@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 import { routes } from './app.routing';
 
@@ -13,7 +14,8 @@ import { routes } from './app.routing';
   declarations: [
     AppComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
