@@ -39,12 +39,13 @@
     "dotenv": "^4.0.0",
     "jquery": "1.9.1",
     "popper.js": "^1.12.9",
-    "reflect-metadata": "^0.1.10",
+    "reflect-metadata": "0.1.10",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.20"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.3",
+    "@angular-devkit/core": "^0.3.1",
+    "@angular/cli": "^1.6.3",
     "@angular/compiler-cli": "^5.2.3",
     "@angular/language-service": "^5.2.3",
     "@types/dotenv": "^4.0.2",
