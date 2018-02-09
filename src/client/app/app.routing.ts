@@ -1,5 +1,6 @@
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import {UserSearchComponent} from './components/user-search/user-search.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
 export const routes = [
@@ -19,7 +20,8 @@ export const routes = [
   {
     path: 'register',
     component: RegistrationComponent
+  },
+  {
+    path: 'search', component: UserSearchComponent
   }
 ];
-
-
