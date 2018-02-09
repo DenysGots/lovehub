@@ -19,8 +19,7 @@ npm install
 ### Development
 
 * Development port is on: 4200 ( inherited from angular-cli )
-
-*In development, every controller ( route ) from NestJS must be mapped in proxy.conf.json*
+* In development, every controller ( route ) from NestJS must be mapped in proxy.conf.json*
 
 ```bash
 npm start
