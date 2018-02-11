@@ -1,3 +1,5 @@
-<label>Famale
-  <input #searchBox type="{{ type }}" placeholder="{{ placeholder }}" (keyup)="search(searchBox.value)" />
-</label>
+<div>
+  <label>{{ label }}
+    <input [type]="type" [name]="name" [placeholder]="placeholder" (input)="search($event)" />
+  </label>
+</div>

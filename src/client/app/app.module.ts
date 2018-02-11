@@ -15,6 +15,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
+import {FormsModule} from '@angular/forms';
+import {UsersProfileService} from './services/users-profile.service';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,17 @@ import { UserFilterComponent } from './components/user-filter/user-filter.compon
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
     })
   ],
-  providers: [UsersService],
+  providers: [
+    UsersService,
+    UsersProfileService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

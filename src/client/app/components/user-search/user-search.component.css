@@ -19,7 +19,6 @@
   border-radius: 5px;
 }
 
-
 .hamburger span {
   display: block;
   position: absolute;
@@ -65,15 +64,37 @@
 .hamburger.active span::after {
   transform: rotate(-45deg);
 }
+@media only screen and (min-width: 1200px) {
+  .users__gallery {
+    width: 100%;
+  }
 
-.user-container {
-  display: flex;
-  flax-direction: row;
-  border: 1px solid black;
+  .users__gallery .users__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: stretch;
+    height: 60vh;
+    width: 100%;
+  }
+
+  .users__gallery .users__container .user__container {
+    flex: 1;
+    flax-direction: column;
+    border: 1px solid black;
+
+  }
+  .users__gallery .users__container .user__container .img {
+    flex: 2;
+    border: 1px solid green;
+  }
+
+  .users__gallery .users__container .user__container .description {
+    flex: 1;
+    border: 1px solid yellow;
+  }
 }
 
-.user-container > div {
-  flex: 1;
-  border: 1px solid red;
-}
+@media only screen and (max-width: 768px) {
 
+}

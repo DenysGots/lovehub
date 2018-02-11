@@ -1,15 +1,19 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import {
-  debounceTime, distinctUntilChanged, switchMap
+  debounceTime, distinctUntilChanged, switchMap, tap
 } from 'rxjs/operators';
 
-import { User } from '../../models/user';
-import { UsersService } from '../../services/users.service';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {animate, state, style, transition, trigger} from '@angular/animations'
+
+import { UsersProfileService } from '../../services/users-profile.service';
+
+import { SearchParam } from './shared/search-param';
+import { FilterParam } from './shared/filter-param';
+import { UserProfile } from '../../models/user-profile';
 
 @Component({
   moduleId: module.id,
@@ -30,23 +34,35 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ]
 })
 export class UserSearchComponent implements OnInit {
-  users$: Observable<User[]>;
+
   menuState = 'out';
 
-  private searchTerms = new Subject<string>();
+  users$: Observable<UserProfile[]>;
+  serarchFilter: FilterParam;
+  ageFilter: FilterParam;
+  genderFFilter: FilterParam;
+  genderMFilter: FilterParam;
 
-  constructor(private usersService: UsersService, private el: ElementRef) {}
+  private searchTerms = new Subject<SearchParam>();
 
-  search(term: string): void {
-    this.searchTerms.next(term);
+  constructor(private usersProfileService: UsersProfileService) {
+    this.serarchFilter = new FilterParam('Name', 'search', 'value', '', 'Enter a favourite name..');
+    this.ageFilter = new FilterParam('Age', 'range', 'value', '0', '');
+    this.genderMFilter = new FilterParam('Male', 'radio', 'value', 'male', '');
+    this.genderFFilter = new FilterParam('Female', 'radio', 'value', 'female', '');
   }
 
   ngOnInit(): void {
     this.users$ = this.searchTerms.pipe(
       debounceTime(300),
       distinctUntilChanged(),
-      switchMap((term: string) => this.usersService.searchUsers(term)),
+      switchMap((term: SearchParam) => this.usersProfileService.searchUsers(term.searchType, term.searchValue))
     );
+  }
+
+  search(term: SearchParam): void {
+    //this.searchTerms.next(term);
+    this.users$ = this.usersProfileService.searchUsers(term.searchType, term.searchValue)
   }
 
   toggleMenu() {

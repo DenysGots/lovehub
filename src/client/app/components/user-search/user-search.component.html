@@ -4,15 +4,53 @@
 
 <app-sidebar-menu [@slideInOut]="menuState"></app-sidebar-menu>
 
-<section class="users">
-  <div class="user-container">
-    <div class="img"><img src=""alt="User"></div>
-    <div class="description">
-      <div class="date">
-        <span>{{ 'User' }}</span>
-      </div>
-      <div class="location">Location: <b>{{ 'Kyev' }}</b></div>
-      <a  class="button" href="">{{ 'Link' }}</a>
+<div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class=" p-4">
+
+      <app-user-filter
+        [label]="serarchFilter.label" [type]="serarchFilter.type" [name]="serarchFilter.name"
+        [value]="serarchFilter.value" [placeholder]="serarchFilter.placeholder" (onSearch)="search($event)">
+      </app-user-filter>
+
+      <app-user-filter
+        [label]="ageFilter.label" [type]="ageFilter.type" [name]="ageFilter.name"
+        [placeholder]="ageFilter.placeholder" [value]="ageFilter.value" (onSearch)="search($event)">
+      </app-user-filter>
+
+      <app-user-filter
+        [label]="genderMFilter.label" [type]="genderMFilter.type" [name]="genderMFilter.name"
+        [placeholder]="genderMFilter.placeholder" [value]="genderMFilter.value" (onSearch)="search($event)">
+      </app-user-filter>
+
+      <app-user-filter
+        [label]="genderFFilter.label" [type]="genderFFilter.type" [name]="genderFFilter.name"
+        [placeholder]="genderFFilter.placeholder" [value]="genderFFilter.value" (onSearch)="search($event)">
+      </app-user-filter>
+
     </div>
+  </div>
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+            aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div>
+
+<section class="users__gallery">
+  <div class="users__container">
+
+    <div class="user__container">
+      <div class="img"><img src=""alt="User_Photo"></div>
+      <div class="description">
+        <div class="date">
+          <span>{{ 'User' }}</span>
+        </div>
+        <div class="location">Location: <b>{{ 'Kyev' }}</b></div>
+        <a  class="button" href="">{{ 'Link' }}</a>
+      </div>
+    </div>
+
   </div>
 </section>
