@@ -1,3 +1,35 @@
-<p>
-  user-profile works!
-</p>
+<div class="user-profile-container">
+  <h1>Your profile</h1>
+  <div class="user-profile-wrapper">
+    <img
+      class="user-profile__pic"
+      src="http://via.placeholder.com/500x500"
+      alt="profile-pic"
+    />
+    <button class="user-profile__btn--change">Change</button>
+    <div class="user-profile__info">
+      <div class="user-profile__name"></div>
+      <div class="user-profile__sex"></div>
+      <div class="user-profile__age"></div>
+      <div class="user-profile__location"></div>
+    </div>
+    <div class="user-profile__additional-info">
+      <div class="user-profile__interests--wrapper">
+        <div class="user-profile__interests--label">Interests</div>
+        <div class="user-profile__interests--field">
+          <textarea name="interests" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="user-profile__addit-info--wrapper">
+        <div class="user-profile__addit-info--label">Something about me</div>
+        <div class="user-profile__addit-info--field">
+          <textarea name="additional-info" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="user-profile__controls">
+      <button class="user-profile__btn--save">Save changes</button>
+      <button class="user-profile__btn--cancel">Cancel</button>
+    </div>
+  </div>
+</div>
