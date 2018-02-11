@@ -4,7 +4,7 @@ import {Component} from '@angular/core';
   moduleId: module.id,
   selector: 'app-sidebar-menu',
   templateUrl: 'sidebar-menu.component.html',
-  styleUrls: ['sidebar-menu.component.css']
+  styleUrls: ['sidebar-menu.component.scss']
 })
 export class SidebarMenuComponent {
 
