@@ -1,5 +1,93 @@
+#video-background {
+/*  making the video fullscreen  */
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto; 
+    height: auto;
+    z-index: -100;
+}
+.title{
+    text-align: center;
+    font-size: 24px;
+    margin: 10px 0px;
+}
 
-.logo{
-    width: 40px;
-    height: 40px;
+.subtitle{
+    text-align: center;
+    font-size: 20px;
+    margin: 0px 0 15px;    
+}
+
+#find, #questions, #feedbacks{
+    padding: 15px 70px;
+}
+.find-items{
+    margin-top: 30px;
+}
+.find-block{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.find-block-image{
+    width:100px;
+    display: inline-flex;
+    margin-right: 25px;
+}
+.find-block-info{
+    display: flex;
+    flex-direction: column;
+}
+.find-block-info-title{
+    font-size: 16px;
+}
+.find-block-info-text{
+    font-size: 12px;
+    margin: 0;
+}
+
+#questions{
+    background-color: darkgray;
+}
+.centerized{
+    align-items: center;
+}
+.chat-btn{
+    width: 100%;
+    padding: 10px 5px;
+    border: none;
+}
+.questions-text{
+    margin: 0;
+}
+.feed-block{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.feed-block-image{
+    width:100px;
+    display: inline-flex;
+    margin-right: 25px;
+}
+.feed-block-info{
+    display: flex;
+    flex-direction: column;
+}
+.feed-block-info-title{
+    font-size: 16px;
+}
+.feed-block-info-text{
+    font-size: 12px;
+    margin: 0;
+}
+
+.reasons-slide, .feed-slide{
+     /* Full height */
+     height: 100%; 
+    width: 100%;
+     /* Center and scale the image nicely */
+     background-position: center;
+     background-repeat: no-repeat;
+     background-size: cover;
 }
