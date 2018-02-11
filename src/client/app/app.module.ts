@@ -11,12 +11,13 @@ import { UsersService } from './services/users.service';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
-
 import { HomeComponent } from './components/home/home.component';
-
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
+import { HeaderComponent } from './components/header/header.component';
+import { NavigationService } from './services/navigation.service';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ import { UserFilterComponent } from './components/user-filter/user-filter.compon
     HomeComponent,
     UserSearchComponent,
     UserFilterComponent,
-    SidebarMenuComponent
+    SidebarMenuComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -37,7 +40,7 @@ import { UserFilterComponent } from './components/user-filter/user-filter.compon
       preloadingStrategy: PreloadAllModules,
     })
   ],
-  providers: [UsersService],
+  providers: [UsersService, NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
