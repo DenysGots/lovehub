@@ -1,0 +1,33 @@
+.registration {
+  position: relative;
+  /*display: -webkit-flex;*/
+  display: flex;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 25px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, .1);
+  text-align: center;
+}
+
+.registration div {
+  justify-content: center;
+  vertical-align: top;
+  margin: 0 auto;
+}
+
+.quick_reg button{
+  cursor: pointer;
+}
+
+.signUp_flow div{
+  width: 70%;
+  cursor: pointer;
+  margin: 6px;
+
+}
+
+@media (max-width: 576px){
+  .signUp_flow div{
+    width: 96%;
+  }
+}

@@ -22,6 +22,7 @@ export const routes = [
     component: RegistrationComponent
   },
   {
-    path: 'search', component: UserSearchComponent
+    path: 'search',
+    component: UserSearchComponent
   }
 ];
