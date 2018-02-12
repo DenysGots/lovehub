@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { RegistrationComponent } from './components/registration/registration.component';
-
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
@@ -26,7 +26,8 @@ import { UserFilterComponent } from './components/user-filter/user-filter.compon
     RegistrationComponent,
     UserSearchComponent,
     UserFilterComponent,
-    SidebarMenuComponent
+    SidebarMenuComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),

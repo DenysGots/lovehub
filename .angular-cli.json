@@ -8,7 +8,7 @@
       "root": "src/client",
       "outDir": "dist/client",
       "assets": [
-        "assets",
+        "../assets",
         "favicon.ico"
       ],
       "index": "index.html",
@@ -34,13 +34,13 @@
       }
     },
     {
-      "platform": "server",
       "root": "src/client",
       "outDir": "dist/server",
       "assets": [
-        "assets",
+        "../assets",
         "favicon.ico"
       ],
+      "platform": "server",
       "index": "index.html",
       "main": "main.server.ts",
       "polyfills": "polyfills.ts",
@@ -49,7 +49,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "../assets/sass/main.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -84,7 +84,8 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {
+    }
   }
 }
