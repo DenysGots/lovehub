@@ -13,7 +13,7 @@ import { join } from 'path';
 
 import { enableProdMode } from '@angular/core';
 import { renderModuleFactory } from '@angular/platform-server';
-import { FOLDER_CLIENT, FOLDER_DIST } from '../shared/constants';
+import {FOLDER_ASSETS, FOLDER_CLIENT, FOLDER_DIST} from '../shared/constants';
 
 import { ApplicationModule } from './app.module';
 
@@ -22,6 +22,8 @@ const app = express();
 async function bootstrap() {
   if (process.env.NODE_ENV === 'production') {
     serverRender(app);
+  } else {
+    app.use('/assets', express.static(join(__dirname, '../assets')));
   }
 
   const server = await NestFactory.create(ApplicationModule, app);
@@ -63,6 +65,7 @@ function serverRender(expressApp: express.Express) {
   expressApp.set('views', join(FOLDER_DIST, FOLDER_CLIENT));
 
   // Server static files from /client
+  expressApp.use('/assets', express.static(join(FOLDER_DIST, FOLDER_ASSETS)));
   expressApp.get('*.*', express.static(join(FOLDER_DIST, FOLDER_CLIENT)));
 }
 
