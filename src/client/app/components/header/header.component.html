@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="home">
+  <a class="navbar-brand" routerLink="home">
       <img class='logo' src={{logo}} alt="logo" />
   </a>
 
@@ -10,7 +10,7 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav menu ml-auto">
       <li *ngFor="let item of menu" class="nav-item">
-        <a class="nav-link menu-item" href={{item.link}}>{{item.name}}</a>
+        <a class="nav-link menu-item" routerLink={{item.link}}>{{item.name}}</a>
       </li>
     </ul>
   </div>
