@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { routes } from './app.routing';
 
@@ -33,7 +34,8 @@ import { UserFilterComponent } from './components/user-filter/user-filter.compon
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
-    })
+    }),
+    FormsModule
   ],
   providers: [UsersService],
   bootstrap: [AppComponent]
