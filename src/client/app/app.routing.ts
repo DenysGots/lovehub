@@ -3,11 +3,13 @@ import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 
 import {UserSearchComponent} from './components/user-search/user-search.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 export const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'search', component: UserSearchComponent },
-  { path: 'home', component: HomeComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'user-profile', component: UserProfileComponent }
 ];

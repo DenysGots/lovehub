@@ -1,4 +1,10 @@
 <section>
+  <video autoplay loop id="video-background" muted plays-inline>
+      <source src="../../../assets/videos/couple.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+</section>
+<section>
     <div id="demo" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div *ngFor="let reason of reasons" class="carousel-item" [class.active]="reason.title === 'Los Angeles'">
@@ -149,9 +155,3 @@
     </div>
   </div>
 </section>
-<!-- <section>
-    <video autoplay loop id="video-background" muted plays-inline>
-        <source src="https://pixabay.com/videos/id-6582/" type="video/mp4">
-      Your browser does not support HTML5 video.
-    </video>
-</section> -->

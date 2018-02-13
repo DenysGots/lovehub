@@ -15,7 +15,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   moduleId: module.id,
   selector: 'app-user-search',
   templateUrl: 'user-search.component.html',
-  styleUrls: ['user-search.component.css'],
+  styleUrls: ['user-search.component.scss'],
   animations: [
     trigger('slideInOut', [
       state('in', style({
