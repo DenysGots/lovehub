@@ -9,7 +9,7 @@ import { NavigationService } from '../../services/navigation.service';
 })
 export class HeaderComponent implements OnInit {
   menu: object[];
-  logo: string = 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Apple.svg/1024px-Apple.svg.png';
+  logo: string = '../../../../assets/img/logo3.png';
 
   constructor(private navService: NavigationService) { }
 

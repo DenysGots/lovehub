@@ -1,24 +1,15 @@
 footer {
     background-color: darkgray;
-    /* position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 200px;
-    background-color: #f5f5f5; */
 }
 
 .info{
     padding: 15px 30px;
 }
 
-.copyright{
+.authors{
     background-color: #313335;
     color: white;
     padding: 15px 30px;
-}
-
-.right{
-    text-align: right;
 }
 
 .center{
@@ -33,8 +24,25 @@ footer {
     background-color: lightgray;
 }
 
-.centerized{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.donate:hover{
+    background-color: brown;
+    color: white;
 }
+
+.developers{
+    text-align: right;
+}
+
+@media (max-width: 576px) { 
+    .developers, .copyright {
+        text-align: center;
+    }
+
+    .copyright {
+        margin-bottom: 10px;
+    }
+
+    .info .col-sm-4{
+        padding: 10px 0;
+    }
+ }
