@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationService } from '../../services/navigation.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,16 +6,14 @@ import { NavigationService } from '../../services/navigation.service';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  menu: object[];
+  contacts = {
+    phones:['+38 012 345 67 8*','+38 012 345 67 8*', '+38 012 345 67 8*'],
+    address: 'Kyiv, Somestr str., 5',
+    mail: 'write@us.now'
+  };
 
-  constructor(private navService: NavigationService) { }
+  constructor() { }
 
-  ngOnInit() {
-    this.getMenu();
-  }
-
-  getMenu(): void {
-    this.menu = this.navService.getMenuItems();
-  }
+  ngOnInit() {}
 
 }
