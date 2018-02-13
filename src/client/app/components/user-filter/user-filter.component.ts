@@ -4,7 +4,7 @@ import {Component, Input} from '@angular/core';
   moduleId: module.id,
   selector: 'app-user-filter',
   templateUrl: 'user-filter.component.html',
-  styleUrls: ['user-filter.component.css']
+  styleUrls: ['user-filter.component.scss']
 })
 export class UserFilterComponent {
 

@@ -1,0 +1,35 @@
+<footer>
+  <div class="row info">
+    <div class="col-md-4 centerized">
+      <h3>Support our work</h3>
+      <input type="button" value="Donate us" class="donate">
+    </div>
+    <div class="col-md-4 centerized">
+      <p class="center">
+          Lorem ipsum dolor sit 
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+    </div>
+    <div class="col-md-4 centerized right">
+      <h3>Technical support:</h3>
+      
+      <ul>
+        <li *ngFor="let tel of contacts.phones">
+          {{tel}}
+        </li>
+        <li>{{contacts.mail}}</li>
+        <li>{{contacts.address}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row copyright">
+    <div class="col-md-8">
+      <p> © 2018, SoftServe Inc</p>
+    </div>
+    <div class="col-md-4">
+      <p class="right">Developed with love by WebUI Team</p>
+    </div>
+  </div>
+</footer>
+  
