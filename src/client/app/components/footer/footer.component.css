@@ -17,11 +17,7 @@ footer {
 }
 .donate{
     margin-top: 10px;
-    cursor: pointer;
-    padding: 10px 25px;
     width:max-content;
-    border: 0;
-    background-color: lightgray;
 }
 
 .donate:hover{

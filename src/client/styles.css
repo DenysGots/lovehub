@@ -45,4 +45,16 @@ table {
 body {
 	height: 100vh;
 }
+
+.lh-btn{
+    cursor: pointer;
+    padding: 10px 25px;
+    border: 0;
+    background-color: lightgray;
+}
+
+.lh-btn:hover{
+	background-color: brown;
+    color: white;
+}
   

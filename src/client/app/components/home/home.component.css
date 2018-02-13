@@ -1,8 +1,8 @@
+#registration{
+    width: 100%;
+}
 #video-background {
-/*  making the video fullscreen  */
-    min-width: 100%; 
-    min-height: 100%;
-    width: auto; 
+    width: 100%;
     height: auto;
     z-index: -100;
 }
@@ -11,13 +11,11 @@
     font-size: 24px;
     margin: 10px 0px;
 }
-
 .subtitle{
     text-align: center;
     font-size: 20px;
     margin: 0px 0 15px;    
 }
-
 #find, #questions, #feedbacks{
     padding: 15px 70px;
 }
@@ -45,17 +43,11 @@
     font-size: 12px;
     margin: 0;
 }
-
 #questions{
     background-color: darkgray;
 }
-.centerized{
-    align-items: center;
-}
 .chat-btn{
     width: 100%;
-    padding: 10px 5px;
-    border: none;
 }
 .questions-text{
     margin: 0;
@@ -81,7 +73,6 @@
     font-size: 12px;
     margin: 0;
 }
-
 .reasons-slide, .feed-slide{
      /* Full height */
      height: 100%; 
@@ -91,3 +82,21 @@
      background-repeat: no-repeat;
      background-size: cover;
 }
+
+@media (max-width: 768px) { 
+    #find, #questions, #feedbacks{
+        padding: 15px 16px;
+    }
+}
+
+@media (max-width: 576px) { 
+    .questions-text{
+        margin-bottom: 10px;
+    }
+
+    .chat-btn{
+        width: auto;
+        padding: 10px 60px;
+    }
+    
+ }
