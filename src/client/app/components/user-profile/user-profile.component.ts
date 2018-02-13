@@ -7,13 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
   userProfaleChangeIsEnabled = true;
-  userName: string;
-  userSex: number;
-  userAge: number;
-  userLocation: string;
-  userInterests: string;
-  userAdditInfo: string;
-  
+  userProfileData = {
+    userName: '',
+    userSex: '',
+    userAge: '',
+    userLocation: '',
+    userInterests: '',
+    userAdditInfo: ''
+  };
+
   constructor() {
   }
 
@@ -26,7 +28,14 @@ export class UserProfileComponent implements OnInit {
   }
 
   cancelChanges () {
-    
+    // how to reset all inputs at once
+    this.userProfaleChangeIsEnabled = true;
+    console.log('cancel!!');
+  }
+
+  submitUserData () {
+    console.log('submit data triggered!');
+    console.table(this.userProfileData || 'something went wrong');
   }
 
 }

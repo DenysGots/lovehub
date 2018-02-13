@@ -103,27 +103,18 @@
         <button 
           class="user-profile__btn--save btn"
           [disabled]="userProfaleChangeIsEnabled"
+          type="submit"
         >
           Save changes
         </button>
         <button 
           class="user-profile__btn--cancel btn"
           [disabled]="userProfaleChangeIsEnabled"
-          (click)="cancelCganges()"
+          (click)="cancelChanges()"
         >
           Cancel
         </button>
       </div>
     </form>
-  </div>
-  <div>
-    <div>
-      <div>userName: {{userName}}</div>
-      <div>userSex: {{userSex}}</div>
-      <div>userAge: {{userAge}}</div>
-      <div>userLocation: {{userLocation}}</div>
-      <div>userInterests: {{userInterests}}</div>
-      <div>userAdditInfo: {{userAdditInfo}}</div>
-    </div>
   </div>
 </div>
