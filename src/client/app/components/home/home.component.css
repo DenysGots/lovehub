@@ -21,25 +21,39 @@
 }
 .find-items{
     margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 .find-block{
     display: flex;
-    align-items: center;
-    margin-bottom: 30px;
+    width: 45%;
+    height: 130px;
+    margin-bottom: 15px; 
 }
-.find-block-image{
+
+.find-image-block{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.find-image{
     width:100px;
     display: inline-flex;
     margin-right: 25px;
 }
-.find-block-info{
+.find-info{
     display: flex;
     flex-direction: column;
 }
-.find-block-info-title{
+.find-info-title{
     font-size: 16px;
+    margin-bottom: 10px;
 }
-.find-block-info-text{
+.find-info-text{
     font-size: 12px;
     margin: 0;
 }
@@ -47,7 +61,8 @@
     background-color: darkgray;
 }
 .chat-btn{
-    width: 100%;
+    width: auto;
+    padding: 10px 50px;
 }
 .questions-text{
     margin: 0;
@@ -74,18 +89,50 @@
     margin: 0;
 }
 .reasons-slide, .feed-slide{
-     /* Full height */
      height: 100%; 
-    width: 100%;
-     /* Center and scale the image nicely */
+     width: 100%;
      background-position: center;
      background-repeat: no-repeat;
      background-size: cover;
 }
 
+@media (max-width: 1200px) { 
+    #find, #questions, #feedbacks{
+        padding: 15px 40px;
+    }
+}
+
+@media (max-width: 992px) { 
+    .find-block{
+        width: 48%;
+        height: 160px;
+    }
+
+    .find-image{
+        width: 80px;
+    }
+    
+}
 @media (max-width: 768px) { 
     #find, #questions, #feedbacks{
         padding: 15px 16px;
+    }
+
+    .find-items{
+        flex-direction: column;
+    }
+
+    .find-block{
+        width: 75%;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 40px; 
+        height: auto;
+    }
+
+    .find-image{
+        margin: 0;
+        margin-bottom: 15px;
     }
 }
 
@@ -93,10 +140,12 @@
     .questions-text{
         margin-bottom: 10px;
     }
-
     .chat-btn{
         width: auto;
         padding: 10px 60px;
+    }
+    .find-block{
+        margin-bottom: 20px; 
     }
     
  }
