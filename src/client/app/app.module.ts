@@ -16,6 +16,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
+import { UserProfileService } from './services/user-profile.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { UserFilterComponent } from './components/user-filter/user-filter.compon
     }),
     FormsModule
   ],
-  providers: [UsersService],
+  providers: [UsersService, UserProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

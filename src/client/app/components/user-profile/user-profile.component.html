@@ -23,7 +23,7 @@
             type="text"
             class="form-control"
             id="usr-name"
-            [disabled]="userProfaleChangeIsEnabled"
+            [disabled]="userProfileChangeIsEnabled"
             [(ngModel)]="userProfileData.userName"
             name="userName"
           >
@@ -34,7 +34,7 @@
               type="text"
               class="form-control"
               id="usr-sex"
-              [disabled]="userProfaleChangeIsEnabled"
+              [disabled]="userProfileChangeIsEnabled"
               [(ngModel)]="userProfileData.userSex"
               name="userSex"
             >
@@ -45,7 +45,7 @@
               type="text"
               class="form-control"
               id="usr-age"
-              [disabled]="userProfaleChangeIsEnabled"
+              [disabled]="userProfileChangeIsEnabled"
               [(ngModel)]="userProfileData.userAge"
               name="userAge"
             >
@@ -56,7 +56,7 @@
               type="text"
               class="form-control"
               id="usr-loc"
-              [disabled]="userProfaleChangeIsEnabled"
+              [disabled]="userProfileChangeIsEnabled"
               [(ngModel)]="userProfileData.userLocation"
               name="userLocation"
             >
@@ -73,7 +73,7 @@
             name="interests"
             id="interests"
             rows="5"
-            [disabled]="userProfaleChangeIsEnabled"
+            [disabled]="userProfileChangeIsEnabled"
             [(ngModel)]="userProfileData.userInterests"
             name="userInterests"
           ></textarea>
@@ -88,7 +88,7 @@
             name="additional-info"
             id="addit-info"
             rows="5"
-            [disabled]="userProfaleChangeIsEnabled"
+            [disabled]="userProfileChangeIsEnabled"
             [(ngModel)]="userProfileData.userAdditInfo"
             name="userAdditInfo"
           ></textarea>
@@ -97,14 +97,14 @@
       <div class="user-profile__controls btn-group-sm">
         <button 
           class="user-profile__btn--save btn"
-          [disabled]="userProfaleChangeIsEnabled"
+          [disabled]="userProfileChangeIsEnabled"
           type="submit"
         >
           Save changes
         </button>
         <button 
           class="user-profile__btn--cancel btn"
-          [disabled]="userProfaleChangeIsEnabled"
+          [disabled]="userProfileChangeIsEnabled"
           (click)="cancelChanges()"
         >
           Cancel

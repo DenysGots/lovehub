@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserProfileService } from '../../services/user-profile.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  userProfaleChangeIsEnabled = true;
+  userProfileChangeIsEnabled = false;
   userProfileData: any = {
     userName: '',
     userSex: '',
@@ -16,20 +17,21 @@ export class UserProfileComponent implements OnInit {
     userAdditInfo: ''
   };
 
-  constructor() {
+  constructor(private _userProfileService: UserProfileService) {
   }
 
   ngOnInit() {
     // display current user data
+    this._userProfileService.firstMethod();
   }
 
   enableChanges () {
-    this.userProfaleChangeIsEnabled = null;
+    this.userProfileChangeIsEnabled = null;
   }
 
   cancelChanges () {
     // how to reset all inputs at once
-    this.userProfaleChangeIsEnabled = true;
+    this.userProfileChangeIsEnabled = true;
     console.log('cancel!!');
   }
 
