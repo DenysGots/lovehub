@@ -19,6 +19,7 @@ import { UserFilterComponent } from './components/user-filter/user-filter.compon
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationService } from './services/navigation.service';
 import { FooterComponent } from './components/footer/footer.component';
+import { SliderComponent } from './slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HeaderComponent,
     FooterComponent,
     UserProfileComponent,
+    SliderComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
