@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
   userProfaleChangeIsEnabled = true;
-  userProfileData = {
+  userProfileData: any = {
     userName: '',
     userSex: '',
     userAge: '',
@@ -34,8 +34,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   submitUserData () {
-    console.log('submit data triggered!');
-    console.table(this.userProfileData || 'something went wrong');
+    console.log(this.userProfileData || 'something went wrong');
   }
 
 }

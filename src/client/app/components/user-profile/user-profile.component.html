@@ -8,7 +8,7 @@
     /> -->
     <img
       class="user-profile__pic"
-      src=""
+      src="assets/img/user.jpg"
       alt="profile-pic"
     />
     <button 
@@ -29,7 +29,7 @@
             class="form-control"
             id="usr-name"
             [disabled]="userProfaleChangeIsEnabled"
-            [(ngModel)]="userName"
+            [(ngModel)]="userProfileData.userName"
             name="userName"
           >
         </div>
@@ -40,7 +40,7 @@
               class="form-control"
               id="usr-sex"
               [disabled]="userProfaleChangeIsEnabled"
-              [(ngModel)]="userSex"
+              [(ngModel)]="userProfileData.userSex"
               name="userSex"
             >
         </div>
@@ -51,7 +51,7 @@
               class="form-control"
               id="usr-age"
               [disabled]="userProfaleChangeIsEnabled"
-              [(ngModel)]="userAge"
+              [(ngModel)]="userProfileData.userAge"
               name="userAge"
             >
         </div>
@@ -62,7 +62,7 @@
               class="form-control"
               id="usr-loc"
               [disabled]="userProfaleChangeIsEnabled"
-              [(ngModel)]="userLocation"
+              [(ngModel)]="userProfileData.userLocation"
               name="userLocation"
             >
         </div>
@@ -79,7 +79,7 @@
             id="interests"
             rows="5"
             [disabled]="userProfaleChangeIsEnabled"
-            [(ngModel)]="userInterests"
+            [(ngModel)]="userProfileData.userInterests"
             name="userInterests"
           ></textarea>
         </div>
@@ -94,7 +94,7 @@
             id="addit-info"
             rows="5"
             [disabled]="userProfaleChangeIsEnabled"
-            [(ngModel)]="userAdditInfo"
+            [(ngModel)]="userProfileData.userAdditInfo"
             name="userAdditInfo"
           ></textarea>
         </div>
@@ -104,6 +104,7 @@
           class="user-profile__btn--save btn"
           [disabled]="userProfaleChangeIsEnabled"
           type="submit"
+          (click)="submitUserData()"
         >
           Save changes
         </button>
