@@ -71,9 +71,13 @@
     display: flex;
     align-items: center;
     margin-bottom: 30px;
+    cursor: pointer;
+}
+.breads-2{
+    margin: 0;
 }
 .feed-block-image{
-    width:100px;
+    width:80px;
     display: inline-flex;
     margin-right: 25px;
 }
@@ -89,16 +93,19 @@
     margin: 0;
 }
 .reasons-slide, .feed-slide{
-     height: 100%; 
-     width: 100%;
-     background-position: center;
-     background-repeat: no-repeat;
-     background-size: cover;
+    height: 100%; 
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @media (max-width: 1200px) { 
     #find, #questions, #feedbacks{
         padding: 15px 40px;
+    }
+    .feed-block-image{
+        width: 60px;
     }
 }
 
@@ -107,11 +114,9 @@
         width: 48%;
         height: 160px;
     }
-
     .find-image{
         width: 80px;
     }
-    
 }
 @media (max-width: 768px) { 
     #find, #questions, #feedbacks{
@@ -147,5 +152,8 @@
     .find-block{
         margin-bottom: 20px; 
     }
-    
+
+    .feed-block{
+        margin: 15px 0;
+    }
  }

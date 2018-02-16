@@ -1,17 +1,31 @@
-<div [id]="iden" class="carousel slide slider" data-ride="carousel">
-  <div class="carousel-inner">
-      <ng-content></ng-content>
+<div class="row slider-block">
+  <div [ngClass]="_breads ? 'col-md-8' : 'col-md-12'" class='d-none d-md-flex justify-content-center slider'>
+    <div [id]="iden" class="carousel" data-ride="carousel">
+      <div class="carousel-inner">
+          <ng-content select=".carousel-item"></ng-content>
+      </div>
+      <a class="carousel-control-prev" [href]="'#'+iden" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" [href]="'#'+iden" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+      <ul *ngIf="_breads" class="carousel-indicators">
+        <li [attr.data-target]="'#'+iden" data-slide-to="0" class="active"></li>
+        <li [attr.data-target]="'#'+iden" data-slide-to="1"></li>
+        <li [attr.data-target]="'#'+iden" data-slide-to="2"></li>
+      </ul>
+    </div>
   </div>
-  <a class="carousel-control-prev" [href]="'#'+iden" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" [href]="'#'+iden" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-
-  <ul *ngIf="_breads" class="carousel-indicators">
-    <li [attr.data-target]="'#'+iden" data-slide-to="0" class="active"></li>
-    <li [attr.data-target]="'#'+iden" data-slide-to="1"></li>
-    <li [attr.data-target]="'#'+iden" data-slide-to="2"></li>
-  </ul>
+  <div *ngIf="_breads" class="col-md-4 col-sm-12 feedbacks">
+    <div [attr.data-target]="'#'+iden" data-slide-to="0" class="active">
+      <ng-content select=".breads-0"></ng-content>
+    </div>
+    <div [attr.data-target]="'#'+iden" data-slide-to="1">
+        <ng-content select=".breads-1"></ng-content>
+    </div>
+    <div [attr.data-target]="'#'+iden" data-slide-to="2">
+        <ng-content select=".breads-2"></ng-content>
+    </div>
+  </div>
 </div>
