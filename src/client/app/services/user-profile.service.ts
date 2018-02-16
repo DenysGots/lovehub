@@ -1,11 +1,35 @@
 import { Injectable } from '@angular/core';
+import {Observable} from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../models/user';
 
 @Injectable()
 export class UserProfileService {
 
-  constructor() { }
+  private static handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      if (error.status === 404) {
+        errMsg = `Resourse ${error.url} wasn\'t found`;
+      } else {
+        const body = error.json() || '';
+        // const err = body.error || JSON.stringify(body);
+        const err = body || JSON.stringify(body);
+        errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      }
+    } else {
+        errMsg = error.message ? error.message : error.toString();
+    }
+    return Observable.throw(errMsg);
+  }
 
-  firstMethod () {
-    console.log('first method logged!!! Yay!');
+  constructor(private http: HttpClient) {}
+
+  getUser(): Observable<User> {
+    return this.http.get('/fake-backend/users/1')
+  }
+
+  updateUser(user: User): Observable<any> {
+    // return  this.http.put('/fake-backend/users', user)
   }
 }
