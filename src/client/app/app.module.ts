@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { routes } from './app.routing';
 
 import { UsersService } from './services/users.service';
+import { UsersProfileService } from './services/users-profile.service';
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
@@ -15,8 +17,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
-import {FormsModule} from '@angular/forms';
-import {UsersProfileService} from './services/users-profile.service';
+import { PagerComponent } from './components/pager/pager.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import {UsersProfileService} from './services/users-profile.service';
     ContactComponent,
     UserSearchComponent,
     UserFilterComponent,
-    SidebarMenuComponent
+    SidebarMenuComponent,
+    PagerComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),

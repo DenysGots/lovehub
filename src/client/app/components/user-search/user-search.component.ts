@@ -37,32 +37,53 @@ export class UserSearchComponent implements OnInit {
 
   menuState = 'out';
 
-  users$: Observable<UserProfile[]>;
+  users: UserProfile[];
   serarchFilter: FilterParam;
   ageFilter: FilterParam;
   genderFFilter: FilterParam;
   genderMFilter: FilterParam;
+  term: SearchParam;
+
+  size: number;
+  offset: number = 0;
+  limit: number = 6;
 
   private searchTerms = new Subject<SearchParam>();
 
   constructor(private usersProfileService: UsersProfileService) {
-    this.serarchFilter = new FilterParam('Name', 'search', 'value', '', 'Enter a favourite name..');
-    this.ageFilter = new FilterParam('Age', 'range', 'value', '0', '');
-    this.genderMFilter = new FilterParam('Male', 'radio', 'value', 'male', '');
-    this.genderFFilter = new FilterParam('Female', 'radio', 'value', 'female', '');
+    this.serarchFilter = new FilterParam('Name', 'search', '', 'Enter a favourite name..');
+    this.ageFilter = new FilterParam('Age', 'range', '0', '');
+    this.genderMFilter = new FilterParam('Male', 'radio', 'male', '');
+    this.genderFFilter = new FilterParam('Female', 'radio', 'female', '');
   }
 
   ngOnInit(): void {
-    this.users$ = this.searchTerms.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: SearchParam) => this.usersProfileService.searchUsers(term.searchType, term.searchValue))
-    );
+    this.searchTerms
+      .pipe(
+        debounceTime(3000),
+        distinctUntilChanged()
+      )
+      .subscribe((term) => {
+        this.term = term;
+        this.fetchData()
+      });
   }
 
   search(term: SearchParam): void {
-    //this.searchTerms.next(term);
-    this.users$ = this.usersProfileService.searchUsers(term.searchType, term.searchValue)
+    this.searchTerms.next(term);
+  }
+
+  fetchData() {
+    return this.usersProfileService.searchUsers(this.term.searchType, this.term.searchValue, this.offset, this.limit)
+      .subscribe(result => {
+        this.users = result.rows;
+        this.size = result.count;
+      });
+  }
+
+  onPageChange(offset) {
+    this.offset = offset;
+    this.fetchData();
   }
 
   toggleMenu() {

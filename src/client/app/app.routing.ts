@@ -1,6 +1,6 @@
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
-import {UserSearchComponent} from './components/user-search/user-search.component';
+import { UserSearchComponent } from './components/user-search/user-search.component';
 
 export const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'about' },

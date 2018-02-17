@@ -2,6 +2,11 @@ import { Component, Inject } from '@nestjs/common';
 import { UserProfile } from './user-profile.entity';
 import { UserProfileDto } from './dto/user-profile.dto';
 
+export interface FilteredUsersProfile {
+  rows?: UserProfile[];
+  count?: number;
+}
+
 @Component()
 export class UsersProfileService {
 
@@ -16,23 +21,40 @@ export class UsersProfileService {
     return await userProfile.save();
   }
 
-  async findAll(): Promise<UserProfile[]> {
-    return await this.userProfileRepository.findAll<UserProfile>();
+  async findAll(): Promise<FilteredUsersProfile> {
+    return await this.userProfileRepository.findAndCountAll<UserProfile>();
   }
 
   async findById(id: number): Promise<UserProfile> {
     return await this.userProfileRepository.findById<UserProfile>(id);
   }
 
-  async findByName(name: string): Promise<UserProfile[]> {
-    return await this.userProfileRepository.findAll<UserProfile>();
+  async findByName(name: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
+    console.log(`server service: findByName(${name})`);
+    return await this.userProfileRepository
+      .findAndCountAll<UserProfile>({where: {firstName: {$like: name}}, offset: offset, limit: limit});
   }
 
-  async findByAge(age: number): Promise<UserProfile[]> {
-    return await this.userProfileRepository.findAll<UserProfile>();
+  async findByAge(age: number, offset: number, limit: number): Promise<FilteredUsersProfile> {
+    console.log(`server service: findByAge(${age})`);
+    return await this.userProfileRepository.findAndCountAll<UserProfile>({where: {age: age}});
   }
 
-  async findByGender(gender: string): Promise<UserProfile[]> {
-    return await this.userProfileRepository.findAll<UserProfile>();
+  async findByGender(gender: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
+    console.log(`server service: findByGender(${gender})`);
+    return await this.userProfileRepository.findAndCountAll<UserProfile>({where: {firstName: gender}});
+  }
+
+
+  async update(id: number, userProfileDto: UserProfileDto): Promise<[number, UserProfile[]]> {
+    return await this.userProfileRepository.update(userProfileDto, {where: {id: id}});
+  }
+
+  async remove(id: number): Promise<number> {
+    try {
+      return await this.userProfileRepository.destroy({where: {id: id}});
+    } catch(err) {
+      console.error(`Service ${err.message}`)
+    }
   }
 }

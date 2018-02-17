@@ -5,7 +5,7 @@ import { UsersProfileModule } from './users-profile/users-profile.module';
 
 @Module({
   imports: [UsersModule, UsersProfileModule],
-  controllers: [ApiController],
+  controllers: [],
   components: [],
 })
 export class ApiModule {}

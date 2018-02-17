@@ -1,8 +1,8 @@
 import { AutoIncrement, BelongsTo, Column, ForeignKey, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 
-import { User} from '../users/user.entity';
+import { User } from '../users/user.entity';
 
-@Table
+@Table({tableName: 'UsersProfile'})
 export class UserProfile extends Model<UserProfile> {
 
   @AutoIncrement
@@ -16,7 +16,6 @@ export class UserProfile extends Model<UserProfile> {
   @Column
   lastName: string;
 
-  @Unique
   @Column
   numberLike: number;
 

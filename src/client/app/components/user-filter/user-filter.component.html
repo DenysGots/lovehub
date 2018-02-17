@@ -1,5 +1,3 @@
-<div>
-  <label>{{ label }}
-    <input [type]="type" [name]="name" [placeholder]="placeholder" (input)="search($event)" />
-  </label>
-</div>
+<label>{{ label }}
+  <input [type]="type" name="value" [(ngModel)]="value" [placeholder]="placeholder" (input)="search()" />
+</label>

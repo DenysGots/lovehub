@@ -1,7 +1,7 @@
-import {AutoIncrement, Column, HasOne, Model, PrimaryKey, Table, Unique} from 'sequelize-typescript';
-import {UserProfile} from '../users-profile/user-profile.entity';
+import { AutoIncrement, Column, HasOne, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { UserProfile } from '../users-profile/user-profile.entity';
 
-@Table
+@Table({tableName: 'Users'})
 export class User extends Model<User> {
 
   @AutoIncrement

@@ -5,6 +5,7 @@ import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import * as express from 'express';
 import * as dotenv from 'dotenv';
+import * as bodyParser from 'body-parser';
 
 dotenv.config();
 
@@ -20,6 +21,9 @@ import { ApplicationModule } from './app.module';
 const app = express();
 
 async function bootstrap() {
+
+  app.use(bodyParser.json());
+
   if (process.env.NODE_ENV === 'production') {
     serverRender(app);
   }

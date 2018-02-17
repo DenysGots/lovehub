@@ -1,7 +1,12 @@
-import {Body, Controller, Delete, Get, Param, Post, Query} from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, Param, Post, Query} from '@nestjs/common';
 import { UserProfileDto } from './dto/user-profile.dto';
 import { UsersProfileService } from './users-profile.service';
 import { UserProfile } from './user-profile.entity';
+
+export interface FilteredUsersProfile {
+  rows?: UserProfile[];
+  count?: number;
+}
 
 @Controller('api/users-profile')
 export class UsersProfileController {
@@ -10,13 +15,8 @@ export class UsersProfileController {
 
   @Post()
   async create(@Body() userProfileDto: UserProfileDto) {
+    console.log(userProfileDto);
     await this.usersProfileService.create(userProfileDto);
-  }
-
-  @Get()
-  async findAll(): Promise<UserProfile[]> {
-    console.log(`server findAll()`);
-    return await this.usersProfileService.findAll();
   }
 
   @Get(':id')
@@ -24,19 +24,30 @@ export class UsersProfileController {
     return await this.usersProfileService.findById(params.id);
   }
 
-  @Get('?name')
-  async findByName(@Query() queries): Promise<UserProfile[]> {
-    return await this.usersProfileService.findByName(queries.name);
+  @Get()
+  async findAll(@Query() queries): Promise<FilteredUsersProfile> {
+    const key = Object.keys(queries)[0];
+    if(key === 'name') {
+      console.log(`server controller: findByName(${queries.name})`);
+      return await this.usersProfileService.findByName(queries.name, queries.offset, queries.limit);
+    } else if(key === 'age') {
+      console.log(`server controller: findByAge(${queries.age})`);
+      return await this.usersProfileService.findByAge(parseInt(queries.age), queries.offset, queries.limit);
+    } else if(key === 'gender') {
+      console.log(`server controller: findByGender(${queries.gender})`);
+      return await this.usersProfileService.findByGender(queries.gender, queries.offset, queries.limit);
+    }
+    return await this.usersProfileService.findAll();
   }
 
-  @Get('?age')
-  async findByAge(@Query() queries): Promise<UserProfile[]> {
-    return await this.usersProfileService.findByAge(parseInt(queries.age));
+  @HttpCode(204)
+  @Delete(':id')
+  async removeById(@Param() params): Promise<{statusCode: number}> {
+    try {
+      const affected = await this.usersProfileService.remove(params.id);
+      return {statusCode: affected};
+    } catch(err) {
+      console.error(`Controller: ${err.message}`)
+    }
   }
-
-  @Get('?gender')
-  async findByGender(@Query() queries): Promise<UserProfile[]> {
-    return await this.usersProfileService.findByGender(queries.gender);
-  }
-
 }

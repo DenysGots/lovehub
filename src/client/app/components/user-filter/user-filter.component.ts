@@ -11,19 +11,17 @@ export class UserFilterComponent implements OnChanges {
 
   @Input() label: string;
   @Input() type: string;
-  @Input() name: string;
   @Input() placeholder: string;
   @Input() value: string;
   @Output() onSearch = new EventEmitter<SearchParam>();
 
   ngOnChanges() {
-    //console.log(this.name);
   }
 
-  search(event) {
+  search() {
     const searchParams: SearchParam = {
       searchType: this.type,
-      searchValue: event.target.type == "radio" ? this.value : event.target.value
+      searchValue: this.value
     };
     this.onSearch.emit(searchParams);
   }

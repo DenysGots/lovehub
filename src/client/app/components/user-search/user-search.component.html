@@ -1,32 +1,33 @@
-<button (click)="toggleMenu()" class="hamburger">
-  <span>toggle menu</span>
-</button>
-
-<app-sidebar-menu [@slideInOut]="menuState"></app-sidebar-menu>
-
 <div class="pos-f-t">
   <div class="collapse" id="navbarToggleExternalContent">
-    <div class=" p-4">
+    <div class="p-4 filter__container">
 
-      <app-user-filter
-        [label]="serarchFilter.label" [type]="serarchFilter.type" [name]="serarchFilter.name"
-        [value]="serarchFilter.value" [placeholder]="serarchFilter.placeholder" (onSearch)="search($event)">
-      </app-user-filter>
+      <div class="filter__component">
+        <app-user-filter
+          [label]="serarchFilter.label" [type]="serarchFilter.type"
+          [value]="serarchFilter.value" [placeholder]="serarchFilter.placeholder" (onSearch)="search($event)">
+        </app-user-filter>
+      </div>
 
-      <app-user-filter
-        [label]="ageFilter.label" [type]="ageFilter.type" [name]="ageFilter.name"
-        [placeholder]="ageFilter.placeholder" [value]="ageFilter.value" (onSearch)="search($event)">
-      </app-user-filter>
+      <div class="filter__component">
+        <app-user-filter
+          [label]="ageFilter.label" [type]="ageFilter.type"
+          [placeholder]="ageFilter.placeholder" [value]="ageFilter.value" (onSearch)="search($event)">
+        </app-user-filter>
+        <span id="current-value">0</span>
+      </div>
 
-      <app-user-filter
-        [label]="genderMFilter.label" [type]="genderMFilter.type" [name]="genderMFilter.name"
-        [placeholder]="genderMFilter.placeholder" [value]="genderMFilter.value" (onSearch)="search($event)">
-      </app-user-filter>
+      <div class="filter__component">
+        <app-user-filter
+          [label]="genderMFilter.label" [type]="genderMFilter.type"
+          [placeholder]="genderMFilter.placeholder" [value]="genderMFilter.value" (onSearch)="search($event)">
+        </app-user-filter>
 
-      <app-user-filter
-        [label]="genderFFilter.label" [type]="genderFFilter.type" [name]="genderFFilter.name"
-        [placeholder]="genderFFilter.placeholder" [value]="genderFFilter.value" (onSearch)="search($event)">
-      </app-user-filter>
+        <app-user-filter
+          [label]="genderFFilter.label" [type]="genderFFilter.type"
+          [placeholder]="genderFFilter.placeholder" [value]="genderFFilter.value" (onSearch)="search($event)">
+        </app-user-filter>
+      </div>
 
     </div>
   </div>
@@ -38,19 +39,26 @@
   </nav>
 </div>
 
-<section class="users__gallery">
-  <div class="users__container">
-
-    <div class="user__container">
-      <div class="img"><img src=""alt="User_Photo"></div>
-      <div class="description">
+<article>
+  <section class="user__gallery">
+    <div class="user__container" *ngFor="let user of users">
+      <figure class="user__img"><img src="https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?h=350&auto=compress&cs=tinysrgb"
+                            alt="User_Photo">
+      </figure>
+      <div class="user__description">
         <div class="date">
-          <span>{{ 'User' }}</span>
+          <span>{{ user.age }}</span>
         </div>
-        <div class="location">Location: <b>{{ 'Kyev' }}</b></div>
-        <a  class="button" href="">{{ 'Link' }}</a>
+          <a  class="button" href="">{{ user.firstName }} {{ user.lastName }}</a>
       </div>
     </div>
-
-  </div>
-</section>
+  </section>
+  <section>
+    <app-pager
+      [offset]="offset"
+      [limit]="limit"
+      [size]="size"
+      (pageChange)="onPageChange($event)">
+    </app-pager>
+  </section>
+</article>
