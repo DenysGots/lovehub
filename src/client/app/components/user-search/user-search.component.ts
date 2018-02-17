@@ -1,10 +1,9 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import {
-  debounceTime, distinctUntilChanged, switchMap, tap
+  debounceTime, distinctUntilChanged
 } from 'rxjs/operators';
 
 import {animate, state, style, transition, trigger} from '@angular/animations'
@@ -19,7 +18,7 @@ import { UserProfile } from '../../models/user-profile';
   moduleId: module.id,
   selector: 'app-user-search',
   templateUrl: 'user-search.component.html',
-  styleUrls: ['user-search.component.css'],
+  styleUrls: ['user-search.component.scss'],
   animations: [
     trigger('slideInOut', [
       state('in', style({
