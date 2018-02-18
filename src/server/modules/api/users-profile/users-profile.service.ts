@@ -22,27 +22,31 @@ export class UsersProfileService {
   }
 
   async findAll(): Promise<FilteredUsersProfile> {
-    return await this.userProfileRepository.findAndCountAll<UserProfile>();
+    return await this.userProfileRepository
+      .findAndCountAll<UserProfile>();
   }
 
   async findById(id: number): Promise<UserProfile> {
-    return await this.userProfileRepository.findById<UserProfile>(id);
+    return await this.userProfileRepository
+      .findById<UserProfile>(id);
   }
 
   async findByName(name: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
     console.log(`server service: findByName(${name})`);
     return await this.userProfileRepository
-      .findAndCountAll<UserProfile>({where: {firstName: {$like: name}}, offset: offset, limit: limit});
+      .findAndCountAll<UserProfile>({where: {firstName: {$iLike: `${name}%`}}, offset: offset, limit: limit});
   }
 
   async findByAge(age: number, offset: number, limit: number): Promise<FilteredUsersProfile> {
     console.log(`server service: findByAge(${age})`);
-    return await this.userProfileRepository.findAndCountAll<UserProfile>({where: {age: age}});
+    return await this.userProfileRepository
+      .findAndCountAll<UserProfile>({where: {age: {$gte: age}}, offset: offset, limit: limit});
   }
 
   async findByGender(gender: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
     console.log(`server service: findByGender(${gender})`);
-    return await this.userProfileRepository.findAndCountAll<UserProfile>({where: {firstName: gender}});
+    return await this.userProfileRepository
+      .findAndCountAll<UserProfile>({where: {firstName: gender}, offset: offset, limit: limit});
   }
 
 

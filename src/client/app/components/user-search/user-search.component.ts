@@ -18,30 +18,16 @@ import { UserProfile } from '../../models/user-profile';
   moduleId: module.id,
   selector: 'app-user-search',
   templateUrl: 'user-search.component.html',
-  styleUrls: ['user-search.component.scss'],
-  animations: [
-    trigger('slideInOut', [
-      state('in', style({
-        transform: 'translate(0, 0)'
-      })),
-      state('out', style({
-        transform: 'translate(100%, 0)'
-      })),
-      transition('in => out', animate('400ms ease-in-out')),
-      transition('out => in', animate('400ms ease-in-out'))
-    ]),
-  ]
+  styleUrls: ['user-search.component.scss']
 })
 export class UserSearchComponent implements OnInit {
 
-  menuState = 'out';
-
   users: UserProfile[];
-  serarchFilter: FilterParam;
+  searchFilter: FilterParam;
   ageFilter: FilterParam;
   genderFFilter: FilterParam;
   genderMFilter: FilterParam;
-  term: SearchParam;
+  term: SearchParam = null;
 
   size: number;
   offset: number = 0;
@@ -50,7 +36,7 @@ export class UserSearchComponent implements OnInit {
   private searchTerms = new Subject<SearchParam>();
 
   constructor(private usersProfileService: UsersProfileService) {
-    this.serarchFilter = new FilterParam('Name', 'search', '', 'Enter a favourite name..');
+    this.searchFilter = new FilterParam('Name', 'search', '', 'Enter a favourite name..');
     this.ageFilter = new FilterParam('Age', 'range', '0', '');
     this.genderMFilter = new FilterParam('Male', 'radio', 'male', '');
     this.genderFFilter = new FilterParam('Female', 'radio', 'female', '');
@@ -63,12 +49,12 @@ export class UserSearchComponent implements OnInit {
         distinctUntilChanged()
       )
       .subscribe((term) => {
-        this.term = term;
         this.fetchData()
       });
   }
 
   search(term: SearchParam): void {
+    this.term = term;
     this.searchTerms.next(term);
   }
 
@@ -83,9 +69,5 @@ export class UserSearchComponent implements OnInit {
   onPageChange(offset) {
     this.offset = offset;
     this.fetchData();
-  }
-
-  toggleMenu() {
-    this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 }
