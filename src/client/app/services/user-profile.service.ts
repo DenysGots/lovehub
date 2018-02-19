@@ -33,10 +33,4 @@ export class UserProfileService {
 
     return mockUserSubject;
   }
-
-  // updateUser(user: User): Observable<User> {
-  //   return this.http.put(`/fake-backend/users/${user.id}`, user)
-  //     .json()
-  //     .catch(UserProfileService.handleError);
-  // }
 }
