@@ -1,4 +1,4 @@
-const user = {
+export const fakeUser = {
     id: 1,
     name: 'John Doe',
     age: 45,

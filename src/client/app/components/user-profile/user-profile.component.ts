@@ -22,7 +22,9 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     // display current user data
-    this._userProfileService.firstMethod();
+    // this._userProfileService.firstMethod();
+    this._userProfileService.getUser(1)
+      .subscribe(res => console.log(res));
   }
 
   enableChanges () {

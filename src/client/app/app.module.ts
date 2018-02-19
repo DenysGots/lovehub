@@ -18,6 +18,10 @@ import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.com
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
 import { UserProfileService } from './services/user-profile.service';
 
+import { MockBackend } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
+import { fakeBackendProvider } from './services/fakeBackendProvider';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +42,13 @@ import { UserProfileService } from './services/user-profile.service';
     }),
     FormsModule
   ],
-  providers: [UsersService, UserProfileService],
+  providers: [
+    UsersService,
+    UserProfileService,
+    // fakeBackendProvider,
+    // MockBackend,
+    // BaseRequestOptions
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

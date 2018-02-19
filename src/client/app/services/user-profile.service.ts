@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
+import { fakeUser } from './fakeUser';
 
 @Injectable()
 export class UserProfileService {
@@ -25,11 +27,16 @@ export class UserProfileService {
 
   constructor(private http: HttpClient) {}
 
-  getUser(): Observable<User> {
-    return this.http.get('/fake-backend/users/1')
+  getUser (userId: number): Subject<any> {
+    const mockUserSubject = new Subject();
+    setTimeout(() => mockUserSubject.next(fakeUser), 1000);
+
+    return mockUserSubject;
   }
 
-  updateUser(user: User): Observable<any> {
-    // return  this.http.put('/fake-backend/users', user)
-  }
+  // updateUser(user: User): Observable<User> {
+  //   return this.http.put(`/fake-backend/users/${user.id}`, user)
+  //     .json()
+  //     .catch(UserProfileService.handleError);
+  // }
 }
