@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from '../models/user';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class UsersService {
@@ -22,6 +26,11 @@ export class UsersService {
       catchError(this.handleError<User[]>('searchHeroes', []))
     );
   }
+  registration(user: User): Observable<User> {
+    const url = 'api/users';
+    return this.http.post<User>(url, user, httpOptions);
+  }
+
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -29,4 +38,5 @@ export class UsersService {
       return of(result as T);
     };
   }
+
 }

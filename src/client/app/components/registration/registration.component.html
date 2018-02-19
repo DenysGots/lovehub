@@ -1,89 +1,26 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
-
-<div class="registration row">
-
-
-  <!--<div class="quick_reg">-->
-    <!--<form id="quickRegistration"></form>-->
-    <!--<h5>Quick Registration</h5>-->
-    <!--<p><input type="text" required placeholder="Your Name" name="user" form="quickRegistration"/></p>-->
-    <!--<p><input type="email" required placeholder="Email" form="quickRegistration"/></p>-->
-    <!--<p><input type="password" required placeholder="Password" form="quickRegistration"/></p>-->
-    <!--<p><input type="password" required placeholder="Confirm Password" form="quickRegistration"/></p>-->
-    <!--<button type="button" class="btn btn-danger">START MEETING</button>-->
-  <!--</div>-->
-
-    <div class="signUp_flow col-12 col-sm-10">
-      <h3>Register in just a few steps:</h3>
-      <h4>You are...</h4>
-      <div class="btn btn-outline-dark">Man</div>
-      <div class="btn btn-outline-dark">Woman</div>
-      <div></div>
+<div class="quick-reg">
+  <h4>Quick Registration</h4>
+  <div>
+    <div>
+      <input #name type="text" class="form-control" required placeholder="Your Name">
     </div>
-
-
-
-    <div class="signUp_flow col-12 col-sm-10">
-      <h3>Register in just a few steps:</h3>
-      <h4>You want to...</h4>
-      <div class="btn btn-outline-dark">Go on a date</div>
-      <div class="btn btn-outline-dark">Find a new friends</div>
-      <div class="btn btn-outline-dark">Just chatting</div>
-      <div></div>
+    <div>
+      <input #email type="email" class="form-control" required aria-describedby="emailHelp" placeholder="Email"/>
     </div>
-
-
-
-
-    <div class="signUp_flow col-12 col-sm-10">
-      <h3>Register in just a few steps:</h3>
-      <h4>You are interesting in...</h4>
-      <div class="btn btn-outline-dark">Man</div>
-      <div class="btn btn-outline-dark">Woman</div>
-      <div class="btn btn-outline-dark">All</div>
-      <div></div>
+    <div>
+      <input #pass type="password" class="form-control"  required placeholder="Password"/>
     </div>
-
-
-
-
-    <div class="signUp_flow quick_reg col-12 col-sm-10">
-      <h3>And in the end:</h3>
-      <div>
-        <form id="registration"></form>
-        <p><input type="text" required placeholder="Your Name" name="user" form="registration"/></p>
-
-        <!--<p><div></div></p>-->
-        <!--<p><div></div></p>-->
-
-        <p><input type="email" required placeholder="Email" form="registration"/></p>
-        <p><input type="password" required placeholder="Password" form="registration"/></p>
-        <p><input type="password" required placeholder="Confirm Password" form="registration"/></p>
-        <button type="button" class="btn btn-danger">START MEETING</button>
-      </div>
-      <div></div>
-      <div></div>
+    <div>
+      <input #confirmPass type="password" class="form-control" required placeholder="Confirm Password"/>
     </div>
-
-
-
+    <div>
+      <button class="btn btn-danger" (click)="register(name.value, email.value, pass.value, confirmPass.value);
+              name.value = ''; email.value = ''; pass.value = ''; confirmPass.value = '';">
+        REGISTER
+      </button>
+    </div>
+  </div>
 </div>
-
-
-
-
-
-
-</body>
-</html>
-
 
 
 

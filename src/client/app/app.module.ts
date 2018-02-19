@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { RegistrationFullComponent } from './components/registration-full/registration-full.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
@@ -24,6 +25,7 @@ import { UserFilterComponent } from './components/user-filter/user-filter.compon
     AboutComponent,
     ContactComponent,
     RegistrationComponent,
+    RegistrationFullComponent,
     UserSearchComponent,
     UserFilterComponent,
     SidebarMenuComponent,

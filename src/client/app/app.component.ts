@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
+
 import { Observable } from 'rxjs/Observable';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 

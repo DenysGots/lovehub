@@ -1,33 +1,32 @@
-.registration {
-  position: relative;
-  /*display: -webkit-flex;*/
-  display: flex;
-  max-width: 600px;
-  margin: 0 auto;
-  border-radius: 25px;
+.quick-reg {
+  max-width: 300px;
+  border-radius: 10px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, .1);
+  padding: 10px;
   text-align: center;
+  opacity: 2;
+  background: rgba(0,0,0,0.7);
 }
 
-.registration div {
-  justify-content: center;
-  vertical-align: top;
-  margin: 0 auto;
-}
-
-.quick_reg button{
+.quick-reg button {
   cursor: pointer;
+  width: 100%;
+  height: 45px;
+  font-size: 16px;
 }
 
-.signUp_flow div{
-  width: 70%;
-  cursor: pointer;
-  margin: 6px;
+.quick-reg div {
+  margin: 20px auto;
 
 }
+.quick-reg h4 {
+  color: #fff;
+}
 
-@media (max-width: 576px){
-  .signUp_flow div{
-    width: 96%;
-  }
+.quick-reg .form-control {
+  height: 45px;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
 }
