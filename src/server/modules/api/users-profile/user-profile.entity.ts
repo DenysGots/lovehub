@@ -1,4 +1,4 @@
-import { AutoIncrement, BelongsTo, Column, ForeignKey, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import {AutoIncrement, BelongsTo, Column, ForeignKey, Length, Model, PrimaryKey, Table} from 'sequelize-typescript';
 
 import { User } from '../users/user.entity';
 
@@ -10,9 +10,11 @@ export class UserProfile extends Model<UserProfile> {
   @Column
   id: number;
 
+  @Length({min: 2, max: 15})
   @Column
   firstName: string;
 
+  @Length({min: 2, max: 15})
   @Column
   lastName: string;
 
@@ -21,6 +23,9 @@ export class UserProfile extends Model<UserProfile> {
 
   @Column
   age: number;
+
+  @Column
+  photo: Buffer;
 
   @Column
   isBaned: boolean;

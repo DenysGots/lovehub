@@ -9,6 +9,8 @@ import { routes } from './app.routing';
 
 import { UsersService } from './services/users.service';
 import { UsersProfileService } from './services/users-profile.service';
+import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
+import { httpInterceptorProviders } from './http-interceptors';
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
@@ -43,7 +45,9 @@ import { PagerComponent } from './components/pager/pager.component';
   ],
   providers: [
     UsersService,
-    UsersProfileService
+    UsersProfileService,
+    { provide: RequestCache, useClass: RequestCacheWithMap },
+    httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })

@@ -55,10 +55,6 @@ export class UsersProfileService {
   }
 
   async remove(id: number): Promise<number> {
-    try {
-      return await this.userProfileRepository.destroy({where: {id: id}});
-    } catch(err) {
-      console.error(`Service ${err.message}`)
-    }
+    return await this.userProfileRepository.destroy({where: {id: id}});
   }
 }

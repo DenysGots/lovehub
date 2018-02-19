@@ -1,29 +1,35 @@
-import {Body, Controller, Delete, Get, HttpCode, Param, Post, Query} from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, Param, Post, Query, UseFilters} from '@nestjs/common';
 import { UserProfileDto } from './dto/user-profile.dto';
 import { UsersProfileService } from './users-profile.service';
 import { UserProfile } from './user-profile.entity';
+import { HttpExceptionFilter } from '../../filters/http-exception.filter';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
   count?: number;
 }
 
+
+@UseFilters(new HttpExceptionFilter())
 @Controller('api/users-profile')
 export class UsersProfileController {
 
   constructor(private readonly usersProfileService: UsersProfileService) {}
 
+  @HttpCode(201)
   @Post()
   async create(@Body() userProfileDto: UserProfileDto) {
     console.log(userProfileDto);
     await this.usersProfileService.create(userProfileDto);
   }
 
+  @HttpCode(200)
   @Get(':id')
   async findById(@Param() params): Promise<UserProfile> {
     return await this.usersProfileService.findById(params.id);
   }
 
+  @HttpCode(200)
   @Get()
   async findAll(@Query() queries): Promise<FilteredUsersProfile> {
     const key = Object.keys(queries)[0];
@@ -43,11 +49,7 @@ export class UsersProfileController {
   @HttpCode(204)
   @Delete(':id')
   async removeById(@Param() params): Promise<{statusCode: number}> {
-    try {
-      const affected = await this.usersProfileService.remove(params.id);
-      return {statusCode: affected};
-    } catch(err) {
-      console.error(`Controller: ${err.message}`)
-    }
+    const affected = await this.usersProfileService.remove(params.id);
+    return {statusCode: affected};
   }
 }
