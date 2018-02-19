@@ -31,7 +31,7 @@ export class UserSearchComponent implements OnInit {
 
   size: number;
   offset: number = 0;
-  limit: number = 6;
+  perPage: number = 6;
 
   private searchTerms = new Subject<SearchParam>();
 
@@ -59,7 +59,7 @@ export class UserSearchComponent implements OnInit {
   }
 
   fetchData() {
-    return this.usersProfileService.searchUsers(this.term.searchType, this.term.searchValue, this.offset, this.limit)
+    return this.usersProfileService.searchUsers(this.term.searchType, this.term.searchValue, this.offset, this.perPage)
       .subscribe(result => {
         this.users = result.rows;
         this.size = result.count;

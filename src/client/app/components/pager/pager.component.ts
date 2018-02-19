@@ -16,9 +16,9 @@ import 'rxjs/add/operator/toArray';
 export class PagerComponent implements OnInit, OnChanges {
 
   @Input() offset: number;
-  @Input() limit: number;
+  @Input() perPage: number;
   @Input() size: number;
-  range: number = 3;
+  pagesToShow: number = 3;
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   pages: Observable<number[]>;
@@ -26,17 +26,17 @@ export class PagerComponent implements OnInit, OnChanges {
   totalPages: number;
 
   ngOnInit(): void {
-    this.getPages(this.offset, this.limit, this.size);
+    this.getPages(this.offset, this.perPage, this.size);
   }
 
   ngOnChanges(): void {
-    this.getPages(this.offset, this.limit, this.size);
+    this.getPages(this.offset, this.perPage, this.size);
   }
 
   getPages(offset: number, limit: number, size: number) {
     this.currentPage = this.getCurrentPage(offset, limit);
     this.totalPages = this.getTotalPages(limit, size);
-    this.pages = Observable.range(-this.range, this.range * 2 + 1)
+    this.pages = Observable.range(-this.pagesToShow, this.pagesToShow * 2 + 1)
       .map(offset => this.currentPage + offset)
       .filter(page => this.isValidPageNumber(page, this.totalPages))
       .toArray();
@@ -57,7 +57,7 @@ export class PagerComponent implements OnInit, OnChanges {
   selectPage(page: number, event) {
     this.cancelEvent(event);
     if (this.isValidPageNumber(page, this.totalPages)) {
-      this.pageChange.emit((page - 1) * this.limit);
+      this.pageChange.emit((page - 1) * this.perPage);
     }
   }
 

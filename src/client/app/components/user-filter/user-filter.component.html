@@ -1,5 +1,5 @@
 <label>{{ label }}
-  <input class="form-control form-control-lg"
+  <input #searchValue class="form-control form-control-lg form-filter"
          [type]="type" name="value" [placeholder]="placeholder"
-         [(ngModel)]="value" (input)="search()" />
+         [(ngModel)]="value" (input)="search()" (blur)="searchValue.value = ''"/>
 </label>

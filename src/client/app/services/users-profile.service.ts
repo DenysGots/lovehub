@@ -20,14 +20,14 @@ export class UsersProfileService {
 
   constructor(private http: HttpClient) { }
 
-  searchUsers(type, term, offset, limit): Observable<FilteredUsersProfile> {
+  searchUsers(type, term, offset, perPage): Observable<FilteredUsersProfile> {
     console.log(`angular: within searchUsers(${type}, ${term})`);
     if (type == 'search') {
-      return this.findByName(term, offset, limit);
+      return this.findByName(term, offset, perPage);
     } else if(type == 'range') {
-      return this.findByAge(term, offset, limit);
+      return this.findByAge(term, offset, perPage);
     } else if(type == 'radio') {
-      return this.findByGender(term, offset, limit);
+      return this.findByGender(term, offset, perPage);
     }
   }
 
