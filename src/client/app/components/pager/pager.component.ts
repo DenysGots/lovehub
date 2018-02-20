@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -13,29 +13,23 @@ import 'rxjs/add/operator/toArray';
   templateUrl: 'pager.component.html',
   styleUrls: ['pager.component.scss']
 })
-export class PagerComponent implements OnInit, OnChanges {
+export class PagerComponent implements OnChanges {
 
-  @Input() offset: number;
-  @Input() perPage: number;
-  @Input() size: number;
-  pagesToShow: number = 3;
+  @Input() itemsPerPage: number;
+  @Input() countItems: number;
+  @Input() currentPage: number;
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   pages: Observable<number[]>;
-  currentPage: number;
+  pagesToShow: number = 3;
   totalPages: number;
 
-  ngOnInit(): void {
-    this.getPages(this.offset, this.perPage, this.size);
-  }
-
   ngOnChanges(): void {
-    this.getPages(this.offset, this.perPage, this.size);
+    this.getPages(this.itemsPerPage, this.countItems);
   }
 
-  getPages(offset: number, limit: number, size: number) {
-    this.currentPage = this.getCurrentPage(offset, limit);
-    this.totalPages = this.getTotalPages(limit, size);
+  getPages(itemsPerPage: number, countItems: number) {
+    this.totalPages = this.getTotalPages(countItems, itemsPerPage);
     this.pages = Observable.range(-this.pagesToShow, this.pagesToShow * 2 + 1)
       .map(offset => this.currentPage + offset)
       .filter(page => this.isValidPageNumber(page, this.totalPages))
@@ -46,18 +40,14 @@ export class PagerComponent implements OnInit, OnChanges {
     return page > 0 && page <= totalPages;
   }
 
-  getCurrentPage(offset: number, limit: number): number {
-    return Math.floor(offset / limit) + 1;
-  }
-
-  getTotalPages(limit: number, size: number): number {
-    return Math.ceil(Math.max(size, 1) / Math.max(limit, 1));
+  getTotalPages(countItems: number, itemsPerPage: number): number {
+    return Math.ceil(Math.max(countItems, 1) / Math.max(itemsPerPage, 1));
   }
 
   selectPage(page: number, event) {
     this.cancelEvent(event);
     if (this.isValidPageNumber(page, this.totalPages)) {
-      this.pageChange.emit((page - 1) * this.perPage);
+      this.pageChange.emit(page);
     }
   }
 

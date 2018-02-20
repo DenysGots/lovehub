@@ -17,6 +17,7 @@ export class UsersProfileService {
     userProfile.firstName = userProfileDto.firstName;
     userProfile.lastName = userProfileDto.lastName;
     userProfile.age = userProfileDto.age;
+    userProfile.gender = userProfileDto.gender;
 
     return await userProfile.save();
   }
@@ -46,7 +47,7 @@ export class UsersProfileService {
   async findByGender(gender: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
     console.log(`server service: findByGender(${gender})`);
     return await this.userProfileRepository
-      .findAndCountAll<UserProfile>({where: {firstName: gender}, offset: offset, limit: limit});
+      .findAndCountAll<UserProfile>({where: {gender: gender}, offset: offset, limit: limit});
   }
 
 

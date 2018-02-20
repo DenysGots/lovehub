@@ -8,16 +8,4 @@ import {Component} from '@angular/core';
 })
 export class SidebarMenuComponent {
 
-  searchType = 'search';
-  searchPlaceholder = 'Enter a favourite name..';
-  searchValue = '';
-
-  rangeType = 'range';
-  rangePlaceholder = 'Enter a favourite age..';
-  rangeValue = '0';
-
-  radioType = 'radio';
-  radioPlaceholder = 'Enter a favourite gender..';
-  radioValueM = 'male';
-  radioValueF = 'female';
 }

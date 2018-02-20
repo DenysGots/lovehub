@@ -2,11 +2,6 @@ import {AutoIncrement, BelongsTo, Column, DataType, Default, ForeignKey, Length,
 
 import { User } from '../users/user.entity';
 
-enum Gender {
-  MALE = 'male',
-  FEMALE = 'female',
-}
-
 @Table({tableName: 'UsersProfile'})
 export class UserProfile extends Model<UserProfile> {
 
@@ -28,14 +23,13 @@ export class UserProfile extends Model<UserProfile> {
 
   @Column
   age: number;
-/*
-  @Default('MALE')
-  @Column(DataType.ENUM('MALE', 'FEMALE'))
-  gender: Gender;
+
+  @Column
+  gender: string;
 
   @Column
   photo: Buffer;
-*/
+
   @Column
   isBaned: boolean;
 

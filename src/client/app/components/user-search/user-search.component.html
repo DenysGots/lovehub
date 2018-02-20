@@ -50,9 +50,9 @@
   </section>
   <section>
     <app-pager
-      [offset]="offset"
-      [perPage]="perPage"
-      [size]="size"
+      [itemsPerPage]="itemsPerPage"
+      [countItems]="countItems"
+      [currentPage]="currentPage"
       (pageChange)="onPageChange($event)">
     </app-pager>
   </section>

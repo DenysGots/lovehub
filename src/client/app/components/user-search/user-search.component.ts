@@ -6,8 +6,6 @@ import {
   debounceTime, distinctUntilChanged
 } from 'rxjs/operators';
 
-import {animate, state, style, transition, trigger} from '@angular/animations'
-
 import { UsersProfileService } from '../../services/users-profile.service';
 
 import { SearchParam } from './shared/search-param';
@@ -29,9 +27,10 @@ export class UserSearchComponent implements OnInit {
   genderMFilter: FilterParam;
   term: SearchParam = null;
 
-  size: number;
-  offset: number = 0;
-  perPage: number = 6;
+  countItems: number;
+  offsetItems = 0;
+  currentPage = 1;
+  itemsPerPage = 6;
 
   private searchTerms = new Subject<SearchParam>();
 
@@ -59,15 +58,17 @@ export class UserSearchComponent implements OnInit {
   }
 
   fetchData() {
-    return this.usersProfileService.searchUsers(this.term.searchType, this.term.searchValue, this.offset, this.perPage)
+    return this.usersProfileService
+      .searchUsers(this.term.searchType, this.term.searchValue, this.offsetItems, this.itemsPerPage)
       .subscribe(result => {
         this.users = result.rows;
-        this.size = result.count;
+        this.countItems = result.count;
       });
   }
 
-  onPageChange(offset) {
-    this.offset = offset;
+  onPageChange(page) {
+    this.currentPage = page;
+    this.offsetItems = (this.currentPage - 1) * this.itemsPerPage;
     this.fetchData();
   }
 }

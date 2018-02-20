@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, HttpCode, Param, Post, Query, UseFilters} from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Query, UseFilters } from '@nestjs/common';
 import { UserProfileDto } from './dto/user-profile.dto';
 import { UsersProfileService } from './users-profile.service';
 import { UserProfile } from './user-profile.entity';
@@ -10,8 +10,8 @@ export interface FilteredUsersProfile {
 }
 
 
-@UseFilters(new HttpExceptionFilter())
 @Controller('api/users-profile')
+@UseFilters(new HttpExceptionFilter())
 export class UsersProfileController {
 
   constructor(private readonly usersProfileService: UsersProfileService) {}
@@ -44,6 +44,7 @@ export class UsersProfileController {
       return await this.usersProfileService.findByGender(queries.gender, queries.offset, queries.limit);
     }
     return await this.usersProfileService.findAll();
+
   }
 
   @HttpCode(204)

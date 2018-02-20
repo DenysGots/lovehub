@@ -10,7 +10,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       .status(status)
       .json({
         statusCode: status,
-        message: ``
+        message: `Exception has been caught custom's filter`
       });
   }
 }

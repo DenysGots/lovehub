@@ -39,7 +39,7 @@ export class UsersProfileService {
 
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?name=${name}&&offset=${offset}&&limit=${limit}`).pipe(
       tap(_ => console.log(`found users-profile by "${name}"`)),
-      catchError(this.handleError<FilteredUsersProfile>('users-profile: findByName', ))
+      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})`, ))
     );
   }
 
@@ -50,7 +50,7 @@ export class UsersProfileService {
 
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?age=${age}&&offset=${offset}&&limit=${limit}`).pipe(
       tap(_ => console.log(`found users-profile by "${age}"`)),
-      catchError(this.handleError<FilteredUsersProfile>('users-profile: findByAge', ))
+      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})`, ))
     );
   }
 
@@ -61,13 +61,13 @@ export class UsersProfileService {
 
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?gender=${gender}&&offset=${offset}&&limit=${limit}`).pipe(
       tap(_ => console.log(`found users-profile by "${gender}"`)),
-      catchError(this.handleError<FilteredUsersProfile>('users-profile: findByGender', ))
+      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${gender})`, ))
     );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.log(`${operation} failed: ${error.message}`);
+      console.log(`${operation} failed: ${error.status}: ${error.message}`);
       return of(result as T);
     };
   }

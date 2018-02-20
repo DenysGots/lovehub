@@ -5,6 +5,7 @@ export class UserProfile {
   lastName: string;
   numberLike: number;
   age: number;
+  gender: string;
   isBaned: boolean;
   isActive: boolean;
 
