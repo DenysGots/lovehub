@@ -6,11 +6,11 @@
 </section>
 <section>
   <app-slider iden='demo'>
-    <div *ngFor="let reason of reasons" class="carousel-item" [class.active]="reason.title === 'Los Angeles'">
-      <img src={{reason.image}} alt={{reason.title}} class='reasons-slide'>
+    <div *ngFor="let slider of slider; let i = index" class="carousel-item" [class.active]="i === 0">
+      <img src={{slider.image}} alt={{slider.title}} class='main-slide'>
       <div class="carousel-caption">
-        <h3>{{reason.title}}</h3>
-        <p>{{reason.text}}</p>
+        <h3>{{slider.title}}</h3>
+        <p>{{slider.text}}</p>
       </div>   
     </div>
   </app-slider>
@@ -19,7 +19,7 @@
   <div>
     <h2 class="title">The way to find your true love starts here</h2>
     <div class="find-items">
-      <div *ngFor="let item of findItems" class="find-block">
+      <div *ngFor="let item of reasons" class="find-block">
         <div >
             <img
               class="find-image"
@@ -54,47 +54,23 @@
   <h3 class="subtitle">It's kinda surprising that feedbacks are always positive, isn`t it?</h3>
   <div class="row">
     <app-slider iden='feeds' class="col-sm-12" breads>
-      <div *ngFor="let reason of reasons" class="carousel-item" [class.active]="reason.title === 'Los Angeles'">
-        <img src={{reason.image}} alt={{reason.title}} class='reasons-slide'>
+      <div *ngFor="let feed of feedbacks; let i = index" class="carousel-item" [class.active]="i === 0">
+        <img src={{feed.image}} alt={{feed.title}} class='main-slide'>
         <div class="carousel-caption">
-          <h3>{{reason.title}}</h3>
-          <p>{{reason.text}}</p>
+          <h3>{{feed.title}}</h3>
+          <p>{{feed.text}}</p>
         </div>   
       </div>
 
-      <div class="feed-block breads-0">
+      <div *ngFor="let feed of feedbacks; let i = index" class="feed-block breads" [attr.data-target]="'#feeds'" [attr.data-slide-to]="i">
         <img
           class="feed-block-image"
           src="https://cdn.onlinewebfonts.com/svg/img_152532.png"
         />
         <div class='feed-block-info'>
-          <h3 class="feed-block-info-title">Lorem impum</h3>
+          <h3 class="feed-block-info-title">{{feed.title}}</h3>
           <p class="feed-block-info-text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          </p>
-        </div>
-      </div>
-      <div class="feed-block breads-1">
-        <img
-          class="feed-block-image"
-          src="https://cdn.onlinewebfonts.com/svg/img_152532.png"
-        />
-        <div class='feed-block-info' >
-          <h3 class="feed-block-info-title">Lorem impum</h3>
-          <p class="feed-block-info-text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-          </p>
-        </div>
-      </div>
-      <div class="feed-block breads-2">
-        <img
-          class="feed-block-image"
-          src="https://cdn.onlinewebfonts.com/svg/img_152532.png"
-        />
-        <div class='feed-block-info'>
-          <h3 class="feed-block-info-title">Lorem impum</h3>
-          <p class="feed-block-info-text">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            {{feed.info}}
           </p>
         </div>
       </div>

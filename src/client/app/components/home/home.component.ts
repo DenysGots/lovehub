@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -6,61 +9,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  findItems = [
-    {
-      image:'https://maxcdn.icons8.com/app/uploads/2017/05/Like-500.png',
-      title:'Lorem impum',
-      text:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer '
-    },
-    {
-      image:'https://maxcdn.icons8.com/app/uploads/2017/05/Like-500.png',
-      title:'Lorem impum',
-      text:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-    },
-    {
-      image:'https://maxcdn.icons8.com/app/uploads/2017/05/Like-500.png',
-      title:'Lorem impum',
-      text:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-    },
-    {
-      image:'https://maxcdn.icons8.com/app/uploads/2017/05/Like-500.png',
-      title:'Lorem impum',
-      text:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer '
-    },
-    {
-      image:'https://maxcdn.icons8.com/app/uploads/2017/05/Like-500.png',
-      title:'Lorem impum',
-      text:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-    },
-    {
-      image:'https://maxcdn.icons8.com/app/uploads/2017/05/Like-500.png',
-      title:'Lorem impum',
-      text:'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-    },
-  ];
+  public feedbacks;
+  public reasons;
+  public slider;
 
-  reasons = [
-    {
-      image:'https://www.w3schools.com/bootstrap4/la.jpg',
-      title:'Los Angeles',
-      text:'We had such a great time in LA!'
-    },
-    {
-      image:'https://www.w3schools.com/bootstrap4/chicago.jpg',
-      title:'Chicago',
-      text:'Thank you, Chicago!'
-    },
-    {
-      image:'https://www.w3schools.com/bootstrap4/ny.jpg',
-      title:'New York',
-      text:'We love the Big Apple!'
-    },
-  ];
-
-  constructor() {
-   }
+  constructor(private httpClient: HttpClient, private _homeService: HomeService) {}
 
   ngOnInit() {
+    this.getAllInfo();
   }
 
+  getAllInfo(){
+    this._homeService.getAllInfo().subscribe(
+      data => {
+        this.slider = data[0]; 
+        this.reasons = data[1];
+        this.feedbacks = data[2]; 
+      },
+      err => {
+        console.log(err)
+      },
+      () => console.log('done loading all info')
+    );
+  }
 }

@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app.routing';
 
 import { UsersService } from './services/users.service';
+import { HomeService }  from './services/home.service';
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
@@ -44,7 +45,7 @@ import { SliderComponent } from './slider/slider.component';
       preloadingStrategy: PreloadAllModules,
     })
   ],
-  providers: [UsersService, NavigationService],
+  providers: [UsersService, NavigationService, HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

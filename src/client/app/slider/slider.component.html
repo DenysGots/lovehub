@@ -18,14 +18,6 @@
     </div>
   </div>
   <div *ngIf="_breads" class="col-md-4 col-sm-12 feedbacks">
-    <div [attr.data-target]="'#'+iden" data-slide-to="0" class="active">
-      <ng-content select=".breads-0"></ng-content>
-    </div>
-    <div [attr.data-target]="'#'+iden" data-slide-to="1">
-        <ng-content select=".breads-1"></ng-content>
-    </div>
-    <div [attr.data-target]="'#'+iden" data-slide-to="2">
-        <ng-content select=".breads-2"></ng-content>
-    </div>
+    <ng-content select=".breads"></ng-content>
   </div>
 </div>

@@ -1,5 +1,6 @@
 #registration{
     width: 100%;
+    height: calc(100% - 66px);
 }
 #video-background {
     width: 100%;
@@ -73,7 +74,7 @@
     margin-bottom: 30px;
     cursor: pointer;
 }
-.breads-2{
+.breads:nth-child(3){
     margin: 0;
 }
 .feed-block-image{
@@ -92,7 +93,7 @@
     font-size: 12px;
     margin: 0;
 }
-.reasons-slide, .feed-slide{
+.main-slide, .feed-slide{
     height: 100%; 
     width: 100%;
     background-position: center;
