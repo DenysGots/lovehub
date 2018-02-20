@@ -5,7 +5,7 @@
   </video>
 </section>
 <section>
-  <app-slider iden='demo'>
+  <home-slider iden='demo'>
     <div *ngFor="let slider of slider; let i = index" class="carousel-item" [class.active]="i === 0">
       <img src={{slider.image}} alt={{slider.title}} class='main-slide'>
       <div class="carousel-caption">
@@ -13,7 +13,7 @@
         <p>{{slider.text}}</p>
       </div>   
     </div>
-  </app-slider>
+  </home-slider>
 </section>
 <section id='find'>
   <div>
@@ -53,7 +53,7 @@
   <h2 class="title">Some positive feedbacks from our users</h2>
   <h3 class="subtitle">It's kinda surprising that feedbacks are always positive, isn`t it?</h3>
   <div class="row">
-    <app-slider iden='feeds' class="col-sm-12" breads>
+    <home-slider iden='feeds' class="col-sm-12" breads>
       <div *ngFor="let feed of feedbacks; let i = index" class="carousel-item" [class.active]="i === 0">
         <img src={{feed.image}} alt={{feed.title}} class='main-slide'>
         <div class="carousel-caption">
@@ -74,7 +74,7 @@
           </p>
         </div>
       </div>
-    </app-slider>
+    </home-slider>
   </div>
 </section>
 
