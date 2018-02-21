@@ -12,6 +12,8 @@ import { UsersProfileService } from './services/users-profile.service';
 import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
 import { httpInterceptorProviders } from './http-interceptors';
 
+import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
+
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -31,7 +33,8 @@ import { PagerComponent } from './components/pager/pager.component';
     UserFilterComponent,
     SidebarMenuComponent,
     PagerComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UsersProfileOrderByPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),

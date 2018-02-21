@@ -16,7 +16,7 @@
   }
 
   #menuToggle + label:after {
-    content:"Open"
+    content:"Open Searching ToolBar"
   }
 
   #menuToggle:checked + label {
@@ -24,7 +24,7 @@
   }
 
   #menuToggle:checked + label:after {
-    content:"Close"
+    content:"Close Searching ToolBar"
   }
 
   .filter__container {
