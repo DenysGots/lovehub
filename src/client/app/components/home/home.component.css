@@ -1,6 +1,14 @@
 #registration{
     width: 100%;
-    height: calc(100% - 66px);
+    position: relative;
+}
+.reg-block{
+    width: 500px;
+    height: 400px;
+    background-color: rgba(0,0,0,.3);
+    position: absolute;
+    top: 50px;
+    right: 50px;
 }
 #video-background {
     width: 100%;
@@ -117,6 +125,22 @@
     }
     .find-image{
         width: 80px;
+    }
+
+    #registration{
+        padding:20px 0;
+        background-color: #e8e8e8;
+    }
+
+    .reg-block{
+        margin: 0 auto;
+        width: 80%;
+        height: auto;
+        position: relative;
+        background-color: rgba(0,0,0,.1);
+        left: 0;
+        top: 0;
+        transform: translate(0,0);
     }
 }
 @media (max-width: 768px) { 
