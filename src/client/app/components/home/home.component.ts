@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { HomeService } from '../../services/home.service';
+
+import { HomeService }   from '../../services/home.service';
+import { WindowService } from '../../services/window.service';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +15,18 @@ export class HomeComponent implements OnInit {
   public reasons;
   public slider;
 
-  constructor(private httpClient: HttpClient, private _homeService: HomeService) {}
+  public videoHeight;
+
+  constructor(
+    private httpClient: HttpClient,
+    private _homeService: HomeService,
+    private windowService: WindowService,
+  ) {}
 
   ngOnInit() {
+    const { videoHeight } = this.windowService;
+    this.videoHeight = videoHeight;
+
     this.getAllInfo();
   }
 

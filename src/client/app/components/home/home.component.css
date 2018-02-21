@@ -12,7 +12,6 @@
 }
 #video-background {
     width: 100%;
-    height: auto;
     z-index: -100;
 }
 .title{
@@ -126,14 +125,14 @@
     .find-image{
         width: 80px;
     }
-
     #registration{
-        padding:20px 0;
         background-color: #e8e8e8;
     }
-
+    .video-block{
+        display: none;
+    }
     .reg-block{
-        margin: 0 auto;
+        margin: 20px auto;
         width: 80%;
         height: auto;
         position: relative;
@@ -147,11 +146,9 @@
     #find, #questions, #feedbacks{
         padding: 15px 16px;
     }
-
     .find-items{
         flex-direction: column;
     }
-
     .find-block{
         width: 75%;
         flex-direction: column;
@@ -159,7 +156,6 @@
         margin-bottom: 40px; 
         height: auto;
     }
-
     .find-image{
         margin: 0;
         margin-bottom: 15px;
@@ -177,7 +173,6 @@
     .find-block{
         margin-bottom: 20px; 
     }
-
     .feed-block{
         margin: 15px 0;
     }
