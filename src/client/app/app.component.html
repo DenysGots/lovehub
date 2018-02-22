@@ -1,13 +1,17 @@
-<ul>
-  <li><a routerLink="about">About</a></li>
-  <li><a routerLink="contact">Contact</a></li>
-  <li><a routerLink="home">Home</a></li>
-  <li><a routerLink="search">Search</a></li>
-  <li><a routerLink="login">Login</a></li>
-  <li><a routerLink="user-profile">User Profile</a></li>
-</ul>
+<div class="wrapper">
+  <div class='content'>
+    <app-header></app-header>
+    <ul>
+      <li><a routerLink="about">About</a></li>
+      <li><a routerLink="contact">Contact</a></li>
+      <li><a routerLink="home">Home</a></li>
+      <li><a routerLink="search">Search</a></li>
+      <li><a routerLink="user-profile">User Profile</a></li>
+      <li><a routerLink="login">Login</a> </li>
+    </ul>
+    <hr />
 
-<hr />
-<app-header></app-header>
-<router-outlet></router-outlet>
-<app-footer></app-footer>
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</div>
