@@ -12,7 +12,7 @@ export const databaseProviders = [
         host: 'localhost',
         port: 5432,
         username: 'postgres',
-        password: 'nss22',
+        password: '141296',
         database: 'lovehub',
         pool: {
           max: 5,
