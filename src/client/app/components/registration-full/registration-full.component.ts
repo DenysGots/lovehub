@@ -11,6 +11,7 @@ export class RegistrationFullComponent implements OnInit {
 
   stage = 0;
   user: User;
+  enable = {step0: false, step1: false, step2: false, step3: false};
 
   public constructor(private userService: UsersService) {}
 
@@ -20,18 +21,21 @@ export class RegistrationFullComponent implements OnInit {
 
   receiveSex($event) {
     this.user.sex = $event;
+    this.enable.step0 = true;
     this.stage++;
     console.log(this.user);
   }
 
   receivePreference($event) {
     this.user.preference = $event;
+    this.enable.step1 = true;
     this.stage++;
     console.log(this.user);
   }
 
   receiveOrientation($event) {
     this.user.orientation = $event;
+    this.enable.step2 = true;
     this.stage++;
     console.log(this.user);
   }
@@ -45,6 +49,7 @@ export class RegistrationFullComponent implements OnInit {
     // } else {
     // }
     this.user.password = $event.pass;
+    this.enable.step3 = true;
     this.stage++;
     this.userService.registration(this.user as User)
       .subscribe(newUser => {
@@ -60,7 +65,10 @@ export class RegistrationFullComponent implements OnInit {
   }
 
   isNext() {
-    if (this.stage !== 3) {
+    if (((this.enable.step0 === true && this.stage === 0) ||
+        (this.enable.step1 === true && this.stage !== 2) ||
+        (this.enable.step2 === true && this.stage !== 3)) &&
+        this.stage !== 3) {
       this.stage++;
     }
   }

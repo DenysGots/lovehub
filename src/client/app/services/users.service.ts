@@ -38,5 +38,4 @@ export class UsersService {
       return of(result as T);
     };
   }
-
 }

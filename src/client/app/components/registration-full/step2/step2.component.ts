@@ -15,14 +15,4 @@ export class Step2Component implements OnInit {
   selectOrientation(orientation: string) {
     this.orientationEvent.emit(orientation);
   }
-
-  // isNext() {
-  // }
-  // isPrev() {
-  // }
-  // isEnable() {
-  // }
-  // isDisable() {
-  // }
-
 }
