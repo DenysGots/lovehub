@@ -48,8 +48,9 @@ export class LoginComponent implements OnInit {
 
     console.log(this.loginForm.value);
 
-    this.loginService.logUser(email, password).subscribe(user => {
+    this.loginService.logUser(email, password).subscribe((user: User) => {
         this.storage.setUser(user);
+        // user.print();
       },
       error => {
          console.log(error);

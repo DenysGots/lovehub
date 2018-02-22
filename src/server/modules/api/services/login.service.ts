@@ -6,6 +6,6 @@ export class LoginService {
 
   findUser(email: string, password: number): User {
 
-    return new User('name', 10);
+    return {username: '', age: 10};
   }
 }
