@@ -13,7 +13,7 @@ class User {
 @Controller('api')
 export class ApiController {
 
-  @Get('hello')
+  @Get('')
   root() {
 
     return {

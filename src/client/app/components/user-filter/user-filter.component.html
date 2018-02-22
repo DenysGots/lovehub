@@ -1,3 +1,5 @@
-<label>Famale
-  <!--<input #searchBox type="{{ type }}" placeholder="{{ placeholder }}" (keyup)="search(searchBox.value)" />-->
+<label>{{ label }}
+  <input #searchValue class="form-control form-control-lg form-filter"
+         [type]="type" name="value" [placeholder]="placeholder"
+         [(ngModel)]="value" (input)="search()" (blur)="searchValue.value = ''"/>
 </label>
