@@ -17,7 +17,6 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 
 import { AppComponent } from './app.component';
-import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
@@ -34,7 +33,6 @@ import { PagerComponent } from './components/pager/pager.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
     ContactComponent,
     HomeComponent,
     UserSearchComponent,
@@ -42,7 +40,6 @@ import { PagerComponent } from './components/pager/pager.component';
     SidebarMenuComponent,
     HeaderComponent,
     FooterComponent,
-    UserProfileComponent,
     SliderComponent,
     PagerComponent,
     UserProfileComponent,

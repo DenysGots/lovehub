@@ -10,7 +10,7 @@ import { WindowService }     from '../../services/window.service';
 })
 export class HeaderComponent implements OnInit {
   menu: object[];
-  logo: string = '../../../../assets/img/logo3.png';
+  logo: string = '/assets/img/logo3.png';
 
   @ViewChild('header') elementView: ElementRef;
 
