@@ -3,7 +3,8 @@ export class User {
   bday: string;
   location: string;
   sex: string;
-  interestingIn: string;
+  preference: string;
+  orientation: string;
   email: string;
   password: string;
 }

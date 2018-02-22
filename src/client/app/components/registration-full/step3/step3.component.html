@@ -1,0 +1,77 @@
+<!--<div *ngIf="stage==3" class="full-reg">-->
+  <!--<div class="carousel">-->
+
+    <!--<ol class="carousel-indicators">-->
+      <!--<li></li>-->
+      <!--<li></li>-->
+      <!--<li></li>-->
+      <!--<li class="active"></li>-->
+    <!--</ol>-->
+
+    <!--<div #stage3 class="registration row">-->
+      <!--<div class="signUp-flow col-12 col-sm-10">-->
+        <!--<h4>And in the end:</h4>-->
+        <!--<label>-->
+          <!--<input #name type="text" class="form-control" required placeholder="Your Name"/>-->
+        <!--</label>-->
+        <!--<label>-->
+          <!--<input #bday type="date" class="form-control" required placeholder="Date of birth"/>-->
+        <!--</label>-->
+        <!--<label>-->
+          <!--<input #location type="text" class="form-control" required placeholder="Location"/>-->
+        <!--</label>-->
+        <!--<label>-->
+          <!--<input #email type="email" class="form-control" required aria-describedby="emailHelp" placeholder="Email"/>-->
+        <!--</label>-->
+        <!--<label>-->
+          <!--<input #pass type="password" class="form-control"  required placeholder="Password"/>-->
+        <!--</label>-->
+        <!--<label>-->
+          <!--<input #confirmPass type="password" class="form-control" required placeholder="Confirm Password"/>-->
+        <!--</label>-->
+        <!--<button type="submit" class="btn btn-danger" (click)="sendForm(name.value, bday.value, location.value, email.value, pass.value, confirmPass.value);-->
+                <!--name.value = ''; bday.value = ''; location.value = ''; email.value = ''; pass.value = ''; confirmPass.value = '';">-->
+          <!--REGISTER-->
+        <!--</button>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<a class="carousel-control-prev" role="button" (click)="isPrev()">-->
+      <!--<span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+      <!--<span class="sr-only">Previous</span>-->
+    <!--</a>-->
+    <!--<a class="carousel-control-next" role="button" (click)="disable = false">-->
+      <!--<span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+      <!--<span class="sr-only">Next</span>-->
+    <!--</a>-->
+
+  <!--</div>-->
+<!--</div>-->
+
+<div #stage3 class="registration row">
+  <div class="signUp-flow col-12 col-sm-10">
+    <h4>And in the end:</h4>
+    <label>
+      <input #name type="text" class="form-control" required placeholder="Your Name"/>
+    </label>
+    <label>
+      <input #bday type="date" class="form-control" required placeholder="Date of birth"/>
+    </label>
+    <label>
+      <input #location type="text" class="form-control" required placeholder="Location"/>
+    </label>
+    <label>
+      <input #email type="email" class="form-control" required aria-describedby="emailHelp" placeholder="Email"/>
+    </label>
+    <label>
+      <input #pass type="password" class="form-control"  required placeholder="Password"/>
+    </label>
+    <label>
+      <input #confirmPass type="password" class="form-control" required placeholder="Confirm Password"/>
+    </label>
+    <button type="submit" class="btn btn-danger" (click)="sendForm(name.value, bday.value, location.value, email.value, pass.value, confirmPass.value);
+                name.value = ''; bday.value = ''; location.value = ''; email.value = ''; pass.value = ''; confirmPass.value = '';">
+      REGISTER
+    </button>
+  </div>
+</div>
