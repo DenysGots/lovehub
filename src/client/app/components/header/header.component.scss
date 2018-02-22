@@ -1,26 +1,30 @@
-.logo-img{
+.logo-img {
     width: 40px;
     height: 40px;
     margin-right: 3px;
 }
-.logo{
+
+.logo {
     display: inline-flex;
     align-items: center;
 }
-.menu{
+
+.menu {
     display: inline-flex;
     list-style-type: none;
     margin: 0;
 }
-.menu-item{
+
+.menu-item {
     display: inline-flex;
     padding: 10px;
     color: white;
 }
-.header{
+
+.header {
     position: fixed;
     top: 0;
-    left:0;
+    left: 0;
     right: 0;
     z-index: 100;
 }

@@ -1,8 +1,9 @@
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
-import { HomeComponent } from './components/home/home.component';
 
-import {UserSearchComponent} from './components/user-search/user-search.component';
+import { HomeComponent } from './components/home/home.component';
+import { UserSearchComponent } from './components/user-search/user-search.component';
+
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 export const routes = [
