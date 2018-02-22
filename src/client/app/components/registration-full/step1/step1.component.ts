@@ -7,7 +7,6 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 })
 export class Step1Component implements OnInit {
 
-  @Input() stage: number;
   @Output() preferenceEvent = new EventEmitter<string>();
   constructor() { }
   ngOnInit() {
@@ -15,14 +14,4 @@ export class Step1Component implements OnInit {
   selectPreference(preference: string) {
     this.preferenceEvent.emit(preference);
   }
-
-  // isNext() {
-  // }
-  // isPrev() {
-  // }
-  // isEnable() {
-  // }
-  // isDisable() {
-  // }
-
 }

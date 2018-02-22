@@ -7,7 +7,6 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 })
 export class Step0Component implements OnInit {
 
-  @Input() stage: number;
   @Output() sexEvent = new EventEmitter<string>();
   constructor() { }
   ngOnInit() {
@@ -15,12 +14,4 @@ export class Step0Component implements OnInit {
   selectSex(sex: string) {
     this.sexEvent.emit(sex);
   }
-  // isNext() {
-  // }
-  // isPrev() {
-  // }
-  // isEnable() {
-  // }
-  // isDisable() {
-  // }
 }

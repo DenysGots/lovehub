@@ -20,8 +20,8 @@ export class NavigationService {
       link:'user-profile',
     },
     {
-      name: 'Log in/Register',
-      link: 'home'
+      name: 'Login/Register',
+      link: 'register-full'
     },
   ];
 

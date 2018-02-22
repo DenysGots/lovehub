@@ -1,6 +1,6 @@
 <section id="registration">
   <div class="reg-block">
-    <!-- Here will be quick registration and login form -->
+    <app-registration></app-registration>
   </div>
   <div class="video-block" [ngStyle]="{'max-height.px': videoHeight}">
       <video autoplay loop class="d-none d-lg-block" id="video-background" muted plays-inline>
@@ -16,7 +16,7 @@
       <div class="carousel-caption">
         <h3>{{slider.title}}</h3>
         <p>{{slider.text}}</p>
-      </div>   
+      </div>
     </div>
   </home-slider>
 </section>
@@ -64,7 +64,7 @@
         <div class="carousel-caption">
           <h3>{{feed.title}}</h3>
           <p>{{feed.text}}</p>
-        </div>   
+        </div>
       </div>
 
       <div *ngFor="let feed of feedbacks; let i = index" class="feed-block breads" [attr.data-target]="'#feeds'" [attr.data-slide-to]="i">

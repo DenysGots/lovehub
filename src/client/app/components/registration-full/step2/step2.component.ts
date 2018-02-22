@@ -7,7 +7,6 @@ import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 })
 export class Step2Component implements OnInit {
 
-  @Input() stage: number;
   @Output() orientationEvent = new EventEmitter<string>();
   constructor() { }
   ngOnInit() {

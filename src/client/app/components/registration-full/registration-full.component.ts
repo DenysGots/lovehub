@@ -44,10 +44,7 @@ export class RegistrationFullComponent implements OnInit {
     this.user.name = $event.name;
     this.user.bday = $event.bday;
     this.user.location = $event.location;
-    // if (validateEmail($event.email)) {
-      this.user.email = $event.email;
-    // } else {
-    // }
+    this.user.email = $event.email;
     this.user.password = $event.pass;
     this.enable.step3 = true;
     this.stage++;
@@ -77,7 +74,4 @@ export class RegistrationFullComponent implements OnInit {
       this.stage--;
     }
   }
-
-  // validateEmail(email: string) {
-  // }
 }
