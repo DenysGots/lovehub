@@ -8,16 +8,16 @@ export class NavigationService {
       link: 'home'
     },
     {
-      name: 'About',
-      link: 'home'
+      name: 'Contact',
+      link:'contact',
     },
     {
-      name: 'Pricing',
-      link: 'home'
+      name: 'Search',
+      link:'search',
     },
     {
-      name: 'Blog',
-      link: 'home'
+      name: 'User Profile',
+      link:'user-profile',
     },
     {
       name: 'Log in/Register',

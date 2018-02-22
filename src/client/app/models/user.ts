@@ -1,29 +1,37 @@
-export interface User {
-  username: string;
-  age: number;
-  email: string;
+export class User {
+
+  private _id: number;
+  private _email: string;
+  private _hashPassword?: string;
+
+
+  constructor(id: number, email: string, hashPassword: string) {
+    this._id = id;
+    this._email = email;
+    this._hashPassword = hashPassword;
+  }
+
+  get id(): number {
+    return this._id;
+  }
+
+  set id(value: number) {
+    this._id = value;
+  }
+
+  get email(): string {
+    return this._email;
+  }
+
+  set email(value: string) {
+    this._email = value;
+  }
+
+  get hashPassword(): string {
+    return this._hashPassword;
+  }
+
+  set hashPassword(value: string) {
+    this._hashPassword = value;
+  }
 }
-// export class User {
-//   constructor(private _username: string, private _age: string) {}
-//
-//
-//   get username(): string {
-//     return this._username;
-//   }
-//
-//   set username(value: string) {
-//     this._username = value;
-//   }
-//
-//   get age(): string {
-//     return this._age;
-//   }
-//
-//   set email(value: string) {
-//     this._age = value;
-//   }
-//
-//   public print() {
-//     console.log(`username: ${this.username}: age: ${this.age}`);
-//   }
-// }

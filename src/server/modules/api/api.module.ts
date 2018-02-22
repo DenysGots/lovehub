@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ApiController } from './api.controller';
+import { UsersModule } from './users/users.module';
+import { UsersProfileModule } from './users-profile/users-profile.module';
 import { LoginModule } from './controllers/Login/login.module';
 
 @Module({
-  imports: [LoginModule],
+  imports: [LoginModule, UsersModule, UsersProfileModule],
   controllers: [ApiController],
   components: [],
 })

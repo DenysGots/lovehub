@@ -8,7 +8,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { routes } from './app.routing';
 
+import { HomeService }   from './services/home.service';
+import { WindowService } from './services/window.service';
 import { UsersService } from './services/users.service';
+import { UsersProfileService } from './services/users-profile.service';
+import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
+import { httpInterceptorProviders } from './http-interceptors';
+
+import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
@@ -23,6 +30,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { NavigationService } from './services/navigation.service';
 import { LoginService } from './services/login.service';
 import { FooterComponent } from './components/footer/footer.component';
+import { SliderComponent } from './components/home-slider/slider.component';
+import { PagerComponent } from './components/pager/pager.component';
+
 
 // test
 
@@ -32,7 +42,6 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
     ContactComponent,
     LoginComponent,
     HomeComponent,
@@ -41,7 +50,10 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     SidebarMenuComponent,
     HeaderComponent,
     FooterComponent,
+    SliderComponent,
+    PagerComponent,
     UserProfileComponent,
+    UsersProfileOrderByPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -54,8 +66,17 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
       preloadingStrategy: PreloadAllModules,
     })
   ],
-  providers: [UsersService, NavigationService, LoginService,
-    { provide: 'IUserStorage', useClass: UserLocalStorageService}],
+  providers: [
+    NavigationService,
+    HomeService,
+    LoginService,
+    WindowService,
+    UsersService,
+    UsersProfileService,
+    { provide: 'IUserStorage', useClass: UserLocalStorageService},
+    { provide: RequestCache, useClass: RequestCacheWithMap },
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

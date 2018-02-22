@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-<!--<label>Famale-->
-  <!--<input #searchBox type="{{ type }}" placeholder="{{ placeholder }}" (keyup)="search(searchBox.value)" />-->
-<!--</label>-->
-=======
-<label>Famale
-  <!--<input #searchBox type="{{ type }}" placeholder="{{ placeholder }}" (keyup)="search(searchBox.value)" />-->
+<label>{{ label }}
+  <input #searchValue class="form-control form-control-lg form-filter"
+         [type]="type" name="value" [placeholder]="placeholder"
+         [(ngModel)]="value" (input)="search()" (blur)="searchValue.value = ''"/>
 </label>
->>>>>>> e66071b39113c68511a8e6e19732e7b7a41ab204
