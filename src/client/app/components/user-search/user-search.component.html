@@ -1,18 +1,59 @@
-<button (click)="toggleMenu()" class="hamburger">
-  <span>toggle menu</span>
-</button>
+<input id="menuToggle" type="checkbox">
+<label for="menuToggle"></label>
 
-<app-sidebar-menu [@slideInOut]="menuState"></app-sidebar-menu>
+<section class="filter__container">
 
-<section class="users">
-  <div class="user-container">
-    <div class="img"><img src=""alt="User"></div>
-    <div class="description">
-      <div class="date">
-        <span>{{ 'User' }}</span>
-      </div>
-      <div class="location">Location: <b>{{ 'Kyev' }}</b></div>
-      <a  class="button" href="">{{ 'Link' }}</a>
-    </div>
+  <div class="filter__component">
+    <app-user-filter
+      [label]="searchFilter.label" [type]="searchFilter.type"
+      [value]="searchFilter.value" [placeholder]="searchFilter.placeholder" (onSearch)="search($event)">
+    </app-user-filter>
   </div>
+
+  <div class="filter__component">
+    <app-user-filter
+      [label]="ageFilter.label" [type]="ageFilter.type"
+      [placeholder]="ageFilter.placeholder" [value]="ageFilter.value" (onSearch)="search($event)">
+    </app-user-filter>
+    <span class="value">{{ !term ? ageFilter.value :
+          ((term.searchType == 'range') ? term.searchValue : ageFilter.value) }}
+        </span>
+  </div>
+
+  <div class="filter__component">
+    <app-user-filter
+      [label]="genderMFilter.label" [type]="genderMFilter.type"
+      [placeholder]="genderMFilter.placeholder" [value]="genderMFilter.value" (onSearch)="search($event)">
+    </app-user-filter>
+
+    <app-user-filter
+      [label]="genderFFilter.label" [type]="genderFFilter.type"
+      [placeholder]="genderFFilter.placeholder" [value]="genderFFilter.value" (onSearch)="search($event)">
+    </app-user-filter>
+  </div>
+
 </section>
+
+<article>
+  <section class="user__gallery">
+    <div class="user__container" *ngFor="let user of users">
+      <figure class="user__img"><img src="https://images.pexels.com/photos/207962/pexels-photo-207962.jpeg?h=350&auto=compress&cs=tinysrgb"
+                            alt="User_Photo">
+      </figure>
+      <div class="user__description">
+        <div class="date">
+          <span>{{ user.age }}</span>
+        </div>
+          <a class="button" routerLink="user-profile/{{ user.id }}">{{ user.firstName }} {{ user.lastName }}</a>
+      </div>
+    </div>
+  </section>
+  <section>
+    <app-pager
+      [itemsPerPage]="itemsPerPage"
+      [countItems]="countItems"
+      [currentPage]="currentPage"
+      (pageChange)="onPageChange($event)">
+    </app-pager>
+  </section>
+</article>
