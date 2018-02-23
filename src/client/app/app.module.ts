@@ -15,6 +15,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
+import {UserMatchComponent} from './components/user-match/user-match.component';
+import {AgmCoreModule} from '@agm/core';
+import {MatchingService} from './services/matching.service';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,18 +28,23 @@ import { UserFilterComponent } from './components/user-filter/user-filter.compon
     UserSearchComponent,
     UserFilterComponent,
     SidebarMenuComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserMatchComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
     BrowserAnimationsModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCdhaZA2fOUM-rLoI95dNDssEdiaGiLDtM'
     })
   ],
-  providers: [UsersService],
+  providers: [UsersService, MatchingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
