@@ -1,0 +1,18 @@
+<nav #header class="navbar navbar-expand-md bg-dark navbar-dark header">
+  <a class="navbar-brand logo" routerLink="home">
+      <img class='logo-img' src={{logo}} alt="logo" />
+      <span>Lovehub</span>
+  </a>
+
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav menu ml-auto">
+      <li *ngFor="let item of menu" class="nav-item">
+        <a class="nav-link menu-item" routerLink={{item.link}}>{{item.name}}</a>
+      </li>
+    </ul>
+  </div>
+</nav>

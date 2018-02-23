@@ -3,7 +3,7 @@ import { Controller, Get } from '@nestjs/common';
 @Controller('api')
 export class ApiController {
 
-  @Get('hello')
+  @Get('')
   root() {
 
     return {

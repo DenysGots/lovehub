@@ -1,4 +1,5 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {SearchParam} from '../user-search/shared/search-param';
 
 @Component({
   moduleId: module.id,
@@ -6,15 +7,22 @@ import {Component, Input} from '@angular/core';
   templateUrl: 'user-filter.component.html',
   styleUrls: ['user-filter.component.scss']
 })
-export class UserFilterComponent {
+export class UserFilterComponent implements OnChanges {
 
+  @Input() label: string;
   @Input() type: string;
   @Input() placeholder: string;
   @Input() value: string;
+  @Output() onSearch = new EventEmitter<SearchParam>();
 
-  /*
-  onSubmit() {
-    emiter.emit(this.type, value);
+  ngOnChanges() {
   }
-  */
+
+  search() {
+    const searchParams: SearchParam = {
+      searchType: this.type,
+      searchValue: this.value
+    };
+    this.onSearch.emit(searchParams);
+  }
 }
