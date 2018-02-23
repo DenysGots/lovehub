@@ -9,6 +9,9 @@ export class User extends Model<User> {
   @Column
   id: number;
 
+  @Column
+  name: string;
+
   @Unique
   @Column
   email: string;

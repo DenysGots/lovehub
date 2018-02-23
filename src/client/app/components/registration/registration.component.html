@@ -1,25 +1,24 @@
 <div class="quick-reg">
   <h4>QUICK REGISTRATION</h4>
-  <div>
-    <div>
+  <form novalidate>
+    <label>
       <input #name type="text" class="form-control" required placeholder="Your Name">
-    </div>
-    <div>
+    </label>
+    <label>
       <input #email type="email" class="form-control" required aria-describedby="emailHelp" placeholder="Email"/>
-    </div>
-    <div>
+    </label>
+    <label>
       <input #pass type="password" class="form-control"  required placeholder="Password"/>
-    </div>
-    <div>
+    </label>
+    <label>
       <input #confirmPass type="password" class="form-control" required placeholder="Confirm Password"/>
-    </div>
+    </label>
     <div>
-      <button class="btn btn-danger" (click)="register(name.value, email.value, pass.value, confirmPass.value);
-              name.value = ''; email.value = ''; pass.value = ''; confirmPass.value = '';">
+      <button class="btn btn-danger" (click)="register(name.value, email.value, pass.value, confirmPass.value);">
         REGISTER
       </button>
     </div>
-  </div>
+  </form>
 </div>
 
 

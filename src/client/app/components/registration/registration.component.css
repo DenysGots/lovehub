@@ -11,12 +11,13 @@
   font-size: 16px;
 }
 
-.quick-reg div {
-  margin: 20px auto;
-
+.quick-reg label, .quick-reg div {
+  width: 100%;
+  margin: 10px auto;
 }
 .quick-reg h4 {
   color: #fff;
+  margin-bottom: 10px;
 }
 
 .quick-reg .form-control {
