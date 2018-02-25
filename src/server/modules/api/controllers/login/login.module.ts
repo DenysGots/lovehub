@@ -1,13 +1,18 @@
 import {Module, NestModule, RequestMethod} from '@nestjs/common';
 import { LoginController} from './login.controller';
-import { LoginService} from '../../services/login.service';
-import { LoginValidateService } from '../../services/login-validate.service';
+import { LoginService} from './login.service';
+import { LoginValidateService } from './login-validate.service';
 import {MiddlewaresConsumer} from '@nestjs/common/interfaces/middlewares';
 import { LoginMiddleware } from './login.middleware';
+import { usersProviders} from '../../users/users.providers';
+import { UsersService} from '../../users/users.service';
+import {usersProfileProviders} from '../../users-profile/users-profile.providers';
+import { UsersProfileService} from '../../users-profile/users-profile.service';
 
 @Module({
   controllers: [LoginController],
-  components: [LoginValidateService, LoginService]
+  components: [LoginValidateService, LoginService,
+  UsersService, ...usersProviders]
 })
 export class LoginModule implements NestModule {
   configure(consumer: MiddlewaresConsumer): void {
@@ -16,3 +21,4 @@ export class LoginModule implements NestModule {
     );
   }
 }
+

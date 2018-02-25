@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { User } from '../../models/user';
+import { UserProfile } from '../../models/user-profile';
 import {IUserStorage} from '../../services/IUserStorage';
 import { Router } from '@angular/router';
 
@@ -48,9 +49,9 @@ export class LoginComponent implements OnInit {
 
     console.log(this.loginForm.value);
 
-    this.loginService.logUser(email, password).subscribe((user: User) => {
-        this.storage.setUser(user);
-        // user.print();
+    this.loginService.logUser(email, password).subscribe((user) => {
+      this.storage.setUser(user);
+      console.log(user);
       },
       error => {
          console.log(error);

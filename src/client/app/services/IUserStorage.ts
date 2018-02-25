@@ -1,7 +1,7 @@
-import {User} from '../models/user';
+import { UserProfile } from '../models/user-profile';
 
 export interface IUserStorage {
-  getUser(): User;
-  setUser(user: User);
-  deleteUser(user: User);
+  getUser(): UserProfile;
+  setUser(user: UserProfile);
+  deleteUser(user: UserProfile);
 }

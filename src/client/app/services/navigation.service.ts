@@ -9,26 +9,26 @@ export class NavigationService {
     },
     {
       name: 'Contact',
-      link:'contact',
+      link: 'contact',
     },
     {
       name: 'Search',
-      link:'search',
+      link: 'search',
     },
     {
       name: 'User Profile',
-      link:'user-profile',
+      link: 'user-profile',
     },
     {
       name: 'Log in/Register',
-      link: 'home'
+      link: 'login'
     },
   ];
 
   constructor() { }
 
-  getMenuItems(): object[]{
+  getMenuItems(): object[] {
     return this.menu;
-  };
+  }
 
 }

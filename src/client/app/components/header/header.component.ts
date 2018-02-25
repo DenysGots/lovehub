@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { NavigationService } from '../../services/navigation.service';
-import { WindowService }     from '../../services/window.service';
+import { WindowService } from '../../services/window.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +10,7 @@ import { WindowService }     from '../../services/window.service';
 })
 export class HeaderComponent implements OnInit {
   menu: object[];
-  logo: string = '/assets/img/logo3.png';
+  logo = '/assets/img/logo3.png';
 
   @ViewChild('header') elementView: ElementRef;
 
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     this.menu = this.navService.getMenuItems();
   }
 
-  setHeaderHeight(height): void{
+  setHeaderHeight(height): void {
     this.windowService.headerHeight = height;
   }
 

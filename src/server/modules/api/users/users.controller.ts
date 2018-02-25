@@ -5,12 +5,12 @@ import { UserDto } from './dto/user.dto';
 import { HttpExceptionFilter } from '../../filters/http-exception.filter';
 
 
+
 @UseFilters(new HttpExceptionFilter())
 @Controller('api/users')
 export class UsersController {
 
   constructor(private readonly usersService: UsersService) {}
-
   @HttpCode(201)
   @Post()
   async create(@Body() userDto: UserDto) {

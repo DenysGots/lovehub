@@ -1,5 +1,5 @@
 import {Middleware, NestMiddleware, ExpressMiddleware, Inject} from '@nestjs/common';
-import { LoginValidateService } from '../../services/login-validate.service';
+import { LoginValidateService } from './login-validate.service';
 
 @Middleware()
 export class LoginMiddleware implements NestMiddleware {

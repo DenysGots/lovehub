@@ -1,6 +1,7 @@
 import { Component, Inject } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserDto } from './dto/user.dto';
+import {UserProfile} from '../users-profile/user-profile.entity';
 
 @Component()
 export class UsersService {
@@ -20,10 +21,15 @@ export class UsersService {
   }
 
   async findById(id: number): Promise<User> {
-    return await this.userRepository.findById<User>(id);
+    return await this.userRepository.findById<User>(id, {include: [UserProfile]});
   }
 
   async remove(id: number): Promise<number> {
     return await this.userRepository.destroy({where: {id: id}});
   }
+
+  async findByEmail(email: string, password: string): Promise<User> {
+    return await this.userRepository.findOne<User>({where: {email, password}, include: [UserProfile]});
+  }
+
 }

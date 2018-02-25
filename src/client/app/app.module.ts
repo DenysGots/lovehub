@@ -8,7 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { routes } from './app.routing';
 
-import { HomeService }   from './services/home.service';
+import { HomeService } from './services/home.service';
 import { WindowService } from './services/window.service';
 import { UsersService } from './services/users.service';
 import { UsersProfileService } from './services/users-profile.service';
@@ -18,7 +18,6 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 
 import { AppComponent } from './app.component';
-import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
