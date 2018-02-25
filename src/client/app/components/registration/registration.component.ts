@@ -1,52 +1,67 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule, Pipe} from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { User } from '../../models/user';
-import {ElementRef, Renderer2} from '@angular/core';
-import { ViewChild } from '@angular/core';
+import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+
 export class RegistrationComponent implements OnInit {
+  myform: FormGroup;
+  name: FormControl;
+  email: FormControl;
+  password: FormControl;
+  confirmPassword: FormControl;
 
-  @ViewChild('name') name: ElementRef;
-  @ViewChild('email') email: ElementRef;
-  @ViewChild('pass') pass: ElementRef;
-  @ViewChild('confirmPass') confPass: ElementRef;
+  constructor(private userService: UsersService) {}
 
-  public constructor(private userService: UsersService, private rd: Renderer2) {}
   ngOnInit() {
+    this.createFormControls();
+    this.createForm();
   }
 
-  public register(name: string, email: string, pass: string, confirmPass: string): void {
+  createFormControls() {
+    this.name = new FormControl('', Validators.required);
+    this.email = new FormControl('', [
+      Validators.required,
+      Validators.pattern('[^ @]*@[^ @]*')
+    ]);
+    this.password = new FormControl('', [
+      Validators.required,
+      Validators.minLength(8)
+    ]);
+    this.confirmPassword = new FormControl('', [
+      Validators.required,
+    ]);
+  }
+  passwordMatchValidator(fg: FormGroup) {
+    return fg.get('password').value === fg.get('confirmPassword').value ? null : { 'mismatch': true };
+  }
 
-    if (this.validationFields(name, email, pass, confirmPass)) {
+  createForm() {
+    this.myform = new FormGroup({
+      name: this.name,
+      email: this.email,
+      password: this.password,
+      confirmPassword: this.confirmPassword
+    }, this.passwordMatchValidator);
+  }
+
+  onSubmit() {
+    if (this.myform.valid) {
+      console.log('Form Submitted!');
+      console.log(this.myform);
       const user = {
-        name: name,
-        email: email,
-        password: pass
+        name: this.name.value,
+        email: this.email.value,
+        password: this.password.value
       };
       this.userService.registration(user as User).subscribe();
-      console.log(user);
-      this.freeFields();
       alert('Congratulation! You are registered!');
+      this.myform.reset();
     }
-  }
-
-  public validationFields(name: string, email: string, pass: string, confirmPass: string) {
-    if (!name.trim()) { alert(('Please, put your name!')); return 0; } else
-    if (!email.trim()) { alert(('Please, put your email!')); return 0; } else
-    if (!pass.trim()) { alert(('Please, put your pass!')); return; } else
-    if (!confirmPass.trim()) { alert(('Please, confirm your pass!')); return 0; } else
-    if (pass !== confirmPass) { alert(('The passwords are not matching. Try again!')); return 0; } else {return 1; }
-  }
-
-  public freeFields() {
-    this.name.nativeElement.value = '';
-    this.email.nativeElement.value = '';
-    this.pass.nativeElement.value = '';
-    this.confPass.nativeElement.value = '';
   }
 }

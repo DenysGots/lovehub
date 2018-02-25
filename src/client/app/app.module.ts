@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { routes } from './app.routing';
 
@@ -62,8 +61,8 @@ import { PagerComponent } from './components/pager/pager.component';
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
@@ -81,3 +80,4 @@ import { PagerComponent } from './components/pager/pager.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
