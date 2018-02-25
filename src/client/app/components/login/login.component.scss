@@ -1,5 +1,5 @@
 .container {
-  margin:50px auto;
+  margin: 50px auto;
   font-family: "Open Sans","OpenSans",sans-serif;
 }
 
@@ -9,7 +9,7 @@
   margin-bottom: 20px;
 }
 
-.form-control{
+.form-control {
   border-radius: 10px;
 }
 
@@ -19,27 +19,23 @@
   margin-top: 40px;
   margin-bottom: 20px;
   overflow: hidden;
-}
-
-.line-heading:before,
-.line-heading:after {
-  content: '';
-  display: inline-block;
-  vertical-align: middle;
-  box-sizing: border-box;
-  width: 100%;
-  height: 2px;
-  background: rgba(0,0,0,0.1);
-  border: solid #FFF;
-  border-width: 0 10px;
-}
-
-.line-heading:before {
-  margin-left: -100%;
-}
-
-.line-heading:after {
-  margin-right: -100%;
+  &:before, &:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    width: 100%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.1);
+    border: solid #FFF;
+    border-width: 0 10px;
+  }
+  &:before {
+    margin-left: -100%;
+  }
+  &:after {
+    margin-right: -100%;
+  }
 }
 
 label {
