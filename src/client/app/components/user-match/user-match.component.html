@@ -1,12 +1,13 @@
+<link href="https://fonts.googleapis.com/css?family=Alegreya" rel="stylesheet">
 <div class="Matching__container">
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <div class="Matching__searching">
         <h3>Need for</h3>
       </div>
       <div class="Matching__buttons">
         <div *ngFor="let radioParam of radioParams; let idx = index">
-          <input type="radio" id=idx name="matchingChoice" (change)="filter(radioParam.value)">
+          <input type="radio" class="radio-inline" id=idx name="matchingChoice" (change)="filter(radioParam.value)">
           <label for="idx">{{ radioParam.label }}</label>
         </div>
       </div>
@@ -22,13 +23,14 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="Map__container">
-          <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-          </agm-map>
-        </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="Map__container">
+        <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
       </div>
     </div>
   </div>
 </div>
+

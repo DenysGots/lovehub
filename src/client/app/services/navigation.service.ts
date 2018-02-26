@@ -25,7 +25,7 @@ export class NavigationService {
     },
     {
       name: 'Matching',
-      link: 'matching'
+      link: 'user-match'
     },
   ];
 
