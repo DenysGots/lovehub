@@ -30,7 +30,7 @@ async function bootstrap() {
     app.use('/assets', express.static(join(__dirname, '../assets')));
   }
 
-  const server = await NestFactory.create(ApplicationModule, app);
+  const server = await NestFactory.create(ApplicationModule, app, null);
 
   await server.listen(process.env.PORT || 3666);
 }

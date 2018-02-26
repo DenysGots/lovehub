@@ -4,10 +4,11 @@ import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { routes } from './app.routing';
 
-import { HomeService }   from './services/home.service';
+import { HomeService } from './services/home.service';
 import { WindowService } from './services/window.service';
 import { UsersService } from './services/users.service';
 import { UsersProfileService } from './services/users-profile.service';
@@ -23,8 +24,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
+import {LoginComponent} from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationService } from './services/navigation.service';
+import { LoginService } from './services/login.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { SliderComponent } from './components/home-slider/slider.component';
 import { PagerComponent } from './components/pager/pager.component';
@@ -33,10 +36,16 @@ import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
 import {MatchingService} from './services/matching.service';
 
+// test
+
+import { IUserStorage } from './services/IUserStorage';
+import { UserLocalStorageService } from './services/user-local-storage.service';
+
 @NgModule({
   declarations: [
     AppComponent,
     ContactComponent,
+    LoginComponent,
     HomeComponent,
     UserSearchComponent,
     UserFilterComponent,
@@ -51,10 +60,10 @@ import {MatchingService} from './services/matching.service';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpClientModule,
-    FormsModule,
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
@@ -66,10 +75,12 @@ import {MatchingService} from './services/matching.service';
   providers: [
     NavigationService,
     HomeService,
+    LoginService,
     WindowService,
     UsersService,
     UsersProfileService,
     MatchingService,
+    { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
     httpInterceptorProviders
   ],

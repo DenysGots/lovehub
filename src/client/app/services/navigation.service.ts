@@ -21,7 +21,7 @@ export class NavigationService {
     },
     {
       name: 'Log in/Register',
-      link: 'home'
+      link: 'login'
     },
     {
       name: 'Matching',
