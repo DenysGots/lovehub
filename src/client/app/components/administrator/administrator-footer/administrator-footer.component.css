@@ -1,0 +1,73 @@
+/* Footer section styles */
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  background-color: #193952;
+  border-top: 1px solid #555b6e;
+  height: 55px;
+  min-width: 253px;
+  transition: 0.1s ease-in-out;
+  width: 100%;
+  z-index: 100; }
+
+.icon-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  height: 45px;
+  transition: 10.1s ease-in-out;
+  width: 45px; }
+
+.icon-wrapper:hover {
+  cursor: pointer; }
+
+.icon-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  height: 30px;
+  width: 30px; }
+
+.icon {
+  fill: #000;
+  transition: 0.1s ease-in-out; }
+
+.icon-wrapper:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #1581d3; }
+
+.icon-wrapper:hover .icon {
+  fill: #1581d3; }
+
+.icon-wrapper:active {
+  border-color: #3d90cc;
+  box-shadow: 0 0 15px #3d90cc; }
+
+.icon-wrapper:active .icon {
+  fill: #3d90cc; }
+
+.section-hidden {
+  border: none;
+  min-width: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+  z-index: 100; }
+
+/*# sourceMappingURL=administrator-footer.component.css.map */

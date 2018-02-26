@@ -13,6 +13,7 @@ import { UsersService } from './services/users.service';
 import { UsersProfileService } from './services/users-profile.service';
 import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
 import { httpInterceptorProviders } from './http-interceptors';
+import { AdministratorService } from './services/administrator.service';
 
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 
@@ -41,6 +42,12 @@ import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
 import {MatchingService} from './services/matching.service';
 
+import { AdministratorFooterComponent } from './components/administrator/administrator-footer/administrator-footer.component';
+import { AdministratorHeaderComponent } from './components/administrator/administrator-header/administrator-header.component';
+import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
+import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
+import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
+
 // test
 
 import { IUserStorage } from './services/IUserStorage';
@@ -68,6 +75,12 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     UserProfileComponent,
     UsersProfileOrderByPipe,
     UserMatchComponent,
+    AppComponent,
+    AdministratorFooterComponent,
+    AdministratorHeaderComponent,
+    AdministratorNavbarComponent,
+    AdministratorDashboardComponent,
+    AdministratorUsersManagementComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -94,7 +107,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    AdministratorService
   ],
   bootstrap: [AppComponent]
 })
