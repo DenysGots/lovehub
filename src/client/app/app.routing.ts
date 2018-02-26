@@ -3,6 +3,7 @@ import {LoginComponent} from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import {UserMatchComponent} from './components/user-match/user-match.component';
 
 export const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -10,5 +11,6 @@ export const routes = [
   { path: 'search', component: UserSearchComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'user-profile', component: UserProfileComponent }
+  { path: 'user-profile', component: UserProfileComponent },
+  { path: 'user-match', component: UserMatchComponent },
 ];

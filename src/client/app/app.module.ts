@@ -32,6 +32,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SliderComponent } from './components/home-slider/slider.component';
 import { PagerComponent } from './components/pager/pager.component';
 
+import {UserMatchComponent} from './components/user-match/user-match.component';
+import {AgmCoreModule} from '@agm/core';
+import {MatchingService} from './services/matching.service';
 
 // test
 
@@ -52,7 +55,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     SliderComponent,
     PagerComponent,
     UserProfileComponent,
-    UsersProfileOrderByPipe
+    UsersProfileOrderByPipe,
+    UserMatchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -63,6 +67,9 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCdhaZA2fOUM-rLoI95dNDssEdiaGiLDtM'
     })
   ],
   providers: [
@@ -72,6 +79,7 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     WindowService,
     UsersService,
     UsersProfileService,
+    MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
     httpInterceptorProviders

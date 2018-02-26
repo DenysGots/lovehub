@@ -23,6 +23,10 @@ export class NavigationService {
       name: 'Log in/Register',
       link: 'login'
     },
+    {
+      name: 'Matching',
+      link: 'matching'
+    },
   ];
 
   constructor() { }
