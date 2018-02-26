@@ -3,6 +3,7 @@ export class UserProfileDto {
   readonly lastName: string;
   readonly age: number;
   readonly gender: string;
+  readonly userId: number;
   readonly sex: string;
   readonly preference: string;
   readonly orientation: string;

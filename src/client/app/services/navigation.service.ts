@@ -9,15 +9,23 @@ export class NavigationService {
     },
     {
       name: 'Contact',
-      link:'contact',
+      link: 'contact',
     },
     {
       name: 'Search',
-      link:'search',
+      link: 'search',
     },
     {
       name: 'User Profile',
-      link:'user-profile',
+      link: 'user-profile',
+    },
+    {
+      name: 'Log in/Register',
+      link: 'login'
+    },
+    {
+      name: 'Matching',
+      link: 'matching'
     },
     {
       name: 'Login/Register',
@@ -27,8 +35,8 @@ export class NavigationService {
 
   constructor() { }
 
-  getMenuItems(): object[]{
+  getMenuItems(): object[] {
     return this.menu;
-  };
+  }
 
 }
