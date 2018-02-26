@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
+import { UsersProfileService } from '../../services/users-profile.service';
+import { UserProfile } from '../../models/user-profile';
 import { User } from '../../models/user';
+import { ActivatedRouteSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-registration-full',
@@ -11,56 +14,54 @@ export class RegistrationFullComponent implements OnInit {
 
   stage = 0;
   user: User;
+  userProfile: UserProfile;
   enable = {step0: false, step1: false, step2: false, step3: false};
 
-  public constructor(private userService: UsersService) {}
+  public constructor(private usersProfileService: UsersProfileService) {}
 
   ngOnInit() {
-    this.user = new User();
+    this.userProfile = new UserProfile(null, null, null, null, null, null, null, null);
+    this.user = new User(null, null, null);
   }
 
   receiveSex($event) {
-    this.user.sex = $event;
+    this.userProfile.sex = $event;
     this.enable.step0 = true;
     this.stage++;
-    console.log(this.user);
+    console.log(this.userProfile);
   }
 
   receivePreference($event) {
-    this.user.preference = $event;
+    this.userProfile.preference = $event;
     this.enable.step1 = true;
     this.stage++;
-    console.log(this.user);
+    console.log(this.userProfile);
   }
 
   receiveOrientation($event) {
-    this.user.orientation = $event;
+    this.userProfile.orientation = $event;
     this.enable.step2 = true;
     this.stage++;
-    console.log(this.user);
+    console.log(this.userProfile);
   }
 
   receiveUserForm($event) {
-    this.user.name = $event.name;
-    this.user.bday = $event.bday;
-    this.user.location = $event.location;
+    this.userProfile.firstName = $event.firstName;
+    this.userProfile.lastName = $event.lastName;
+    this.userProfile.age = $event.age;
+    this.userProfile.location = $event.location;
+    this.user.name = $event.firstName;
     this.user.email = $event.email;
-    this.user.password = $event.pass;
+    this.user.password = $event.password;
     this.enable.step3 = true;
     this.stage++;
-    this.userService.registration(this.user as User)
-      .subscribe(newUser => {
-        if (newUser) {
-          // TODO create redirect
-          console.log('user registered: ' + newUser);
-        } else {
-          // TODO create fail logic
-          console.log('user registration failed: ' + newUser);
-        }
-      });
+    this.usersProfileService.registration(this.userProfile as UserProfile).subscribe();
+    // this.userService.registration(this.user as User).subscribe();
+    alert('Congratulation! You are registered!');
+    console.log(this.userProfile);
     console.log(this.user);
+    // this.router.navigate(['/home']);
   }
-
   isNext() {
     if (((this.enable.step0 === true && this.stage === 0) ||
         (this.enable.step1 === true && this.stage !== 2) ||

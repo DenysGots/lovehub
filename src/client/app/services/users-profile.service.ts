@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { of } from 'rxjs/observable/of';
 
@@ -13,12 +13,20 @@ export interface FilteredUsersProfile {
   count?: number;
 }
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable()
 export class UsersProfileService {
 
   usersProfileUrl = 'api/users-profile/';
 
   constructor(private http: HttpClient) { }
+
+  registration(user: UserProfile): Observable<UserProfile> {
+    return this.http.post<UserProfile>(this.usersProfileUrl, user, httpOptions);
+  }
 
   searchUsers(type, term, offset, perPage): Observable<FilteredUsersProfile> {
     console.log(`angular: within searchUsers(${type}, ${term})`);
