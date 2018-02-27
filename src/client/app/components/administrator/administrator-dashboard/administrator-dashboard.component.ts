@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-administrator-dashboard',
   templateUrl: './administrator-dashboard.component.html',
   styleUrls: [
-    '../shared/normalize.css',
+    '../shared/normalize.scss',
     '../shared/default-styles.scss',
     './administrator-dashboard.component.scss'
   ]

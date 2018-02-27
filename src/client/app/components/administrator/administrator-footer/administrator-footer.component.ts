@@ -6,7 +6,7 @@ import { AdministratorService } from '../../../services/administrator.service';
   selector: 'app-administrator-footer',
   templateUrl: './administrator-footer.component.html',
   styleUrls: [
-    '../shared/normalize.css',
+    '../shared/normalize.scss',
     '../shared/default-styles.scss',
     './administrator-footer.component.scss'
   ]

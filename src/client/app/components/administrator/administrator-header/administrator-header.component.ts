@@ -6,7 +6,7 @@ import { AdministratorService } from '../../../services/administrator.service';
   selector: 'app-administrator-header',
   templateUrl: './administrator-header.component.html',
   styleUrls: [
-    '../shared/normalize.css',
+    '../shared/normalize.scss',
     '../shared/default-styles.scss',
     './administrator-header.component.scss'
   ]

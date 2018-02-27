@@ -9,7 +9,7 @@ import { AdministratorService } from '../../../services/administrator.service';
   selector: 'app-administrator-navbar',
   templateUrl: './administrator-navbar.component.html',
   styleUrls: [
-    '../shared/normalize.css',
+    '../shared/normalize.scss',
     '../shared/default-styles.scss',
     './administrator-navbar.component.scss'
   ]

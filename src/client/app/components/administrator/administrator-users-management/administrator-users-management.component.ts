@@ -7,7 +7,7 @@ import { usersList } from '../shared/mock-users';   // mock usersList, TODO: del
   selector: 'app-administrator-users-management',
   templateUrl: './administrator-users-management.component.html',
   styleUrls: [
-    '../shared/normalize.css',
+    '../shared/normalize.scss',
     '../shared/default-styles.scss',
     './administrator-users-management.component.scss']
 })

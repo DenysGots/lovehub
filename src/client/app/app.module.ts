@@ -75,7 +75,6 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     UserProfileComponent,
     UsersProfileOrderByPipe,
     UserMatchComponent,
-    AppComponent,
     AdministratorFooterComponent,
     AdministratorHeaderComponent,
     AdministratorNavbarComponent,
