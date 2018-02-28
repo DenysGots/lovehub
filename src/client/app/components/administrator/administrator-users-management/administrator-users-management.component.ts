@@ -12,10 +12,10 @@ import { usersList } from '../shared/mock-users';   // mock usersList, TODO: del
     './administrator-users-management.component.scss']
 })
 export class AdministratorUsersManagementComponent implements OnInit {
-  private users = usersList;    // mock usersList, TODO: delete upon obtaining usersList from server
-  private mainSectionIsVisible: boolean;
+  users = usersList;    // mock usersList, TODO: delete upon obtaining usersList from server
+  mainSectionIsVisible: boolean;
 
-  private getUsersOptions = {
+  getUsersOptions = {
     userRole: 'any',
     userStatus: 'any',
     usersPerPage: 5,
@@ -26,19 +26,19 @@ export class AdministratorUsersManagementComponent implements OnInit {
     }
   };
 
-  private updateUsersOptions = {
+  updateUsersOptions = {
     usersList: [],
     appliedAction: 'disable'
   };
 
-  private usersList = {
+  usersList = {
     users: [],    // TODO: add binding to html template upon obtaining usersList from server
     currentUser: {},
     numberOfPages: 1,
     currentPage: 1
   };
 
-  private pages = [1, 2, 3];
+  pages = [1, 2, 3];
 
   constructor(private administratorService: AdministratorService) {
   }
