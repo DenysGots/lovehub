@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { NavigationService } from '../../services/navigation.service';
 import { WindowService } from '../../services/window.service';
@@ -16,7 +17,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private navService: NavigationService,
-    private windowService: WindowService
+    private windowService: WindowService,
+    private router: Router
   ) { }
 
   ngOnInit() {

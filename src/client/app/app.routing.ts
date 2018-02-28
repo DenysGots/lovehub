@@ -19,5 +19,5 @@ export const routes = [
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
-  { path: 'administrator-users-management', component: AdministratorUsersManagementComponent }
+  { path: 'admin/users-management', component: AdministratorUsersManagementComponent }
 ];

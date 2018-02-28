@@ -1,4 +1,4 @@
-<nav #header class="navbar navbar-expand-md bg-dark navbar-dark header">
+<nav #header class="navbar navbar-expand-md bg-dark navbar-dark header" *ngIf="router.url !== '/admin/users-management'">
   <a class="navbar-brand logo" routerLink="home">
       <img class='logo-img' src={{logo}} alt="logo" />
       <span>LoveHub</span>
