@@ -1,4 +1,7 @@
-<nav #header class="navbar navbar-expand-md bg-dark navbar-dark header">
+<nav
+  #header
+  class="navbar navbar-expand-md bg-dark navbar-dark header"
+  [ngStyle]="router.url === '/admin/users-management' && {'height': '0', 'overflow': 'hidden', 'padding': '0'}">
   <a class="navbar-brand logo" routerLink="home">
       <img class='logo-img' src={{logo}} alt="logo" />
       <span>LoveHub</span>
