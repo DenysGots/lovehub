@@ -1,6 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -99,8 +97,5 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     httpInterceptorProviders
   ],
   bootstrap: [AppComponent]
-})
-@Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/nest')],
 })
 export class AppModule { }
