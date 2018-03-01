@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable()
 export class AdministratorService {
   private usersList: any = {};
-  private serverURL = '';   // TODO: add server url
+  private serverURL = 'api/administrator';
   private isVisible = true;
 
   private getUsersOptions: any = {};
@@ -69,12 +69,11 @@ export class AdministratorService {
   getUsersEnquiryRequest(enquiry): any /*Observable<{}>*/ {   // Get usersList from server according to the specified view parameters, on startup with default parameters
     this.getUsersOptions = enquiry;
 
-    // return this.http.post(this.serverUrl, JSON.stringify(this.getUsersOptions), httpOptions)    // TODO: uncomment upon server response logic being ready for obtaining usersList from server on startup
-    //   .subscribe(response => {
-    //     this.receivedUsersList.next(JSON.parse(response));
-    //   });
-
-    console.log(this.getUsersOptions);      // delete
+    return this.http.get(this.serverURL, /*JSON.stringify(this.getUsersOptions),*/ httpOptions)
+       .subscribe(response => {
+         // this.receivedUsersList.next(JSON.parse(response));
+         console.log(response);
+       });
   }
 
   updateUsersEnquiryRequest(enquiry): any /*Observable<{}>*/ {    // Update usersList on server and get updated usersList back from server with specified view parameters
