@@ -72,6 +72,8 @@ $box-shadow_3: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 .main {
   display: grid;
   grid-template: auto auto auto / 1fr 4fr;
+  position: absolute;
+  top: 0;
   z-index: 100;
 }
 
