@@ -45,6 +45,8 @@ import {MatchingService} from './services/matching.service';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     UserProfileComponent,
     UsersProfileOrderByPipe,
     UserMatchComponent,
+    RecoverPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
