@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { NavigationService } from '../../services/navigation.service';
 import { WindowService } from '../../services/window.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,14 +12,17 @@ import { WindowService } from '../../services/window.service';
 export class HeaderComponent implements OnInit {
   menu: object[];
   logo = '/assets/img/logo3.png';
+  router: any;
 
   @ViewChild('header') elementView: ElementRef;
 
   constructor(
     private navService: NavigationService,
     private windowService: WindowService,
-    private router: Router
-  ) { }
+    _router: Router
+  ) {
+    this.router = _router;
+  }
 
   ngOnInit() {
     const headerHeight = this.elementView.nativeElement.offsetHeight;

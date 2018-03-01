@@ -13,7 +13,11 @@ export class FooterComponent implements OnInit {
     mail: 'write@us.now'
   };
 
-  constructor(private router: Router) { }
+  router: any;
+
+  constructor(_router: Router) {
+    this.router = _router;
+  }
 
   ngOnInit() {}
 
