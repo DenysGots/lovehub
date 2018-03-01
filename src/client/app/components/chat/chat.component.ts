@@ -11,12 +11,23 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ChatComponent implements OnInit {
   height = 100;
+  dialog = [];
   chats = [
     new Chat(
       1,
       'Maura Jo',
       'https://i.pinimg.com/736x/fb/e3/75/fbe37552637081f7bced381c7c464f3b--illustration-girl-girl-illustrations.jpg',
-      'Hello'
+      'Hello',
+      [
+        {
+          me: false,
+          text: 'Hello'
+        },
+        {
+          me: true,
+          text: 'Hi'
+        }
+      ]
     ),
     new Chat(
       2,
@@ -59,7 +70,11 @@ export class ChatComponent implements OnInit {
 
   constructor(private windowService: WindowService,) {
     this.height = windowService.freeHeight;
-   }
+  }
+
+  onChatChecked(messages){
+    this.dialog = messages;
+  }
 
   ngOnInit() {}
 }

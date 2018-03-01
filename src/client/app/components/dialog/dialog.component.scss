@@ -1,0 +1,39 @@
+.message{
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: lightgrey;
+    margin: 5px 0;
+    max-width: 50%;
+}
+.left{
+    border-bottom-left-radius: 0;
+}
+.right{
+    border-bottom-right-radius: 0;
+}
+.input-container{
+    margin-top: 15px;
+}
+.textarea{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 100%;
+    resize: none;
+    border: 1px solid lightgray;
+    border-right: none;
+    padding: 5px 10px;
+}
+.send{
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: 1px solid lightgray;
+    border-left: none;
+}
+
+input:focus, textarea:focus {outline:0;}
+.send:hover{
+    background-color: darkgray;
+}

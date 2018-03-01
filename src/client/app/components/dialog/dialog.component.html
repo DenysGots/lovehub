@@ -1,0 +1,30 @@
+<div
+  class="d-flex flex-column h-100"
+  [ngClass]="!messages.length?'justify-content-start':'justify-content-end'"
+  >
+  <div *ngIf="!messages.length" class="d-flex justify-content-center">
+    <span>Choose user to start messaging</span>
+  </div>
+  <div *ngIf="!!messages.length">
+      <div 
+        *ngFor="let mess of messages" 
+        class="d-flex"
+        [ngClass]="!!mess.me?'justify-content-end':'justify-content-start'"
+      >
+        <span
+          class="message"
+          [ngClass]="!!mess.me?'right':'left'"
+        >{{mess.text}}</span>
+      </div>
+  </div>
+  <div *ngIf="!!messages.length">
+      <div class="input-group input-container">
+        <textarea
+          class="textarea"
+          rows="3"
+          placeholder="Type your message here..."
+        ></textarea>
+        <input type="button" value="Send" class="send" />
+      </div>
+  </div>
+</div>

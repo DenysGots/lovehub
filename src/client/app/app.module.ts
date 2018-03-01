@@ -47,6 +47,7 @@ import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatUserComponent } from './components/chat-user/chat-user.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ChatUserComponent } from './components/chat-user/chat-user.component';
     UserMatchComponent,
     ChatComponent,
     ChatUserComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),

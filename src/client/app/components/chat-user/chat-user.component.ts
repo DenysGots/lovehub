@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 
 import Chat from '../../models/chat';
 
@@ -9,10 +9,15 @@ import Chat from '../../models/chat';
 })
 export class ChatUserComponent implements OnInit {
   @Input() chat: Chat;
+  @Output() onChatChecked = new EventEmitter<Array<object>>();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  checkChat(messages) {
+    this.onChatChecked.emit(messages);
   }
 
 }
