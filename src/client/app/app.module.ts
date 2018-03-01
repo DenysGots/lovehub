@@ -45,6 +45,8 @@ import {MatchingService} from './services/matching.service';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatUserComponent } from './components/chat-user/chat-user.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     UserProfileComponent,
     UsersProfileOrderByPipe,
     UserMatchComponent,
+    ChatComponent,
+    ChatUserComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),

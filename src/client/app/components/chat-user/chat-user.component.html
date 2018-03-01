@@ -1,0 +1,15 @@
+<div class="container p-2 d-flex flex-row">
+  <div class="avatar-container d-inline-flex mr-3">
+    <img
+      [src]="chat.user_image"
+      [alt]="chat.user_name"
+      class="avatar"
+    />
+  </div>
+  <div class="info-container d-inline-flex">
+    <div class="d-flex flex-column justify-content-around">
+        <p class="name">{{chat.user_name}}</p>
+        <p class="message">{{chat.last_message}}</p>
+    </div>
+  </div>
+</div>

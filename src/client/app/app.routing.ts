@@ -6,6 +6,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import {UserMatchComponent} from './components/user-match/user-match.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationFullComponent } from './components/registration-full/registration-full.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 export const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -18,4 +19,5 @@ export const routes = [
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
+  { path: 'chat', component: ChatComponent },
 ];
