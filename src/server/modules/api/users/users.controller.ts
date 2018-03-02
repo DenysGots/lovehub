@@ -26,7 +26,7 @@ export class UsersController {
   @HttpCode(200)
   @Get(':id')
   async findById(@Param() params): Promise<User> {
-    return await this.usersService.findById(params.id);
+    return await this.usersService.findById(params.id)
   }
 
   @HttpCode(204)
