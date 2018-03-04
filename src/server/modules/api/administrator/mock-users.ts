@@ -1,191 +1,191 @@
 export const usersList = [
     {
-      id: 'id_1',
+      id: 1,
       firstName: 'Admin',
       lastName: 'Admin',
       status: 'Active',
-      membership: '11 years',
       role: 'Administrator',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2001'
     },
     {
-      id: 'id_247731',
+      id: 247731,
       firstName: 'User0',
       lastName: 'User0',
       status: 'Active',
-      membership: '1 year',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2011'
     },
     {
-      id: 'id_905741',
+      id: 905741,
       firstName: 'User1',
       lastName: 'User1',
       status: 'Active',
-      membership: '2 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2009'
     },
     {
-      id: 'id_438961',
+      id: 438961,
       firstName: 'User2',
       lastName: 'User2',
       status: 'Active',
-      membership: '7 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2010'
     },
     {
-      id: 'id_155452',
+      id: 155452,
       firstName: 'User3',
       lastName: 'User3',
       status: 'Active',
-      membership: '3 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2008'
     },
     {
-      id: 'id_669339',
+      id: 669339,
       firstName: 'User4',
       lastName: 'User4',
       status: 'Active',
-      membership: '3 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2006'
     },
     {
-      id: 'id_857314',
+      id: 857314,
       firstName: 'User5',
       lastName: 'User5',
       status: 'Active',
-      membership: '9 years',
       role: 'Moderator',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2015'
     },
     {
-      id: 'id_874411',
+      id: 874411,
       firstName: 'User6',
       lastName: 'User6',
       status: 'Active',
-      membership: '3 years',
       role: 'Moderator',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2017'
     },
     {
-      id: 'id_694102',
+      id: 694102,
       firstName: 'User7',
       lastName: 'User7',
       status: 'Active',
-      membership: '9 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2014'
     },
     {
-      id: 'id_4240',
+      id: 4240,
       firstName: 'User8',
       lastName: 'User8',
       status: 'Active',
-      membership: '10 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2008'
     },
     {
-      id: 'id_2934',
+      id: 2934,
       firstName: 'User9',
       lastName: 'User9',
       status: 'Active',
-      membership: '3 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2012'
     },
     {
-      id: 'id_183733',
+      id: 183733,
       firstName: 'User10',
       lastName: 'User10',
       status: 'Active',
-      membership: '4 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2016'
     },
     {
-      id: 'id_667060',
+      id: 667060,
       firstName: 'User11',
       lastName: 'User11',
       status: 'Active',
-      membership: '7 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2015'
     },
     {
-      id: 'id_812395',
+      id: 812395,
       firstName: 'User12',
       lastName: 'User12',
       status: 'Active',
-      membership: '3 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2007'
     },
     {
-      id: 'id_573430',
+      id: 573430,
       firstName: 'User13',
       lastName: 'User13',
       status: 'Active',
-      membership: '5 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2003'
     },
     {
-      id: 'id_829486',
+      id: 829486,
       firstName: 'User14',
       lastName: 'User14',
       status: 'Active',
-      membership: '4 years',
       role: 'Moderator',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2002'
     },
     {
-      id: 'id_678402',
+      id: 678402,
       firstName: 'User15',
       lastName: 'User15',
       status: 'Active',
-      membership: '2 years',
       role: 'Moderator',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2001'
     },
     {
-      id: 'id_811004',
+      id: 811004,
       firstName: 'User16',
       lastName: 'User16',
       status: 'Active',
-      membership: '10 years',
       role: 'Moderator',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2007'
     },
     {
-      id: 'id_450156',
+      id: 450156,
       firstName: 'User17',
       lastName: 'User17',
       status: 'Active',
-      membership: '6 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2008'
     },
     {
-      id: 'id_838009',
+      id: 838009,
       firstName: 'User18',
       lastName: 'User18',
       status: 'Active',
-      membership: '9 years',
       role: 'User',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2012'
     },
     {
-      id: 'id_112007',
+      id: 112007,
       firstName: 'User19',
       lastName: 'User19',
       status: 'Active',
-      membership: '10 years',
       role: 'Moderator',
-      lastActive: '10/02/2018'
+      lastActive: '10/02/2018',
+      registrationDate: '01/03/2015'
     }
   ];
