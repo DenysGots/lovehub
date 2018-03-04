@@ -24,8 +24,8 @@
                   title="Choose an action"
                   #action="ngModel"
                   [(ngModel)]="updateUsersOptions.appliedAction">
-                  <option value="disable">
-                    Disable
+                  <option value="ban">
+                    Ban
                   </option>
 
                   <option value="delete">
@@ -67,16 +67,16 @@
                   title="Select users by role"
                   #role="ngModel"
                   [(ngModel)]="getUsersOptions.userRole"
-                  (change)="getUsers()">
+                  (change)="getUsers(); resetSortingOptions(); resetNextPage()">
                   <option value="any">
                     All users
                   </option>
 
-                  <option value="moderators">
+                  <option value="Moderator">
                     Moderators
                   </option>
 
-                  <option value="users">
+                  <option value="User">
                     Users
                   </option>
                 </select>
@@ -94,21 +94,17 @@
                   title="Select users by status"
                   #status="ngModel"
                   [(ngModel)]="getUsersOptions.userStatus"
-                  (change)="getUsers()">
+                  (change)="getUsers(); resetSortingOptions(); resetNextPage()">
                   <option value="any">
                     All users
                   </option>
 
-                  <option value="active">
+                  <option value="Active">
                     Active
                   </option>
 
-                  <option value="disabled">
-                    Disabled
-                  </option>
-
-                  <option value="deleted">
-                    Deleted
+                  <option value="Banned">
+                    Banned
                   </option>
                 </select>
               </div>
@@ -138,7 +134,7 @@
                     15
                   </option>
 
-                  <option value="10">
+                  <option value="20">
                     20
                   </option>
                 </select>
@@ -286,7 +282,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="table-row" *ngFor="let user of users">   <!-- TODO: change binding to usersList.users upon obtaining usersList from server -->
+            <tr class="table-row" *ngFor="let user of usersList.users">
               <td class="table_cell">
                 {{ user.id }}
               </td>
@@ -308,7 +304,7 @@
               </td>
 
               <td class="table_cell">
-                {{ user.lastActive }}
+                {{ user.lastActiveDate }}
               </td>
 
               <td class="table_cell">

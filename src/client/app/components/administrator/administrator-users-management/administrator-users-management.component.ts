@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AdministratorService } from '../../../services/administrator.service';
-import { usersList } from '../shared/mock-users';   // mock usersList, TODO: delete upon obtaining usersList from server
 
 @Component({
   selector: 'app-administrator-users-management',
@@ -12,7 +11,6 @@ import { usersList } from '../shared/mock-users';   // mock usersList, TODO: del
     './administrator-users-management.component.scss']
 })
 export class AdministratorUsersManagementComponent implements OnInit {
-  users = usersList;    // mock usersList, TODO: delete upon obtaining usersList from server
   mainSectionIsVisible: boolean;
 
   getUsersOptions = {
@@ -28,37 +26,38 @@ export class AdministratorUsersManagementComponent implements OnInit {
 
   updateUsersOptions = {
     usersList: [],
-    appliedAction: 'disable'
+    appliedAction: 'ban'
   };
 
   usersList = {
-    users: [],    // TODO: add binding to html template upon obtaining usersList from server
+    users: [],
     currentUser: {},
     numberOfPages: 1,
     currentPage: 1
   };
 
-  pages = [1, 2, 3];
+  pages = [];
 
   constructor(private administratorService: AdministratorService) {
   }
 
   ngOnInit() {
-    this.administratorService.navBarState.subscribe(data => {
-      return this.mainSectionIsVisible = data;
+    this.administratorService.receivedUsers.subscribe(data => {
+      this.usersList.users = data.users;
+      this.usersList.currentUser = data.currentUser;
+      this.usersList.numberOfPages = data.numberOfPages;
+      this.usersList.currentPage = this.getUsersOptions.nextPage;
+      this.pages = [];
+
+      for (let i = 1, numberOfPages = this.usersList.numberOfPages; i <= numberOfPages; i += 1) {
+        this.pages.push(i);
+      }
     });
 
-    // this.administratorService.getUsersEnquiryRequest(this.getUsersOptions);   // TODO: uncomment upon server response logic being ready for obtaining usersList from server on startup
+    this.administratorService.getUsersEnquiryRequest(this.getUsersOptions);
 
-    this.administratorService.receivedUsers.subscribe(data => {   // TODO: uncomment upon obtaining usersList from server
-      // this.usersList = JSON.parse(data);
-      // this.pages = [];
-
-      // for (let i = 1, numberOfPages = this.usersList.numberOfPages; i < numberOfPages; i += 1) {
-      //   this.pages.push(i);
-      // }
-
-      return;
+    this.administratorService.navBarState.subscribe(data => {
+      return this.mainSectionIsVisible = data;
     });
   }
 
@@ -74,6 +73,10 @@ export class AdministratorUsersManagementComponent implements OnInit {
       tableColumn: 'none',
       sortingOption: 'none'
     };
+  }
+
+  resetNextPage(): void {
+    this.getUsersOptions.nextPage = 1;
   }
 
   pushSelectedUsersList(form, user): void {
@@ -110,7 +113,6 @@ export class AdministratorUsersManagementComponent implements OnInit {
 
   getUsers(): void {
     this.administratorService.getUsersEnquiryRequest(this.getUsersOptions);
-    this.resetSortingOptions();
   }
 
   updateUsers(): void {
