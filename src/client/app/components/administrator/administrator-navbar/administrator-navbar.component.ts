@@ -21,12 +21,24 @@ export class AdministratorNavbarComponent implements OnInit {
     analyticsDropdownList: false
   };
 
+  currentUser = {
+    firstName: '',
+    lastName: '',
+    role: ''
+  };
+
   mainSectionIsVisible: boolean;
 
   constructor(private administratorService: AdministratorService) {
   }
 
   ngOnInit() {
+    this.administratorService.receivedUsers.subscribe(data => {
+      if (data.currentUser) {
+        this.currentUser = data.currentUser;
+      }
+    });
+
     this.administratorService.navBarState.subscribe(data => {
       return this.mainSectionIsVisible = data;
     });

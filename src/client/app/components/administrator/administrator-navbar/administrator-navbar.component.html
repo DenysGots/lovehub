@@ -51,14 +51,14 @@
       <h4>Welcome,</h4>
 
       <h5 class="white-text">
-       Admin Admin                                          <!-- TODO: add binding to usersList => administrator here -->
+        {{ currentUser.firstName + ' ' + currentUser.lastName }}
       </h5>
     </div>
   </div>
 
   <div class="user-status">
     <p class="text white-text">
-      Administrator                                         <!-- TODO: add binding to usersList => administrator here -->
+      {{ currentUser.role }}
     </p>
   </div>
 
