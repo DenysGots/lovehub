@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Post, Patch } from '@nestjs/common';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
@@ -8,12 +8,16 @@ import { AdministratorServiceComponent } from './administrator.service';
 export class AdministratorController {
 
   constructor(private readonly administratorService: AdministratorServiceComponent) {
-
   }
 
-  @Get()
-  getUsers() {
-    console.log('here');
-    return of (this.administratorService.getUsers());
+  @Post('')
+  async getUsers(@Body() getUsersEnquiryDto) {
+    return this.administratorService.manageUsersList(getUsersEnquiryDto);
   }
+
+  @Patch('')
+  async updateUsers(@Body() updateUsersEnquiryDto) {
+    return this.administratorService.updateUsersList(updateUsersEnquiryDto);
+  }
+
 }

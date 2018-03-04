@@ -11,8 +11,8 @@ import { AdministratorModule } from './modules/api/administrator/administrator.m
     ApiModule,
     HomepageModule,
     MatchingModule,
-    StaticModule,
-    AdministratorModule
+    AdministratorModule,
+    StaticModule // Must be the last one !
   ],
   controllers: [],
   components: [],

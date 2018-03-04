@@ -9,7 +9,6 @@ const httpOptions = {
   })
 };
 
-
 @Injectable()
 export class AdministratorService {
   private usersList: any = {};
@@ -23,7 +22,7 @@ export class AdministratorService {
   /*
   private getUsersOptions = {    // Get UsersList from server according to the following options:
     userRole: 'any',             // possible values: any (initial)/user/moderator
-    userStatus: 'any',           // possible values: any (initial)/active/disabled/deleted
+    userStatus: 'any',           // possible values: any (initial)/active/banned
     usersPerPage: 5,             // possible values: 5 (initial)/10/15/20
     nextPage: 1,                 // value: administrator-users-management-component goToPage() method result
     goToPage: 'none',            // possible values: none (initial)/from 1 to (server "usersList.length" / client "usersPerPage")
@@ -48,7 +47,7 @@ export class AdministratorService {
   /*
   private updateUsersOptions = {  // Update usersList back to server according to the following options:
     usersList: [],                // array of checked users to update
-    appliedAction: 'disable '     // possible values: disable/delete/restore
+    appliedAction: 'ban'     // possible values: ban/delete/restore
   };
    */
 
@@ -66,25 +65,24 @@ export class AdministratorService {
     this.isVisibleSource.next(this.isVisible);
   }
 
-  getUsersEnquiryRequest(enquiry): any /*Observable<{}>*/ {   // Get usersList from server according to the specified view parameters, on startup with default parameters
-    this.getUsersOptions = enquiry;
+  // Get usersList from server according to the specified view parameters, on startup with default parameters
+  getUsersEnquiryRequest(enquiry?): any {
+    if (enquiry) {
+      this.getUsersOptions = enquiry;
+    }
 
-    return this.http.get(this.serverURL, /*JSON.stringify(this.getUsersOptions),*/ httpOptions)
+    return this.http.post(this.serverURL, JSON.stringify(this.getUsersOptions), httpOptions)
        .subscribe(response => {
-         // this.receivedUsersList.next(JSON.parse(response));
-         console.log(response);
+         this.receivedUsersList.next(response);
        });
   }
 
-  updateUsersEnquiryRequest(enquiry): any /*Observable<{}>*/ {    // Update usersList on server and get updated usersList back from server with specified view parameters
+  // Update usersList on server and get updated usersList back from server with specified view parameters
+  updateUsersEnquiryRequest(enquiry): any {
     this.updateUsersOptions = enquiry;
 
-    // return this.http.put(this.serverUrl, JSON.stringify(this.updateUsersOptions), httpOptions)    // TODO: uncomment upon server response logic being ready for obtaining usersList from server on startup
-    //   .subscribe(response => {
-    //     this.receivedUsersList.next(JSON.parse(response));
-    //   });
-
-    console.log(this.updateUsersOptions);   // delete
+    return this.http.patch(this.serverURL, JSON.stringify(this.updateUsersOptions), httpOptions)
+      .subscribe(next => this.getUsersEnquiryRequest());
   }
 
 }
