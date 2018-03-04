@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AdministratorService } from '../../../services/administrator.service';
+
 @Component({
   selector: 'app-administrator-dashboard',
   templateUrl: './administrator-dashboard.component.html',
@@ -10,10 +12,15 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class AdministratorDashboardComponent implements OnInit {
+  mainSectionIsVisible: boolean;
 
-  constructor() { }
+  constructor(private administratorService: AdministratorService) {
+  }
 
   ngOnInit() {
+    this.administratorService.navBarState.subscribe(data => {
+      return this.mainSectionIsVisible = data;
+    });
   }
 
 }

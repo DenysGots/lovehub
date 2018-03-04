@@ -1,1 +1,20 @@
+<main class="main">
+  <app-administrator-navbar class="admin-navbar">
+  </app-administrator-navbar>
 
+  <app-administrator-header class="header" [ngClass]="{'header-full-screen': !mainSectionIsVisible}">
+  </app-administrator-header>
+
+  <section
+    class="main-section"
+    [ngClass]="{
+      'main-section-full-screen': !mainSectionIsVisible,
+      'full-screen': !mainSectionIsVisible}">
+    <div class="main-section-content" [ngClass]="{'full-screen': !mainSectionIsVisible}">
+
+    </div>
+  </section>
+
+  <app-administrator-footer class="footer">
+  </app-administrator-footer>
+</main>
