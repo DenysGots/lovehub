@@ -19,8 +19,8 @@ export class AdministratorUsersManagementComponent implements OnInit {
     usersPerPage: 5,
     nextPage: 1,
     sortingOptions: {
-      tableColumn: 'none',
-      sortingOption: 'none'
+      tableColumn: 'id',
+      sortingOption: 'ascending'
     }
   };
 
@@ -52,6 +52,8 @@ export class AdministratorUsersManagementComponent implements OnInit {
       for (let i = 1, numberOfPages = this.usersList.numberOfPages; i <= numberOfPages; i += 1) {
         this.pages.push(i);
       }
+
+      console.log(this.usersList.users);
     });
 
     this.administratorService.getUsersEnquiryRequest(this.getUsersOptions);

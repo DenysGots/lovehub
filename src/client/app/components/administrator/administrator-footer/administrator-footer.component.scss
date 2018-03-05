@@ -51,10 +51,21 @@ $color_8: #555b6e;
   height: 45px;
   transition: 0.1s ease-in-out;
   width: 45px;
-}
-
-.icon-wrapper:hover {
-  cursor: pointer;
+  &:hover {
+    background-color: $color_6;
+    border-color: $color_4;
+    cursor: pointer;
+    & .icon {
+      fill: $color_4;
+    }
+  }
+  &:active {
+    border-color: $color_2;
+    box-shadow: 0 0 15px $color_2;
+    & .icon {
+      fill: $color_2;
+    }
+  }
 }
 
 .icon-container {
@@ -66,24 +77,6 @@ $color_8: #555b6e;
 .icon {
   fill: $color_5;
   transition: 0.1s ease-in-out;
-}
-
-.icon-wrapper:hover {
-  background-color: $color_6;
-  border-color: $color_4;
-}
-
-.icon-wrapper:hover .icon {
-  fill: $color_4;
-}
-
-.icon-wrapper:active {
-  border-color: $color_2;
-  box-shadow: 0 0 15px $color_2;
-}
-
-.icon-wrapper:active .icon {
-  fill: $color_2;
 }
 
 .section-hidden {

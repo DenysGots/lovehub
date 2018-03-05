@@ -11,12 +11,11 @@ const httpOptions = {
 
 @Injectable()
 export class AdministratorService {
-  private usersList: any = {};
-  private serverURL = 'api/administrator';
   private isVisible = true;
-
+  private usersList: any = {};
   private getUsersOptions: any = {};
   private updateUsersOptions: any = {};
+  private serverURL = 'api/administrator';
 
   /* POST Request - send usersList requirements and get new usersList from server */
   /*
@@ -72,16 +71,14 @@ export class AdministratorService {
     }
 
     return this.http.post(this.serverURL, JSON.stringify(this.getUsersOptions), httpOptions)
-       .subscribe(response => {
-         this.receivedUsersList.next(response);
-       });
+       .subscribe(response => this.receivedUsersList.next(response));
   }
 
   // Update usersList on server and get updated usersList back from server with specified view parameters
   updateUsersEnquiryRequest(enquiry): any {
     this.updateUsersOptions = enquiry;
 
-    return this.http.patch(this.serverURL, JSON.stringify(this.updateUsersOptions), httpOptions)
+    this.http.patch(this.serverURL, JSON.stringify(this.updateUsersOptions), httpOptions)
       .subscribe(next => this.getUsersEnquiryRequest());
   }
 

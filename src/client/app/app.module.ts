@@ -14,6 +14,7 @@ import { UsersProfileService } from './services/users-profile.service';
 import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
 import { httpInterceptorProviders } from './http-interceptors';
 import { AdministratorService } from './services/administrator.service';
+import { NotificationsService } from './services/notifications.service';
 
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 
@@ -30,7 +31,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
-import {LoginComponent} from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationService } from './services/navigation.service';
 import { LoginService } from './services/login.service';
@@ -47,6 +48,7 @@ import { AdministratorHeaderComponent } from './components/administrator/adminis
 import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 // test
 
@@ -79,7 +81,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     AdministratorHeaderComponent,
     AdministratorNavbarComponent,
     AdministratorDashboardComponent,
-    AdministratorUsersManagementComponent
+    AdministratorUsersManagementComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -107,7 +110,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
     httpInterceptorProviders,
-    AdministratorService
+    AdministratorService,
+    NotificationsService
   ],
   bootstrap: [AppComponent]
 })

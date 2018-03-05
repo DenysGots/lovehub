@@ -183,7 +183,7 @@ $box-shadow_1: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1p
   margin: 5px 0;
 }
 
-.admin-navbar_section-selected {        //Selected navbar section is highlighted
+.admin-navbar_section-selected {
   background: $background-gradient_1;
 }
 
@@ -286,22 +286,20 @@ $box-shadow_1: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1p
 .admin-navbar_option {
   @include apply-flex(space-between, center, center);
   height: 40px;
-}
-
-.admin-navbar_option:hover {
-  background-color: $color_9;
-  box-shadow: $box-shadow_1;
+  &:hover {
+    background-color: $color_9;
+    box-shadow: $box-shadow_1;
+  }
 }
 
 .admin-navbar_option-description {
   margin: 0 10px;
-}
-
-.admin-navbar_option-description::before {
-  content: "\25CF";
-  display: inline-block;
-  font-size: 1.0rem;
-  margin: 0 10px;
+  &::before {
+    content: "\25CF";
+    display: inline-block;
+    font-size: 1.0rem;
+    margin: 0 10px;
+  }
 }
 
 .hidden {

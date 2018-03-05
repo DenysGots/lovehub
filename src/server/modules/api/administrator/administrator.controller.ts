@@ -12,12 +12,12 @@ export class AdministratorController {
 
   @Post('')
   async getUsers(@Body() getUsersEnquiryDto) {
-    return this.administratorService.manageUsersList(getUsersEnquiryDto);
+    return await this.administratorService.manageUsersList(getUsersEnquiryDto);
   }
 
   @Patch('')
   async updateUsers(@Body() updateUsersEnquiryDto) {
-    return this.administratorService.updateUsersList(updateUsersEnquiryDto);
+    return await this.administratorService.updateUsersList(updateUsersEnquiryDto);
   }
 
 }

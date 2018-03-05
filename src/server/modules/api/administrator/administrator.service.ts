@@ -11,9 +11,10 @@ export class AdministratorServiceComponent {
 
   constructor(@Inject('UsersProfileRepository') private readonly userProfileRepository: typeof UserProfile) {}
 
-  async getUsers() {
-    return await this.userProfileRepository
-      .findAll<UserProfile>({ raw: true }).then(result => this.originalUsersList = result);
+  getUsers() {
+    return this.userProfileRepository
+      .findAll<UserProfile>({ raw: true })
+      .then(result => this.originalUsersList = result);
   }
 
   async updateUser(id: number, options: {}) {
@@ -48,8 +49,6 @@ export class AdministratorServiceComponent {
 
     processedUsersList = this.originalUsersList.slice(0);
 
-    processedResponse.numberOfPages = Math.ceil(processedUsersList.length / usersPerPage);
-
     endingUserPosition = (
       (startingUserPosition + usersPerPage) <= (this.originalUsersList.length - 1)
     ) ? (usersPerPage) : (this.originalUsersList.length - startingUserPosition);
@@ -58,6 +57,9 @@ export class AdministratorServiceComponent {
     processedUsersList = processedUsersList.filter(user => {
       return ((userRole === 'any' || user.role === userRole) && (userStatus === 'any' || user.status === userStatus));
     });
+
+    // Calculate number of pages for pagination
+    processedResponse.numberOfPages = Math.ceil(processedUsersList.length / usersPerPage);
 
     // Assign usersList users missing properties, necessary for the view
     if (processedUsersList) {
