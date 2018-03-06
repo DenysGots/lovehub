@@ -43,7 +43,7 @@
                 [ngClass]="{'button-disabled': updateUsersOptions.usersList.length === 0}"
                 title="Apply an operation"
                 [attr.disabled]="(updateUsersOptions.usersList.length === 0) ? '' : null"
-                (click)="updateUsers(); false">
+                (click)="updateUsers(); resetSelectedUsersList(); false">
                 Apply
               </button>
             </form>

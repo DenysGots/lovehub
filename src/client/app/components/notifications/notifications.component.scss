@@ -1,0 +1,66 @@
+/* Notifications pop-up window styles styles */
+
+@mixin apply-flex($justify-content, $align-items, $align-content) {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  align-content: $align-content;
+}
+
+@mixin forbidTextSelection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+$color_1: #193952;
+
+$color_2: #bf71ce;
+
+$color_3: #fff;
+
+.main {
+  @include forbidTextSelection;
+  border-radius: 5px;
+  border: 1px solid $color_1;
+  bottom: 10px;
+  height: auto;
+  position: fixed;
+  right: 20px;  // On mobile: top: 0; left: 0; width: 100vh;
+  transition: 1s bottom ease-out;
+  width: 200px;
+  z-index: 1000;
+  // TODO: add shadow, background color
+}
+
+  // TODO: add styles for mobile layout
+
+.notification {
+  @include apply-flex(space-between, center, center);
+  flex-wrap: nowrap;
+  // TODO: add border (top/bottom), background color
+}
+
+.photo-container {
+  background-color: $color_1;                                     //TODO: remove
+  border-radius: 50%;
+  border: 4px solid $color_3;
+  height: 40px;
+  width: 40px;
+}
+
+.user-photo {
+  fill: $color_2;                                                 //TODO: remove
+  overflow: hidden;
+}
+
+
+
+
+
+.notification-hidden {
+  bottom: -200px;
+}

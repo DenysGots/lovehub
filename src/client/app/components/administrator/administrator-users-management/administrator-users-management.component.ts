@@ -13,6 +13,7 @@ import { AdministratorService } from '../../../services/administrator.service';
 export class AdministratorUsersManagementComponent implements OnInit {
   mainSectionIsVisible: boolean;
 
+  // Initial options to get usersList from DB
   getUsersOptions = {
     userRole: 'any',
     userStatus: 'any',
@@ -52,8 +53,6 @@ export class AdministratorUsersManagementComponent implements OnInit {
       for (let i = 1, numberOfPages = this.usersList.numberOfPages; i <= numberOfPages; i += 1) {
         this.pages.push(i);
       }
-
-      console.log(this.usersList.users);
     });
 
     this.administratorService.getUsersEnquiryRequest(this.getUsersOptions);
@@ -61,6 +60,20 @@ export class AdministratorUsersManagementComponent implements OnInit {
     this.administratorService.navBarState.subscribe(data => {
       return this.mainSectionIsVisible = data;
     });
+  }
+
+  pushSelectedUsersList(form, user): void {
+    if (!form.value.selectUser) {
+      this.updateUsersOptions.usersList.push(user.id);
+    } else {
+      const userListIndex = this.updateUsersOptions.usersList.indexOf(user.id);
+
+      this.updateUsersOptions.usersList.splice(userListIndex, 1);
+    }
+  }
+
+  resetSelectedUsersList(): void {
+    this.updateUsersOptions.usersList = [];
   }
 
   applySort(column, direction): void {
@@ -79,16 +92,6 @@ export class AdministratorUsersManagementComponent implements OnInit {
 
   resetNextPage(): void {
     this.getUsersOptions.nextPage = 1;
-  }
-
-  pushSelectedUsersList(form, user): void {
-    if (!form.value.selectUser) {
-      this.updateUsersOptions.usersList.push(user.id);
-    } else {
-      const userListIndex = this.updateUsersOptions.usersList.indexOf(user.id);
-
-      this.updateUsersOptions.usersList.splice(userListIndex, 1);
-    }
   }
 
   goToPage(page): void {

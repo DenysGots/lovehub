@@ -36,16 +36,6 @@ $color_10: #555b6e;
 
 $color_11: #0275d8;
 
-/*
-$background-gradient_1: linear-gradient(to bottom, #9d9de0 0%, #7171e2 100%);
-
-$background-gradient_2: linear-gradient(to bottom, #6361e5 0%, #6f6fe2 48%, #7c7cb4 100%);
-
-$background-gradient_3: linear-gradient(to bottom, #a8a8db 0%,#8484e0 100%);
-
-$background-gradient_4: linear-gradient(to bottom, #8383db 0%,#6464db 100%);
-*/
-
 $background-gradient_1: linear-gradient(to bottom, #348ed3 0%, #5c9fce 100%);
 
 $background-gradient_2: linear-gradient(to bottom, #0275d8 0%, #2985d1 50%, #3f93d3 100%);
@@ -70,17 +60,17 @@ $box-shadow_1: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1p
   z-index: 100;
 }
 
-.section {
-  transition: 0.1s ease-in-out;
-  width: 0;
-}
-
 @media screen and (max-width: 640px) {
   .main {
     height: auto;
     min-height: 100%;
     width: 100%;
   }
+}
+
+.section {
+  transition: 0.1s ease-in-out;
+  width: 0;
 }
 
 .text {
