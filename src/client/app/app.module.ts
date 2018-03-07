@@ -29,7 +29,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
-import {LoginComponent} from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationService } from './services/navigation.service';
 import { LoginService } from './services/login.service';
@@ -40,6 +40,9 @@ import { PagerComponent } from './components/pager/pager.component';
 import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
 import {MatchingService} from './services/matching.service';
+
+import { PhotosService } from './services/photos.service';
+import { PhotosComponent } from './components/photos/photos.component';
 
 // test
 
@@ -68,6 +71,7 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     UserProfileComponent,
     UsersProfileOrderByPipe,
     UserMatchComponent,
+    PhotosComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -85,6 +89,7 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     })
   ],
   providers: [
+    PhotosService,
     NavigationService,
     HomeService,
     LoginService,

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ApiModule } from './modules/api/api.module';
 import { StaticModule } from './modules/static/static.module';
 import { HomepageModule } from './modules/homepage/homepage.module';
-import {MatchingModule} from './modules/matching/matching.module';
+import { MatchingModule } from './modules/matching/matching.module';
+import { PhotosModule } from './modules/api/photos/photos.module';
 
 @Module({
   imports: [
@@ -11,7 +11,7 @@ import {MatchingModule} from './modules/matching/matching.module';
     HomepageModule,
     MatchingModule,
     StaticModule,
-    MongooseModule.forRoot('mongodb://localhost/nest')
+    PhotosModule
   ],
   controllers: [],
   components: [],
