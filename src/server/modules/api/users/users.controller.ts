@@ -2,11 +2,8 @@ import {Body, Controller, Delete, Get, HttpCode, Param, Post, UseFilters} from '
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 import { UserDto } from './dto/user.dto';
-import { HttpExceptionFilter } from '../../filters/http-exception.filter';
 
 
-
-@UseFilters(new HttpExceptionFilter())
 @Controller('api/users')
 export class UsersController {
 

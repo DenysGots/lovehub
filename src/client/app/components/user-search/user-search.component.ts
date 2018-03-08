@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -16,9 +16,9 @@ import { UserProfile } from '../../models/user-profile';
   moduleId: module.id,
   selector: 'app-user-search',
   templateUrl: 'user-search.component.html',
-  styleUrls: ['user-search.component.scss']
+  styleUrls: ['user-search.component.scss'],
 })
-export class UserSearchComponent implements OnInit {
+export class UserSearchComponent implements OnInit, OnChanges {
 
   users: UserProfile[];
   searchFilter: FilterParam;
@@ -31,6 +31,10 @@ export class UserSearchComponent implements OnInit {
   offsetItems = 0;
   currentPage = 1;
   itemsPerPage = 6;
+
+  isDesc = false;
+  property: string;
+  direction: number;
 
   private searchTerms = new Subject<SearchParam>();
 
@@ -52,6 +56,16 @@ export class UserSearchComponent implements OnInit {
       });
   }
 
+  ngOnChanges() {
+    /*
+    this.setDefaultParamService.getValue().subscribe(type => {
+      if(type == 'search') {
+        this.ageFilter.value = '0';
+      }
+    });
+    */
+  }
+
   search(term: SearchParam): void {
     this.term = term;
     this.searchTerms.next(term);
@@ -61,8 +75,12 @@ export class UserSearchComponent implements OnInit {
     return this.usersProfileService
       .searchUsers(this.term.searchType, this.term.searchValue, this.offsetItems, this.itemsPerPage)
       .subscribe(result => {
-        this.users = result.rows;
-        this.countItems = result.count;
+        if(result === undefined) {
+          console.log(`UserSearchComponent fetchData() result ${result}`);
+        } else {
+          this.users = result.rows;
+          this.countItems = result.count;
+        }
       });
   }
 

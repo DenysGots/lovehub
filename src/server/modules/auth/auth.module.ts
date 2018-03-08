@@ -13,7 +13,7 @@ import { AuthMiddleware } from '../common/middlewares/auth.middleware';
 export class AuthModule implements NestModule {
   configure(consumer: MiddlewaresConsumer): void {
     consumer.apply(AuthMiddleware).forRoutes(
-    {path: 'api/login', method: RequestMethod.POST}
+    {path: 'api/users-profile', method: RequestMethod.GET}
   );
 }
 }

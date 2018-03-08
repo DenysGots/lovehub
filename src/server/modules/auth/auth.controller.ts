@@ -6,13 +6,14 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('auth')
-  public async login(@Request() req, @Response() res) {
+  public async sign(@Request() req, @Response() res) {
     const body = req.body;
     if (!body) {
       throw new Error('Missing Information');
     }
 
     const token = await this.authService.sign(body);
-    res.status(HttpStatus.ACCEPTED).json('AuthToken ' + token);
+    console.log(`Server AuthController send ${token}`);
+    res.status(HttpStatus.ACCEPTED).json({ idToken : token });
   }
 }

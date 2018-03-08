@@ -35,12 +35,13 @@ export class User extends Model<User> {
 
   @HasOne(() => UserProfile)
   userProfile: UserProfile;
-
+/*
   @BeforeCreate
   public static async hashPassword(user: User, options: any) {
     if (!options.transaction) throw new Error('Missing transaction.');
 
     user.password = crypto.createHmac('sha256', user.password).digest('hex');
   }
+  */
 }
 

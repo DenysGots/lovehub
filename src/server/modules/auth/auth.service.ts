@@ -8,17 +8,12 @@ import { User } from '../api/users/user.entity';
 export class AuthService implements IAuthService {
   options: IJwtOptions = {
     algorithm: 'HS256',
-    expiresIn: '2 days',
-    jwtid: process.env.JWT_ID || '',
+    expiresIn: '1h',
+    jwtid: process.env.JWT_ID || '1',
   };
 
   public async sign(credentials: { email: string; password: string }): Promise<string> {
-    const user = await User.findOne<User>({
-      where: {
-        email: credentials.email,
-        password: crypto.createHmac('sha256', credentials.password).digest('hex'),
-      },
-    });
+    const user = await User.findOne<User>({ where: { id: 1 }});
 
     if (!user) {
       throw new Error('UserNotFound');
@@ -29,6 +24,6 @@ export class AuthService implements IAuthService {
       email: user.email,
     };
 
-    return await jwt.sign(payload, process.env.JWT_KEY || '', this.options);
+    return await jwt.sign(payload, process.env.JWT_KEY || 'secretKey', this.options);
   }
 }
