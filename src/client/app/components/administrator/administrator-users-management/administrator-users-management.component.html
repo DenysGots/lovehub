@@ -121,7 +121,7 @@
                   title="Select number of users shown per page"
                   #usersPerPage="ngModel"
                   [(ngModel)]="getUsersOptions.usersPerPage"
-                  (change)="getUsers()">
+                  (change)="getUsers(); resetSortingOptions(); resetNextPage()">
                   <option value="5">
                     5
                   </option>
@@ -331,7 +331,7 @@
         <div class="users-table-pagination">
           <div
             class="pagination-element pagination-previous"
-            (click)="goToPage('previous'); getUsers()">
+            (click)="goToPage({pageTitle: 'previous'}); getUsers()">
             <span class="arrow left-arrow"></span>
             <span class="arrow left-arrow"></span>
           </div>
@@ -341,17 +341,17 @@
             *ngFor="let page of pages">
             <div
               class="pagination-page"
-              [ngClass]="{'pagination-current': usersList.currentPage === page}"
+              [ngClass]="{'pagination-current': usersList.currentPage === page.pageTitle}"
               (click)="goToPage(page); getUsers()">
               <p class="page">
-                {{ page }}
+                {{ page.pageTitle }}
               </p>
             </div>
           </div>
 
           <div
             class="pagination-element pagination-next"
-            (click)="goToPage('next'); getUsers()">
+            (click)="goToPage({pageTitle: 'next'}); getUsers()">
             <span class="arrow right-arrow"></span>
             <span class="arrow right-arrow"></span>
           </div>

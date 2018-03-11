@@ -68,6 +68,8 @@ export class AdministratorService {
   getUsersEnquiryRequest(enquiry?): any {
     if (enquiry) {
       this.getUsersOptions = enquiry;
+    } else {
+      console.log('On DB update');
     }
 
     return this.http.post(this.serverURL, JSON.stringify(this.getUsersOptions), httpOptions)
