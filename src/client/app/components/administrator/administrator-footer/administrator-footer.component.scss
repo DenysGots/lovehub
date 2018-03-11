@@ -37,7 +37,7 @@ $color_8: #555b6e;
   background-color: $color_1;
   border-top: 1px solid $color_8;
   height: 55px;
-  min-width: 253px;
+  min-width: 220px;
   transition: 0.1s ease-in-out;
   width: 100%;
   z-index: 100;
@@ -56,14 +56,14 @@ $color_8: #555b6e;
     border-color: $color_4;
     cursor: pointer;
     & .icon {
-      fill: $color_4;
+      color: $color_4;
     }
   }
   &:active {
     border-color: $color_2;
     box-shadow: 0 0 15px $color_2;
     & .icon {
-      fill: $color_2;
+      color: $color_2;
     }
   }
 }
@@ -75,7 +75,8 @@ $color_8: #555b6e;
 }
 
 .icon {
-  fill: $color_5;
+  color: $color_5;
+  font-size: 1.8rem;
   transition: 0.1s ease-in-out;
 }
 

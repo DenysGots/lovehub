@@ -1,5 +1,7 @@
 /* Navbar section styles */
 
+@import url('https://use.fontawesome.com/releases/v5.0.8/css/all.css');
+
 @mixin apply-flex($justify-content, $align-items, $align-content) {
   display: flex;
   flex-wrap: wrap;
@@ -44,7 +46,6 @@ $background-gradient_3: linear-gradient(to bottom, #529cce 0%, #7aaacc 100%);
 
 $background-gradient_4: linear-gradient(to bottom, #1581d3 0%, #3d90cc 100%);
 
-
 $box-shadow_1: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1px 0;
 
 .main {
@@ -54,7 +55,7 @@ $box-shadow_1: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1p
   border-right: 1px solid $color_10;
   height: 100%;
   min-height: calc(100vh - 55px);
-  min-width: 253px;
+  min-width: 220px;
   transition: 0.1s ease-in-out;
   width: 100%;
   z-index: 100;
@@ -112,16 +113,14 @@ $box-shadow_1: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1p
 }
 
 .photo-container {
+  @include apply-flex(center, center, center);
   background-color: $color_1;                                         //TODO: remove
   border-radius: 50%;
   border: 4px solid $color_4;
   height: 70px;
   width: 70px;
-}
-
-.user-photo {
-  fill: $color_2;                                                     //TODO: remove
-  overflow: hidden;
+  color: $color_2;
+  font-size: 2.5rem;
 }
 
 .user-status {
@@ -199,7 +198,8 @@ $box-shadow_1: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1p
 }
 
 .icon {
-  fill: $color_5;
+  color: $color_5;
+  font-size: 1.8rem;
   transition: 0.1s ease-in-out;
 }
 
@@ -224,7 +224,7 @@ $box-shadow_1: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1p
 }
 
 .admin-navbar_section-header:hover .icon {
-  fill: $color_4;
+  color: $color_4;
 }
 
 .admin-navbar_section-header:active .icon-wrapper {
@@ -233,7 +233,7 @@ $box-shadow_1: rgba(0, 0, 0, 0.25) 0 1px 0, inset rgba(255, 255, 255, 0.16) 0 1p
 }
 
 .admin-navbar_section-header:active .icon {
-  fill: $color_4;
+  color: $color_4;
 }
 
 .admin-navbar_section-header:hover .open-list-arrow {

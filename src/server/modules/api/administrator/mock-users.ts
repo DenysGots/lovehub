@@ -6,8 +6,8 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'Administrator',
-      registrationDate: <Date> new Date('2001-01-02'),
-      lastActiveDate: <Date> new Date('2018-10-01')
+      // registrationDate: <Date> new Date('2001-01-02'),
+      // lastActiveDate: <Date> new Date('2018-10-01'),
     },
     {
       id: <number>247731,
@@ -16,8 +16,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2012-01-02'),
-      lastActiveDate: <Date> new Date('2018-11-01')
+      // registrationDate: <Date> new Date('2012-01-02'),
+      // lastActiveDate: <Date> new Date('2018-11-01'),
+      age: <number>21,
+      gender: <string>'Male'
     },
     {
       id: <number>905741,
@@ -26,8 +28,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2008-01-02'),
-      lastActiveDate: <Date> new Date('2018-12-01')
+      // registrationDate: <Date> new Date('2008-01-02'),
+      // lastActiveDate: <Date> new Date('2018-12-01'),
+      age: <number>42,
+      gender: <string>'Female'
     },
     {
       id: <number>438961,
@@ -36,8 +40,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2015-01-02'),
-      lastActiveDate: <Date> new Date('2018-13-01')
+      // registrationDate: <Date> new Date('2015-01-02'),
+      // lastActiveDate: <Date> new Date('2018-13-01'),
+      age: <number>54,
+      gender: <string>'Male'
     },
     {
       id: <number>155452,
@@ -46,8 +52,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date>new Date('2008-01-02'),
-      lastActiveDate: <Date>new Date('2018-14-01')
+      // registrationDate: <Date> new Date('2008-01-02'),
+      // lastActiveDate: <Date>new Date('2018-14-01'),
+      age: <number>59,
+      gender: <string>'Female'
     },
     {
       id: <number>669339,
@@ -56,8 +64,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2016-01-02'),
-      lastActiveDate: <Date> new Date('2018-15-01')
+      // registrationDate: <Date> new Date('2016-01-02'),
+      // lastActiveDate: <Date> new Date('2018-15-01'),
+      age: <number>29,
+      gender: <string>'Male'
     },
     {
       id: <number>857314,
@@ -66,8 +76,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'Moderator',
-      registrationDate: <Date> new Date('2011-01-02'),
-      lastActiveDate: <Date> new Date('2018-16-01')
+      // registrationDate: <Date> new Date('2011-01-02'),
+      // lastActiveDate: <Date> new Date('2018-16-01'),
+      age: <number>41,
+      gender: <string>'Female'
     },
     {
       id: <number>874411,
@@ -76,8 +88,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'Moderator',
-      registrationDate: <Date> new Date('2010-01-02'),
-      lastActiveDate: <Date> new Date('2018-17-01')
+      // registrationDate: <Date> new Date('2010-01-02'),
+      // lastActiveDate: <Date> new Date('2018-17-01'),
+      age: <number>34,
+      gender: <string>'Male'
     },
     {
       id: <number>694102,
@@ -86,8 +100,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2008-01-02'),
-      lastActiveDate: <Date> new Date('2018-18-01')
+      // registrationDate: <Date> new Date('2008-01-02'),
+      // lastActiveDate: <Date> new Date('2018-18-01'),
+      age: <number>36,
+      gender: <string>'Female'
     },
     {
       id: <number>4240,
@@ -96,8 +112,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2003-01-02'),
-      lastActiveDate: <Date> new Date('2018-19-01')
+      // registrationDate: <Date> new Date('2003-01-02'),
+      // lastActiveDate: <Date> new Date('2018-19-01'),
+      age: <number>38,
+      gender: <string>'Male'
     },
     {
       id: <number>2934,
@@ -106,8 +124,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2015-01-02'),
-      lastActiveDate: <Date> new Date('2018-20-01')
+      // registrationDate: <Date> new Date('2015-01-02'),
+      // lastActiveDate: <Date> new Date('2018-20-01'),
+      age: <number>22,
+      gender: <string>'Female'
     },
     {
       id: <number>183733,
@@ -116,8 +136,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2006-01-02'),
-      lastActiveDate: <Date> new Date('2018-21-01')
+      // registrationDate: <Date> new Date('2006-01-02'),
+      // lastActiveDate: <Date> new Date('2018-21-01'),
+      age: <number>55,
+      gender: <string>'Male'
     },
     {
       id: <number>667060,
@@ -126,8 +148,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2001-01-02'),
-      lastActiveDate: <Date> new Date('2018-22-01')
+      // registrationDate: <Date> new Date('2001-01-02'),
+      // lastActiveDate: <Date> new Date('2018-22-01'),
+      age: <number>27,
+      gender: <string>'Female'
     },
     {
       id: <number>812395,
@@ -136,8 +160,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2014-01-02'),
-      lastActiveDate: <Date> new Date('2018-23-01')
+      // registrationDate: <Date> new Date('2014-01-02'),
+      // lastActiveDate: <Date> new Date('2018-23-01'),
+      age: <number>37,
+      gender: <string>'Male'
     },
     {
       id: <number>573430,
@@ -146,8 +172,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2007-01-02'),
-      lastActiveDate: <Date> new Date('2018-24-01')
+      // registrationDate: <Date> new Date('2007-01-02'),
+      // lastActiveDate: <Date> new Date('2018-24-01'),
+      age: <number>48,
+      gender: <string>'Female'
     },
     {
       id: <number>829486,
@@ -156,8 +184,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'Moderator',
-      registrationDate: <Date> new Date('2007-01-02'),
-      lastActiveDate: <Date> new Date('2018-25-01')
+      // registrationDate: <Date> new Date('2007-01-02'),
+      // lastActiveDate: <Date> new Date('2018-25-01'),
+      age: <number>59,
+      gender: <string>'Male'
     },
     {
       id: <number>678402,
@@ -166,8 +196,10 @@ export const usersList = [
       isActive: true,
       isBaned: false,
       role: <string>'Moderator',
-      registrationDate: <Date> new Date('2002-01-02'),
-      lastActiveDate: <Date> new Date('2018-26-01')
+      // registrationDate: <Date> new Date('2002-01-02'),
+      // lastActiveDate: <Date> new Date('2018-26-01'),
+      age: <number>26,
+      gender: <string>'Female'
     },
     {
       id: <number>811004,
@@ -176,8 +208,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'Moderator',
-      registrationDate: <Date> new Date('2012-01-02'),
-      lastActiveDate: <Date> new Date('2018-27-01')
+      // registrationDate: <Date> new Date('2012-01-02'),
+      // lastActiveDate: <Date> new Date('2018-27-01'),
+      age: <number>34,
+      gender: <string>'Male'
     },
     {
       id: <number>450156,
@@ -186,8 +220,10 @@ export const usersList = [
       isActive: true,
       isBaned: false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2015-01-02'),
-      lastActiveDate: <Date> new Date('2018-28-01')
+      // registrationDate: <Date> new Date('2015-01-02'),
+      // lastActiveDate: <Date> new Date('2018-28-01'),
+      age: <number>55,
+      gender: <string>'Female'
     },
     {
       id: <number>838009,
@@ -196,8 +232,10 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'User',
-      registrationDate: <Date> new Date('2017-01-02'),
-      lastActiveDate: <Date> new Date('2018-29-01')
+      // registrationDate: <Date> new Date('2017-01-02'),
+      // lastActiveDate: <Date> new Date('2018-29-01'),
+      age: <number>47,
+      gender: <string>'Male'
     },
     {
       id: <number>112007,
@@ -206,7 +244,201 @@ export const usersList = [
       isActive: <boolean>true,
       isBaned: <boolean>false,
       role: <string>'Moderator',
-      registrationDate: <Date> new Date('2009-01-02'),
-      lastActiveDate: <Date> new Date('2018-30-01')
+      // registrationDate: <Date> new Date('2009-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>20,
+      gender: <string>'Female'
+    },
+    {
+      id: <number>675978,
+      firstName: <string>'User20',
+      lastName: <string>'User20',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2015-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>31,
+      gender: <string>'Male'
+    },
+    {
+      id: <number>245087,
+      firstName: <string>'User21',
+      lastName: <string>'User21',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2014-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>25,
+      gender: <string>'Female'
+    },
+    {
+      id: <number>147095,
+      firstName: <string>'User22',
+      lastName: <string>'User22',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2013-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>33,
+      gender: <string>'Male'
+    },
+    {
+      id: <number>5436097,
+      firstName: <string>'User23',
+      lastName: <string>'User23',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2012-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>38,
+      gender: <string>'Female'
+    },
+    {
+      id: <number>245086,
+      firstName: <string>'User24',
+      lastName: <string>'User24',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2011-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>29,
+      gender: <string>'Male'
+    },
+    {
+      id: <number>987563,
+      firstName: <string>'User25',
+      lastName: <string>'User25',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2010-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>44,
+      gender: <string>'Female'
+    },
+    {
+      id: <number>586974,
+      firstName: <string>'User26',
+      lastName: <string>'User26',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2010-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>41,
+      gender: <string>'Male'
+    },
+    {
+      id: <number>109654,
+      firstName: <string>'User27',
+      lastName: <string>'User27',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2009-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>39,
+      gender: <string>'Female'
+    },
+    {
+      id: <number>196749,
+      firstName: <string>'User28',
+      lastName: <string>'User28',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2008-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>37,
+      gender: <string>'Male'
+    },
+    {
+      id: <number>356975,
+      firstName: <string>'User29',
+      lastName: <string>'User29',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2007-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>35,
+      gender: <string>'Female'
+    },
+    {
+      id: <number>583457,
+      firstName: <string>'User30',
+      lastName: <string>'User30',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2006-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>29,
+      gender: <string>'Male'
+    },
+    {
+      id: <number>195746,
+      firstName: <string>'User31',
+      lastName: <string>'User31',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2005-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>43,
+      gender: <string>'Female'
+    },
+    {
+      id: <number>196745,
+      firstName: <string>'User32',
+      lastName: <string>'User32',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2004-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>51,
+      gender: <string>'Male'
+    },
+    {
+      id: <number>967543,
+      firstName: <string>'User33',
+      lastName: <string>'User33',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2003-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>28,
+      gender: <string>'Female'
+    },
+    {
+      id: <number>497615,
+      firstName: <string>'User34',
+      lastName: <string>'User34',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2002-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>27,
+      gender: <string>'Male'
+    },
+    {
+      id: <number>858762,
+      firstName: <string>'User35',
+      lastName: <string>'User35',
+      isActive: <boolean>true,
+      isBaned: <boolean>false,
+      role: <string>'User',
+      // registrationDate: <Date> new Date('2001-01-02'),
+      // lastActiveDate: <Date> new Date('2018-30-01'),
+      age: <number>24,
+      gender: <string>'Female'
     }
   ];
