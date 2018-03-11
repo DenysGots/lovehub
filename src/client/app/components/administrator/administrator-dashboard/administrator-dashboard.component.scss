@@ -1,5 +1,7 @@
 /* Page layout styles */
 
+@import url('https://use.fontawesome.com/releases/v5.0.8/css/all.css');
+
 @mixin grid-area($column-start, $column-end, $row-start, $row-end) {
   grid-column-start: $column-start;
   grid-column-end: $column-end;
@@ -61,6 +63,8 @@ $color_14: #0275d8;
 
 $color_15: #193952;
 
+$color_16: #ef233c;
+
 $box-shadow_1: 3px 3px 7px 1px rgba(0, 0, 0, 0.2);
 
 $box-shadow_2: inset 5px 5px 9px rgba(0, 0, 0, 0.6);
@@ -71,7 +75,7 @@ $box-shadow_3: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
 .main {
   display: grid;
-  grid-template: auto auto auto / 1fr 4fr;
+  grid-template: auto auto auto / 1fr 6fr;
   left: 0;
   position: absolute;
   top: 0;
@@ -134,10 +138,10 @@ $box-shadow_3: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
   }
 }
 
-/* Users management section styles */
+/* Main section layout and styles */
 
 .main-section {
-  background-color: $color_1;
+  background-color: $color_9;
   min-height: calc(100vh - 105px);
   min-width: 920px;
   overflow-x: hidden;
@@ -154,7 +158,7 @@ $box-shadow_3: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 @media screen and (max-width: 640px) {
   .main-section {
     height: auto;
-    max-width: 100vw;
+    max-width: 100%;
     min-height: 100vh;
     overflow: scroll;
     position: relative;
@@ -173,4 +177,41 @@ $box-shadow_3: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 .text {
   font: 1rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   margin: 0;
+}
+
+/* Dashboard section styles */
+
+.general-information {
+  display: grid;
+  grid-template: auto/ repeat(4, 1fr);
+  margin: 20px;
+  width: 100%;
+}
+
+.general-information_wrapper {
+  &:nth-of-type(2n + 1) {
+    border-right: 1px solid $color_4;
+  }
+}
+
+.general-information_section {
+  color: $color_4;
+  font-size: 0.8rem;
+  margin: 0 20px;
+}
+
+.section-title {
+  font: 1.3rem 'Alegreya', serif;
+}
+
+.section-counter {
+  font: 2.3rem 'Alegreya', serif;
+}
+
+.increase {
+  color: $color_14;
+}
+
+.decrease {
+  color: $color_16;
 }
