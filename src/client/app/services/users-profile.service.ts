@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 
 import { of } from 'rxjs/observable/of';
 
 import { catchError, tap } from 'rxjs/operators';
 
 import { UserProfile } from '../models/user-profile';
+import {AuthErrorHandlerService} from './auth-error-handler.service';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -22,7 +23,7 @@ export class UsersProfileService {
 
   usersProfileUrl = 'api/users-profile/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authErrorHandlerService: AuthErrorHandlerService) { }
 
   registration(user: UserProfile): Observable<UserProfile> {
     return this.http.post<UserProfile>(this.usersProfileUrl, user, httpOptions);
@@ -45,10 +46,16 @@ export class UsersProfileService {
       return of([]);
     }
 
-    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?name=${name}&&offset=${offset}&&limit=${limit}`).pipe(
-      tap(_ => console.log(`found users-profile by "${name}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})`, ))
-    );
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?name=${name}&&offset=${offset}&&limit=${limit}`)
+      .map(response => response)
+      .catch(err => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401 || err.status === 403) {
+          console.log('UsersProfileService ', err.statusText);
+          return Observable.empty();
+        }
+      }
+    });
   }
 
   findByAge(age, offset, limit): Observable<FilteredUsersProfile | {}> {
