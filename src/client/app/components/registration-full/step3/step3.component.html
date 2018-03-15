@@ -50,24 +50,6 @@
       </div>
     </div>
 
-
-    <div class="form-group"
-         [ngClass]="{
-          'has-danger': location.invalid && (location.dirty || location.touched),
-          'has-success': location.valid && (location.dirty || location.touched)
-     }">
-      <input type="text"
-             class="form-control"
-             formControlName="location"
-             required
-             placeholder="Location">
-      <div class="form-control-feedback"
-           *ngIf="location.errors && (location.dirty || location.touched)">
-        <p *ngIf="location.errors.required">Location is required</p>
-      </div>
-    </div>
-
-
     <div class="form-group"
          [ngClass]="{
           'has-danger': email.invalid && (email.dirty || email.touched),
