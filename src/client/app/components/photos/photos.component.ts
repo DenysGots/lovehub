@@ -3,8 +3,8 @@ import { PhotosService } from '../../services/photos.service';
 
 @Component({
   selector: 'app-upload-photo',
-  template: `<input type="file" (change)="fileChangeEvent($event)" placeholder="Upload photo..."/>
-              <button type="button" (click)="upload()">Upload</button>`,
+  templateUrl: './photos.component.html',
+  styleUrls: ['./photos.component.scss']
 })
 export class PhotosComponent implements OnInit {
 
@@ -14,14 +14,29 @@ export class PhotosComponent implements OnInit {
 
   ngOnInit() {
   }
+  fileChangeEvent(fileInput: any) {
+    this.filesToUpload = <FileList>fileInput.target.files;
+    if (this.filesToUpload) {
+      this.upload();
+    }
+    this.fileReset(fileInput);
+  }
+
+  fileReset(fileInput: any) {
+    fileInput.target.value = '';
+    return ;
+  }
 
   async upload() {
     const file: File = this.filesToUpload[0];
     const fileBase64 = await this.toDataURL(file);
-    console.log(fileBase64);
-    this.photosService.uploadPhoto(fileBase64).subscribe();
+    const fileName = file.name;
+    const fileRes = {base64: fileBase64, name: fileName};
+    this.photosService.uploadPhoto(fileRes).subscribe();
+    this.displayPhoto();
   }
-  toDataURL (file) {
+
+  toDataURL(file) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onloadend = () => resolve(reader.result);
@@ -29,7 +44,13 @@ export class PhotosComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
-  fileChangeEvent(fileInput: any) {
-    this.filesToUpload = <FileList>fileInput.target.files;
+
+  displayPhoto() {
+    const base64 = this.photosService.getPhoto().subscribe();
+    console.log(base64);
+    const img = new Image();
+    img.src = '';
+    document.getElementById('profile-photo').style.backgroundImage = 'url(\'' + img.src + '\')';
   }
+
 }

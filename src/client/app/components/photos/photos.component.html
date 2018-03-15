@@ -1,3 +1,13 @@
-<p>
-  photos works!
-</p>
+<ul class="ch-grid">
+  <li>
+    <div id="profile-photo" class="ch-item">
+      <img class="rounded-circle mx-auto d-block img-fluid"/>
+      <div class="ch-info">
+        <p>
+          <input type="file" (change)="fileChangeEvent($event)"/>
+          <a>Upload photo</a>
+        </p>
+      </div>
+    </div>
+  </li>
+</ul>

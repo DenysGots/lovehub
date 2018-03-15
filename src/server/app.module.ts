@@ -10,8 +10,8 @@ import { PhotosModule } from './modules/api/photos/photos.module';
     ApiModule,
     HomepageModule,
     MatchingModule,
+    PhotosModule,
     StaticModule,
-    PhotosModule
   ],
   controllers: [],
   components: [],

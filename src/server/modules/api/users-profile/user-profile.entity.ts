@@ -28,7 +28,7 @@ export class UserProfile extends Model<UserProfile> {
   gender: string;
 
   @Column
-  photo: Buffer;
+  photo: string;
 
   @Column
   isBaned: boolean;
