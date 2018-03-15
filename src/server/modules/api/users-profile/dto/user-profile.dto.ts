@@ -7,5 +7,4 @@ export class UserProfileDto {
   readonly sex: string;
   readonly preference: string;
   readonly orientation: string;
-  readonly location: string;
 }
