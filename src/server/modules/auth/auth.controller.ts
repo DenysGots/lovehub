@@ -1,4 +1,4 @@
-import { Controller, HttpStatus, Post, Request, Response } from '@nestjs/common';
+import {Body, Controller, HttpCode, HttpStatus, Post, Request, Response} from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('api/')
@@ -6,14 +6,13 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('auth')
-  public async sign(@Request() req, @Response() res) {
-    const body = req.body;
+  public async sign(@Body() body, @Response() res) {
     if (!body) {
       throw new Error('Missing Information');
     }
 
     const token = await this.authService.sign(body);
     console.log(`Server AuthController send ${token}`);
-    res.status(HttpStatus.ACCEPTED).json({ idToken : token });
+    res.status(HttpStatus.OK).json({ idToken : token });
   }
 }

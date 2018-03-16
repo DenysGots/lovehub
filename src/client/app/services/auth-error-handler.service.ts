@@ -6,7 +6,7 @@ export class AuthErrorHandlerService implements ErrorHandler {
 
   constructor(private injector: Injector) {}
 
-  handleError(error: any): void {
+  public handleError(error: any): void {
     console.log('AuthErrorHandler', error.status);
     const router = this.injector.get(Router);
 

@@ -41,8 +41,8 @@ export class UserSearchComponent implements OnInit, OnChanges {
   constructor(private usersProfileService: UsersProfileService) {
     this.searchFilter = new FilterParam('Name', 'search', '', 'Enter a favourite name..');
     this.ageFilter = new FilterParam('Age', 'range', '0', '');
-    this.genderMFilter = new FilterParam('Male', 'radio', 'male', '');
-    this.genderFFilter = new FilterParam('Female', 'radio', 'female', '');
+    this.genderMFilter = new FilterParam('Male', 'radio', 'MALE', '');
+    this.genderFFilter = new FilterParam('Female', 'radio', 'FEMALE', '');
   }
 
   ngOnInit(): void {
@@ -75,12 +75,8 @@ export class UserSearchComponent implements OnInit, OnChanges {
     return this.usersProfileService
       .searchUsers(this.term.searchType, this.term.searchValue, this.offsetItems, this.itemsPerPage)
       .subscribe(result => {
-        if(result === undefined) {
-          console.log(`UserSearchComponent fetchData() result ${result}`);
-        } else {
-          this.users = result.rows;
-          this.countItems = result.count;
-        }
+        this.users = result.rows;
+        this.countItems = result.count;
       });
   }
 

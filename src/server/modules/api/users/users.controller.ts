@@ -8,6 +8,7 @@ import { UserDto } from './dto/user.dto';
 export class UsersController {
 
   constructor(private readonly usersService: UsersService) {}
+
   @HttpCode(201)
   @Post()
   async create(@Body() userDto: UserDto) {
@@ -24,6 +25,14 @@ export class UsersController {
   @Get(':id')
   async findById(@Param() params): Promise<User> {
     return await this.usersService.findById(params.id)
+  }
+
+  @HttpCode(200)
+  @Post('/login')
+  async findByEmailAndPassword(@Body() credential): Promise<User> {
+    const { email, password } = credential;
+
+    return await this.usersService.findByEmailAndPassword(email, password);
   }
 
   @HttpCode(204)

@@ -16,12 +16,12 @@ export class AuthMiddleware implements NestMiddleware {
 
         const user = await User.findOne<User>({
           where: {
-            id: decoded.id,
+            email: decoded.email
           }
         });
 
-        console.log('AuthMiddleware ' + user.email);
-        if (user) {
+        console.log('AuthMiddleware ' + user.name);
+        if (!user) {
           throw new MessageCodeError('request:unauthorized');
         }
 

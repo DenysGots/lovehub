@@ -19,7 +19,7 @@ export class User extends Model<User> {
     validate: {
       isEmail: true,
       isUnique: async (value: string, next: Function): Promise<any> => {
-        const isExist = await User.findOne({ where: { email: value }});
+        const isExist = await User.findOne<User>({ where: { email: value }});
         if (isExist) {
           const error = new Error('User with this email already exist');
           next(error);

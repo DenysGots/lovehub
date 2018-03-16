@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit {
 
     console.log(this.loginForm.value);
 
-    this.authService.sign(email, password).subscribe((user) => {});
+    this.authService.sign(email, password).subscribe((response) => {
+
+    });
   }
 
   private checkForm(): boolean {

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HttpHandler} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -46,6 +46,8 @@ import {AgmCoreModule} from '@agm/core';
 import {MatchingService} from './services/matching.service';
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
+import {providerCustomHttpClient} from './http-interceptors/providers';
+import {CustomHttpClient} from './http-interceptors/custom-http-client';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,7 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
+    { provide: CustomHttpClient, useFactory: providerCustomHttpClient, deps: [HttpHandler, AuthErrorHandlerService]},
     httpInterceptorProviders,
     AuthService,
     AuthGuard,
