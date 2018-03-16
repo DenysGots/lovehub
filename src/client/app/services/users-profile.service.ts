@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { UserProfile } from '../models/user-profile';
 
-import {CustomHttpClient} from '../http-interceptors/custom-http-client';
-
-import 'rxjs/add/observable/empty';
+import { of } from 'rxjs/observable/of';
 import { catchError, tap } from 'rxjs/operators';
+
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -42,41 +41,41 @@ export class UsersProfileService {
   findByName(name, offset, limit): Observable<FilteredUsersProfile | {}> {
     console.log(`angular: within findByName(${name})`);
     if (!name.trim()) {
-      return Observable.empty();
+      return of([]);
     }
 
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?name=${name}&&offset=${offset}&&limit=${limit}`).pipe(
         tap(_ => console.log(`found users-profile by "${name}"`)),
-        catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})`, ))
+        catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})` ))
       );
   }
 
   findByAge(age, offset, limit): Observable<FilteredUsersProfile | {}> {
     if (!parseInt(age.trim())) {
-      return  Observable.empty();
+      return of([]);
     }
 
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?age=${age}&&offset=${offset}&&limit=${limit}`).pipe(
       tap(_ => console.log(`found users-profile by "${age}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})`, ))
+      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})` ))
     );
   }
 
   findByGender(gender, offset, limit): Observable<FilteredUsersProfile | {}> {
     if (!gender.trim()) {
-      return Observable.empty();
+      return of([]);
     }
 
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?gender=${gender}&&offset=${offset}&&limit=${limit}`).pipe(
       tap(_ => console.log(`found users-profile by "${gender}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${gender})`, ))
+      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${gender})` ))
     );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.log(`${operation} failed: status - ${error.status}, message - ${error.message}`);
-      return Observable.empty();
+      return of(result as T);
     };
   }
 }

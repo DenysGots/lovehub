@@ -6,6 +6,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
+import {catchError, tap} from 'rxjs/operators';
+import {FilteredUsersProfile} from '../services/users-profile.service';
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
@@ -17,10 +19,10 @@ export class ResponseInterceptor implements HttpInterceptor {
       if (err instanceof HttpErrorResponse) {
         if (err['status'] === 401 || err['status'] === 403) {
           this.authErrorHandlerService.handleError(err);
-          return Observable.empty();
         }
         return Observable.of(err);
       }
     });
   }
+
 }
