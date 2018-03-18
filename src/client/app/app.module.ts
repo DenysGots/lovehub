@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { routes } from './app.routing';
 
@@ -97,7 +98,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCdhaZA2fOUM-rLoI95dNDssEdiaGiLDtM'
-    })
+    }),
+    ChartsModule
   ],
   providers: [
     NavigationService,
