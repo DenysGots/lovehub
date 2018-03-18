@@ -1,48 +1,51 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import * as io from 'socket.io-client';
+
+interface CurrentUser {
+  userId: number;
+  firstName: string;
+  lastName: string;
+  role: string;
+}
 
 @Injectable()
 export class NotificationsService {
-  private serverURL = '';
+  private serverURL = 'http://localhost:5400';  // TODO: change on server's url change
   private socket = io(this.serverURL);
 
-  constructor() {
-    this.socket.on('receive-notification', (data) => {
-      console.log(data);
-    });
+  public currentUser = {} as CurrentUser;
 
-    this.socket.on('WORKING', (data) => {
-      console.log(data);
-    });
+  constructor() {
   }
 
-  sendMessage(message) {
-    this.socket.emit('send-notification', message);
-    console.log(this.socket);
+  sendMessage(receiverUserId) {
+    this.socket.emit('send-notification', receiverUserId);
   }
 
   getMessages() {
-    const observable = new Observable(observer => {
+    return new Observable(observer => {
+      this.socket.on('connect', () => {
+        this.socket.emit('user-parameters', this.currentUser);
+      });
+
+      this.socket.on('connection-successful', () => {
+        console.log('Connected to server via websocket');
+      });
+
       this.socket.on('receive-notification', (data) => {
         console.log(data);
-
         observer.next(data);
       });
 
-      this.socket.on('WORKING', (data) => {
-        console.log(data);
+      this.socket.on('disconnect', () => {
+        this.socket.emit('user-disconnected');
       });
 
       return () => {
         this.socket.disconnect();
       };
     });
-
-    return observable;
   }
 
 }
