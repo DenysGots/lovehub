@@ -1,6 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
 
 import { NotificationsService } from '../../services/notifications.service';
 
@@ -8,6 +6,13 @@ interface Message {
   user: string;
   isHidden: boolean;
   isShifted: boolean;
+}
+
+interface CurrentUser {
+  userId: number;
+  firstName: string;
+  lastName: string;
+  role: string;
 }
 
 @Component({
@@ -24,6 +29,12 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     isHidden: true,
     minHeight: '0'
   };
+  currentUser: CurrentUser = {
+    userId: 1234,
+    firstName: 'User_1',
+    lastName: 'User_1',
+    role: 'User'
+  };
 
   constructor(private notificationsService: NotificationsService) {
   }
@@ -32,14 +43,20 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     this.connection = this.notificationsService.getMessages().subscribe(message => {
       this.handleMessages(message);
     });
+
+    // TODO: acquire current logged user parameters with some service and save them to this.currentUser
+
+    this.notificationsService.currentUser = this.currentUser;
   }
 
   ngOnDestroy() {
     this.connection.unsubscribe();
   }
 
-  sendLike(message): void {
-    this.notificationsService.sendMessage(message);
+  // Must receive receiver user id somehow
+  sendLike(receiverUserId): void {
+    // TODO: get receiverUserId from user's profile URL
+    this.notificationsService.sendMessage(receiverUserId);
   }
 
   closeNotificationsList(): void {
@@ -49,29 +66,22 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   handleMessages(message): void {
     const messages = this.messages;
+    const randomSequence = (Math.round(Math.random() * 1000000)).toString(); // For testing purposes only, TODO: delete
 
     let currentMessage = {} as Message;
 
-    const randomSequence = (Math.round(Math.random() * 1000000)).toString();      // TODO: delete
-
     messages.push(<Message>{
-      user: randomSequence,     // TODO: change "rand" to "message"
+      user: randomSequence,                           // TODO: change to 'message'
       isHidden: true,
       isShifted: true
     });
 
     for (let i = 0; i < messages.length; i += 1) {
-      if (messages[i]['user'] === randomSequence) {
+      if (messages[i]['user'] === randomSequence) {   // TODO: change to 'message'
         currentMessage = messages[i];
         break;
       }
     }
-
-    // if (this.notificationsList.isHidden) {
-    //   setTimeout(() => {
-    //     this.notificationsList.isHidden = false;
-    //   }, 0);
-    // }
 
     if (this.notificationsList.isHidden) {
       this.notificationsList.isHidden = false;

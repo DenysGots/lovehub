@@ -12,11 +12,12 @@
 }
 
 @mixin remove-default-element-display {
-  -webkit-appearance: none;
-  -ms-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
   appearance: none;
   outline: none;
+  text-decoration: none;
 }
 
 @mixin forbidTextSelection {
@@ -46,11 +47,15 @@ $color_9: #adadad;
 
 $color_10: #ef233c;
 
-$box-shadow_1: 0 3px 5px 0 rgba(0, 0, 0, 0.6);
+$color_11: rgba(255, 255, 255, 0.65);
+
+$color_12: rgba(169, 169, 169, 0.65);
+
+$box-shadow_1: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
 
 .main {
   @include forbidTextSelection;
-  background-color: $color_3;
+  background-color: $color_11;
   border-radius: 2px;
   bottom: 10px;
   box-shadow: $box-shadow_1;
@@ -83,13 +88,13 @@ $box-shadow_1: 0 3px 5px 0 rgba(0, 0, 0, 0.6);
 
 .header {
   @include apply-flex(flex-end, center, center);
-  background-color: $color_5;
+  background-color: $color_12;
 }
 
 .button {
   @include forbidTextSelection;
   @include remove-default-element-display;
-  background-color: $color_3;
+  background-color: $color_11;
   border-radius: 50%;
   border: 1px solid $color_7;
   color: $color_4;
@@ -166,6 +171,7 @@ $box-shadow_1: 0 3px 5px 0 rgba(0, 0, 0, 0.6);
 .section-hidden,
 .notification-hidden {
   border: none;
+  box-shadow: none;
   height: 0;
   margin: 0;
   min-height: 0;
@@ -175,7 +181,6 @@ $box-shadow_1: 0 3px 5px 0 rgba(0, 0, 0, 0.6);
 .notification-shifted {
   left: calc(100% + 1px);
 }
-
 
 // "Like" Button. For "Put a Like => Get Notification" testing purposes only. TODO: delete
 .like {
