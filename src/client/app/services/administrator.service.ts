@@ -13,6 +13,8 @@ const httpOptions = {
 export class AdministratorService {
   private isVisible = true;
   private usersList: any = {};
+  private usersData: any = {};
+  private currentUser: any = {};
   private getUsersOptions: any = {};
   private updateUsersOptions: any = {};
   private serverURL = 'api/administrator';
@@ -52,9 +54,13 @@ export class AdministratorService {
 
   private isVisibleSource = new BehaviorSubject<boolean>(this.isVisible);
   private receivedUsersList = new BehaviorSubject<any>(this.usersList);
+  private receivedUsersData = new BehaviorSubject<any>(this.usersData);
+  private receivedCurrentUserData = new BehaviorSubject<any>(this.currentUser);
 
   navBarState = this.isVisibleSource.asObservable();
   receivedUsers = this.receivedUsersList.asObservable();
+  receivedData = this.receivedUsersData.asObservable();
+  receivedCurrentUser = this.receivedCurrentUserData.asObservable();
 
   constructor(private http: HttpClient) {
   }
@@ -64,12 +70,17 @@ export class AdministratorService {
     this.isVisibleSource.next(this.isVisible);
   }
 
+  getCurrentUserParameters(currentUserId): any {
+    return this.http.get((this.serverURL + ':' + currentUserId), httpOptions)
+      .subscribe(response => {
+        this.receivedCurrentUserData.next(response);
+      });
+  }
+
   // Get usersList from server according to the specified view parameters, on startup with default parameters
   getUsersEnquiryRequest(enquiry?): any {
     if (enquiry) {
       this.getUsersOptions = enquiry;
-    } else {
-      console.log('On DB update');
     }
 
     return this.http.post(this.serverURL, JSON.stringify(this.getUsersOptions), httpOptions)
@@ -82,6 +93,14 @@ export class AdministratorService {
 
     this.http.patch(this.serverURL, JSON.stringify(this.updateUsersOptions), httpOptions)
       .subscribe(next => this.getUsersEnquiryRequest());
+  }
+
+  // Get site statistics for administrator dashboard view
+  getStatistics(): any {
+    return this.http.get(this.serverURL, httpOptions)
+      .subscribe(response => {
+        this.receivedUsersData.next(response);
+      });
   }
 
 }

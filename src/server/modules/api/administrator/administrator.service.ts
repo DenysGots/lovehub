@@ -1,9 +1,41 @@
 import { Component, Inject } from '@nestjs/common';
 
-import { usersList } from './mock-users';   // TODO: delete when ready
-
 import { UserProfile } from '../users-profile/user-profile.entity';
 import { UserProfileDto } from '../users-profile/dto/user-profile.dto';
+
+import { usersList } from './mock-users';   // TODO: delete when ready
+
+interface GeneralInformation {
+  totalQuantityOfUsers: number;
+  quantityOfFemales: number;
+  quantityOfMales: number;
+  averageTimeSpent: number;
+  difTotalQuantityOfUsers: number;
+  difQuantityOfFemales: number;
+  difQuantityOfMales: number;
+  difAverageTimeSpent: number;
+}
+
+interface UsersByAge {
+  'less than 20': number;
+  'from 20 to 30': number;
+  'from 30 to 40': number;
+  'from 40 to 50': number;
+  'from 50 to 60': number;
+  'greater than 60': number;
+}
+
+interface UsersAttendance {
+  femaleAttendanceByMonth: number[];
+  maleAttendanceByMonth: number[];
+  measurementPeriod: string[];
+}
+
+interface SiteStatistics {
+  generalInformation: GeneralInformation;
+  usersByAge: UsersByAge;
+  usersAttendance: UsersAttendance;
+}
 
 @Component()
 export class AdministratorServiceComponent {
@@ -157,6 +189,100 @@ export class AdministratorServiceComponent {
         });
         break;
     }
+  }
+
+  // Get user card by user's id
+  async getUser(id) {
+    const users = this.originalUsersList;
+
+    let user;
+    let usersListLength;
+
+    if (this.originalUsersList.length === 0) {
+      await this.getUsers();
+    }
+
+    usersListLength = users.length;
+
+    for (let i = 0; i < usersListLength; i += 1) {
+      if (users[i].id === id) {
+        user = users[i];
+      }
+    }
+
+    return user;
+  }
+
+  // Collect site statistics from admin dashboard
+  async collectSiteStatistics() {
+    const currentDate = Date.now();
+    const statistics: SiteStatistics = {
+      generalInformation: <GeneralInformation>{
+        totalQuantityOfUsers: 0,
+        quantityOfFemales: 0,
+        quantityOfMales: 0,
+        averageTimeSpent: 0,
+        // Mock data, TODO: collect data from DB: users registered/deleted last week/current week
+        difTotalQuantityOfUsers: 4,
+        difQuantityOfFemales: -9,
+        difQuantityOfMales: 12,
+        difAverageTimeSpent: -4
+      },
+      usersByAge: <UsersByAge>{
+        'less than 20': 0,
+        'from 20 to 30': 0,
+        'from 30 to 40': 0,
+        'from 40 to 50': 0,
+        'from 50 to 60': 0,
+        'greater than 60': 0,
+      },
+      // Mock data, TODO: collect data from DB somehow
+      usersAttendance: <UsersAttendance>{
+        femaleAttendanceByMonth: [65, 59, 80, 81, 56, 55, 40],
+        maleAttendanceByMonth: [28, 48, 40, 19, 86, 27, 90],
+        measurementPeriod: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+      }
+    };
+
+    let users;
+    let currentUserAge;
+
+    await this.getUsers();
+
+    users = this.originalUsersList.slice(0);
+
+    statistics.generalInformation.totalQuantityOfUsers = users.length;
+
+    for (let i = 0; i < statistics.generalInformation.totalQuantityOfUsers; i += 1) {
+      if (users[i].gender === 'Female') {
+        statistics.generalInformation.quantityOfFemales += 1;
+      } else {
+        statistics.generalInformation.quantityOfMales += 1;
+      }
+
+      statistics.generalInformation.averageTimeSpent += (currentDate - Date.parse(users[i].registrationDate)) / (1000 * 60 * 60 * 24 * 365);
+
+      currentUserAge = users[i].age;
+
+      if (currentUserAge < 20) {
+        statistics.usersByAge['less than 20'] += 1;
+      } else if (currentUserAge >= 20 && currentUserAge < 30) {
+        statistics.usersByAge['from 20 to 30'] += 1;
+      } else if (currentUserAge >= 30 && currentUserAge < 40) {
+        statistics.usersByAge['from 30 to 40'] += 1;
+      } else if (currentUserAge >= 40 && currentUserAge < 50) {
+        statistics.usersByAge['from 40 to 50'] += 1;
+      } else if (currentUserAge >= 50 && currentUserAge < 60) {
+        statistics.usersByAge['from 50 to 60'] += 1;
+      } else if (currentUserAge >= 60) {
+        statistics.usersByAge['greater than 60'] += 1;
+      }
+    }
+
+    statistics.generalInformation.averageTimeSpent /= statistics.generalInformation.totalQuantityOfUsers;
+    statistics.generalInformation.averageTimeSpent = parseFloat(statistics.generalInformation.averageTimeSpent.toFixed(2));
+
+    return statistics;
   }
 
 }

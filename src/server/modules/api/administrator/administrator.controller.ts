@@ -1,6 +1,5 @@
-import { Body, Controller, Post, Patch } from '@nestjs/common';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Controller, Body, Param, Get, Post, Patch } from '@nestjs/common';
+import { ParseIntPipe } from '@nestjs/common/pipes/parse-int.pipe';
 
 import { AdministratorServiceComponent } from './administrator.service';
 
@@ -8,6 +7,17 @@ import { AdministratorServiceComponent } from './administrator.service';
 export class AdministratorController {
 
   constructor(private readonly administratorService: AdministratorServiceComponent) {
+  }
+
+  @Get('')
+  async getStatitstics() {
+    return await this.administratorService.collectSiteStatistics();
+  }
+
+  @Get(':id')
+  async getUser(@Param('id', new ParseIntPipe()) id) {
+    console.log(id);
+    return await this.administratorService.getUser(id);
   }
 
   @Post('')
