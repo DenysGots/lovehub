@@ -9,6 +9,15 @@
   align-content: $align-content;
 }
 
+@mixin remove-default-element-display {
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  text-decoration: none;
+}
+
 @mixin forbidTextSelection {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -41,6 +50,13 @@ $color_8: #555b6e;
   transition: 0.1s ease-in-out;
   width: 100%;
   z-index: 100;
+}
+
+.link,
+.link:hover,
+.link:active,
+.link:visited {
+  @include remove-default-element-display
 }
 
 .icon-wrapper {

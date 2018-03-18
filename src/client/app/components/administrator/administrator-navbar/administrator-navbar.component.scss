@@ -1,7 +1,5 @@
 /* Navbar section styles */
 
-@import url('https://use.fontawesome.com/releases/v5.0.8/css/all.css');
-
 @mixin apply-flex($justify-content, $align-items, $align-content) {
   display: flex;
   flex-wrap: wrap;

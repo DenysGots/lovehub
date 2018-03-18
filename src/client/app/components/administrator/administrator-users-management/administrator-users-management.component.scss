@@ -1,14 +1,5 @@
 /* Page layout styles */
 
-@import url('https://use.fontawesome.com/releases/v5.0.8/css/all.css');
-
-@mixin grid-area($column-start, $column-end, $row-start, $row-end) {
-  grid-column-start: $column-start;
-  grid-column-end: $column-end;
-  grid-row-start: $row-start;
-  grid-row-end: $row-end;
-}
-
 @mixin apply-flex($justify-content, $align-items, $align-content) {
   display: flex;
   flex-wrap: wrap;
@@ -19,11 +10,12 @@
 }
 
 @mixin remove-default-element-display {
-  -webkit-appearance: none;
-  -ms-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
   appearance: none;
   outline: none;
+  text-decoration: none;
 }
 
 @mixin forbidTextSelection {
@@ -63,83 +55,18 @@ $color_14: #0275d8;
 
 $color_15: #193952;
 
+$color_16: #f1f1f1;
+
 $box-shadow_1: 3px 3px 7px 1px rgba(0, 0, 0, 0.2);
 
 $box-shadow_2: inset 5px 5px 9px rgba(0, 0, 0, 0.6);
 
 $box-shadow_3: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
-/* Desktop page layout */
-
-.main {
-  display: grid;
-  grid-template: auto auto auto / 1fr 6fr;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-}
-
-.admin-navbar {
-  @include grid-area(1, 2, 1, 3);
-  position: relative;
-}
-
-.header {
-  @include grid-area(2, 3, 1, 2);
-  position: relative;
-}
-
-.header-full-screen {
-  @include grid-area(1, 3, 1, 2);
-  transition: ease-in-out 0.1s;
-}
-
-.main-section {
-  @include grid-area(2, 3, 2, 4);
-  position: relative;
-}
-
-.main-section-full-screen {
-  @include grid-area(1, 3, 2, 4);
-  transition: ease-in-out 0.1s;
-}
-
-.footer {
-  @include grid-area(1, 2, 3, 4);
-  position: relative;
-}
-
-/* Mobile page layout */
-
-@media screen and (max-width: 640px) {
-  .main {
-    display: grid;
-    grid-template: auto / 100%;
-  }
-
-  .admin-navbar {
-    @include grid-area(1, 2, 2, 3);
-  }
-
-  .header {
-    @include grid-area(1, 2, 1, 2);
-  }
-
-  .main-section {
-    @include grid-area(1, 2, 3, 4);
-  }
-
-  .footer {
-    @include grid-area(1, 2, 4, 5);
-  }
-}
-
 /* Main section layout and styles */
 
 .main-section {
-  background-color: $color_9;
+  background-color: $color_16;
   min-height: calc(100vh - 105px);
   min-width: 920px;
   overflow-x: hidden;

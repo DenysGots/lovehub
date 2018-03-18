@@ -16,21 +16,20 @@ export class AdministratorHeaderComponent implements OnInit {
 
   currentUser = {
     firstName: '',
-    lastName: ''
+    lastName: '',
+    role: ''
   };
 
   constructor(private administratorService: AdministratorService) {
   }
 
   ngOnInit() {
-    this.administratorService.receivedUsers.subscribe(data => {
-      if (data.currentUser) {
-        this.currentUser = data.currentUser;
-      }
-    });
-
     this.administratorService.navBarState.subscribe(data => {
       return this.mainSectionIsVisible = data;
+    });
+
+    this.administratorService.receivedCurrentUser.subscribe(data => {
+      return this.currentUser = data;
     });
   }
 

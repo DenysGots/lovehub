@@ -10,11 +10,12 @@
 }
 
 @mixin remove-default-element-display {
-  -webkit-appearance: none;
-  -ms-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
   appearance: none;
   outline: none;
+  text-decoration: none;
 }
 
 @mixin forbidTextSelection {
@@ -57,6 +58,14 @@ $color_13: #e6e6e6;
   height: 105px;
   width: 100%;
   z-index: 90;
+}
+
+.link,
+.link:hover,
+.link:active,
+.link:visited {
+  @include remove-default-element-display;
+  color: $color_3;
 }
 
 .text {

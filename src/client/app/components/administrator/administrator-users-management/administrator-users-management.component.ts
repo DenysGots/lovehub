@@ -8,6 +8,7 @@ import { AdministratorService } from '../../../services/administrator.service';
   styleUrls: [
     '../shared/normalize.scss',
     '../shared/default-styles.scss',
+    '../shared/default-layout-styles.scss',
     './administrator-users-management.component.scss']
 })
 export class AdministratorUsersManagementComponent implements OnInit {

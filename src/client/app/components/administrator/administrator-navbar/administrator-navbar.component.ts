@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { NgClass } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
@@ -22,6 +22,7 @@ export class AdministratorNavbarComponent implements OnInit {
   };
 
   currentUser = {
+    userId: 1,        // TODO: get userId on init from URL
     firstName: '',
     lastName: '',
     role: ''
@@ -33,15 +34,16 @@ export class AdministratorNavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.administratorService.receivedUsers.subscribe(data => {
-      if (data.currentUser) {
-        this.currentUser = data.currentUser;
-      }
-    });
-
     this.administratorService.navBarState.subscribe(data => {
       return this.mainSectionIsVisible = data;
     });
+
+    this.administratorService.receivedCurrentUser.subscribe(data => {
+      return this.currentUser = data;
+    });
+
+    // TODO: 500 internal server error
+    // this.administratorService.getCurrentUserParameters(this.currentUser.userId);
   }
 
   adminNavbarHandler(list): void {
