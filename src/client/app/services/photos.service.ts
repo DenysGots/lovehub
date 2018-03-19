@@ -20,13 +20,9 @@ export class PhotosService {
     return this.http.post<any>(url, {data: file}, httpOptions);
   }
 
-  getPhoto(id: string): Observable<any> {
-    const url = 'api/photos/' + id;
+  getPhoto(): Observable<any> {
+    const url = 'api/photos/id';
     return this.http.get<any>(url);
   }
 
-  // getAvatar(): Observable<any> {
-  //   const url = 'api/photos/avatar';
-  //   return this.http.get<any>(url);
-  // }
 }
