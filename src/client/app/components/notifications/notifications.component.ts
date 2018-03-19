@@ -19,6 +19,8 @@ interface CurrentUser {
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: [
+    '../administrator/shared/normalize.scss',
+    '../administrator/shared/default-styles.scss',
     './notifications.component.scss'
   ]
 })

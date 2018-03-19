@@ -40,8 +40,16 @@ interface SiteStatistics {
 @Component()
 export class AdministratorServiceComponent {
   originalUsersList: any[] = [];
+  currentUser = {} as UserProfile;
 
   constructor(@Inject('UsersProfileRepository') private readonly userProfileRepository: typeof UserProfile) {}
+
+  // Get user from DB
+  async getUser(id: number) {
+    return await this.userProfileRepository
+      .findById<UserProfile>(id)
+      .then(result => this.currentUser = result);
+  }
 
   // Get users from DB
   async getUsers() {
@@ -85,7 +93,7 @@ export class AdministratorServiceComponent {
 
     processedUsersList = this.originalUsersList.slice(0);
 
-    for (const user of processedUsersList) {
+    for (const user of processedUsersList) {    // TODO: delete and replace with nav bar component get current user method
       if (user.role === 'Administrator') {
         processedResponse.currentUser = user;
       }
@@ -189,28 +197,6 @@ export class AdministratorServiceComponent {
         });
         break;
     }
-  }
-
-  // Get user card by user's id
-  async getUser(id) {
-    const users = this.originalUsersList;
-
-    let user;
-    let usersListLength;
-
-    if (this.originalUsersList.length === 0) {
-      await this.getUsers();
-    }
-
-    usersListLength = users.length;
-
-    for (let i = 0; i < usersListLength; i += 1) {
-      if (users[i].id === id) {
-        user = users[i];
-      }
-    }
-
-    return user;
   }
 
   // Collect site statistics from admin dashboard

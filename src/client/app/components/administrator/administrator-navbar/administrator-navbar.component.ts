@@ -38,12 +38,11 @@ export class AdministratorNavbarComponent implements OnInit {
       return this.mainSectionIsVisible = data;
     });
 
+    this.administratorService.getCurrentUserParameters(this.currentUser.userId);
+
     this.administratorService.receivedCurrentUser.subscribe(data => {
       return this.currentUser = data;
     });
-
-    // TODO: 500 internal server error
-    // this.administratorService.getCurrentUserParameters(this.currentUser.userId);
   }
 
   adminNavbarHandler(list): void {

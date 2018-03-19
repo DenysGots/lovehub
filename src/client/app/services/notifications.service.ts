@@ -12,7 +12,7 @@ interface CurrentUser {
 @Injectable()
 export class NotificationsService {
   private serverURL = 'http://localhost:5400';  // TODO: change on server's url change
-  private socket = io(this.serverURL);
+  private socket = io(this.serverURL);          // TODO: add some namespace to URL for notifications WS connection
 
   public currentUser = {} as CurrentUser;
 
@@ -34,7 +34,6 @@ export class NotificationsService {
       });
 
       this.socket.on('receive-notification', (data) => {
-        console.log(data);
         observer.next(data);
       });
 

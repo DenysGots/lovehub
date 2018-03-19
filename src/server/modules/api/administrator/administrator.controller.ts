@@ -16,8 +16,9 @@ export class AdministratorController {
 
   @Get(':id')
   async getUser(@Param('id', new ParseIntPipe()) id) {
-    console.log(id);
-    return await this.administratorService.getUser(id);
+    await this.administratorService.getUser(id);
+
+    return this.administratorService.currentUser;
   }
 
   @Post('')
