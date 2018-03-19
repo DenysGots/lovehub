@@ -16,6 +16,7 @@ import { RequestCache, RequestCacheWithMap } from './services/request-cashe.serv
 import { httpInterceptorProviders } from './http-interceptors';
 import { AdministratorService } from './services/administrator.service';
 import { NotificationsService } from './services/notifications.service';
+import { InterestsService } from './services/interests.service';
 
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 
@@ -50,6 +51,7 @@ import { AdministratorNavbarComponent } from './components/administrator/adminis
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { InterestsComponent } from './components/interests/interests.component';
 
 // test
 
@@ -83,7 +85,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     AdministratorNavbarComponent,
     AdministratorDashboardComponent,
     AdministratorUsersManagementComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    InterestsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -113,7 +116,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     { provide: RequestCache, useClass: RequestCacheWithMap },
     httpInterceptorProviders,
     AdministratorService,
-    NotificationsService
+    NotificationsService,
+    InterestsService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,42 @@
+<main class="main">
+  <header class="header">
+
+  </header>
+
+  <section class="interests-section">
+    <div class="new-interest">
+      <form class="new-interest-form">
+        <input type="text">
+
+        <div
+          class="hint"
+          [ngClass]="{'hidden': !userTypingNewInterest}"
+          (click)="addInterestFromHint()">
+        </div>
+
+        <input type="submit">
+      </form>
+    </div>
+
+    <div class="interest-list">
+      <div class="interest">
+        <span>reading</span>
+
+        <button
+          class="button"
+          [ngClass]="{'hidden': !editMode}"
+          (click)="deleteInterest()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="interest">
+        <span>football</span>
+      </div>
+
+      <div class="interest">
+        <span>tv watching</span>
+      </div>
+    </div>
+  </section>
+</main>
