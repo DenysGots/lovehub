@@ -14,6 +14,9 @@ import { UsersProfileService } from './services/users-profile.service';
 import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
 import { httpInterceptorProviders } from './http-interceptors';
 
+import { ChatService } from './services/chat.service';
+import { WebsocketService } from './services/websocket.service';
+
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 
 import { AppComponent } from './app.component';
@@ -97,6 +100,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     WindowService,
     UsersService,
     UsersProfileService,
+    WebsocketService,
+    ChatService,
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },

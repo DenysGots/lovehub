@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import Chat from '../../models/chat';
 import { WindowService } from '../../services/window.service';
-import { Subscription } from 'rxjs/Subscription';
+import { ChatService } from '../../services/chat.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-chat',
@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ChatComponent implements OnInit {
   height = 100;
-  dialog = [];
   chats = [
     new Chat(
       1,
@@ -20,12 +19,20 @@ export class ChatComponent implements OnInit {
       'Hello',
       [
         {
-          me: false,
-          text: 'Hello'
+          user: 'Ivan Ivanov',
+          message: 'Hello'
         },
         {
-          me: true,
-          text: 'Hi'
+          user: 'Petya Petrov',
+          message: 'Hi'
+        },
+        {
+          user: 'Vasya Pupkin',
+          message: 'Hi'
+        },
+        {
+          user: 'Ivan Ivanov',
+          message: 'Hello'
         }
       ]
     ),
@@ -33,48 +40,73 @@ export class ChatComponent implements OnInit {
       2,
       'Fallon Mcsorley',
       'https://static.pexels.com/photos/450212/pexels-photo-450212.jpeg',
-      'Hello'
+      'Hello',
+      []
     ),
     new Chat(
       3,
       'Otilia Daws',
       'https://cdn.vox-cdn.com/thumbor/q60YIhtwWgRaIv_FDKx55UgICRw=/0x0:999x749/1200x800/filters:focal(0x0:999x749)/cdn.vox-cdn.com/uploads/chorus_image/image/49439009/millennials.0.jpg',
-      'Hello'
+      'Hello',
+      []
     ),
     new Chat(
       4,
       'Angelina Jolie',
       'http://cdn.playbuzz.com/cdn/f761a022-4c56-4b17-8aa4-b93db29001c3/de3a2593-5765-492e-8069-84e4ebf73347.jpg',
-      'Hello'
+      'Hello',
+      []
     ),
     new Chat(
       5,
       'Cassy Cuneo',
-      'http://st.mngbcn.com/menus/999/999/sections_rebajas_step4/rebajas_he/man.jpg?ts=1501759791000&imwidth=312&imdensity=1',
-      'Hello'
+      'http://st.mngbcn.com/usernus/999/999/sections_rebajas_step4/rebajas_he/man.jpg?ts=1501759791000&imwidth=312&imdensity=1',
+      'Hello',
+      []
     ),
     new Chat(
       4,
       'Angelina Jolie',
       'http://cdn.playbuzz.com/cdn/f761a022-4c56-4b17-8aa4-b93db29001c3/de3a2593-5765-492e-8069-84e4ebf73347.jpg',
-      'Hello'
+      'Hello',
+      []
     ),
     new Chat(
       5,
       'Cassy Cuneo',
-      'http://st.mngbcn.com/menus/999/999/sections_rebajas_step4/rebajas_he/man.jpg?ts=1501759791000&imwidth=312&imdensity=1',
-      'Hello'
+      'http://st.mngbcn.com/usernus/999/999/sections_rebajas_step4/rebajas_he/man.jpg?ts=1501759791000&imwidth=312&imdensity=1',
+      'Hello',
+      []
     ),
   ];
-  public subscription: Subscription;
+  messages = [];
 
-  constructor(private windowService: WindowService,) {
-    this.height = windowService.freeHeight;
+  constructor(
+    private windowService: WindowService,
+    private chat: ChatService,
+    private http: HttpClient
+  ) {
+    this.height = this.windowService.freeHeight;
+   }
+  
+  send(){
+    this.chat.sendMessage({user: 'Tanya Marych', userssage: 'Love it'});
   }
 
-  onChatChecked(messages){
-    this.dialog = messages;
+  onChatChecked(userssages){
+    // this.dialog = userssages;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+  
+    this.chat.messages.subscribe(msg => {
+      console.log('msg', msg);
+      this.messages = [...this.messages, JSON.parse(msg)];
+    });
+
+    this.http.get<any[]>('api/messages').subscribe((data) => {
+      this.messages = data;
+      console.log('!!data', data);
+    });
+  }
 }

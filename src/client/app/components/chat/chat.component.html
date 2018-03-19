@@ -1,6 +1,8 @@
+{{this.messages}}
 <div class="container main" [ngStyle]="{'height.px': height}"> 
+  <input type="button" value="Click" (click)="send()">
   <div class="row h-100 chat-container">
-    <div class="col-md-4 col-sm-5 col-xs-12 chat-list">
+    <div class="col-md-4 col-sm-5 col-xs-12 chat-list scrollbar">
       <chat-user
         *ngFor="let chat of chats"
         (onChatChecked)="onChatChecked($event)"
@@ -8,7 +10,7 @@
       ></chat-user>
     </div>
     <div class="col-md-8 col-sm-7 d-none d-sm-block message-list">
-      <chat-dialog [messages]="dialog"></chat-dialog>
+      <chat-dialog [messages]="messages"></chat-dialog>
     </div>
   </div>
 </div>
