@@ -1,6 +1,5 @@
-import {Controller, Get, Post, Delete, Body, Param, HttpCode, Request, Response, HttpStatus, Headers} from '@nestjs/common';
+import { Controller, Get, Post, Delete, Body, Param, HttpCode, Request, Response, HttpStatus, Headers } from '@nestjs/common';
 import { PhotosService } from './photos.service';
-import { HttpExceptionFilter } from '../../filters/http-exception.filter';
 import { CreatePhotoDto } from './dto/create-photo.dto';
 
 
@@ -9,8 +8,6 @@ export class PhotosController {
 
   constructor(private readonly photosService: PhotosService) {
   }
-
-
 
   @HttpCode(201)
   @Post()
@@ -28,11 +25,19 @@ export class PhotosController {
     return await src;
   }
 
-  // @HttpCode(200)
-  // @Get('/avatar')
-  // async findAvatar(@Request() req): Promise<string> {
-  //   const src = this.photosService.findById(params.id);
-  //   return await src;
-  // }
+  @HttpCode(200)
+  // @Headers('image/png')
+  @Get()
+  async findAll(@Param() params): Promise<any[]> {
+    const src = this.photosService.findAll();
+    return await src;
+  }
+
+  @HttpCode(204)
+  @Delete(':id')
+  async removeById(@Param() params): Promise<{statusCode: number}> {
+    const affected = await this.photosService.remove(params.id);
+    return {statusCode: affected};
+  }
 
 }

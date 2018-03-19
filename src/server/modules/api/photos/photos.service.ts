@@ -1,5 +1,4 @@
 import { Model } from 'mongoose';
-import { Types } from 'mongoose';
 import { Component, Inject } from '@nestjs/common';
 import { Photo } from './interfaces/photo.interface';
 import { CreatePhotoDto } from './dto/create-photo.dto';
@@ -14,6 +13,10 @@ export class PhotosService {
     return await createdPhoto.save();
   }
 
+  async findAll(): Promise<Photo[]> {
+    return await this.photoModel.find();
+  }
+
   async findById(id: string): Promise<string> {
     try {
       if (id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -25,4 +28,9 @@ export class PhotosService {
       throw error;
     }
   }
+
+  async remove(id: string): Promise<number> {
+    return await this.photoModel.deleteOne({where: {id: id}});
+  }
+
 }

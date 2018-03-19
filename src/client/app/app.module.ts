@@ -44,6 +44,10 @@ import {MatchingService} from './services/matching.service';
 import { PhotosService } from './services/photos.service';
 import { PhotosComponent } from './components/photos/photos.component';
 
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { LeftPartComponent } from './components/profile-page/left-part/left-part.component';
+import { RightPartComponent } from './components/profile-page/right-part/right-part.component';
+
 // test
 
 import { IUserStorage } from './services/IUserStorage';
@@ -72,6 +76,9 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     UsersProfileOrderByPipe,
     UserMatchComponent,
     PhotosComponent,
+    ProfilePageComponent,
+    LeftPartComponent,
+    RightPartComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
