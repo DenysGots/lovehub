@@ -6,6 +6,7 @@ import { Rating } from '../users-profile/rating.entity';
 import { Location } from '../users-profile/location.entity';
 import { UserProfileInterest } from '../users-profile/user-profile-interest.entity';
 import { Interest } from '../users-profile/interest.entity';
+import { Chat } from '../chats/chat.entity';
 
 export const databaseProviders = [
   {
@@ -25,7 +26,7 @@ export const databaseProviders = [
           idle: 10000
         },
       });
-      sequelize.addModels([User, UserProfile, Rating, Location, Interest, UserProfileInterest]);
+      sequelize.addModels([User, UserProfile, Rating, Location, Interest, UserProfileInterest, Chat]);
       await sequelize.sync();
       return sequelize;
     },
