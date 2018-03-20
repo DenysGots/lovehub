@@ -30,10 +30,7 @@ export class WebsocketService {
           this.socket.disconnect();
         }
     });
-    
-    // We define our Observer which will listen to messages
-    // from our other components and send messages back to our
-    // socket server whenever the `next()` method is called.
+
     let observer = {
         next: (data: any) => {
             this.socket.emit(data.event, JSON.stringify(data));

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HttpHandler} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -13,6 +13,10 @@ import { UsersService } from './services/users.service';
 import { UsersProfileService } from './services/users-profile.service';
 import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
 import { httpInterceptorProviders } from './http-interceptors';
+import { AdministratorService } from './services/administrator.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { AuthErrorHandlerService } from './services/auth-error-handler.service';
 
 import { ChatService } from './services/chat.service';
 import { WebsocketService } from './services/websocket.service';
@@ -32,25 +36,32 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
-import {LoginComponent} from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationService } from './services/navigation.service';
 import { LoginService } from './services/login.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { SliderComponent } from './components/home-slider/slider.component';
 import { PagerComponent } from './components/pager/pager.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
 import {MatchingService} from './services/matching.service';
 
-// test
+import { AdministratorFooterComponent } from './components/administrator/administrator-footer/administrator-footer.component';
+import { AdministratorHeaderComponent } from './components/administrator/administrator-header/administrator-header.component';
+import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
+import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
+import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatUserComponent } from './components/chat-user/chat-user.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import {providerCustomHttpClient} from './http-interceptors/providers';
+import {CustomHttpClient} from './http-interceptors/custom-http-client';
 
 @NgModule({
   declarations: [
@@ -77,6 +88,12 @@ import { DialogComponent } from './components/dialog/dialog.component';
     ChatComponent,
     ChatUserComponent,
     DialogComponent,
+    AdministratorFooterComponent,
+    AdministratorHeaderComponent,
+    AdministratorNavbarComponent,
+    AdministratorDashboardComponent,
+    AdministratorUsersManagementComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -105,7 +122,12 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
-    httpInterceptorProviders
+    { provide: CustomHttpClient, useFactory: providerCustomHttpClient, deps: [HttpHandler, AuthErrorHandlerService]},
+    httpInterceptorProviders,
+    AuthService,
+    AuthGuard,
+    AuthErrorHandlerService,
+    AdministratorService
   ],
   bootstrap: [AppComponent]
 })

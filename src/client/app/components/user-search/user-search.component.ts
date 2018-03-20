@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -16,9 +16,9 @@ import { UserProfile } from '../../models/user-profile';
   moduleId: module.id,
   selector: 'app-user-search',
   templateUrl: 'user-search.component.html',
-  styleUrls: ['user-search.component.scss']
+  styleUrls: ['user-search.component.scss'],
 })
-export class UserSearchComponent implements OnInit {
+export class UserSearchComponent implements OnInit, OnChanges {
 
   users: UserProfile[];
   searchFilter: FilterParam;
@@ -32,13 +32,17 @@ export class UserSearchComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 6;
 
+  isDesc = false;
+  property: string;
+  direction: number;
+
   private searchTerms = new Subject<SearchParam>();
 
   constructor(private usersProfileService: UsersProfileService) {
     this.searchFilter = new FilterParam('Name', 'search', '', 'Enter a favourite name..');
     this.ageFilter = new FilterParam('Age', 'range', '0', '');
-    this.genderMFilter = new FilterParam('Male', 'radio', 'male', '');
-    this.genderFFilter = new FilterParam('Female', 'radio', 'female', '');
+    this.genderMFilter = new FilterParam('Male', 'radio', 'MALE', '');
+    this.genderFFilter = new FilterParam('Female', 'radio', 'FEMALE', '');
   }
 
   ngOnInit(): void {
@@ -50,6 +54,16 @@ export class UserSearchComponent implements OnInit {
       .subscribe((term) => {
         this.fetchData()
       });
+  }
+
+  ngOnChanges() {
+    /*
+    this.setDefaultParamService.getValue().subscribe(type => {
+      if(type == 'search') {
+        this.ageFilter.value = '0';
+      }
+    });
+    */
   }
 
   search(term: SearchParam): void {

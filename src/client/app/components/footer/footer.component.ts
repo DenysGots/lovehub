@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 import { WindowService } from '../../services/window.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -17,7 +16,11 @@ export class FooterComponent implements OnInit {
     mail: 'write@us.now'
   };
 
-  constructor(private windowService: WindowService) { }
+  router: any;
+
+  constructor(_router: Router, private windowService: WindowService) {
+    this.router = _router;
+  }
 
   ngOnInit() {}
 

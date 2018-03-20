@@ -5,6 +5,8 @@ import { StaticModule } from './modules/static/static.module';
 import { HomepageModule } from './modules/homepage/homepage.module';
 import { MatchingModule } from './modules/matching/matching.module';
 import { ChatModule } from './modules/chat/chat.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { AdministratorModule } from './modules/api/administrator/administrator.module';
 
 @Module({
   imports: [
@@ -12,7 +14,9 @@ import { ChatModule } from './modules/chat/chat.module';
     HomepageModule,
     MatchingModule,
     ChatModule,
+    AuthModule,
     StaticModule,
+    AdministratorModule
   ],
   controllers: [],
   components: [],
