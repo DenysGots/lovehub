@@ -25,6 +25,10 @@ export class UsersService {
     return await this.userRepository.findById<User>(id, {include: [UserProfile]});
   }
 
+  async findByEmailAndPassword(email: string, password: string): Promise<User> {
+    return await this.userRepository.findOne({where: {email: email, password: password}});
+  }
+
   async remove(id: number): Promise<number> {
     return await this.userRepository.destroy({where: {id: id}});
   }

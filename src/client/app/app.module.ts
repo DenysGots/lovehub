@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HttpHandler} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -14,6 +14,9 @@ import { UsersProfileService } from './services/users-profile.service';
 import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
 import { httpInterceptorProviders } from './http-interceptors';
 import { AdministratorService } from './services/administrator.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { AuthErrorHandlerService } from './services/auth-error-handler.service';
 
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 
@@ -30,13 +33,14 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
-import {LoginComponent} from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NavigationService } from './services/navigation.service';
 import { LoginService } from './services/login.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { SliderComponent } from './components/home-slider/slider.component';
 import { PagerComponent } from './components/pager/pager.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
@@ -48,10 +52,10 @@ import { AdministratorNavbarComponent } from './components/administrator/adminis
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 
-// test
-
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
+import {providerCustomHttpClient} from './http-interceptors/providers';
+import {CustomHttpClient} from './http-interceptors/custom-http-client';
 
 @NgModule({
   declarations: [
@@ -79,7 +83,8 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     AdministratorHeaderComponent,
     AdministratorNavbarComponent,
     AdministratorDashboardComponent,
-    AdministratorUsersManagementComponent
+    AdministratorUsersManagementComponent,
+    ForbiddenComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -106,7 +111,11 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
+    { provide: CustomHttpClient, useFactory: providerCustomHttpClient, deps: [HttpHandler, AuthErrorHandlerService]},
     httpInterceptorProviders,
+    AuthService,
+    AuthGuard,
+    AuthErrorHandlerService,
     AdministratorService
   ],
   bootstrap: [AppComponent]

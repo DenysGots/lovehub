@@ -1,16 +1,17 @@
 import { Catch, ExceptionFilter, HttpException } from '@nestjs/common';
+import {MessageCodeError} from '../error/MessageCodeError';
 
-@Catch(HttpException)
+@Catch()
 export class HttpExceptionFilter implements ExceptionFilter {
 
-  catch(exception: HttpException, response: any): any {
-    const status = exception.getStatus();
+  catch(exception: MessageCodeError, response: any): any {
+    const status = exception.httpStatus;
 
     response
       .status(status)
       .json({
         statusCode: status,
-        message: `Exception has been caught custom's filter`
+        message: exception.errorMessage
       });
   }
 }

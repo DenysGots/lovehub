@@ -1,10 +1,13 @@
+import { SEX } from '../sex';
+import { ORIENTATION } from '../orientation';
+import { PREFERENCE } from '../preference';
+
 export class UserProfileDto {
   readonly firstName: string;
   readonly lastName: string;
   readonly age: number;
-  readonly gender: string;
+  readonly sex: SEX;
+  readonly preference: PREFERENCE;
+  readonly orientation: ORIENTATION;
   readonly userId: number;
-  readonly sex: string;
-  readonly preference: string;
-  readonly orientation: string;
 }
