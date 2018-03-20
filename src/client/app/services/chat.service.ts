@@ -4,11 +4,11 @@ import { Observable, Subject } from 'rxjs/Rx';
 
 @Injectable()
 export class ChatService {
-  
-  messages: Subject<any>;
+  currentChatId: number;
+  socket: Subject<any>;
   
   constructor(private wsService: WebsocketService) {
-    this.messages = <Subject<any>>wsService
+    this.socket = <Subject<any>>wsService
       .connect()
       .map((response: any): any => {
         return response;
@@ -16,13 +16,20 @@ export class ChatService {
    }
   
   // Our simplified interface for sending
-  // messages back to our socket.io server
+  // socket back to our socket.io server
   getDefaultData() {
-    this.messages.next({event: 'getDefault', data: {}});
+    this.socket.next({event: 'getDefault', data: {}});
   }
 
   sendMessage(data){
-    this.messages.next({event: 'send', data});
+    if(this.currentChatId) {
+      this.socket.next({event: 'send', data, chatId: this.currentChatId});
+    }
+  }
+
+  setChat(chatId: number){
+    this.socket.next({event: 'changeRoom', prevChatId: this.currentChatId, chatId});
+    this.currentChatId = chatId;
   }
 
 }

@@ -36,12 +36,7 @@ export class WebsocketService {
     // socket server whenever the `next()` method is called.
     let observer = {
         next: (data: any) => {
-          console.log('data', data, !data.data);
-          if(!data.data){
-            return data;
-          } else{
-            this.socket.emit(data.event, JSON.stringify(data.data));
-          }
+            this.socket.emit(data.event, JSON.stringify(data));
         },
     };
 

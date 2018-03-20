@@ -1,15 +1,15 @@
-<div class="container scrollbar p-2 d-flex flex-row" (click)="checkChat(chat.messages)">
+<div class="container scrollbar p-2 d-flex flex-row" (click)="checkChat(chat.chatId)">
   <div class="avatar-container d-inline-flex mr-3">
     <img
-      [src]="chat.user_image"
-      [alt]="chat.user_name"
+      [src]="chat.avatar"
+      [alt]="chat.username"
       class="avatar"
     />
   </div>
   <div class="info-container d-inline-flex">
     <div class="d-flex flex-column justify-content-around">
-        <p class="name">{{chat.user_name}}</p>
-        <p class="message">{{chat.last_message}}</p>
+        <p class="name">{{chat.username}}</p>
+        <p class="message">{{chat.lastMessage}}</p>
     </div>
   </div>
 </div>

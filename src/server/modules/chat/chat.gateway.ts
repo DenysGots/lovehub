@@ -1,40 +1,24 @@
-import {
-  WebSocketGateway,
-  SubscribeMessage,
-  WsResponse,
-  WebSocketServer,
-  WsException,
-  OnGatewayConnection,
-  OnGatewayDisconnect,
-} from '@nestjs/websockets';
-import { Observable } from 'rxjs/Observable';
+import { WebSocketGateway, SubscribeMessage } from '@nestjs/websockets';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
-@WebSocketGateway()
-export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect{
-  connections = [];
+@WebSocketGateway({namespace: 'chat'})
+export class ChatGateway{
+  @SubscribeMessage('changeRoom')
+  changeRoom(client, data) {
+    const chat = JSON.parse(data);
 
-  handleConnection(socket){
-    this.connections.push(socket);
-  }
-
-  handleDisconnect(socket){
-    this.connections.splice(this.connections.indexOf(socket), 1);
+    client.leave(chat.prevChatId);
+    client.join(chat.chatId);
   }
 
   @SubscribeMessage('send')
   getNewMessage(client, data) {
-    const res = { data, event: 'resFromServer' };
+    const parsedData = JSON.parse(data);
+    const res = parsedData.data;
 
-    console.log('con', this.connections.length, res)
-    this.connections.forEach(socket => socket.emit('resFromServer',data));
+    client.to(parsedData.chatId).emit('resFromServer', res);
+    
+    return { event: 'resFromServer', data: res};
   }
-
-  // onEvent(client, data): Observable<WsResponse<number>> {
-  //   const event = 'events';
-  //   const response = [1, 2, 3];
-
-  //   return Observable.from(response).map(res => ({ event, data: res }));
-  // }
 }

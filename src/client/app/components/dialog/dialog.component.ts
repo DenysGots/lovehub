@@ -8,9 +8,9 @@ import { ChatService } from '../../services/chat.service';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
-  user = {
+  sending = {
     message: '',
-    name: 'Ivan Ivanov'
+    user: 'Ivan Ivanov'
   }
 
   @Input() messages: Array<object>;
@@ -18,11 +18,11 @@ export class DialogComponent implements OnInit {
   constructor( private chat: ChatService) { }
 
   ngOnInit() {
-    this.messages = this.messages.map(mes => ({...mes, me: mes['user'] === this.user.name}))
+    this.messages = this.messages.map(mes => ({...mes, me: mes['user'] === this.sending.user}))
   }
 
   sendMes(mes){
-    this.chat.sendMessage(this.user);
+    this.chat.sendMessage(this.sending);
   }
 
 }

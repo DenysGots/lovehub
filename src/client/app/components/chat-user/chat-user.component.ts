@@ -13,8 +13,7 @@ export class ChatUserComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   checkChat(messages) {
     this.onChatChecked.emit(messages);
