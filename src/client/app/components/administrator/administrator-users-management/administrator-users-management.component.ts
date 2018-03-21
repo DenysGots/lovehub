@@ -16,7 +16,7 @@ export class AdministratorUsersManagementComponent implements OnInit {
   mainSectionIsVisible: boolean;
 
   // Initial options to get usersList from DB
-  // Options changes upon applying sorting/filtering actions in the view
+  // Options change upon applying sorting/filtering actions in the view
   getUsersOptions = {
     userRole: 'any',
     userStatus: 'any',
@@ -68,6 +68,9 @@ export class AdministratorUsersManagementComponent implements OnInit {
   // Fill usersList with data, received from server
   manageUsersListParameters(data): void {
     this.usersList.users = data.users;
+
+    console.log(this.usersList.users);
+
     this.usersList.currentUser = data.currentUser;
     this.usersList.numberOfPages = data.numberOfPages;
     this.usersList.currentPage = this.getUsersOptions.nextPage;

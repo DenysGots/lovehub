@@ -15,7 +15,7 @@
     <div class="main-section-content" [ngClass]="{'full-screen': !mainSectionIsVisible}">
       <div class="users-management">
         <div class="users-management_apply-action">
-          <h5>Apply action on selected users</h5>
+          <h5 class="heading">Apply action on selected users</h5>
 
           <div class="users-management_actions">
             <form class="form actions-form" #actionsForm="ngForm">
@@ -53,7 +53,7 @@
         </div>
 
         <div class="users-management_apply-filter">
-          <h5>Filter users</h5>
+          <h5 class="heading">Filter users</h5>
 
           <div class="users-management_filters">
             <form class="form filters-form" #filtersForm="ngForm">
@@ -105,7 +105,7 @@
                     Active
                   </option>
 
-                  <option value="Banned">
+                  <option value="Baned">
                     Banned
                   </option>
                 </select>
