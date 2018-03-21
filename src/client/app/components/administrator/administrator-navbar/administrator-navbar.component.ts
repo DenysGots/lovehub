@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { NgClass } from '@angular/common';
-import { Subscription } from 'rxjs/Subscription';
 
 import { AdministratorService } from '../../../services/administrator.service';
 

@@ -42,7 +42,7 @@ export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisco
   }
 
   // Received data must contain link to user-receiver profile (user id)
-  // Sent data must contain sender user name and optionally message context: 'like', new mail, chat message, etc.
+  // Sent data must contain sender name and optionally message context: 'like', new mail, chat message, etc.
   @SubscribeMessage('send-notification')
   onNotification(client, receiverUserId) {
     const notificationReceiver = this.notificationsService.handleNotification(client, receiverUserId);

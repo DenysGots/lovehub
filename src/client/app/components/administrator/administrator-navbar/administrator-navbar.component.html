@@ -58,23 +58,29 @@
 
       <div class="admin-navbar_dropdown-list"
            [ngClass]="{'hidden': !dropdownLists.homeDropdownList}">
-        <div class="admin-navbar_option">
-          <p class="admin-navbar_option-description text white-text">
-            Dashboard
-          </p>
-        </div>
+        <a class="link" routerLink="/admin">
+          <div class="admin-navbar_option">
+            <p class="admin-navbar_option-description text white-text">
+              Dashboard
+            </p>
+          </div>
+        </a>
 
-        <div class="admin-navbar_option">
-          <p class="admin-navbar_option-description text white-text">
-            Notifications
-          </p>
-        </div>
+        <a class="link">
+          <div class="admin-navbar_option">
+            <p class="admin-navbar_option-description text white-text">
+              Notifications
+            </p>
+          </div>
+        </a>
 
-        <div class="admin-navbar_option">
-          <p class="admin-navbar_option-description text white-text">
-            Send E-mail
-          </p>
-        </div>
+        <a class="link">
+          <div class="admin-navbar_option">
+            <p class="admin-navbar_option-description text white-text">
+              Send E-mail
+            </p>
+          </div>
+        </a>
       </div>
     </div>
 
@@ -104,23 +110,29 @@
 
       <div class="admin-navbar_dropdown-list"
            [ngClass]="{'hidden': !dropdownLists.usersDropdownList}">
-        <div class="admin-navbar_option">
-          <p class="admin-navbar_option-description text white-text">
-            Users Management
-          </p>
-        </div>
+        <a class="link" routerLink="/admin/users-management">
+          <div class="admin-navbar_option">
+            <p class="admin-navbar_option-description text white-text">
+              Users Management
+            </p>
+          </div>
+        </a>
 
-        <div class="admin-navbar_option">
-          <p class="admin-navbar_option-description text white-text">
-            Create New Moderator
-          </p>
-        </div>
+        <a class="link">
+          <div class="admin-navbar_option">
+            <p class="admin-navbar_option-description text white-text">
+              Create New Moderator
+            </p>
+          </div>
+        </a>
 
-        <div class="admin-navbar_option">
-          <p class="admin-navbar_option-description text white-text">
-            Last Users Activities
-          </p>
-        </div>
+        <a class="link">
+          <div class="admin-navbar_option">
+            <p class="admin-navbar_option-description text white-text">
+              Last Users Activities
+            </p>
+          </div>
+        </a>
       </div>
     </div>
 
@@ -150,17 +162,21 @@
 
       <div class="admin-navbar_dropdown-list"
            [ngClass]="{'hidden': !dropdownLists.analyticsDropdownList}">
-        <div class="admin-navbar_option">
-          <p class="admin-navbar_option-description text white-text">
-            Charts
-          </p>
-        </div>
+        <a class="link">
+          <div class="admin-navbar_option">
+            <p class="admin-navbar_option-description text white-text">
+              Charts
+            </p>
+          </div>
+        </a>
 
-        <div class="admin-navbar_option">
-          <p class="admin-navbar_option-description text white-text">
-            Tables
-          </p>
-        </div>
+        <a class="link">
+          <div class="admin-navbar_option">
+            <p class="admin-navbar_option-description text white-text">
+              Tables
+            </p>
+          </div>
+        </a>
       </div>
     </div>
   </nav>

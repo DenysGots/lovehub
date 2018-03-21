@@ -32,11 +32,13 @@ export class AdministratorService {
   constructor(private http: HttpClient) {
   }
 
+  // Show/hide aside navbar
   changeNavBarState(): void {
     this.isVisible = !this.isVisible;
     this.isVisibleSource.next(this.isVisible);
   }
 
+  // Get current logged in user parameters
   getCurrentUserParameters(currentUserId): any {
     console.log(`${this.serverURL}/${currentUserId}`);
 
