@@ -46,28 +46,54 @@ export class AdministratorServiceComponent {
 
   // Get user from DB
   async getUser(id: number) {
-    return await this.userProfileRepository
-      .findById<UserProfile>(id)
-      .then(result => this.currentUser = result);
+    // return await this.userProfileRepository                        // TODO: uncomment to work with DB
+    //   .findById<UserProfile>(id)
+    //   .then(result => this.currentUser = result);
+
+    for (let i = 0; i < this.originalUsersList.length; i += 1) {      // TODO: delete
+      if (this.originalUsersList[i].id === id) {
+        this.currentUser = this.originalUsersList[i];
+        break;
+      }
+    }
+
+    return this.currentUser;                                          // TODO: delete
   }
 
   // Get users from DB
   async getUsers() {
-    return await this.userProfileRepository
-      .findAll<UserProfile>({ raw: true })
-      .then(result => this.originalUsersList = result);
+    // return await this.userProfileRepository                        // TODO: uncomment to work with DB
+    //   .findAll<UserProfile>({ raw: true })
+    //   .then(result => this.originalUsersList = result);
+
+    this.originalUsersList = usersList;
   }
 
   // Update users in DB
-  async updateUser(id: number, options: {}) {
-    return await this.userProfileRepository
-      .update(options, {where: {id: id}});
+  async updateUser(id: number, options/*: {}*/) {
+    // return await this.userProfileRepository                        // TODO: uncomment to work with DB
+    //   .update(options, {where: {id: id}});
+
+    for (let i = 0; i < this.originalUsersList.length; i += 1) {      // TODO: delete
+      if (this.originalUsersList[i].id === id) {
+        this.originalUsersList[i].isActive = options.isActive;
+        this.originalUsersList[i].isBaned = options.isBaned;
+        break;
+      }
+    }
   }
 
   // Delete user from DB
   async deleteUser(id: number) {
-    return await this.userProfileRepository
-      .destroy({where: {id: id}});
+    // return await this.userProfileRepository                        // TODO: uncomment to work with DB
+    //   .destroy({where: {id: id}});
+
+    for (let i = 0; i < this.originalUsersList.length; i += 1) {      // TODO: delete
+      if (this.originalUsersList[i].id === id) {
+        this.originalUsersList.splice(i, 1);
+        break;
+      }
+    }
   }
 
   // Get usersList from DB according to options, received from client
