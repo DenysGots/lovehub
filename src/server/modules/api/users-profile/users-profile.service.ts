@@ -52,6 +52,19 @@ export class UsersProfileService {
     }
   }
 
+  async findShortInfo(id: number): Promise<any>{
+    try {
+      return await this.userProfileRepository
+      .findOne<UserProfile>({
+        where: {userId: id},
+        attributes: ['userId','firstName', 'lastName']
+      });
+    } catch (error) {
+      console.error(`UserProfileService findShortInfo Error: (${id})`);
+      throw error;
+    }
+  }
+
   async findByName(name: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
     console.log(`server service: findByName(${name})`);
     try {
@@ -84,8 +97,6 @@ export class UsersProfileService {
       throw error;
     }
   }
-
-
 
   async update(id: number, userProfileDto: UserProfileDto): Promise<[number, UserProfile[]]> {
     try {

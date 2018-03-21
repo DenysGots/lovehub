@@ -1,4 +1,4 @@
-import { Catch, ExceptionFilter, HttpException } from '@nestjs/common';
+import { Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
 import {MessageCodeError} from '../error/MessageCodeError';
 
 @Catch()
@@ -8,7 +8,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.httpStatus;
 
     response
-      .status(status)
+      //.status(status)
+      .status(HttpStatus.BAD_REQUEST)
       .json({
         statusCode: status,
         message: exception.errorMessage

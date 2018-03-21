@@ -8,5 +8,6 @@ import { UsersProfileService } from './users-profile.service';
   imports: [DatabaseModule],
   controllers: [UsersProfileController],
   components: [UsersProfileService, ...usersProfileProviders],
+  exports: [UsersProfileService]
 })
 export class UsersProfileModule {}
