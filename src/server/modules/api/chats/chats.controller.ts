@@ -21,21 +21,20 @@ export class ChatsController {
   @HttpCode(200)
   @Get(':id')
   async findById(@Param() params): Promise<any[]> {
-    const chats = await this.chatsService.findByUser(params.id);
+    const id = parseInt(params.id);
+    const chats = await this.chatsService.findByUser(id);
+
     const fullChats = chats.map(async (chat) => {
       const userId1 = chat.get('userId1');
       const userId2 = chat.get('userId2');
+      const finalUser = userId1 === id ? userId2 : userId1;
 
-      let user1 = await this.usersProfileService.findShortInfo(userId1);
-      let user2 = await this.usersProfileService.findShortInfo(userId2);
-
-      user1 = { ...user1.dataValues, avatar: 'https://i.pinimg.com/736x/fb/e3/75/fbe37552637081f7bced381c7c464f3b--illustration-girl-girl-illustrations.jpg'};
-      user2 = { ...user2.dataValues, avatar: 'https://i.pinimg.com/736x/fb/e3/75/fbe37552637081f7bced381c7c464f3b--illustration-girl-girl-illustrations.jpg'};
+      let user = await this.usersProfileService.findShortInfo(finalUser) || {};
+      user = { ...user.dataValues, avatar: 'https://i.pinimg.com/736x/fb/e3/75/fbe37552637081f7bced381c7c464f3b--illustration-girl-girl-illustrations.jpg'};
 
       return {
         chatId: chat.chatId,
-        user1,
-        user2
+        user
       }
     });
 

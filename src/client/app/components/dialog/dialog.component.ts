@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from 'events';
 import { ChatService } from '../../services/chat.service';
 
+import * as jwt_decode from 'jwt-decode';
+
 @Component({
   selector: 'chat-dialog',
   templateUrl: './dialog.component.html',
@@ -9,8 +11,8 @@ import { ChatService } from '../../services/chat.service';
 })
 export class DialogComponent implements OnInit {
   sending = {
-    message: '',
-    user: 'Ivan Ivanov'
+    userId: '',
+    text: ''
   }
 
   @Input() messages: Array<object>;
@@ -18,7 +20,7 @@ export class DialogComponent implements OnInit {
   constructor( private chat: ChatService) { }
 
   ngOnInit() {
-    this.messages = this.messages.map(mes => ({...mes, me: mes['user'] === this.sending.user}))
+    this.sending.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
   }
 
   sendMes(mes){

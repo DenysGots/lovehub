@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import Chat from '../../models/chat';
+import Message from '../../models/message';
 import { WindowService } from '../../services/window.service';
 import { ChatService } from '../../services/chat.service';
 import { HttpClient } from '@angular/common/http';
+
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-chat',
@@ -24,13 +26,16 @@ export class ChatComponent implements OnInit {
 
   onChatChecked(chat){
     this.chat.setChat(chat);
-    this.http.get<Chat>(`api/messages?chatId=${chat}`).subscribe((data) => {
-      this.messages = data.messages;
+    this.http.get<Message[]>(`api/messages?chatId=${chat}`).subscribe((data) => {
+      console.log("!!!", data);
+      this.messages = data;
     });
   }
 
   ngOnInit() {
-    this.http.get<any[]>(`api/messages`).subscribe((data) => {
+    const userId = jwt_decode(localStorage.getItem('jwt_token')).id;
+    
+    this.http.get<any[]>(`api/chats/${userId}`).subscribe((data) => {
       this.chats = data;
     });
 

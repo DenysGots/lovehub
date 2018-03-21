@@ -15,7 +15,7 @@
         <span
           class="message"
           [ngClass]="!!mess.me?'right':'left'"
-        >{{mess.message}}</span>
+        >{{mess.text}}</span>
       </div>
   </div>
   <div *ngIf="!!messages">
@@ -24,7 +24,7 @@
           class="textarea"
           rows="3"
           placeholder="Type your message here..."
-          [(ngModel)]="sending.message"
+          [(ngModel)]="sending.text"
         ></textarea>
         <input type="button" value="Send" class="send" (click)="sendMes()" />
       </div>

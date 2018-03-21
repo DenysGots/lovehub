@@ -1,18 +1,13 @@
+import { UserProfile } from './user-profile';
+
 export default class Chat {
     chatId: number;
-    username: string;
-    avatar: string;
-    lastMessage?: string;
-    messages?: Array<object>;
+    user: UserProfile;
   
   
-    constructor(chatId: number, username: string, avatar: string,
-      lastMessage?: string, messages?: Array<object>) {
+    constructor(chatId: number, user: UserProfile) {
       this.chatId = chatId;
-      this.username = username;
-      this.avatar = avatar;
-      this.lastMessage = lastMessage;
-      this.messages = messages;
+      this.user = user;
     }
   }
   
