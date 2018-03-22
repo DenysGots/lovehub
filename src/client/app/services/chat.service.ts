@@ -20,12 +20,6 @@ export class ChatService {
         this.currentChatId = value;
     });
    }
-  
-  // Our simplified interface for sending
-  // socket back to our socket.io server
-  getDefaultData() {
-    this.socket.next({event: 'getDefault', data: {}});
-  }
 
   sendMessage(data){
     if(this.currentChatId) {

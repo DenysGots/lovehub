@@ -1,10 +1,13 @@
-{{this.messages}}
 <div
   class="d-flex flex-column h-100"
-  [ngClass]="!messages?'justify-content-start':'justify-content-end'"
+  [ngClass]="!messages || !messages.length?'justify-content-between':'justify-content-end'"
   >
-  <div *ngIf="!messages" class="d-flex justify-content-center">
-    <span class="default">Choose user to start messaging</span>
+  <div *ngIf="!messages || !messages.length" class="d-flex justify-content-center">
+    <span class="default">
+      {{!messages
+        ? 'Choose user to start messaging'
+        : 'Type something to start messaging'}}
+    </span>
   </div>
   <div *ngIf="!!messages" class="message-list scrollbar">
       <div 

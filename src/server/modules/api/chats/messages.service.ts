@@ -17,9 +17,7 @@ export class MessagesService {
       });
   }
 
-  async findByChat(id: number): Promise<Chat[]> {
-    const messages = await this.chatModel.find({ chatId: id });
-
-    return messages;
+  async findByChat(id: number): Promise<any> {
+    return await this.chatModel.findOne({ chatId: id }).select('messages -_id');
   }
 }

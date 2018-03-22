@@ -25,6 +25,8 @@ export class MessagesController {
   async findById(@Param() params): Promise<any[]> {
     const id = parseInt(params.id);
 
-    return await this.messagesService.findByChat(id);
+    const chat = await this.messagesService.findByChat(id);
+
+    return chat.messages;
   }
 }

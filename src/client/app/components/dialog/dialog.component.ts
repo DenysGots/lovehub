@@ -17,7 +17,8 @@ export class DialogComponent implements OnInit {
 
   @Input() messages: Array<object>;
 
-  constructor( private chat: ChatService) { }
+  constructor( private chat: ChatService) {
+   }
 
   ngOnInit() {
     this.sending.userId = jwt_decode(localStorage.getItem('jwt_token')).id;

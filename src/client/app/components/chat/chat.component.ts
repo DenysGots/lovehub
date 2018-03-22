@@ -14,7 +14,7 @@ import * as jwt_decode from 'jwt-decode';
 export class ChatComponent implements OnInit {
   height = 100;
   chats = [];
-  messages = [];
+  messages = null;
 
   constructor(
     private windowService: WindowService,
@@ -41,7 +41,7 @@ export class ChatComponent implements OnInit {
 
   onChatChecked(chat){
     this.chat.setChat(chat);
-    this.http.get<Message[]>(`api/messages?chatId=${chat}`).subscribe((data) => {
+    this.http.get<Message[]>(`api/messages/${chat}`).subscribe((data) => {
       console.log("!!!", data);
       this.messages = data;
     });
