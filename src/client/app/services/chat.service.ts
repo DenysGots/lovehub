@@ -5,6 +5,8 @@ import { Observable, Subject } from 'rxjs/Rx';
 @Injectable()
 export class ChatService {
   currentChatId: number;
+  currentChatIdChange: Subject<number> = new Subject<number>();
+
   socket: Subject<any>;
   
   constructor(private wsService: WebsocketService) {
@@ -13,6 +15,10 @@ export class ChatService {
       .map((response: any): any => {
         return response;
       });
+
+    this.currentChatIdChange.subscribe((value) => {
+        this.currentChatId = value;
+    });
    }
   
   // Our simplified interface for sending
@@ -29,7 +35,6 @@ export class ChatService {
 
   setChat(chatId: number){
     this.socket.next({event: 'changeRoom', prevChatId: this.currentChatId, chatId});
-    this.currentChatId = chatId;
+    this.currentChatIdChange.next(chatId);
   }
-
 }

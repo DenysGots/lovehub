@@ -24,13 +24,6 @@ export class ChatComponent implements OnInit {
     this.height = this.windowService.freeHeight;
    }
 
-  onChatChecked(chat){
-    this.chat.setChat(chat);
-    this.http.get<Message[]>(`api/messages?chatId=${chat}`).subscribe((data) => {
-      console.log("!!!", data);
-      this.messages = data;
-    });
-  }
 
   ngOnInit() {
     const userId = jwt_decode(localStorage.getItem('jwt_token')).id;
@@ -43,6 +36,14 @@ export class ChatComponent implements OnInit {
       console.log('msg', msg);
       this.messages = [...this.messages, msg];
       console.log("sss", this.messages);
+    });
+  }
+
+  onChatChecked(chat){
+    this.chat.setChat(chat);
+    this.http.get<Message[]>(`api/messages?chatId=${chat}`).subscribe((data) => {
+      console.log("!!!", data);
+      this.messages = data;
     });
   }
 }

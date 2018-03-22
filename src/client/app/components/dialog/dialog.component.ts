@@ -25,6 +25,7 @@ export class DialogComponent implements OnInit {
 
   sendMes(mes){
     this.chat.sendMessage(this.sending);
+    this.sending.text = '';
   }
 
 }

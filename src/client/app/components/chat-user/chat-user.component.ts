@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 
 import Chat from '../../models/chat';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'chat-user',
@@ -8,15 +9,22 @@ import Chat from '../../models/chat';
   styleUrls: ['./chat-user.component.scss']
 })
 export class ChatUserComponent implements OnInit {
+  activeChat: number;
   @Input() chat: Chat;
   @Output() onChatChecked = new EventEmitter<Array<object>>();
 
-  constructor() { }
+  constructor(private chatService: ChatService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.chatService.currentChatIdChange.subscribe(id => {
+      this.activeChat = id;
+    });
+  }
 
-  checkChat(messages) {
-    this.onChatChecked.emit(messages);
+  checkChat(chatId) {
+    this.onChatChecked.emit(chatId);
+    console.log('chatId', chatId);
+
   }
 
 }
