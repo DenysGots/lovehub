@@ -23,8 +23,5 @@ export class ChatUserComponent implements OnInit {
 
   checkChat(chatId) {
     this.onChatChecked.emit(chatId);
-    console.log('chatId', chatId);
-
   }
-
 }

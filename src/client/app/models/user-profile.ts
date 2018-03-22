@@ -10,6 +10,7 @@ export class UserProfile {
   orientation: string;
   isBaned: boolean;
   isActive: boolean;
+  avatar: string;
 
   constructor(id: number,
               firstName: string,
@@ -17,7 +18,8 @@ export class UserProfile {
               age: number,
               sex: string,
               orientation: string,
-              preference: string) {
+              preference: string,
+              avatar: string = null) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -25,5 +27,6 @@ export class UserProfile {
     this.sex = sex;
     this.orientation = orientation;
     this.preference = preference;
+    this.avatar = avatar;
   }
 }

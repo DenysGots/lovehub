@@ -1,9 +1,14 @@
 import { WebSocketGateway, SubscribeMessage } from '@nestjs/websockets';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
+import { MessagesService } from './messages.service';
+import { CreateMessageDto } from './dto/create-message.dto';
 
 @WebSocketGateway({namespace: 'chat'})
 export class ChatGateway{
+
+  constructor(private messagesService: MessagesService){}
+
   @SubscribeMessage('changeRoom')
   changeRoom(client, data) {
     const chat = JSON.parse(data);
@@ -17,8 +22,10 @@ export class ChatGateway{
     const parsedData = JSON.parse(data);
     const res = parsedData.data;
 
-    client.to(parsedData.chatId).emit('resFromServer', res);
+    this.messagesService.create(res.chatId, res.message as CreateMessageDto);
+
+    client.to(parsedData.chatId).emit('resFromServer', res.message);
     
-    return { event: 'resFromServer', data: res};
+    return { event: 'resFromServer', data: res.message};
   }
 }
