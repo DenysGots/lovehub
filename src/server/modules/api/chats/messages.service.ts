@@ -1,0 +1,25 @@
+import { Model } from 'mongoose';
+import { Component, Inject } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Chat } from './interfaces/chat.interface';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { ChatSchema } from './schemas/chat.schema';
+
+@Component()
+export class MessagesService {
+  constructor(@Inject('ChatModelToken') private readonly chatModel: Model<Chat>) {}
+
+  async create(chatId, createMessageDto: CreateMessageDto): Promise<Chat> {
+    return this.chatModel
+      .findOne({ chatId: chatId }, function(err, chat){
+        chat.messages.push(createMessageDto);
+        return chat.save();
+      });
+  }
+
+  async findByChat(id: number): Promise<Chat[]> {
+    const messages = await this.chatModel.find({ chatId: id });
+
+    return messages;
+  }
+}
