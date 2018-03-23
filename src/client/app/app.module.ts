@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {Injector, NgModule} from '@angular/core';
 import { PreloadAllModules, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule, HttpHandler} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
@@ -43,6 +43,7 @@ import { LoginService } from './services/login.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { SliderComponent } from './components/home-slider/slider.component';
 import { PagerComponent } from './components/pager/pager.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 
 import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
@@ -56,10 +57,10 @@ import { AdministratorUsersManagementComponent } from './components/administrato
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { InterestsComponent } from './components/interests/interests.component';
 
-// test
-
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
+import {providerCustomHttpClient} from './http-interceptors/providers';
+import {CustomHttpClient} from './http-interceptors/custom-http-client';
 
 @NgModule({
   declarations: [
@@ -118,6 +119,7 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
+    { provide: CustomHttpClient, useFactory: providerCustomHttpClient, deps: [HttpHandler, AuthErrorHandlerService]},
     httpInterceptorProviders,
     AuthService,
     AuthGuard,

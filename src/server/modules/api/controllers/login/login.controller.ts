@@ -1,7 +1,7 @@
 import {Controller, Get, Post, Request, Response, Body, Query, HttpCode, UseFilters, Param} from '@nestjs/common';
 import { User } from '../../users/user.entity';
 import {UsersService} from '../../users/users.service';
-import { HttpExceptionFilter} from '../../../filters/http-exception.filter';
+import { HttpExceptionFilter} from '../../../common/filters/http-exception.filter';
 
 @UseFilters(new HttpExceptionFilter())
 @Controller('api/login')

@@ -15,6 +15,7 @@ export const routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'search', component: UserSearchComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'forbidden', component: ForbiddenComponent },
   { path: 'home', component: HomeComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'user-match', component: UserMatchComponent },
