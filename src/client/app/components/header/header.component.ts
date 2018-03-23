@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private navService: NavigationService,
     private windowService: WindowService,
-    private _router: Router
+    _router: Router
   ) {
     this.router = _router;
   }
