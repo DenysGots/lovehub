@@ -22,6 +22,7 @@ import { ChatService } from './services/chat.service';
 import { WebsocketService } from './services/websocket.service';
 
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
+import { MultilinePipe } from './pipes/multiline.pipe';
 
 import { AppComponent } from './app.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -84,6 +85,7 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     PagerComponent,
     UserProfileComponent,
     UsersProfileOrderByPipe,
+    MultilinePipe,
     UserMatchComponent,
     ChatComponent,
     ChatUserComponent,

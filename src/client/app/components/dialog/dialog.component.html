@@ -18,7 +18,8 @@
         <span
           class="message"
           [ngClass]="mess.userId === userId?'right':'left'"
-        >{{mess.text}}</span>
+          [innerHTML]="mess.text | multiline"
+        ></span>
       </div>
   </div>
   <div *ngIf="!!messages">
@@ -28,6 +29,7 @@
           rows="3"
           placeholder="Type your message here..."
           [(ngModel)]="text"
+          (keydown.enter)="sendMes()"
         ></textarea>
         <input type="button" value="Send" class="send" (click)="sendMes()" />
       </div>
