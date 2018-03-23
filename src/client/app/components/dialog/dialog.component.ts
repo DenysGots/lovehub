@@ -10,6 +10,9 @@ import * as jwt_decode from 'jwt-decode';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
+  userId: Number = null;
+  text: String = '';
+  chatId: Number = null;
   sending = {
     chatId: null,
     message: {
@@ -25,15 +28,22 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
     this.chat.currentChatIdChange.subscribe(id => {
-      this.sending.chatId = id;
+      this.chatId = id;
     });
 
-    this.sending.message.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
+    this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
   }
 
   sendMes(mes){
-    this.chat.sendMessage(this.sending);
-    this.sending.message.text = '';
+    const message = {
+      chatId: this.chatId,
+      message: {
+        userId: this.userId,
+        text: this.text
+      }
+    };
+    this.chat.sendMessage(message);
+    this.text = '';
   }
 
 }

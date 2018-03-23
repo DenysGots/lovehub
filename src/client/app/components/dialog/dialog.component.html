@@ -13,11 +13,11 @@
       <div 
         *ngFor="let mess of messages" 
         class="d-flex"
-        [ngClass]="!!mess.me?'justify-content-end':'justify-content-start'"
+        [ngClass]="mess.userId === userId?'justify-content-end':'justify-content-start'"
       >
         <span
           class="message"
-          [ngClass]="!!mess.me?'right':'left'"
+          [ngClass]="mess.userId === userId?'right':'left'"
         >{{mess.text}}</span>
       </div>
   </div>
@@ -27,7 +27,7 @@
           class="textarea"
           rows="3"
           placeholder="Type your message here..."
-          [(ngModel)]="sending.message.text"
+          [(ngModel)]="text"
         ></textarea>
         <input type="button" value="Send" class="send" (click)="sendMes()" />
       </div>
