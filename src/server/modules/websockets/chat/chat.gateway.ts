@@ -1,8 +1,8 @@
 import { WebSocketGateway, SubscribeMessage } from '@nestjs/websockets';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
-import { CreateMessageDto } from '../api/chat-messages/dto/create-message.dto';
-import { ChatMessagesService } from '../api/chat-messages/chat-messages.service';
+import { CreateMessageDto } from '../../api/chat-messages/dto/create-message.dto';
+import { ChatMessagesService } from '../../api/chat-messages/chat-messages.service';
 
 @WebSocketGateway({namespace: 'chat'})
 export class ChatGateway{
