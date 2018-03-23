@@ -7,6 +7,7 @@ import { MatchingModule } from './modules/matching/matching.module';
 import { ChatModule } from './modules/chat/chat.module';
 import { ChatListModule } from './modules/api/chat-list/chat-list.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { NotificationsModule } from './modules/api/notifications/notifications.module';
 import { AdministratorModule } from './modules/api/administrator/administrator.module';
 
 @Module({
@@ -18,7 +19,9 @@ import { AdministratorModule } from './modules/api/administrator/administrator.m
     ChatListModule,
     AuthModule,
     StaticModule,
-    AdministratorModule
+    NotificationsModule,
+    AdministratorModule,
+    StaticModule // Must be the last one !
   ],
   controllers: [],
   components: [],
