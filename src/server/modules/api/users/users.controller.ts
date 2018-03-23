@@ -16,6 +16,13 @@ export class UsersController {
   }
 
   @HttpCode(200)
+  @Post('/verify')
+  async verifyRole(@Body() body):  Promise<boolean> {
+    const { userId, userRole } = body;
+    return await this.usersService.verifyRole(userId, userRole);
+  }
+
+  @HttpCode(200)
   @Get()
   async findAll(): Promise<User[]> {
     return await this.usersService.findAll();

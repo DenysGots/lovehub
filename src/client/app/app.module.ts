@@ -28,7 +28,6 @@ import { Step0Component } from './components/registration-full/step0/step0.compo
 import { Step1Component } from './components/registration-full/step1/step1.component';
 import { Step2Component } from './components/registration-full/step2/step2.component';
 import { Step3Component } from './components/registration-full/step3/step3.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
@@ -40,14 +39,16 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SliderComponent } from './components/home-slider/slider.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
 
-import {UserMatchComponent} from './components/user-match/user-match.component';
-import {AgmCoreModule} from '@agm/core';
-import {MatchingService} from './services/matching.service';
+import { UserMatchComponent } from './components/user-match/user-match.component';
+import { AgmCoreModule } from '@agm/core';
+import { MatchingService } from './services/matching.service';
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
-import {providerCustomHttpClient} from './http-interceptors/providers';
-import {CustomHttpClient} from './http-interceptors/custom-http-client';
+import { providerCustomHttpClient } from './http-interceptors/providers';
+import { CustomHttpClient } from './http-interceptors/custom-http-client';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     UsersProfileOrderByPipe,
     UserMatchComponent,
     ForbiddenComponent,
+    UserProfileSettingsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),

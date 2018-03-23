@@ -75,6 +75,7 @@ export class UserSearchComponent implements OnInit, OnChanges {
     return this.usersProfileService
       .searchUsers(this.term.searchType, this.term.searchValue, this.offsetItems, this.itemsPerPage)
       .subscribe(result => {
+        console.log('UserSearchComponent');
         this.users = result.rows;
         this.countItems = result.count;
       });

@@ -1,3 +1,6 @@
-<p>
-  forbidden works!
-</p>
+<div class=".error-page">
+  <h1>Sorry, {{ errorMessage }}.</h1>
+  <h1>&#x26a0;<br/>{{ errorStatus }}</h1>
+  <h2>{{ userMessage }}</h2>
+  <a class="button" routerLink="/home">Go To Login Home Page</a>
+</div>

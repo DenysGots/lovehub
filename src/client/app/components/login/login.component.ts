@@ -52,7 +52,11 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
 
     this.authService.sign(email, password).subscribe((response) => {
-
+      if(response.isLoggedIn) {
+        const url: string = this.authService.getRedirectUrl(),
+          redirectUrl = '/user-profile';
+        this.onRedirect(redirectUrl);
+      }
     });
   }
 
@@ -73,8 +77,11 @@ export class LoginComponent implements OnInit {
     return true;
   }
 
-  onRegisterRedirect() {
-    this.router.navigateByUrl('/home');
+  public onRegisterRedirect() {
+    this.router.navigateByUrl('/register');
   }
 
+  public onRedirect(redirectUrl: string) {
+    this.router.navigateByUrl(redirectUrl);
+  }
 }

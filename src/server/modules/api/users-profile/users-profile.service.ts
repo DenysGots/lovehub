@@ -20,6 +20,7 @@ export class UsersProfileService {
     userProfile.lastName = userProfileDto.lastName;
     userProfile.age = userProfileDto.age;
     userProfile.sex = userProfileDto.sex;
+    userProfile.role = userProfileDto.role;
     userProfile.preference = userProfileDto.preference;
     userProfile.orientation = userProfileDto.orientation;
     userProfile.userId = userProfileDto.userId;

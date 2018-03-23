@@ -2,6 +2,7 @@ import { Component, Inject } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserDto } from './dto/user.dto';
 import {UserProfile} from '../users-profile/user-profile.entity';
+import {ROLE} from '../users-profile/role';
 
 @Component()
 export class UsersService {
@@ -17,6 +18,11 @@ export class UsersService {
     return await user.save();
   }
 
+  async verifyRole(id: number, role: ROLE): Promise<boolean> {
+    const user = await this.userRepository.findOne<User>({where: { id }, include: [UserProfile]});
+    return user.userProfile.role === role;
+  }
+
   async findAll(): Promise<User[]> {
     return await this.userRepository.findAll<User>();
   }
@@ -26,7 +32,7 @@ export class UsersService {
   }
 
   async findByEmailAndPassword(email: string, password: string): Promise<User> {
-    return await this.userRepository.findOne({where: {email: email, password: password}});
+    return await this.userRepository.findOne<User>({where: { email, password }});
   }
 
   async remove(id: number): Promise<number> {
@@ -34,7 +40,7 @@ export class UsersService {
   }
 
   async findByEmail(email: string, password: string): Promise<User> {
-    return await this.userRepository.findOne<User>({where: {email, password}, include: [UserProfile]});
+    return await this.userRepository.findOne<User>({where: { email }, include: [UserProfile]});
   }
 
 }

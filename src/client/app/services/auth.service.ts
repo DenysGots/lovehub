@@ -1,32 +1,71 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
 import * as jwt_decode from 'jwt-decode';
 
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
+import {UserCredentialsError} from '../components/login/UserCredentialsError';
 
 @Injectable()
 export class AuthService {
-  public token: string;
+  private token: string;
+  private redirectUrl: string = '/';
+  private loginUrl: string = '/login';
+  private isLoggedIn: boolean = false;
+  private loggedInUser: any;
 
   constructor(private http: HttpClient) {}
 
   sign(email: string, password: string): Observable<any> {
     return this.http.post<Response>('api/auth', { email: email, password: password })
-      .do(response => this.setSession(response));
+      .map(response => {
+        this.token = JSON.parse(JSON.stringify(response)).idToken;
+
+        if(this.token) {
+          this.setSession();
+          this.isLoggedIn = true;
+          this.loggedInUser = this.getLoggedInUserCredential();
+        } else {
+          this.isLoggedIn = false;
+        }
+
+        return {
+          isLoggedIn: this.isLoggedIn,
+          loggedInUser: this.loggedInUser
+        };
+      });
   }
 
-  private setSession(authResult) {
-    localStorage.setItem('jwt_token', authResult.idToken);
+  private setSession(): void {
+    localStorage.setItem('jwt_token', this.token);
   }
 
-  public logout() {
+  public getSession(): string {
+    return localStorage.getItem('jwt_token');
+  }
+
+  public getRedirectUrl(): string {
+    return this.redirectUrl;
+  }
+
+  public setRedirectUrl(url: string): void {
+    this.redirectUrl = url;
+  }
+
+  public getLoginUrl(): string {
+    return this.loginUrl;
+  }
+
+  public logout(): void {
+    this.token = null;
     localStorage.removeItem('jwt_token');
   }
 
   public isTokenExpired(): boolean {
-    this.token = this.getToken();
+    this.token = this.getSession();
 
     if(!this.token) {
       return true;
@@ -42,10 +81,9 @@ export class AuthService {
   }
 
   private getTokenExpirationDate(): Date {
-    this.token = this.getToken();
+    this.token = this.getSession();
     const decoded = jwt_decode(this.token);
 
-    console.log(`Client AuthService get expired time ${decoded.exp}`);
     if (decoded.exp === undefined) {
       return null;
     }
@@ -55,8 +93,22 @@ export class AuthService {
     return date;
   }
 
-  public getToken(): string {
-    return localStorage.getItem('jwt_token');
-  }
-}
+  public getLoggedInUserCredential(): any {
+    const decoded = jwt_decode(this.getSession());
 
+    const user = {
+      userId: parseInt(decoded.id),
+      userRole: decoded.role,
+      firstName: decoded.firstName,
+      lastName: decoded.lastName,
+    };
+
+    return user;
+  }
+
+  handleError(error: Error) {
+
+    console.log(error);
+  }
+
+}

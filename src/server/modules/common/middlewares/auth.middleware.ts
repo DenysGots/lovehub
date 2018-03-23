@@ -11,14 +11,24 @@ export class AuthMiddleware implements NestMiddleware {
   public resolve(...args: any[]): ExpressMiddleware | AsyncExpressMiddleware | Promise<AsyncExpressMiddleware> {
     return async(req: Request, res: Response, next: NextFunction) => {
       if(req.headers.authorization && ((req.headers.authorization as string).split(' ')[0]) === 'Bearer') {
-        const token = (req.headers.authorization as string).split(' ')[1];
-        let decoded: any = jwt.verify(token, process.env.JWT_KEY || 'secretKey');
+        let token = (req.headers.authorization as string).split(' ')[1],
+          decoded: any,
+          user: User;
 
-        const user = await User.findOne<User>({
-          where: {
-            email: decoded.email
-          }
-        });
+        try {
+          decoded = jwt.verify(token, process.env.JWT_KEY || 'secretKey');
+        } catch(err) {
+          throw new MessageCodeError('request:unauthorized');
+        }
+
+        console.log(`AuthMiddleware decoded object: ${decoded}`);
+        if(decoded) {
+          user = await User.findOne<User>({
+            where: {
+              email: decoded.email
+            }
+          });
+        }
 
         console.log('AuthMiddleware ' + user.name);
         if (!user) {

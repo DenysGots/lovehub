@@ -16,7 +16,7 @@ export class MessageCodeError extends Error {
 
     Error.captureStackTrace(this, this.constructor);
     this.name = this.constructor.name;
-    this.httpStatus = errorMessage.httpStatus;
+    this.httpStatus = errorMessage.status;
     this.messageCode = messageCode;
     this.errorMessage = errorMessage.errorMessage;
     this.message = errorMessage.userMessage;

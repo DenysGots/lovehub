@@ -1,0 +1,19 @@
+.error-page {
+  text-align: center;
+  color: #d8000c;
+  a {
+    size: 22px;
+  }
+}
+
+.button {
+  background-image: gradient(33% 0 -90deg, #f2f2f2 0%, #007897 99%, #0a406e 100%);
+  border: 1px solid #007897;
+  border-radius: 4px 4px 4px 4px;
+  color: #f2f2f2;
+  font-family: "Dosis",sans-serif;
+  font-size: 16px;
+  letter-spacing: 1px;
+  margin: 2px;
+  padding: 6px 12px;
+}

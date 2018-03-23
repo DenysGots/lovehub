@@ -15,20 +15,16 @@ const httpOptions = {
 @Injectable()
 export class UsersService {
 
+  usersUrl = 'api/users';
+
   constructor(private http: HttpClient) { }
 
-  searchUsers(term: string): Observable<User[]> {
-    if (!term.trim()) {
-      return of([]);
-    }
-    return this.http.get<User[]>(`api/users/?name=${term}`).pipe(
-      tap(_ => console.log(`found users matching "${term}"`)),
-      catchError(this.handleError<User[]>('searchHeroes', []))
-    );
+  verifyUserRole(userId: number, userRole: string): Observable<boolean> {
+    return this.http.post<boolean>(`${this.usersUrl}/verify`, {userId, userRole});
   }
+
   registration(user: User): Observable<User> {
-    const url = 'api/users';
-    return this.http.post<User>(url, user, httpOptions);
+    return this.http.post<User>(`${this.usersUrl}`, user, httpOptions);
   }
 
 
