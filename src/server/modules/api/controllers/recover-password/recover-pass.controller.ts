@@ -35,7 +35,7 @@ export class RecoverPassController {
 
       res.status(HttpStatus.OK).send(message);
     } catch (error) {
-      res.status(HttpStatus.BAD_REQUEST).send(error);
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
     }
   }
 

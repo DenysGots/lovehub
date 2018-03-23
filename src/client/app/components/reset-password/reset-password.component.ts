@@ -30,6 +30,7 @@ export class ResetPasswordComponent implements OnInit {
       }
     }, error => {
       this.error = 'Something went wrong, try again later.';
+      this.isValidLink = false;
     });
   }
 
