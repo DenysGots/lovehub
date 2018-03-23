@@ -88,6 +88,7 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     AdministratorNavbarComponent,
     AdministratorDashboardComponent,
     AdministratorUsersManagementComponent,
+    ForbiddenComponent,
     NotificationsComponent,
     InterestsComponent
   ],
@@ -118,6 +119,9 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
     httpInterceptorProviders,
+    AuthService,
+    AuthGuard,
+    AuthErrorHandlerService,
     AdministratorService,
     NotificationsService,
     InterestsService
