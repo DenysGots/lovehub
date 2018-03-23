@@ -15,7 +15,7 @@ export class FooterComponent implements OnInit {
 
   router: any;
 
-  constructor(private _router: Router) {
+  constructor(_router: Router) {
     this.router = _router;
   }
 
