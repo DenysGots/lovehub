@@ -43,7 +43,9 @@ import {MatchingService} from './services/matching.service';
 
 import { PhotosService } from './services/photos.service';
 import { PhotosComponent } from './components/photos/photos.component';
-import { PhotoSliderComponent } from './components/photo-slider/photo-slider.component';
+import { PhotoSliderComponent } from './components/carousel/photo-slider.component';
+// import { CarouselComponent, CarouselItemElement } from './components/carousel/carousel.component';
+// import { CarouselItemDirective } from './components/carousel/carousel-item.directive';
 
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { LeftPartComponent } from './components/profile-page/left-part/left-part.component';
@@ -53,6 +55,9 @@ import { RightPartComponent } from './components/profile-page/right-part/right-p
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
+
+// import { SelectModule } from 'ng-select'
+import { UICarouselModule } from 'ui-carousel';
 
 @NgModule({
   declarations: [
@@ -73,17 +78,22 @@ import { UserLocalStorageService } from './services/user-local-storage.service';
     FooterComponent,
     SliderComponent,
     PagerComponent,
-    UserProfileComponent,
     UsersProfileOrderByPipe,
+    UserProfileComponent,
     UserMatchComponent,
     PhotosComponent,
     ProfilePageComponent,
     LeftPartComponent,
     RightPartComponent,
     PhotoSliderComponent,
+    // CarouselComponent,
+    // CarouselItemDirective,
+    // CarouselItemElement
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
+    UICarouselModule,
+    // SelectModule,
     FormsModule,
     ReactiveFormsModule,
     ReactiveFormsModule,

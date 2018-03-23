@@ -1,4 +1,5 @@
 import { Model } from 'mongoose';
+import { Types } from 'mongoose';
 import { Component, Inject } from '@nestjs/common';
 import { Photo } from './interfaces/photo.interface';
 import { CreatePhotoDto } from './dto/create-photo.dto';
