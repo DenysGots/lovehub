@@ -13,13 +13,6 @@ export class DialogComponent implements OnInit {
   userId: Number = null;
   text: String = '';
   chatId: Number = null;
-  sending = {
-    chatId: null,
-    message: {
-      userId: '',
-      text: ''
-    }
-  }
 
   @Input() messages: Array<object>;
 

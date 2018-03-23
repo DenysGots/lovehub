@@ -12,8 +12,8 @@ export class MessagesService {
   async create(chatId, createMessageDto: CreateMessageDto): Promise<Chat> {
     return this.chatModel
       .findOne({ chatId: chatId }, function(err, chat){
-        console.log('ha', createMessageDto, chat);
         chat.messages.push(createMessageDto);
+
         return chat.save();
       });
   }

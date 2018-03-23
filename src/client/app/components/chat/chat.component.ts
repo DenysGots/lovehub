@@ -33,16 +33,13 @@ export class ChatComponent implements OnInit {
     });
 
     this.chat.socket.subscribe(msg => {
-      console.log('msg', msg);
       this.messages = [...this.messages, msg];
-      console.log("sss", this.messages);
     });
   }
 
   onChatChecked(chat){
     this.chat.setChat(chat);
     this.http.get<Message[]>(`api/messages/${chat}`).subscribe((data) => {
-      console.log("!!!", data);
       this.messages = data;
     });
   }

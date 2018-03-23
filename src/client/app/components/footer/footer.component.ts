@@ -29,5 +29,4 @@ export class FooterComponent implements OnInit {
 
     this.windowService.footerHeight = footerHeight;
   }
-
 }

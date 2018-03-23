@@ -6,7 +6,6 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class ChatService {
   currentChatId: number;
   currentChatIdChange: Subject<number> = new Subject<number>();
-
   socket: Subject<any>;
   
   constructor(private wsService: WebsocketService) {
