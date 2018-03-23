@@ -54,9 +54,6 @@ export class UserProfile extends Model<UserProfile> {
   isActive: boolean;
 
   @Column
-  role: string;
-
-  @Column
   registrationDate: Date;
 
   @Column
