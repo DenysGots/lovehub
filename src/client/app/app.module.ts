@@ -15,6 +15,9 @@ import { UsersProfileService } from './services/users-profile.service';
 import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
 import { httpInterceptorProviders } from './http-interceptors';
 import { AdministratorService } from './services/administrator.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
+import { AuthErrorHandlerService } from './services/auth-error-handler.service';
 import { NotificationsService } from './services/notifications.service';
 import { InterestsService } from './services/interests.service';
 
