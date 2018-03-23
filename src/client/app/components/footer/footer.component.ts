@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -12,7 +13,11 @@ export class FooterComponent implements OnInit {
     mail: 'write@us.now'
   };
 
-  constructor() { }
+  router: any;
+
+  constructor(_router: Router) {
+    this.router = _router;
+  }
 
   ngOnInit() {}
 

@@ -8,7 +8,6 @@ export class UserProfile {
   sex: string;
   preference: string;
   orientation: string;
-  location: string;
   isBaned: boolean;
   isActive: boolean;
 
@@ -18,8 +17,7 @@ export class UserProfile {
               age: number,
               sex: string,
               orientation: string,
-              preference: string,
-              location: string ) {
+              preference: string) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -27,6 +25,5 @@ export class UserProfile {
     this.sex = sex;
     this.orientation = orientation;
     this.preference = preference;
-    this.location = location;
   }
 }

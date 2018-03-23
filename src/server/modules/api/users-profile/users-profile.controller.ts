@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Query, UseFilters
 import { UserProfileDto } from './dto/user-profile.dto';
 import { UsersProfileService } from './users-profile.service';
 import { UserProfile } from './user-profile.entity';
-import { HttpExceptionFilter } from '../../filters/http-exception.filter';
+import { HttpExceptionFilter } from '../../common/filters/http-exception.filter';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -11,7 +11,6 @@ export interface FilteredUsersProfile {
 
 
 @Controller('api/users-profile')
-@UseFilters(new HttpExceptionFilter())
 export class UsersProfileController {
 
   constructor(private readonly usersProfileService: UsersProfileService) {}
