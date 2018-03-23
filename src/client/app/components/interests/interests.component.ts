@@ -34,17 +34,13 @@ export class InterestsComponent implements OnInit {
   }
 
   // Add interest from drop down hints
-  addInterestFromHint(interest) {
-    this.unsavedAddedInterests.push(interest);
-    this.typedInterest = '';
+  addInterestFromHint(hint) {
+    this.typedInterest = hint;
   }
 
   // Delete interest from interest list in user profile back at DB
   deleteInterest(interest) {
     this.unsavedDeletedInterests.push(interest);
-
-    console.log(this.unsavedDeletedInterests);
-    console.log(this.unsavedDeletedInterests.indexOf(interest));
   }
 
   // Save changes and exit editing mode
@@ -57,7 +53,7 @@ export class InterestsComponent implements OnInit {
 
     if (deletedInterestsLength) {
       for (let i = 0; i < deletedInterestsLength; i += 1) {
-        if (interests.indexOf(deletedInterests[i])) {
+        if (interests.includes(deletedInterests[i])) {
           interests.splice(interests.indexOf(deletedInterests[i]), 1);
         }
       }
@@ -68,6 +64,8 @@ export class InterestsComponent implements OnInit {
     }
 
     this.editMode = false;
+
+    console.log(this.interests);
   }
 
   // Toggle editing mode and undo changes on exit
@@ -80,14 +78,10 @@ export class InterestsComponent implements OnInit {
   // Show hints on input filed in focus
   onInputFocus() {
     this.inputFieldFocus = true;
-
-    console.log(this.inputFieldFocus);
   }
 
   onInputBlur() {
     this.inputFieldFocus = false;
-
-    console.log(this.inputFieldFocus);
   }
 
 }

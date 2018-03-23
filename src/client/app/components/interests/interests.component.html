@@ -54,7 +54,7 @@
       <div
         class="interest"
         [ngClass]="{
-        'interest-hidden': !unsavedDeletedInterests.indexOf(interest),
+        'interest-hidden': unsavedDeletedInterests.includes(interest),
         'interest-active': editMode}"
         *ngFor="let interest of interests.concat(unsavedAddedInterests)">
         <span class="interest_description text">
