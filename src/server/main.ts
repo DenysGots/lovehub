@@ -1,4 +1,3 @@
-// These are important and needed before anything else
 import 'zone.js/dist/zone-node';
 import 'reflect-metadata';
 
@@ -17,6 +16,7 @@ import { renderModuleFactory } from '@angular/platform-server';
 import {FOLDER_ASSETS, FOLDER_CLIENT, FOLDER_DIST} from '../shared/constants';
 
 import { ApplicationModule } from './app.module';
+import {HttpExceptionFilter} from './modules/common/filters/http-exception.filter';
 
 const app = express();
 
@@ -32,7 +32,7 @@ async function bootstrap() {
   }
 
   const server = await NestFactory.create(ApplicationModule, app, null);
-
+  server.useGlobalFilters(new HttpExceptionFilter());
   await server.listen(process.env.PORT || 3666);
 }
 

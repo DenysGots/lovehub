@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { UserProfile } from '../models/user-profile';
 
 import { of } from 'rxjs/observable/of';
-
 import { catchError, tap } from 'rxjs/operators';
 
-import { UserProfile } from '../models/user-profile';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -46,9 +45,9 @@ export class UsersProfileService {
     }
 
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?name=${name}&&offset=${offset}&&limit=${limit}`).pipe(
-      tap(_ => console.log(`found users-profile by "${name}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})`, ))
-    );
+        tap(_ => console.log(`found users-profile by "${name}"`)),
+        catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})` ))
+      );
   }
 
   findByAge(age, offset, limit): Observable<FilteredUsersProfile | {}> {
@@ -58,7 +57,7 @@ export class UsersProfileService {
 
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?age=${age}&&offset=${offset}&&limit=${limit}`).pipe(
       tap(_ => console.log(`found users-profile by "${age}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})`, ))
+      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})` ))
     );
   }
 
@@ -69,13 +68,13 @@ export class UsersProfileService {
 
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?gender=${gender}&&offset=${offset}&&limit=${limit}`).pipe(
       tap(_ => console.log(`found users-profile by "${gender}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${gender})`, ))
+      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${gender})` ))
     );
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.log(`${operation} failed: ${error.status}: ${error.message}`);
+      console.log(`${operation} failed: status - ${error.status}, message - ${error.message}`);
       return of(result as T);
     };
   }

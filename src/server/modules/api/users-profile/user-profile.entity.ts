@@ -1,6 +1,17 @@
-import {AutoIncrement, BelongsTo, Column, DataType, Default, ForeignKey, Length, Model, PrimaryKey, Table} from 'sequelize-typescript';
+import {
+  AutoIncrement, BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasOne, Length, Model, PrimaryKey,
+  Table
+} from 'sequelize-typescript';
 
 import { User } from '../users/user.entity';
+import { Location } from './location.entity';
+import { Rating } from './rating.entity';
+import { SEX } from './sex';
+import { ROLE } from './role';
+import { PREFERENCE } from './preference';
+import { UserProfileInterest } from './user-profile-interest.entity';
+import { Interest } from './interest.entity';
+import {ORIENTATION} from './orientation';
 
 @Table({tableName: 'UsersProfile'})
 export class UserProfile extends Model<UserProfile> {
@@ -19,7 +30,7 @@ export class UserProfile extends Model<UserProfile> {
   lastName: string;
 
   @Column
-  numberLike: number;
+  phoneNumber: number;
 
   @Column
   age: number;
@@ -29,6 +40,17 @@ export class UserProfile extends Model<UserProfile> {
 
   @Column
   photo: string;
+  @Column(DataType.ENUM('MALE', 'FEMALE'))
+  sex: SEX;
+
+  @Column(DataType.ENUM('USER', 'MODERATOR', 'ADMIN'))
+  role: ROLE;
+
+  @Column(DataType.ENUM('DATE', 'FRIENDS', 'PARTY'))
+  preference: PREFERENCE;
+
+  @Column(DataType.ENUM('MAN', 'WOMAN', 'ALL'))
+  orientation: ORIENTATION;
 
   @Column
   isBaned: boolean;
@@ -42,5 +64,14 @@ export class UserProfile extends Model<UserProfile> {
 
   @BelongsTo(() => User)
   user: User;
+
+  @HasOne(() => Location)
+  location: Location;
+
+  @HasOne(() => Rating)
+  rating: Rating;
+
+  @BelongsToMany(() => Interest, () => UserProfileInterest)
+  authors: Interest[];
 }
 

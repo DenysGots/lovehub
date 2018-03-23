@@ -8,12 +8,15 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { RegistrationFullComponent } from './components/registration-full/registration-full.component';
 import { PhotosComponent } from './components/photos/photos.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import {ForbiddenComponent} from './components/forbidden/forbidden.component';
+import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 
 export const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'contact', component: ContactComponent },
   { path: 'search', component: UserSearchComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'forbidden', component: ForbiddenComponent },
   { path: 'home', component: HomeComponent },
   // { path: 'user-profile', component: UserProfileComponent },
   { path: 'user-match', component: UserMatchComponent },
@@ -22,4 +25,9 @@ export const routes = [
   { path: 'register-full', component: RegistrationFullComponent},
   { path: 'photo', component: PhotosComponent},
   { path: 'profile', component: ProfilePageComponent},
+  { path: 'admin', component: AdministratorUsersManagementComponent,
+    children: [{
+      path: 'users-management' , component: AdministratorUsersManagementComponent
+    }]
+  }
 ];
