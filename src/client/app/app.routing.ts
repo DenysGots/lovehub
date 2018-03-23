@@ -24,7 +24,7 @@ export const routes = [
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
   { path: 'forgot', component:  RecoverPasswordComponent},
-  { path: 'forgot/:token', component: ResetPasswordComponent}
+  { path: 'forgot/:token', component: ResetPasswordComponent},
   { path: 'admin', component: AdministratorUsersManagementComponent,
     children: [{
       path: 'users-management' , component: AdministratorUsersManagementComponent
