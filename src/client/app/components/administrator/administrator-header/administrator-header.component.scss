@@ -10,11 +10,12 @@
 }
 
 @mixin remove-default-element-display {
-  -webkit-appearance: none;
-  -ms-appearance: none;
   -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
   appearance: none;
   outline: none;
+  text-decoration: none;
 }
 
 @mixin forbidTextSelection {
@@ -59,6 +60,14 @@ $color_13: #e6e6e6;
   z-index: 90;
 }
 
+.link,
+.link:hover,
+.link:active,
+.link:visited {
+  @include remove-default-element-display;
+  color: $color_3;
+}
+
 .text {
   font: 1rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   margin: 0;
@@ -85,23 +94,19 @@ $color_13: #e6e6e6;
   height: 45px;
   transition: 0.05s ease-in-out;
   width: 45px;
-}
-
-.icon-wrapper:hover {
-  cursor: pointer;
-}
-
-.icon-wrapper:hover .icon {
-  fill: $color_2;
-}
-
-.icon-wrapper:active {
-  border-color: $color_2;
-  box-shadow: 0 0 5px $color_2;
-}
-
-.icon-wrapper:active .icon {
-  fill: $color_2;
+  &:hover {
+    cursor: pointer;
+    & .icon {
+      color: $color_2;
+    }
+  }
+  &:active {
+    border-color: $color_2;
+    box-shadow: 0 0 5px $color_2;
+    & .icon {
+      color: $color_2;
+    }
+  }
 }
 
 .icon-container {
@@ -111,7 +116,8 @@ $color_13: #e6e6e6;
 }
 
 .icon {
-  fill: $color_1;
+  color: $color_1;
+  font-size: 1.8rem;
   transition: 0.05s ease-in-out;
 }
 
@@ -125,12 +131,6 @@ $color_13: #e6e6e6;
     height: 0;
     overflow: hidden;
   }
-}
-
-.mail-icon {
-  margin-right: 5px;
-  position: relative;
-  width: 45px;
 }
 
 .header-content,
@@ -147,6 +147,12 @@ $color_13: #e6e6e6;
 
 /* Administrator badge section */
 
+.mail-icon {
+  margin-right: 5px;
+  position: relative;
+  width: 45px;
+}
+
 .admin-badge {
   @include forbidTextSelection;
 }
@@ -154,8 +160,9 @@ $color_13: #e6e6e6;
 .mail-counter {
   @include apply-flex(center, center, center);
   @include forbidTextSelection;
-  background-color: $color_4;
+  background-color: $color_2;
   border-radius: 50%;
+  color: $color_3;
   font-size: 0.5rem;
   height: 15px;
   position: absolute;
@@ -168,21 +175,19 @@ $color_13: #e6e6e6;
 
 .mail-icon:hover .mail-counter,
 .mail-counter:hover {
-  background-color: $color_2;
-  color: $color_3;
+  background-color: $color_4;
+  color: $color_2;
   transition: 0.05s ease-in-out;
 }
 
 .photo-container {
+  @include apply-flex(center, center, center);
   background-color: $color_4;                                         //TODO: remove
   border-radius: 50%;
+  color: $color_5;                                                    //TODO: remove
+  font-size: 1.2rem;                                                    //TODO: remove
   height: 35px;
   width: 35px;
-}
-
-.user-photo {
-  fill: $color_5;                                                     //TODO: remove
-  overflow: hidden;
 }
 
 .open-list-arrow-container {
@@ -280,6 +285,7 @@ $color_13: #e6e6e6;
 
 .button {
   @include apply-flex(center, center, center);
+  @include forbidTextSelection;
   background-color: $color_8;
   border-radius: 3px 0 0 3px;
   border: 1px solid $color_9;
@@ -300,14 +306,19 @@ $color_13: #e6e6e6;
   box-shadow: 0 0 10px $color_11;
 }
 
-.magnifying-glass {
-  fill: $color_3;
-  margin: 5px;
+.button:hover .magnifying-glass,
+.button:active .magnifying-glass {
+  color: $color_4;
 }
 
-.button:hover .magnifying-glass,
-.button:active .magnifying-glass{
-  fill: $color_4;
+.magnifying-glass {
+  color: $color_1;
+  font: 1.4rem georgia, times, serif;
+  line-height: 0.5em;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .input,
@@ -335,7 +346,8 @@ $color_13: #e6e6e6;
 
 .input::placeholder {
   color: $color_1;
-  font-size: 1.1rem;
+  font: 1.2rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  line-height: 1.4;
   text-align: left;
 }
 

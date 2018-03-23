@@ -1,7 +1,4 @@
-import { Component, OnInit} from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { NgClass } from '@angular/common';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit } from '@angular/core';
 
 import { AdministratorService } from '../../../services/administrator.service';
 
@@ -21,6 +18,13 @@ export class AdministratorNavbarComponent implements OnInit {
     analyticsDropdownList: false
   };
 
+  currentUser = {
+    userId: 1,        // TODO: get userId on init from URL
+    firstName: '',
+    lastName: '',
+    role: ''
+  };
+
   mainSectionIsVisible: boolean;
 
   constructor(private administratorService: AdministratorService) {
@@ -29,6 +33,12 @@ export class AdministratorNavbarComponent implements OnInit {
   ngOnInit() {
     this.administratorService.navBarState.subscribe(data => {
       return this.mainSectionIsVisible = data;
+    });
+
+    this.administratorService.getCurrentUserParameters(this.currentUser.userId);
+
+    this.administratorService.receivedCurrentUser.subscribe(data => {
+      return this.currentUser = data;
     });
   }
 
