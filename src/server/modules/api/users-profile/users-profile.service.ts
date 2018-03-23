@@ -85,6 +85,16 @@ export class UsersProfileService {
     }
   }
 
+  async findByPreference(preference: string, limit: number): Promise<FilteredUsersProfile> {
+    console.log(`server service: findByPreference(${preference})`);
+    try {
+      return await this.userProfileRepository
+        .findAndCountAll<UserProfile>({where: {preference: preference}, limit: limit});
+    } catch (error) {
+      console.error(`Arise an exception in the findByPreference(${preference}) method UserProfile Service`);
+      throw error;
+    }
+  }
 
 
   async update(id: number, userProfileDto: UserProfileDto): Promise<[number, UserProfile[]]> {
