@@ -1,14 +1,13 @@
 import {Body, Controller, Get, HttpCode, Post, Param} from '@nestjs/common';
-import { Chat } from './chat.entity';
-import { ChatsService } from './chats.service';
-import { ChatDto } from './dto/chat.dto';
+import { ChatList } from './chat-list.entity';
+import { ChatListService } from './chat-list.service';
+import { ChatListDto } from './dto/chat-list.dto';
 import { UsersProfileService } from '../users-profile/users-profile.service';
 
 @Controller('api/chats')
-export class ChatsController {
-
+export class ChatListController {
   constructor(
-    private chatsService: ChatsService,
+    private chatsService: ChatListService,
     private usersProfileService: UsersProfileService
   ) {}
 

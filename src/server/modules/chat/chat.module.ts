@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { ChatGateway } from './chat.gateway';
-import { messagesProviders } from './messages.providers';
-import { MessagesController } from './messages.controller';
-import { MessagesService } from './messages.service';
 import { MongodbModule } from '../api/mongodb/mongodb.module';
+import { ChatMessagesModule } from '../api/chat-messages/chat-messages.module';
 
 @Module({
-  imports: [MongodbModule],
-  controllers: [ MessagesController],
-  components: [ ChatGateway, MessagesService, ...messagesProviders]
+  imports: [MongodbModule, ChatMessagesModule],
+  controllers: [ ],
+  components: [ ChatGateway]
 })
 export class ChatModule {}

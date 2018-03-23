@@ -3,7 +3,7 @@ import { AutoIncrement, BeforeCreate, Column, DataType, HasOne, Model, PrimaryKe
 import { User } from '../users/user.entity';
 
 @Table({tableName: 'Chats'})
-export class Chat extends Model<Chat> {
+export class ChatList extends Model<ChatList> {
   @AutoIncrement
   @PrimaryKey
   @Column

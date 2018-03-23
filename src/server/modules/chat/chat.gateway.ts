@@ -1,13 +1,13 @@
 import { WebSocketGateway, SubscribeMessage } from '@nestjs/websockets';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
-import { MessagesService } from './messages.service';
-import { CreateMessageDto } from './dto/create-message.dto';
+import { CreateMessageDto } from '../api/chat-messages/dto/create-message.dto';
+import { ChatMessagesService } from '../api/chat-messages/chat-messages.service';
 
 @WebSocketGateway({namespace: 'chat'})
 export class ChatGateway{
 
-  constructor(private messagesService: MessagesService){}
+  constructor(private messagesService: ChatMessagesService){}
 
   @SubscribeMessage('changeRoom')
   changeRoom(client, data) {

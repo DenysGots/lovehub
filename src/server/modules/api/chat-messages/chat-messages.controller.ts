@@ -1,10 +1,10 @@
 import {Body, Controller, Get, HttpCode, Request,Response, Post, Param, HttpStatus} from '@nestjs/common';
 import { CreateMessageDto } from './dto/create-message.dto';
-import { MessagesService } from './messages.service';
+import { ChatMessagesService } from './chat-messages.service';
 
 @Controller('api/messages')
-export class MessagesController {
-  constructor( private messagesService: MessagesService) {}
+export class ChatMessagesController {
+  constructor( private messagesService: ChatMessagesService) {}
 
   @HttpCode(201)
   @Post()
