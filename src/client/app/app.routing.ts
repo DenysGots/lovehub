@@ -6,6 +6,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserMatchComponent } from './components/user-match/user-match.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationFullComponent } from './components/registration-full/registration-full.component';
+import {ForbiddenComponent} from './components/forbidden/forbidden.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 
