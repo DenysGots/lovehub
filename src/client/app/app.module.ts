@@ -21,7 +21,11 @@ import { AuthErrorHandlerService } from './services/auth-error-handler.service';
 import { NotificationsService } from './services/notifications.service';
 import { InterestsService } from './services/interests.service';
 
+import { ChatService } from './services/chat.service';
+import { WebsocketService } from './services/websocket.service';
+
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
+import { MultilinePipe } from './pipes/multiline.pipe';
 
 import { AppComponent } from './app.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -59,6 +63,9 @@ import { InterestsComponent } from './components/interests/interests.component';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatUserComponent } from './components/chat-user/chat-user.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 import {providerCustomHttpClient} from './http-interceptors/providers';
 import {CustomHttpClient} from './http-interceptors/custom-http-client';
 
@@ -83,7 +90,11 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     PagerComponent,
     UserProfileComponent,
     UsersProfileOrderByPipe,
+    MultilinePipe,
     UserMatchComponent,
+    ChatComponent,
+    ChatUserComponent,
+    DialogComponent,
     AdministratorFooterComponent,
     AdministratorHeaderComponent,
     AdministratorNavbarComponent,
@@ -116,6 +127,8 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     WindowService,
     UsersService,
     UsersProfileService,
+    WebsocketService,
+    ChatService,
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },

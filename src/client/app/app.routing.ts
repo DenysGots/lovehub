@@ -6,9 +6,11 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserMatchComponent } from './components/user-match/user-match.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationFullComponent } from './components/registration-full/registration-full.component';
+import { ChatComponent } from './components/chat/chat.component';
 import {ForbiddenComponent} from './components/forbidden/forbidden.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 export const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -20,6 +22,7 @@ export const routes = [
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'user-match', component: UserMatchComponent },
   { path: 'user-profile', component: UserProfileComponent },
+
   { path: 'register', component: RegistrationComponent },
   { path: 'register-full', component: RegistrationFullComponent },
   { path: 'admin', canActivate: [ AuthGuard ],
@@ -27,5 +30,6 @@ export const routes = [
       { path: '', component: AdministratorDashboardComponent },
       { path: 'users-management', component: AdministratorUsersManagementComponent }
     ]
-  }
+  },
+  { path: 'chat', component: ChatComponent },
 ];

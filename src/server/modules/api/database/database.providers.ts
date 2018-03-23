@@ -6,6 +6,7 @@ import { Rating } from '../users-profile/rating.entity';
 import { Location } from '../users-profile/location.entity';
 import { UserProfileInterest } from '../users-profile/user-profile-interest.entity';
 import { Interest } from '../users-profile/interest.entity';
+import { ChatList } from '../chat-list/chat-list.entity';
 
 export const databaseProviders = [
   {
@@ -16,7 +17,7 @@ export const databaseProviders = [
         host: 'localhost',
         port: 5432,
         username: 'postgres',
-        password: 'nss22',
+        password: '141296',
         database: 'lovehub',
         pool: {
           max: 5,
@@ -25,7 +26,7 @@ export const databaseProviders = [
           idle: 10000
         },
       });
-      sequelize.addModels([User, UserProfile, Rating, Location, Interest, UserProfileInterest]);
+      sequelize.addModels([User, UserProfile, Rating, Location, Interest, UserProfileInterest, ChatList]);
       await sequelize.sync();
       return sequelize;
     },
