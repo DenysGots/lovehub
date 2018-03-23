@@ -7,6 +7,7 @@ import { Rating } from '../users-profile/rating.entity';
 import { Location } from '../users-profile/location.entity';
 import { UserProfileInterest } from '../users-profile/user-profile-interest.entity';
 import { Interest } from '../users-profile/interest.entity';
+import { ChatList } from '../chat-list/chat-list.entity';
 
 export const databaseProviders = [
   {
@@ -33,7 +34,8 @@ export const databaseProviders = [
         Location,
         Interest,
         UserProfileInterest,
-        RecoverPassEntity,
+        ChatList,
+        RecoverPassEntity
       ]);
       await sequelize.sync();
       return sequelize;

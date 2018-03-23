@@ -14,12 +14,22 @@ import { AdministratorService } from '../../../services/administrator.service';
 export class AdministratorHeaderComponent implements OnInit {
   mainSectionIsVisible: boolean;
 
+  currentUser = {
+    firstName: '',
+    lastName: '',
+    role: ''
+  };
+
   constructor(private administratorService: AdministratorService) {
   }
 
   ngOnInit() {
     this.administratorService.navBarState.subscribe(data => {
       return this.mainSectionIsVisible = data;
+    });
+
+    this.administratorService.receivedCurrentUser.subscribe(data => {
+      return this.currentUser = data;
     });
   }
 

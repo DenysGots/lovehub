@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule } from '@angular/router';
 import {HttpClientModule, HttpHandler} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { routes } from './app.routing';
 
@@ -17,8 +18,14 @@ import { AdministratorService } from './services/administrator.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthErrorHandlerService } from './services/auth-error-handler.service';
+import { NotificationsService } from './services/notifications.service';
+import { InterestsService } from './services/interests.service';
+
+import { ChatService } from './services/chat.service';
+import { WebsocketService } from './services/websocket.service';
 
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
+import { MultilinePipe } from './pipes/multiline.pipe';
 
 import { AppComponent } from './app.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -51,12 +58,17 @@ import { AdministratorHeaderComponent } from './components/administrator/adminis
 import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
+import { NotificationsComponent } from './components/notifications/notifications.component';
+import { InterestsComponent } from './components/interests/interests.component';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { RecoverPassService} from './services/recover-pass.service';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatUserComponent } from './components/chat-user/chat-user.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 import {providerCustomHttpClient} from './http-interceptors/providers';
 import {CustomHttpClient} from './http-interceptors/custom-http-client';
 
@@ -81,15 +93,21 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     PagerComponent,
     UserProfileComponent,
     UsersProfileOrderByPipe,
+    MultilinePipe,
     UserMatchComponent,
     RecoverPasswordComponent,
     ResetPasswordComponent,
+    ChatComponent,
+    ChatUserComponent,
+    DialogComponent,
     AdministratorFooterComponent,
     AdministratorHeaderComponent,
     AdministratorNavbarComponent,
     AdministratorDashboardComponent,
     AdministratorUsersManagementComponent,
     ForbiddenComponent,
+    NotificationsComponent,
+    InterestsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -104,7 +122,8 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCdhaZA2fOUM-rLoI95dNDssEdiaGiLDtM'
-    })
+    }),
+    ChartsModule
   ],
   providers: [
     NavigationService,
@@ -113,6 +132,8 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     WindowService,
     UsersService,
     UsersProfileService,
+    WebsocketService,
+    ChatService,
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
@@ -122,7 +143,9 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     AuthGuard,
     AuthErrorHandlerService,
     AdministratorService,
-    RecoverPassService
+    RecoverPassService,
+    NotificationsService,
+    InterestsService
   ],
   bootstrap: [AppComponent]
 })

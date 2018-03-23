@@ -4,5 +4,6 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  CHAR_URL: 'ws://localhost:5400/chat?chat_id=1'
 };
