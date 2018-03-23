@@ -7,7 +7,6 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class WebsocketService {
   private socket;
-  data;
 
   constructor() { }
 

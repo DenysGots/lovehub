@@ -1,7 +1,10 @@
 import { UserProfile } from './user-profile';
 
 export default class Chat {
-    constructor(private chatId: number,private user: UserProfile) {
+  chatId: number;
+  user: UserProfile;
+
+  constructor(chatId: number, user: UserProfile) {
       this.chatId = chatId;
       this.user = user;
     }
