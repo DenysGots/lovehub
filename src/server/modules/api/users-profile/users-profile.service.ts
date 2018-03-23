@@ -1,8 +1,8 @@
 import { Component, Inject } from '@nestjs/common';
 import { UserProfile } from './user-profile.entity';
 import { UserProfileDto } from './dto/user-profile.dto';
-import {where} from 'sequelize';
-import {User} from "../users/user.entity";
+import {PREFERENCE} from './preference';
+import {ORIENTATION} from './orientation';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -19,7 +19,9 @@ export class UsersProfileService {
     userProfile.firstName = userProfileDto.firstName;
     userProfile.lastName = userProfileDto.lastName;
     userProfile.age = userProfileDto.age;
-    userProfile.gender = userProfileDto.gender;
+    userProfile.sex = userProfileDto.sex;
+    userProfile.preference = userProfileDto.preference;
+    userProfile.orientation = userProfileDto.orientation;
     userProfile.userId = userProfileDto.userId;
 
     try {
@@ -50,8 +52,6 @@ export class UsersProfileService {
     }
   }
 
-
-
   async findByName(name: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
     console.log(`server service: findByName(${name})`);
     try {
@@ -74,13 +74,13 @@ export class UsersProfileService {
     }
   }
 
-  async findByGender(gender: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
-    console.log(`server service: findByGender(${gender})`);
+  async findByGender(sex: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
+    console.log(`server service: findByGender(${sex})`);
     try {
       return await this.userProfileRepository
-        .findAndCountAll<UserProfile>({where: {gender: gender}, offset: offset, limit: limit});
+        .findAndCountAll<UserProfile>({where: {sex: sex}, offset: offset, limit: limit});
     } catch (error) {
-      console.error(`Arise an exception in the findByGender(${gender}) method UserProfile Service`);
+      console.error(`Arise an exception in the findByGender(${sex}) method UserProfile Service`);
       throw error;
     }
   }

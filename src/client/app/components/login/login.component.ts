@@ -5,6 +5,7 @@ import { User } from '../../models/user';
 import { UserProfile } from '../../models/user-profile';
 import {IUserStorage} from '../../services/IUserStorage';
 import { Router } from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private loginService: LoginService,
               @Inject('IUserStorage') private storage: IUserStorage,
+              private authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
@@ -49,15 +51,9 @@ export class LoginComponent implements OnInit {
 
     console.log(this.loginForm.value);
 
-    this.loginService.logUser(email, password).subscribe((user) => {
-      this.storage.setUser(user);
-      console.log(user);
-      },
-      error => {
-         console.log(error);
-         this.error = error;
-         this.loginForm.reset();
-      });
+    this.authService.sign(email, password).subscribe((response) => {
+
+    });
   }
 
   private checkForm(): boolean {

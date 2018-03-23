@@ -18,7 +18,6 @@ export class Step3Component implements OnInit {
   lastName: FormControl;
   age: FormControl;
   email: FormControl;
-  location: FormControl;
   password: FormControl;
   confirmPassword: FormControl;
 
@@ -31,7 +30,6 @@ export class Step3Component implements OnInit {
     this.firstName = new FormControl('', Validators.required);
     this.lastName = new FormControl('', Validators.required);
     this.age = new FormControl('', Validators.required);
-    this.location = new FormControl('', Validators.required);
     this.email = new FormControl('', [
       Validators.required,
       Validators.pattern('[^ @]*@[^ @]*')
@@ -53,7 +51,6 @@ export class Step3Component implements OnInit {
       firstName: this.firstName,
       lastName: this.lastName,
       age: this.age,
-      location: this.location,
       email: this.email,
       password: this.password,
       confirmPassword: this.confirmPassword
@@ -68,7 +65,6 @@ export class Step3Component implements OnInit {
         firstName: this.firstName.value,
         lastName: this.lastName.value,
         age: this.age.value,
-        location: this.location.value,
         email: this.email.value,
         password: this.password.value
       };

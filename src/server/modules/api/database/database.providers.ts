@@ -3,6 +3,10 @@ import { Sequelize } from 'sequelize-typescript';
 import { User } from '../users/user.entity';
 import { UserProfile } from '../users-profile/user-profile.entity';
 import { RecoverPassEntity } from '../controllers/recover-password/recover-pass.entity';
+import { Rating } from '../users-profile/rating.entity';
+import { Location } from '../users-profile/location.entity';
+import { UserProfileInterest } from '../users-profile/user-profile-interest.entity';
+import { Interest } from '../users-profile/interest.entity';
 
 export const databaseProviders = [
   {
@@ -22,7 +26,15 @@ export const databaseProviders = [
           idle: 10000
         },
       });
-      sequelize.addModels([User, UserProfile, RecoverPassEntity]);
+      sequelize.addModels([
+        User,
+        UserProfile,
+        Rating,
+        Location,
+        Interest,
+        UserProfileInterest,
+        RecoverPassEntity,
+      ]);
       await sequelize.sync();
       return sequelize;
     },
