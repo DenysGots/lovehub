@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 
 import { User } from '../users/user.entity';
 import { UserProfile } from '../users-profile/user-profile.entity';
+import { RecoverPassEntity } from '../controllers/recover-password/recover-pass.entity';
 
 export const databaseProviders = [
   {
@@ -21,7 +22,7 @@ export const databaseProviders = [
           idle: 10000
         },
       });
-      sequelize.addModels([User, UserProfile]);
+      sequelize.addModels([User, UserProfile, RecoverPassEntity]);
       await sequelize.sync();
       return sequelize;
     },

@@ -13,4 +13,12 @@ export class RecoverPassService {
   recoverUserPassword(email: string): Observable<any> {
     return this.http.post('http://localhost:4200/api/forgot', {email});
   }
+
+  resetUserPassword(password: string, token: string): Observable<any> {
+    return this.http.post(`http://localhost:4200/api/forgot/${token}`, {password});
+  }
+
+  isTokenValid(token: string): Observable<any> {
+    return this.http.get(`http://localhost:4200/api/forgot/${token}`);
+  }
 }

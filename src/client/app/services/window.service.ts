@@ -1,6 +1,6 @@
 import { Injectable, ViewChild, ElementRef } from '@angular/core';
 
-function _window() : any {
+function _window(): any {
    return window;
 }
 

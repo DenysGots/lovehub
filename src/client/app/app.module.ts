@@ -41,12 +41,11 @@ import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
 import {MatchingService} from './services/matching.service';
 
-// test
-
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { RecoverPassService} from './services/recover-pass.service';
 
 @NgModule({
   declarations: [
@@ -98,7 +97,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
-    httpInterceptorProviders
+    httpInterceptorProviders,
+    RecoverPassService
   ],
   bootstrap: [AppComponent]
 })
