@@ -41,6 +41,9 @@ export class UsersProfileController {
     } else if(key === 'gender') {
       console.log(`server controller: findByGender(${queries.gender})`);
       return await this.usersProfileService.findByGender(queries.gender, queries.offset, queries.limit);
+    } else if(key === 'preference') {
+      console.log(`server controller: findByPreference(${queries.gender})`);
+      return await this.usersProfileService.findByPreference(queries.gender, queries.limit);
     }
     return await this.usersProfileService.findAll();
 

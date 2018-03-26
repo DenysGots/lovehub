@@ -35,6 +35,8 @@ export class UsersProfileService {
       return this.findByAge(term, offset, perPage);
     } else if(type == 'radio') {
       return this.findByGender(term, offset, perPage);
+    } else if(type == 'radio') {
+      return this.findByPreference(term, perPage);
     }
   }
 
@@ -69,6 +71,17 @@ export class UsersProfileService {
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?gender=${gender}&&offset=${offset}&&limit=${limit}`).pipe(
       tap(_ => console.log(`found users-profile by "${gender}"`)),
       catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${gender})` ))
+    );
+  }
+
+  findByPreference(preference, limit): Observable<FilteredUsersProfile | {}> {
+    if (!preference.trim()) {
+      return of([]);
+    }
+
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?preference=${preference}&&limit=${limit}`).pipe(
+      tap(_ => console.log(`found users-profile by "${preference}"`)),
+      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByPreference(${preference})` ))
     );
   }
 
