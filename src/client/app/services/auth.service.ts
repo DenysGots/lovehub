@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
 
 import * as jwt_decode from 'jwt-decode';
 
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/map';
-import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
-import {UserCredentialsError} from '../components/login/UserCredentialsError';
+import { LoggedInUser } from '../components/login/logged-in-user';
+
 
 @Injectable()
 export class AuthService {
@@ -15,7 +17,8 @@ export class AuthService {
   private redirectUrl: string = '/';
   private loginUrl: string = '/login';
   private isLoggedIn: boolean = false;
-  private loggedInUser: any;
+  private isLoggedIn$ = new BehaviorSubject<boolean>(this.isLoggedIn);
+  private loggedInUser: LoggedInUser;
 
   constructor(private http: HttpClient) {}
 
@@ -26,8 +29,8 @@ export class AuthService {
 
         if(this.token) {
           this.setSession();
-          this.isLoggedIn = true;
           this.loggedInUser = this.getLoggedInUserCredential();
+          this.setLoggedIn(true);
         } else {
           this.isLoggedIn = false;
         }
@@ -47,6 +50,19 @@ export class AuthService {
     return localStorage.getItem('jwt_token');
   }
 
+  public getLoggedInUser(): LoggedInUser {
+    return this.loggedInUser;
+  }
+
+  private setLoggedIn(value: boolean) {
+    this.isLoggedIn$.next(value);
+    this.isLoggedIn = value;
+  }
+
+  public isLoggedInUser(): Observable<boolean> {
+    return this.isLoggedIn$;
+  }
+
   public getRedirectUrl(): string {
     return this.redirectUrl;
   }
@@ -61,7 +77,9 @@ export class AuthService {
 
   public logout(): void {
     this.token = null;
+    this.loggedInUser = null;
     localStorage.removeItem('jwt_token');
+    this.setLoggedIn(false);
   }
 
   public isTokenExpired(): boolean {
@@ -93,7 +111,7 @@ export class AuthService {
     return date;
   }
 
-  public getLoggedInUserCredential(): any {
+  private getLoggedInUserCredential(): any {
     const decoded = jwt_decode(this.getSession());
 
     const user = {
@@ -107,7 +125,6 @@ export class AuthService {
   }
 
   handleError(error: Error) {
-
     console.log(error);
   }
 

@@ -1,19 +1,66 @@
-.error-page {
-  text-align: center;
-  color: #d8000c;
-  a {
-    size: 22px;
-  }
-}
+:host {
+  display: block;
 
-.button {
-  background-image: gradient(33% 0 -90deg, #f2f2f2 0%, #007897 99%, #0a406e 100%);
-  border: 1px solid #007897;
-  border-radius: 4px 4px 4px 4px;
-  color: #f2f2f2;
-  font-family: "Dosis",sans-serif;
-  font-size: 16px;
-  letter-spacing: 1px;
-  margin: 2px;
-  padding: 6px 12px;
+  .forbidden-modal {
+    //position: fixed;
+    //top: 0;
+    //right: 0;
+    //bottom: 0;
+    //left: 0;
+    //z-index: 1000;
+    //overflow: auto;
+
+    .forbidden {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 18px;
+      letter-spacing: 1px;
+      padding: 20px;
+      background: #fff;
+      margin: 40px;
+
+      div {
+        flex: 1;
+        margin: 10px;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .message {
+        font-size: 22px;
+        color: #ee4444;
+        text-align: center;
+
+        div {
+          font-size: 92px;
+        }
+      }
+
+      .anchor {
+        background: #1a2580;
+        border: 1px solid #007897;
+        border-radius: 4px 4px 4px 4px;
+        color: #f2f2f2;
+        margin: 2px;
+        padding: 6px 12px;
+      }
+    }
+  }
+
+  .forbidden-modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #000;
+    opacity: 0.75;
+    z-index: 900;
+  }
+
+  .forbidden-modal-open {
+    overflow: hidden;
+  }
 }

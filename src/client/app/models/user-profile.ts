@@ -1,9 +1,11 @@
+import { User } from './user';
+
 export class UserProfile {
 
   id: number;
   firstName: string;
   lastName: string;
-  numberLike: number;
+  phoneNumber: number;
   age: number;
   sex: string;
   preference: string;
@@ -11,6 +13,7 @@ export class UserProfile {
   location: string;
   isBaned: boolean;
   isActive: boolean;
+  userId: User;
 
   constructor(id: number,
               firstName: string,

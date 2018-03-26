@@ -15,8 +15,9 @@ export class AuthGuard implements CanActivate {
 
     console.log(url, this.authService.isTokenExpired());
 
-    if (!this.authService.isTokenExpired()) {
-      const {userId, userRole} = this.authService.getLoggedInUserCredential();
+    if (this.authService.isLoggedInUser() && !this.authService.isTokenExpired()) {
+      const {userId, userRole} = this.authService.getLoggedInUser();
+      console.log(userId, userRole);
       this.usersService.verifyUserRole(userId, userRole).subscribe(isAuth => {
         if (!isAuth) {
           return true;

@@ -3,6 +3,7 @@ import { UserProfile } from './user-profile.entity';
 import { UserProfileDto } from './dto/user-profile.dto';
 import {PREFERENCE} from './preference';
 import {ORIENTATION} from './orientation';
+import {where} from 'sequelize';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -86,10 +87,9 @@ export class UsersProfileService {
     }
   }
 
-
-
   async update(id: number, userProfileDto: UserProfileDto): Promise<[number, UserProfile[]]> {
     try {
+      console.log('Server UsersProfileService ' + id);
       return await this.userProfileRepository
         .update(userProfileDto, {where: {id: id}});
     } catch (error) {

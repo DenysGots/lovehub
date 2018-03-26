@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Query, UseFilters } from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, UseFilters} from '@nestjs/common';
 import { UserProfileDto } from './dto/user-profile.dto';
 import { UsersProfileService } from './users-profile.service';
 import { UserProfile } from './user-profile.entity';
@@ -21,6 +21,13 @@ export class UsersProfileController {
     console.log(userProfileDto);
     await this.usersProfileService.create(userProfileDto);
   }
+
+  @Put()
+  async update(@Body() userProfileDto: UserProfileDto) {
+    console.log('Server Update ' + typeof userProfileDto.id);
+    await this.usersProfileService.update(userProfileDto.id, userProfileDto);
+  }
+
 
   @HttpCode(200)
   @Get(':id')

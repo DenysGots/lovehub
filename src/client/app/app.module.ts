@@ -40,6 +40,7 @@ import { SliderComponent } from './components/home-slider/slider.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
+import { LogoutComponent } from './components/login/logout.component';
 
 import { UserMatchComponent } from './components/user-match/user-match.component';
 import { AgmCoreModule } from '@agm/core';
@@ -48,7 +49,10 @@ import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
 import { providerCustomHttpClient } from './http-interceptors/providers';
 import { CustomHttpClient } from './http-interceptors/custom-http-client';
-import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthProfileGuardService } from './services/auth-profile-guard.service';
+import { InlineEditComponent } from './components/user-profile-settings/inline-edit/inline-edit.component';
+import { CustomRenderService } from './services/custom-render.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +77,9 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
     UsersProfileOrderByPipe,
     UserMatchComponent,
     ForbiddenComponent,
+    LogoutComponent,
     UserProfileSettingsComponent,
+    InlineEditComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -104,7 +110,9 @@ import {UserProfileComponent} from './components/user-profile/user-profile.compo
     httpInterceptorProviders,
     AuthService,
     AuthGuard,
+    AuthProfileGuardService,
     AuthErrorHandlerService,
+    CustomRenderService,
   ],
   bootstrap: [AppComponent]
 })

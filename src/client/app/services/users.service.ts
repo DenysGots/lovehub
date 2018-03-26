@@ -27,6 +27,9 @@ export class UsersService {
     return this.http.post<User>(`${this.usersUrl}`, user, httpOptions);
   }
 
+  findById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.usersUrl}/${id}`);
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {

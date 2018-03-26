@@ -1,6 +1,12 @@
-<div class=".error-page">
-  <h1>Sorry, {{ errorMessage }}.</h1>
-  <h1>&#x26a0;<br/>{{ errorStatus }}</h1>
-  <h2>{{ userMessage }}</h2>
-  <a class="button" routerLink="/home">Go To Login Home Page</a>
+<div class="forbidden-modal">
+  <div class="forbidden">
+    <div class="message">
+      <h1>Sorry, {{ errorMessage }}.</h1>
+      <div>&#x26a0;</div>
+      <span>{{ userMessage }}</span>
+    </div>
+    <div>
+      <a class="anchor" routerLink="/home">Go To Login Page</a>
+    </div>
+  </div>
 </div>

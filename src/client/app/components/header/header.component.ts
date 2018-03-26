@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { NavigationService } from '../../services/navigation.service';
 import { WindowService } from '../../services/window.service';
+import { AuthService } from '../../services/auth.service';
+import { LoggedInUser } from '../login/logged-in-user';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-header',
@@ -11,12 +14,15 @@ import { WindowService } from '../../services/window.service';
 export class HeaderComponent implements OnInit {
   menu: object[];
   logo = '/assets/img/logo3.png';
+  public isLoggedIn: boolean;
+  public loggedInUser: LoggedInUser;
 
   @ViewChild('header') elementView: ElementRef;
 
   constructor(
     private navService: NavigationService,
-    private windowService: WindowService
+    private windowService: WindowService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit() {
@@ -24,6 +30,12 @@ export class HeaderComponent implements OnInit {
 
     this.getMenu();
     this.setHeaderHeight(headerHeight);
+    this.isLoggedInUser().subscribe(result => {
+      this.isLoggedIn = result;
+      if(this.isLoggedIn) {
+        this.getLoggedInUser();
+      }
+    });
   }
 
   getMenu(): void {
@@ -34,4 +46,11 @@ export class HeaderComponent implements OnInit {
     this.windowService.headerHeight = height;
   }
 
+  getLoggedInUser(): void {
+    this.loggedInUser = this.authService.getLoggedInUser();
+  }
+
+  isLoggedInUser(): Observable<boolean> {
+    return this.authService.isLoggedInUser();
+  }
 }

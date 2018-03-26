@@ -13,6 +13,19 @@
       <li *ngFor="let item of menu" class="nav-item">
         <a class="nav-link menu-item" routerLink={{item.link}}>{{item.name}}</a>
       </li>
+      <li *ngIf="!isLoggedIn; then login else logout" class="nav-item">
+      </li>
+      <ng-template #login>
+        <li class="nav-item">
+          <a class="nav-link menu-item" routerLink="login">Login</a>
+        </li>
+      </ng-template>
+      <ng-template #logout>
+        <li class="nav-item">
+          <a class="nav-link menu-item" routerLink="logout">Logout</a>
+        </li>
+      </ng-template>
     </ul>
   </div>
+  <div *ngIf="isLoggedIn" class="nav-item menu-item">{{ loggedInUser.firstName }} {{ loggedInUser.lastName }}</div>
 </nav>

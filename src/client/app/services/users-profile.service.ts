@@ -28,6 +28,11 @@ export class UsersProfileService {
     return this.http.post<UserProfile>(this.usersProfileUrl, user, httpOptions);
   }
 
+  update(user: UserProfile): Observable<UserProfile> {
+    console.log('UsersProfileService updateUser ', user.id, user.firstName);
+    return this.http.put<UserProfile>(this.usersProfileUrl, user, httpOptions);
+  }
+
   searchUsers(type, term, offset, perPage): Observable<FilteredUsersProfile> {
     console.log(`angular: within searchUsers(${type}, ${term})`);
     if (type == 'search') {

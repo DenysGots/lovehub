@@ -1,3 +1,12 @@
-<p>
-  user-profile-settings works!
-</p>
+<form (ngSubmit)="updateUser()" #updateForm="ngForm">
+  <app-inline-edit name="firstName" type="text" [(ngModel)]="userProfile.firstName" label="First Name" [required]="true" >
+  </app-inline-edit>
+  <app-inline-edit name="lastName" type="text" [(ngModel)]="userProfile.lastName" label="Last Name" [required]="true" >
+  </app-inline-edit>
+  <app-inline-edit name="age" type="number" [(ngModel)]="userProfile.age" label="Age" [required]="true" >
+  </app-inline-edit>
+  <div>
+    <input type="submit" value="Update" />
+    <input type="reset" value="Reset" />
+  </div>
+</form>
