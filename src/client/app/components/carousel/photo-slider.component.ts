@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { PhotosService } from '../../services/photos.service';
+import {Component, OnInit} from '@angular/core';
+import {PhotosService} from '../../services/photos.service';
 import * as jwt_decode from 'jwt-decode';
-import { Photo } from '../../models/photo';
+import {Photo} from '../../models/photo';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class PhotoSliderComponent implements OnInit {
 
   filesToUpload: FileList;
   userId: number;
-  photos: Photo[];
+  photos: Photo[] = [];
 
   constructor(private photosService: PhotosService) {}
 
@@ -23,20 +23,24 @@ export class PhotoSliderComponent implements OnInit {
     this.photosService.getPhotos(this.userId)
       .subscribe(items => {
       this.photos = items;
-      console.log(items);
     });
   }
 
-  displayButton() {
-    document.getElementById('button').style.visibility = 'visible';
-  }
-
-  hideButton() {
-    document.getElementById('button').style.visibility = 'hidden';
-  }
+  // displayButton() {
+  //   document.getElementById('button').style.visibility = 'visible';
+  // }
+  //
+  // hideButton() {
+  //   document.getElementById('button').style.visibility = 'hidden';
+  // }
 
   deletePhoto(photoId: string) {
-    this.photosService.deletePhoto(photoId).subscribe();
+    this.photosService.deletePhoto(photoId).subscribe(() => {
+      this.photosService.getPhotos(this.userId)
+        .subscribe(items => {
+          this.photos = items;
+        });
+    });
   }
 
   fileChangeEvent(fileInput: any) {
@@ -57,7 +61,12 @@ export class PhotoSliderComponent implements OnInit {
     const fileBase64 = await this.toDataURL(file);
     const fileName = file.name;
     const fileRes = {base64: fileBase64, name: fileName};
-    this.photosService.uploadPhoto(fileRes, this.userId).subscribe();
+    this.photosService.uploadPhoto(fileRes, this.userId).subscribe(() => {
+      this.photosService.getPhotos(this.userId)
+        .subscribe(items => {
+          this.photos = items;
+        });
+    });
   }
 
   toDataURL(file) {

@@ -39,5 +39,4 @@ export class PhotosService {
   async remove(photoId: string): Promise<number> {
     return await this.photoModel.deleteOne({ '_id': photoId });
   }
-
 }

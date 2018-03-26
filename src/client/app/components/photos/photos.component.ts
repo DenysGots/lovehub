@@ -13,7 +13,6 @@ export class PhotosComponent implements OnInit {
 
   filesToUpload: FileList;
   userId: number;
-  avatars: Photo[];
   avatar: Photo;
   photos: Photo[];
 
@@ -42,7 +41,7 @@ export class PhotosComponent implements OnInit {
     const fileBase64 = await this.toDataURL(file);
     const fileName = file.name;
     const fileRes = {base64: fileBase64, name: fileName};
-    this.photosService.uploadAvatar(fileRes, this.userId).subscribe();
+    this.photosService.uploadAvatar(fileRes, this.userId).subscribe( () => this.getAva());
   }
 
   toDataURL(file) {
@@ -75,8 +74,8 @@ export class PhotosComponent implements OnInit {
     }
   }
 
-  deletePhoto(photoId) {
-    this.photosService.deletePhoto(photoId).subscribe();
-  }
+  // deletePhoto(photoId) {
+  //   this.photosService.deletePhoto(photoId).subscribe();
+  // }
 
 }
