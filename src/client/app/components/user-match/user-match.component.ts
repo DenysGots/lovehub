@@ -3,7 +3,7 @@ import {MatchingService} from '../../services/matching.service';
 import {User} from '../../models/user';
 import {Observable} from 'rxjs/Observable';
 import {UsersProfileService} from '../../services/users-profile.service';
-import {UserProfileDto} from "../../../../server/modules/api/users-profile/dto/user-profile.dto";
+import {UserProfileDto} from '../../../../server/modules/api/users-profile/dto/user-profile.dto';
 
 interface RadioParams {
   label: string;
