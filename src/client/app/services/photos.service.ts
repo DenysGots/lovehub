@@ -40,6 +40,7 @@ export class PhotosService {
   deletePhoto(photoId: string): Observable<any> {
     const url = `api/photos/${photoId}`;
     console.log(photoId);
+    confirm('Delete photo?');
     return this.http.delete<Photo>(url);
   }
 }
