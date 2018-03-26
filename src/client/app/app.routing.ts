@@ -30,8 +30,11 @@ export const routes = [
   { path: 'register-full', component: RegistrationFullComponent},
   { path: 'photo', component: PhotosComponent},
   { path: 'profile', component: ProfilePageComponent},
-  { path: 'admin', component: AdministratorUsersManagementComponent,
-    children: [{
+  { path: 'admin', component: AdministratorDashboardComponent,
+    children: [
+      {path: '', component: AdministratorDashboardComponent
+      },
+      {
       path: 'users-management' , component: AdministratorUsersManagementComponent
     }]
   },

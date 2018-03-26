@@ -36,9 +36,6 @@ export class UserProfile extends Model<UserProfile> {
   age: number;
 
   @Column
-  gender: string;
-
-  @Column
   photo: string;
   @Column(DataType.ENUM('MALE', 'FEMALE'))
   sex: SEX;

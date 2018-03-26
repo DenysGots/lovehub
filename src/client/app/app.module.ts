@@ -5,6 +5,8 @@ import {HttpClientModule, HttpHandler} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+
 import { routes } from './app.routing';
 
 import { HomeService } from './services/home.service';
@@ -136,6 +138,7 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCdhaZA2fOUM-rLoI95dNDssEdiaGiLDtM'
     }),
+    ChartsModule,
   ],
   providers: [
     PhotosService,
