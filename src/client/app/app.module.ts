@@ -61,6 +61,19 @@ import { CustomHttpClient } from './http-interceptors/custom-http-client';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 import { InlineEditComponent } from './components/user-profile-settings/inline-edit/inline-edit.component';
 import { CustomRenderService } from './services/custom-render.service';
+import {RecoverPasswordComponent} from './components/recover-password/recover-password.component';
+import {ResetPasswordComponent} from './components/reset-password/reset-password.component';
+import {ChatComponent} from './components/chat/chat.component';
+import {ChatUserComponent} from './components/chat-user/chat-user.component';
+import {DialogComponent} from './components/dialog/dialog.component';
+import {AdministratorFooterComponent} from './components/administrator/administrator-footer/administrator-footer.component';
+import {AdministratorHeaderComponent} from './components/administrator/administrator-header/administrator-header.component';
+import {AdministratorNavbarComponent} from './components/administrator/administrator-navbar/administrator-navbar.component';
+import {AdministratorDashboardComponent} from './components/administrator/administrator-dashboard/administrator-dashboard.component';
+import {AdministratorUsersManagementComponent} from './components/administrator/administrator-users-management/administrator-users-management.component';
+import {NotificationsComponent} from './components/notifications/notifications.component';
+import {InterestsComponent} from './components/interests/interests.component';
+import {RecoverPassService} from './services/recover-pass.service';
 
 @NgModule({
   declarations: [
@@ -142,4 +155,4 @@ import { CustomRenderService } from './services/custom-render.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
