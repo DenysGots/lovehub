@@ -17,10 +17,10 @@ export class RegistrationFullComponent implements OnInit {
   userProfile: UserProfile;
   enable = {step0: false, step1: false, step2: false, step3: false};
 
-  public constructor(private usersProfileService: UsersProfileService) {}
+  public constructor(private usersProfileService: UsersProfileService, private usersService: UsersService) {}
 
   ngOnInit() {
-    this.userProfile = new UserProfile(null, null, null, null, null, null, null, null);
+    this.userProfile = new UserProfile(null, null, null, null, null, null, null);
     this.user = new User(null, null, null);
   }
 
@@ -49,14 +49,13 @@ export class RegistrationFullComponent implements OnInit {
     this.userProfile.firstName = $event.firstName;
     this.userProfile.lastName = $event.lastName;
     this.userProfile.age = $event.age;
-    this.userProfile.location = $event.location;
     this.user.name = $event.firstName;
     this.user.email = $event.email;
     this.user.password = $event.password;
     this.enable.step3 = true;
     this.stage++;
     this.usersProfileService.registration(this.userProfile as UserProfile).subscribe();
-    // this.userService.registration(this.user as User).subscribe();
+    this.usersService.registration(this.user as User).subscribe();
     alert('Congratulation! You are registered!');
     console.log(this.userProfile);
     console.log(this.user);

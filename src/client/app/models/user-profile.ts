@@ -13,6 +13,7 @@ export class UserProfile {
   location: string;
   isBaned: boolean;
   isActive: boolean;
+  avatar: string;
   userId: User;
 
   constructor(id: number,
@@ -22,7 +23,8 @@ export class UserProfile {
               sex: string,
               orientation: string,
               preference: string,
-              location: string ) {
+              location: string,
+              avatar: string = null) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -31,5 +33,6 @@ export class UserProfile {
     this.orientation = orientation;
     this.preference = preference;
     this.location = location;
+    this.avatar = avatar;
   }
 }

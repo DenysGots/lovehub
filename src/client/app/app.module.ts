@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule } from '@angular/router';
 import {HttpClientModule, HttpHandler} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { routes } from './app.routing';
 
@@ -13,11 +14,18 @@ import { UsersService } from './services/users.service';
 import { UsersProfileService } from './services/users-profile.service';
 import { RequestCache, RequestCacheWithMap } from './services/request-cashe.service';
 import { httpInterceptorProviders } from './http-interceptors';
+import { AdministratorService } from './services/administrator.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthErrorHandlerService } from './services/auth-error-handler.service';
+import { NotificationsService } from './services/notifications.service';
+import { InterestsService } from './services/interests.service';
+
+import { ChatService } from './services/chat.service';
+import { WebsocketService } from './services/websocket.service';
 
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
+import { MultilinePipe } from './pipes/multiline.pipe';
 
 import { AppComponent } from './app.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -28,6 +36,7 @@ import { Step0Component } from './components/registration-full/step0/step0.compo
 import { Step1Component } from './components/registration-full/step1/step1.component';
 import { Step2Component } from './components/registration-full/step2/step2.component';
 import { Step3Component } from './components/registration-full/step3/step3.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
 import { UserFilterComponent } from './components/user-filter/user-filter.component';
@@ -42,14 +51,13 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
 import { LogoutComponent } from './components/login/logout.component';
 
-import { UserMatchComponent } from './components/user-match/user-match.component';
-import { AgmCoreModule } from '@agm/core';
-import { MatchingService } from './services/matching.service';
+import {UserMatchComponent} from './components/user-match/user-match.component';
+import {AgmCoreModule} from '@agm/core';
+import {MatchingService} from './services/matching.service';
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
 import { providerCustomHttpClient } from './http-interceptors/providers';
 import { CustomHttpClient } from './http-interceptors/custom-http-client';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 import { InlineEditComponent } from './components/user-profile-settings/inline-edit/inline-edit.component';
 import { CustomRenderService } from './services/custom-render.service';
@@ -75,8 +83,21 @@ import { CustomRenderService } from './services/custom-render.service';
     PagerComponent,
     UserProfileComponent,
     UsersProfileOrderByPipe,
+    MultilinePipe,
     UserMatchComponent,
+    RecoverPasswordComponent,
+    ResetPasswordComponent,
+    ChatComponent,
+    ChatUserComponent,
+    DialogComponent,
+    AdministratorFooterComponent,
+    AdministratorHeaderComponent,
+    AdministratorNavbarComponent,
+    AdministratorDashboardComponent,
+    AdministratorUsersManagementComponent,
     ForbiddenComponent,
+    NotificationsComponent,
+    InterestsComponent,
     LogoutComponent,
     UserProfileSettingsComponent,
     InlineEditComponent,
@@ -103,6 +124,8 @@ import { CustomRenderService } from './services/custom-render.service';
     WindowService,
     UsersService,
     UsersProfileService,
+    WebsocketService,
+    ChatService,
     MatchingService,
     { provide: 'IUserStorage', useClass: UserLocalStorageService},
     { provide: RequestCache, useClass: RequestCacheWithMap },
@@ -110,9 +133,12 @@ import { CustomRenderService } from './services/custom-render.service';
     httpInterceptorProviders,
     AuthService,
     AuthGuard,
-    AuthProfileGuardService,
     AuthErrorHandlerService,
     CustomRenderService,
+    AdministratorService,
+    RecoverPassService,
+    NotificationsService,
+    InterestsService
   ],
   bootstrap: [AppComponent]
 })

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { NavigationService } from '../../services/navigation.service';
 import { WindowService } from '../../services/window.service';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { LoggedInUser } from '../login/logged-in-user';
 import { Observable } from 'rxjs/Observable';
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit {
   logo = '/assets/img/logo3.png';
   public isLoggedIn: boolean;
   public loggedInUser: LoggedInUser;
+  router: any;
 
   @ViewChild('header') elementView: ElementRef;
 
@@ -23,7 +25,11 @@ export class HeaderComponent implements OnInit {
     private navService: NavigationService,
     private windowService: WindowService,
     private authService: AuthService,
-  ) { }
+    _router: Router
+  ) {
+    this.router = _router;
+  }
+
 
   ngOnInit() {
     const headerHeight = this.elementView.nativeElement.offsetHeight;

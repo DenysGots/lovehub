@@ -1,4 +1,4 @@
-import {Catch, ExceptionFilter, HttpException, HttpStatus} from '@nestjs/common';
+import { Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 import {MessageCodeError} from '../error/MessageCodeError';
 
 @Catch()
