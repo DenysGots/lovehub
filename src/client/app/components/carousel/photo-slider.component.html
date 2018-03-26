@@ -1,35 +1,14 @@
-
-<!--<div style="margin: 2em" class="container">-->
-
-  <!--<carousel #carousel="carousel" [showControls]="false">-->
-    <!--<ng-container *ngFor="let item of items;">-->
-      <!--<ng-container *carouselItem>-->
-        <!--<div class="item">{{item.title}}</div>-->
-      <!--</ng-container>-->
-    <!--</ng-container>-->
-  <!--</carousel>-->
-
-
-  <!--<div style="margin-top: 1em;">-->
-    <!--<a (click)="carousel.next()" class="btn btn-success">Next</a>-->
-    <!--<a (click)="carousel.prev()" class="btn btn-success">Prev</a>-->
-  <!--</div>-->
-
-  <!--<button (click)="addSlide()">Add Slide</button>-->
-
-<!--</div>-->
-
-
-<ui-carousel [infinite]="false" [fade]="true" [arrows]="true" [speed]="500" height="300px" width="90%" (mouseover)="displayButton()" (mouseout)="hideButton()">
-
-  <ng-container *ngFor="let photo of photos;">
-    <ui-carousel-item>
-      <div style="background:#F44336" class="text">{{photo.title}}</div>
-    </ui-carousel-item>
-  </ng-container>
-
-  <div id="button" class="button" (click)="addPhoto()">
-    New photo
-    <input type="file" (change)="fileChangeEvent($event)"/>
+<div>
+  <div class="buttons">
+    <button>Add photo
+      <input type="file" (change)="fileChangeEvent($event)"/>
+    </button>
+    <!--<button #photo>Delete photo</button>-->
   </div>
-</ui-carousel>
+
+  <div class="photos-container">
+    <ng-container *ngFor="let photo of photos;">
+        <img class="image" [src]="photo.base64" id="photo" (click)="deletePhoto(photo._id)">
+    </ng-container>
+  </div>
+</div>

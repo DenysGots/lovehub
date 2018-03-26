@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Delete, Body, Param, HttpCode, Request, Response, HttpStatus, Headers } from '@nestjs/common';
 import { PhotosService } from './photos.service';
 import { CreatePhotoDto } from './dto/create-photo.dto';
+import { Photo } from './interfaces/photo.interface';
 
 
 @Controller('api')
@@ -27,28 +28,45 @@ export class PhotosController {
     res.status(HttpStatus.OK).json({data: 'success'});
   }
 
-  // @HttpCode(200)
-  // // @Headers('image/png')
-  // @Get('/photos/users/:id')
-  // async findById(@Param() params): Promise<any> {
-  //   const src = this.photosService.findById(params.id);
-  //   return await src;
-  // }
-
   @HttpCode(200)
-  // @Headers('image/png')
-  @Get('/photos/users/:id')
-  async findAll(@Param() params): Promise<any[]> {
-    const src = this.photosService.findAll();
-    console.log(src);
-    return await src;
+  @Get('/photos/:photoId')
+  async findById(@Param() params): Promise<Photo> {
+    if (params.photoId) {
+      return await this.photosService.findByPhotoId(params.photoId);
+    } else {
+      console.log('There is no photoId');
+    }
   }
 
-  // @HttpCode(204)
-  // @Delete(':id')
-  // async removeById(@Param() params): Promise<{statusCode: number}> {
-  //   const affected = await this.photosService.remove(params.id);
-  //   return {statusCode: affected};
-  // }
+  @HttpCode(200)
+  @Get('/photos/users/:userId')
+  async findAllByUserId(@Param() params): Promise<Photo[]> {
+    if (params.userId) {
+      return await this.photosService.findAllByUserId(params.userId);
+    } else {
+      console.log('There is no userId');
+    }
+  }
+
+  @HttpCode(200)
+  @Get('/photos/users/:userId/avatar')
+  async findAvatarByUserId(@Param() params): Promise<Photo> {
+    if (params.userId) {
+      return await this.photosService.findAvatarByUserId(params.userId);
+    } else {
+      console.log('There is no userId');
+    }
+  }
+
+  @HttpCode(204)
+  @Delete('/photos/:photoId')
+  async removePhoto(@Param() params): Promise<{statusCode: number}> {
+    if (params.photoId) {
+      const affected = await this.photosService.remove(params.photoId);
+      return {statusCode: affected};
+    } else {
+      console.log('There is no photoId');
+    }
+  }
 
 }

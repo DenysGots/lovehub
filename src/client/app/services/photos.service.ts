@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap} from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
+import { Photo } from '../models/photo';
 
 
 const httpOptions = {
@@ -26,10 +27,19 @@ export class PhotosService {
     return this.http.post<any>(url, {data: file}, httpOptions);
   }
 
-
-  getPhoto(): Observable<any> {
-    const url = 'api/photos/id';
-    return this.http.get<any>(url);
+  getPhotos(userId: number): Observable<Photo[]> {
+    const url = `api/photos/users/${userId}`;
+    return this.http.get<Photo[]>(url);
   }
 
+  getAvatar(userId: number): Observable<Photo> {
+    const url = `api/photos/users/${userId}/avatar`;
+    return this.http.get<Photo>(url);
+  }
+
+  deletePhoto(photoId: string): Observable<any> {
+    const url = `api/photos/${photoId}`;
+    console.log(photoId);
+    return this.http.delete<Photo>(url);
+  }
 }

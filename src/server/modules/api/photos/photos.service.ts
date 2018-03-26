@@ -4,6 +4,7 @@ import { Component, Inject } from '@nestjs/common';
 import { Photo } from './interfaces/photo.interface';
 import { CreatePhotoDto } from './dto/create-photo.dto';
 
+
 @Component()
 export class PhotosService {
   constructor(
@@ -14,24 +15,29 @@ export class PhotosService {
     return await createdPhoto.save();
   }
 
-  async findAll(): Promise<Photo[]> {
-    return await this.photoModel.find();
+  async findAllByUserId(userId: number): Promise<Photo[]> {
+    console.log(userId);
+    return this.photoModel.find({ 'userId': userId, 'avatar': false });
   }
 
-  async findById(id: string): Promise<string> {
+  async findAvatarByUserId(userId: number): Promise<Photo> {
+    console.log(userId);
+    return this.photoModel.findOne({ 'userId': userId, 'avatar': true }).sort({time: -1});
+  }
+
+  async findByPhotoId(photoId: string): Promise<Photo> {
     try {
-      if (id.match(/^[0-9a-fA-F]{24}$/)) {
-        const photo = await this.photoModel.findById(id);
-        return photo.base64;
+      if (photoId.match(/^[0-9a-fA-F]{24}$/)) {
+        return await this.photoModel.findById(photoId);
       }
     } catch (error) {
-      console.error(`Arise an exception in the findById(${id}) method Photos Service`);
+      console.error(`Arise an exception in the findById(${photoId}) method Photos Service`);
       throw error;
     }
   }
 
-  async remove(id: string): Promise<number> {
-    return await this.photoModel.deleteOne({where: {id: id}});
+  async remove(photoId: string): Promise<number> {
+    return await this.photoModel.deleteOne({ '_id': photoId });
   }
 
 }

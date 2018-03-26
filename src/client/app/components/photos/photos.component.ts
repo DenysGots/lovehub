@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotosService } from '../../services/photos.service';
+import { Photo } from '../../models/photo';
 import * as jwt_decode from 'jwt-decode';
+import 'rxjs/add/operator/map';
 
 @Component({
-  selector: 'app-upload-photo',
+  selector: 'app-upload-avatar',
   templateUrl: './photos.component.html',
   styleUrls: ['./photos.component.scss']
 })
@@ -11,12 +13,17 @@ export class PhotosComponent implements OnInit {
 
   filesToUpload: FileList;
   userId: number;
+  avatars: Photo[];
+  avatar: Photo;
+  photos: Photo[];
 
   constructor(private photosService: PhotosService) {}
 
   ngOnInit() {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
+    this.getAva();
   }
+
   fileChangeEvent(fileInput: any) {
     this.filesToUpload = <FileList>fileInput.target.files;
     if (this.filesToUpload) {
@@ -36,7 +43,6 @@ export class PhotosComponent implements OnInit {
     const fileName = file.name;
     const fileRes = {base64: fileBase64, name: fileName};
     this.photosService.uploadAvatar(fileRes, this.userId).subscribe();
-    this.displayPhotos();
   }
 
   toDataURL(file) {
@@ -48,13 +54,29 @@ export class PhotosComponent implements OnInit {
     });
   }
 
-  displayPhotos() {
-    const base64 = this.photosService.getPhoto().subscribe();
-    console.log(base64);
-    const img = new Image();
-    img.src = '';
-    document.getElementById('profile-photo').style.backgroundImage = 'url(\'' + img.src + '\')';
+  getAva() {
+    this.photosService.getAvatar(this.userId)
+      .subscribe(avatar => {
+        this.avatar = avatar;
+        console.log(this.avatar);
+        this.displayAvatar();
+      });
   }
 
+  displayAvatar() {
+    const obj = this.avatar;
+    if (obj) {
+      const img = new Image();
+      img.src = obj.base64;
+      document.getElementById('profile-photo').style.backgroundImage = 'url(\'' + img.src + '\')';
+    } else {
+      document.getElementById('profile-photo').style.backgroundImage =
+        'url(https://kiittnp.in/8134d463acc8c7b66744a481847ab4b/assets/img/user.png)';
+    }
+  }
+
+  deletePhoto(photoId) {
+    this.photosService.deletePhoto(photoId).subscribe();
+  }
 
 }
