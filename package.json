@@ -22,7 +22,7 @@
     "@angular/animations": "^5.2.4",
     "@angular/common": "^5.2.4",
     "@angular/compiler": "^5.2.4",
-    "@angular/core": "^5.2.9",
+    "@angular/core": "^5.2.4",
     "@angular/forms": "^5.2.4",
     "@angular/http": "^5.2.4",
     "@angular/platform-browser": "^5.2.4",
@@ -58,7 +58,8 @@
     "sequelize-typescript": "^0.6.2",
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.0.4",
-    "zone.js": "^0.8.20"
+    "zone.js": "^0.8.20",
+    "nodemailer": "^4.6.0"
   },
   "devDependencies": {
     "@angular-devkit/core": "^0.3.1",

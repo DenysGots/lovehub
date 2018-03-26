@@ -1,7 +1,7 @@
 import { Injectable, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
-function _window() : any {
+function _window(): any {
    return window;
 }
 

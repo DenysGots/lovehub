@@ -5,7 +5,7 @@ import { UserProfile } from '../models/user-profile';
 import { Observable } from 'rxjs/Observable';
 import { catchError, map, tap } from 'rxjs/operators';
 import {ErrorObservable} from 'rxjs/observable/ErrorObservable';
-import { UserCredentialsError } from '../components/login/UserCredentialsError';
+import { UserCredentialsError } from '../../../shared/UserCredentialsError';
 
 @Injectable()
 export class LoginService {

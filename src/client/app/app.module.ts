@@ -63,6 +63,9 @@ import { InterestsComponent } from './components/interests/interests.component';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { RecoverPassService} from './services/recover-pass.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatUserComponent } from './components/chat-user/chat-user.component';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -92,6 +95,8 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     UsersProfileOrderByPipe,
     MultilinePipe,
     UserMatchComponent,
+    RecoverPasswordComponent,
+    ResetPasswordComponent,
     ChatComponent,
     ChatUserComponent,
     DialogComponent,
@@ -138,6 +143,7 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     AuthGuard,
     AuthErrorHandlerService,
     AdministratorService,
+    RecoverPassService,
     NotificationsService,
     InterestsService
   ],
