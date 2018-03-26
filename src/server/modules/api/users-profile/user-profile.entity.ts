@@ -58,6 +58,12 @@ export class UserProfile extends Model<UserProfile> {
   @Column
   isActive: boolean;
 
+  @Column
+  registrationDate: Date;
+
+  @Column
+  lastActiveDate: Date;
+
   @ForeignKey(() => User)
   @Column
   userId: number;

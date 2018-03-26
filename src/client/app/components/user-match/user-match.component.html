@@ -12,13 +12,13 @@
         </div>
       </div>
       <div class="Profile__container">
-        <div class="profile" style="width:400px" *ngFor="let user of users$ | async">
+        <div class="profile" style="width:400px" *ngFor="let user of users$">
           <img class="profile-img-top"
-               src={{user.image}}
+               src={{user.age}}
                alt="profile image" style="width:100%">
           <div class="profile-body">
-            <h4 class="profile-title">{{user.name}}</h4>
-            <p class="profile-text">{{user.description}}</p>
+            <h4 class="profile-title">{{user.firstName}}</h4>
+            <p class="profile-text">{{user.lastName}}</p>
             <a href="#" class="btn btn-primary">See Profile</a>
           </div>
         </div>

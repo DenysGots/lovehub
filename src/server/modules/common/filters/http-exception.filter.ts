@@ -5,11 +5,12 @@ import {MessageCodeError} from '../error/MessageCodeError';
 export class HttpExceptionFilter implements ExceptionFilter {
 
   catch(exception: any, response: any): any {
-    console.log('Exception ', exception);
-    const status = exception.httpStatus ? exception.httpStatus : HttpStatus.EXPECTATION_FAILED;
+    const status = exception.httpStatus;
+    console.log(exception);
 
     response
-      .status(status)
+      //  .status(status)
+      .status(HttpStatus.BAD_REQUEST)
       .json({
         statusCode: status,
         message: exception.errorMessage

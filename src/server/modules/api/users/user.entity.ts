@@ -1,6 +1,7 @@
 import * as crypto from 'crypto';
-import { AutoIncrement, BeforeCreate, Column, DataType, HasOne, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import { AutoIncrement, BeforeCreate, Column, DataType, HasOne, Model, PrimaryKey, Table, HasMany, BelongsTo, BelongsToMany } from 'sequelize-typescript';
 import { UserProfile } from '../users-profile/user-profile.entity';
+import { ChatList } from '../chat-list/chat-list.entity';
 
 @Table({tableName: 'Users'})
 export class User extends Model<User> {
@@ -35,6 +36,9 @@ export class User extends Model<User> {
 
   @HasOne(() => UserProfile)
   userProfile: UserProfile;
+
+
+
 /*
   @BeforeCreate
   public static async hashPassword(user: User, options: any) {

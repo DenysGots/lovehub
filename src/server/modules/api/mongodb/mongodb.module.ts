@@ -5,5 +5,4 @@ import { mongodbProviders } from './mongodb.providers';
   components: [...mongodbProviders],
   exports: [...mongodbProviders],
 })
-export class MongodbModule {
-}
+export class MongodbModule {}
