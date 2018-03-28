@@ -4,6 +4,7 @@ import { PreloadAllModules, RouterModule } from '@angular/router';
 import {HttpClientModule, HttpHandler} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { routes } from './app.routing';
@@ -53,6 +54,15 @@ import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
 import {MatchingService} from './services/matching.service';
 
+import { PhotosService } from './services/photos.service';
+import { PhotosComponent } from './components/photos/photos.component';
+import { PhotoSliderComponent } from './components/carousel/photo-slider.component';
+
+import { ProfilePageComponent } from './components/profile-page/profile-page.component';
+import { LeftPartComponent } from './components/profile-page/left-part/left-part.component';
+import { RightPartComponent } from './components/profile-page/right-part/right-part.component';
+
+// test
 import { AdministratorFooterComponent } from './components/administrator/administrator-footer/administrator-footer.component';
 import { AdministratorHeaderComponent } from './components/administrator/administrator-header/administrator-header.component';
 import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
@@ -63,6 +73,9 @@ import { InterestsComponent } from './components/interests/interests.component';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { RecoverPassService} from './services/recover-pass.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatUserComponent } from './components/chat-user/chat-user.component';
 import { DialogComponent } from './components/dialog/dialog.component';
@@ -88,10 +101,12 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     FooterComponent,
     SliderComponent,
     PagerComponent,
-    UserProfileComponent,
     UsersProfileOrderByPipe,
+    UserProfileComponent,
     MultilinePipe,
     UserMatchComponent,
+    RecoverPasswordComponent,
+    ResetPasswordComponent,
     ChatComponent,
     ChatUserComponent,
     DialogComponent,
@@ -101,6 +116,11 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     AdministratorDashboardComponent,
     AdministratorUsersManagementComponent,
     ForbiddenComponent,
+    PhotosComponent,
+    ProfilePageComponent,
+    LeftPartComponent,
+    RightPartComponent,
+    PhotoSliderComponent,
     NotificationsComponent,
     InterestsComponent
   ],
@@ -118,9 +138,10 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCdhaZA2fOUM-rLoI95dNDssEdiaGiLDtM'
     }),
-    ChartsModule
+    ChartsModule,
   ],
   providers: [
+    PhotosService,
     NavigationService,
     HomeService,
     LoginService,
@@ -138,6 +159,7 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     AuthGuard,
     AuthErrorHandlerService,
     AdministratorService,
+    RecoverPassService,
     NotificationsService,
     InterestsService
   ],

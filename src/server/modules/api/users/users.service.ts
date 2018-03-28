@@ -33,8 +33,16 @@ export class UsersService {
     return await this.userRepository.destroy({where: {id: id}});
   }
 
-  async findByEmail(email: string, password: string): Promise<User> {
+  async updatePass(newPass: string, id: number) {
+    return await this.userRepository.update({password: newPass}, {where: {id}});
+  }
+
+  async findByEmailAndPass(email: string, password: string): Promise<User> {
     return await this.userRepository.findOne<User>({where: {email, password}, include: [UserProfile]});
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    return await this.userRepository.findOne<User>({where: {email}});
   }
 
 }

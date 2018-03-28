@@ -6,4 +6,3 @@ import { mongodbProviders } from './mongodb.providers';
   exports: [...mongodbProviders],
 })
 export class MongodbModule {}
-
