@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { EventEmitter } from 'events';
 import { ChatService } from '../../services/chat.service';
 
@@ -14,6 +14,7 @@ export class DialogComponent implements OnInit {
   text: String = '';
   chatId: Number = null;
 
+  @ViewChild('scrollChat') private scrollChat: ElementRef;
   @Input() messages: Array<object>;
 
   constructor( private chat: ChatService) {}
@@ -24,6 +25,18 @@ export class DialogComponent implements OnInit {
     });
 
     this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
+
+    this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {        
+    this.scrollToBottom();        
+  } 
+
+  scrollToBottom(): void {
+      try {
+          this.scrollChat.nativeElement.scrollTop = this.scrollChat.nativeElement.scrollHeight;
+      } catch(err) { }                 
   }
 
   sendMes(mes){
