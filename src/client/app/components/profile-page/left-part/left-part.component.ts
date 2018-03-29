@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationService } from '../../../services/navigation.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftPartComponent implements OnInit {
 
-  constructor() { }
+  profileMenu: object[];
 
-  ngOnInit() {
+  constructor(
+    private navService: NavigationService,
+    public router: Router
+  ) {
   }
 
+  ngOnInit() {
+    this.getProfileMenu();
+  }
+
+  getProfileMenu(): void {
+    this.profileMenu = this.navService.getProfileMenuItems();
+  }
 }

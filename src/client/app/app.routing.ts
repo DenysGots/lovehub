@@ -6,7 +6,6 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UserMatchComponent } from './components/user-match/user-match.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegistrationFullComponent } from './components/registration-full/registration-full.component';
-import { PhotosComponent } from './components/photos/photos.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import {ResetPasswordComponent} from './components/reset-password/reset-password.component';
@@ -23,12 +22,10 @@ export const routes = [
   { path: 'login', component: LoginComponent },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: 'home', component: HomeComponent },
-  // { path: 'user-profile', component: UserProfileComponent },
   { path: 'user-match', component: UserMatchComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
-  { path: 'photo', component: PhotosComponent},
   { path: 'profile', component: ProfilePageComponent},
   { path: 'admin', component: AdministratorDashboardComponent,
     children: [
