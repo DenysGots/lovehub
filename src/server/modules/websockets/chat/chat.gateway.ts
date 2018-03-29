@@ -25,14 +25,12 @@ export class ChatGateway{
   @SubscribeMessage('send')
   getNewMessage(client, data) {
     const {chat, message}= JSON.parse(data).data;
-    console.log('a', chat, message)
     
     this.messagesService.create(chat.chatId, message as CreateMessageDto);
+    this.notifService.sendNotification(chat, message);
 
     client.to(chat.chatId).emit('resFromServer', message);
 
-    this.notifService.sendNotification(chat, message);
-    
     return { event: 'resFromServer', data: message};
   }
 }

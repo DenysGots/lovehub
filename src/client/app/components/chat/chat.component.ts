@@ -34,7 +34,6 @@ export class ChatComponent implements OnInit {
     });
     
     this.chat.socket.subscribe(data => {
-      console.log('data', data);
       this.messages = [...this.messages, data];
     });
   }
