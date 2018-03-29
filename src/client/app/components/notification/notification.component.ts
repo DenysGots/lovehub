@@ -15,17 +15,14 @@ export class NotificationComponent implements OnInit {
   ngOnInit() {
     const userId = jwt_decode(localStorage.getItem('jwt_token')).id;
 
-    console.log('1');
     this.notifService.connect(userId);
 
-    this.notifService.getNotifications().subscribe(data => {
-        Notification.requestPermission((permission) => {
-          const n = new Notification(`New message`,  {
-            // body: data.data.text
-          });
+    this.notifService.getNotifications().subscribe((data: any) => {
+      const n = new Notification(data.title,  {
+        body: data.text
+      });
 
-          setTimeout(n.close.bind(n), 3000); 
-        });
+      setTimeout(n.close.bind(n), 3000); 
     });
 
   }

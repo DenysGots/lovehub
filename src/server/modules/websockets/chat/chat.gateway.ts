@@ -31,7 +31,7 @@ export class ChatGateway{
 
     client.to(chat.chatId).emit('resFromServer', message);
 
-    //this.notifService.sendNotification(chat, message);
+    this.notifService.sendNotification(chat, message);
     
     return { event: 'resFromServer', data: message};
   }

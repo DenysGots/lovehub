@@ -15,8 +15,6 @@ export class NotificationGateway implements OnGatewayDisconnect{
 
   @SubscribeMessage('notifications')
   setNotifications(client, userId) {
-    console.log('subscribe', userId)
-
     this.notifService.connect(client, userId);
   }
 }
