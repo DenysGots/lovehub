@@ -1,9 +1,9 @@
 import * as mongoose from 'mongoose';
 
-const MessageSchema = mongoose.Schema({
+const MessageSchema = new mongoose.Schema({
         userId: Number,
         text: String
-},{ _id : false });
+}, { _id : false });
 
 export const ChatSchema = new mongoose.Schema({
   chatId: Number,

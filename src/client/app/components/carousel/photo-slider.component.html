@@ -1,0 +1,14 @@
+<div>
+  <div class="buttons">
+    <button>Add photo
+      <input type="file" (change)="fileChangeEvent($event)"/>
+    </button>
+    <!--<button #photo>Delete photo</button>-->
+  </div>
+
+  <div class="photos-container">
+    <ng-container *ngFor="let photo of photos;">
+        <img class="image" [src]="photo.base64" id="photo" (click)="deletePhoto(photo._id)">
+    </ng-container>
+  </div>
+</div>

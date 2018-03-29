@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../models/user';
 
 import { HttpClient } from '@angular/common/http';
+import {UserProfileDto} from "../../../server/modules/api/users-profile/dto/user-profile.dto";
 
 @Injectable()
 export class MatchingService {
@@ -18,7 +19,8 @@ export class MatchingService {
     if (!term.trim()) {
       return of([]);
     }
-    return this.http.get<User[]>(`api/users/?name=${term}`).pipe(
+    return this.http.get<User[]>(`api/users?name=${term}`)
+      .pipe(
       tap(_ => console.log(`found users matching "${term}"`)),
       catchError(this.handleError<User[]>('matchUser', []))
     );
@@ -31,13 +33,14 @@ export class MatchingService {
     };
   }
 
-  matchUsers(term: string): Observable<string[]> {
+  matchUsers(term: string): Observable<any> {
     if (!term.trim()) {
       return of([]);
     }
-    return this.http.get<string[]>(`api/matching/?name=${term}`).pipe(
+    return this.http.get<any>(`api/matching?preference=${term}`)
+      .pipe(
       tap(_ => console.log(`found users matching "${term}"`)),
-      catchError(this.handleError<string[]>('matchUser', []))
+      catchError(this.handleError<any>('matchUser', []))
     );
   }
 }

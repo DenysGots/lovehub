@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {MatchingService} from '../../services/matching.service';
 import {User} from '../../models/user';
 import {Observable} from 'rxjs/Observable';
+import {UsersProfileService} from '../../services/users-profile.service';
+import {UserProfileDto} from "../../../../server/modules/api/users-profile/dto/user-profile.dto";
 
 interface RadioParams {
   label: string;
@@ -16,14 +18,15 @@ export class UserMatchComponent implements OnInit {
   lat = 51.678418;
   lng = 7.809007;
   radioParams: RadioParams[] = [
-    {label: 'For  Date', value: 'forDate'},
-    {label: 'For  Friend', value: 'forFriend'},
-    {label: 'For  Party', value: 'forParty'}
+    {label: 'For  Date', value: 'DATE'},
+    {label: 'For  Friend', value: 'FRIENDS'},
+    {label: 'For  Party', value: 'PARTY'}
   ];
-  users$: Observable<string[]>;
+  users$: any[];
   // users$: Observable<User[]>;
 
-  constructor(private matchingService: MatchingService) { }
+  constructor(private matchingService: MatchingService,
+              private usersProfileService: UsersProfileService) { }
 
   ngOnInit() {
     if (navigator.geolocation) {
@@ -34,6 +37,9 @@ export class UserMatchComponent implements OnInit {
   filter(value) {
     // this.users$ = this.matchingService.searchUsers(value);
     console.log('test');
-    this.users$ = this.matchingService.matchUsers(value);
+    this.matchingService.matchUsers(value).subscribe(users => {
+      this.users$ = users.rows;
+      console.log(users.rows);
+    });
   }
 }

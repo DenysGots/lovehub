@@ -22,7 +22,8 @@ const app = express();
 
 async function bootstrap() {
 
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({limit: '50mb'}));
+  // app.use(bodyParser({limit: '50mb'}).json());
 
   if (process.env.NODE_ENV === 'production') {
     serverRender(app);
