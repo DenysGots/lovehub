@@ -8,6 +8,7 @@ import { UsersProfileModule } from '../users-profile/users-profile.module';
 @Module({
   imports: [DatabaseModule, UsersProfileModule],
   controllers: [ChatListController],
-  components: [ ChatListService, ...chatListProviders]
+  components: [ ChatListService, ...chatListProviders],
+  exports: [ChatListService]
 })
 export class ChatListModule {}

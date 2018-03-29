@@ -27,14 +27,18 @@ export class DialogComponent implements OnInit {
   }
 
   sendMes(mes){
-    const message = {
-      chatId: this.chatId,
+    const newMessage = {
+      chat: {
+        chatId: this.chatId,
+        friendId: this.chat.getFriend(this.chatId, this.userId)
+      },
       message: {
         userId: this.userId,
         text: this.text
       }
     };
-    this.chat.sendMessage(message);
+
+    this.chat.sendMessage(newMessage);
     this.text = '';
   }
 

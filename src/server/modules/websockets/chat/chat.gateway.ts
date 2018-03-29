@@ -1,14 +1,19 @@
-import { WebSocketGateway, SubscribeMessage } from '@nestjs/websockets';
+import { WebSocketGateway, SubscribeMessage, OnGatewayConnection } from '@nestjs/websockets';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 import { CreateMessageDto } from '../../api/chat-messages/dto/create-message.dto';
 import { ChatMessagesService } from '../../api/chat-messages/chat-messages.service';
+import { NotificationService } from '../notification/notification.service';
 
 @WebSocketGateway({namespace: 'chat'})
 export class ChatGateway{
+  connected = [];
 
-  constructor(private messagesService: ChatMessagesService){}
+  constructor(
+    private messagesService: ChatMessagesService,
+    private notifService: NotificationService){}
 
+  
   @SubscribeMessage('changeRoom')
   changeRoom(client, data) {
     const chat = JSON.parse(data);
@@ -19,13 +24,15 @@ export class ChatGateway{
 
   @SubscribeMessage('send')
   getNewMessage(client, data) {
-    const parsedData = JSON.parse(data);
-    const res = parsedData.data;
-
-    this.messagesService.create(res.chatId, res.message as CreateMessageDto);
-
-    client.to(parsedData.chatId).emit('resFromServer', res.message);
+    const {chat, message}= JSON.parse(data).data;
+    console.log('a', chat, message)
     
-    return { event: 'resFromServer', data: res.message};
+    this.messagesService.create(chat.chatId, message as CreateMessageDto);
+
+    client.to(chat.chatId).emit('resFromServer', message);
+
+    //this.notifService.sendNotification(chat, message);
+    
+    return { event: 'resFromServer', data: message};
   }
 }

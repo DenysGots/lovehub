@@ -11,12 +11,14 @@ export class WebsocketService {
   constructor() { }
 
   connect(): Rx.Subject<MessageEvent> {
-    this.socket = io(environment.CHAR_URL);
+    this.socket = io(`${environment.CHAR_URL}/chat`);
 
     let observable = new Observable(observer => {
         this.socket.on('resFromServer', (data) => {
+          console.log('here');
           observer.next(data);
-        })
+        });
+        
         return () => {
           this.socket.disconnect();
         };

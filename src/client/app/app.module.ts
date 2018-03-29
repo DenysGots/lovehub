@@ -24,6 +24,7 @@ import { InterestsService } from './services/interests.service';
 
 import { ChatService } from './services/chat.service';
 import { WebsocketService } from './services/websocket.service';
+import { NotificationService } from './services/notification.service';
 
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 import { MultilinePipe } from './pipes/multiline.pipe';
@@ -70,6 +71,7 @@ import { AdministratorDashboardComponent } from './components/administrator/admi
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { InterestsComponent } from './components/interests/interests.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
@@ -122,7 +124,8 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     RightPartComponent,
     PhotoSliderComponent,
     NotificationsComponent,
-    InterestsComponent
+    InterestsComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -161,7 +164,8 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     AdministratorService,
     RecoverPassService,
     NotificationsService,
-    InterestsService
+    InterestsService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
