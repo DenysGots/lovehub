@@ -7,7 +7,7 @@ import {Photo} from '../../models/photo';
 @Component({
   selector: 'app-photo-slider',
   templateUrl: './photo-slider.component.html',
-  styleUrls: ['./carousel.component.scss']
+  styleUrls: ['./photo-slider.component.scss']
 })
 
 export class PhotoSliderComponent implements OnInit {
@@ -22,8 +22,8 @@ export class PhotoSliderComponent implements OnInit {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
     this.photosService.getPhotos(this.userId)
       .subscribe(items => {
-      this.photos = items;
-    });
+        this.photos = items;
+      });
   }
 
   // displayButton() {

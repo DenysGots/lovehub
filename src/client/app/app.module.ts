@@ -56,7 +56,7 @@ import {MatchingService} from './services/matching.service';
 
 import { PhotosService } from './services/photos.service';
 import { PhotosComponent } from './components/photos/photos.component';
-import { PhotoSliderComponent } from './components/carousel/photo-slider.component';
+import { PhotoSliderComponent } from './components/photo-slider/photo-slider.component';
 
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { LeftPartComponent } from './components/profile-page/left-part/left-part.component';
