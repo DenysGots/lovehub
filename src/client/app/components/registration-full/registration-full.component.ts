@@ -20,7 +20,8 @@ export class RegistrationFullComponent implements OnInit {
   public constructor(private usersProfileService: UsersProfileService, private usersService: UsersService) {}
 
   ngOnInit() {
-    this.userProfile = new UserProfile(null, null, null, null, null, null, null);
+    this.userProfile = new UserProfile(
+      null, null, null,  null, null, null, null, null, null);
     this.user = new User(null, null, null);
   }
 

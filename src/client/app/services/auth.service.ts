@@ -116,9 +116,8 @@ export class AuthService {
 
     const user = {
       userId: parseInt(decoded.id),
-      userRole: decoded.role,
-      firstName: decoded.firstName,
-      lastName: decoded.lastName,
+      name: decoded.name,
+      email: decoded.email,
     };
 
     return user;

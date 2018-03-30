@@ -25,10 +25,8 @@ export class AuthService implements IAuthService {
 
     const payload = {
       id: user.id,
+      name: user.name,
       email: user.email,
-      firstName: user.userProfile.firstName,
-      lastName: user.userProfile.lastName,
-      role: user.userProfile.role,
     };
 
     return await jwt.sign(payload, process.env.JWT_KEY || 'secretKey', this.options);

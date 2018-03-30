@@ -9,9 +9,9 @@ import { RegistrationFullComponent } from './components/registration-full/regist
 import { PhotosComponent } from './components/photos/photos.component';
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
-import {ResetPasswordComponent} from './components/reset-password/reset-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChatComponent } from './components/chat/chat.component';
-import {ForbiddenComponent} from './components/forbidden/forbidden.component';
+import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 import { AuthGuard } from './services/auth-guard.service';
@@ -25,9 +25,6 @@ export const routes = [
   { path: 'login', component: LoginComponent },
   { path: 'forbidden', component: ForbiddenComponent },
   { path: 'home', component: HomeComponent },
-  // { path: 'user-profile', component: UserProfileComponent },
-  { path: 'user-match', component: UserMatchComponent },
-  { path: 'user-profile', component: UserProfileComponent },
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
   { path: 'photo', component: PhotosComponent},

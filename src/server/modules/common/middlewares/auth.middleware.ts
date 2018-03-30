@@ -8,6 +8,8 @@ import { MessageCodeError } from '../error/MessageCodeError';
 @Middleware()
 export class AuthMiddleware implements NestMiddleware {
 
+  constructor() {}
+
   public resolve(...args: any[]): ExpressMiddleware | AsyncExpressMiddleware | Promise<AsyncExpressMiddleware> {
     return async(req: Request, res: Response, next: NextFunction) => {
       if(req.headers.authorization && ((req.headers.authorization as string).split(' ')[0]) === 'Bearer') {
@@ -28,6 +30,8 @@ export class AuthMiddleware implements NestMiddleware {
               email: decoded.email
             }
           });
+
+          req['id'] = decoded.id;
         }
 
         console.log('AuthMiddleware ' + user.name);

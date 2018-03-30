@@ -19,6 +19,7 @@ export class UsersProfileService {
     const userProfile = new UserProfile();
     userProfile.firstName = userProfileDto.firstName;
     userProfile.lastName = userProfileDto.lastName;
+    userProfile.phoneNumber = userProfileDto.phoneNumber;
     userProfile.age = userProfileDto.age;
     userProfile.sex = userProfileDto.sex;
     userProfile.role = userProfileDto.role;
@@ -44,12 +45,13 @@ export class UsersProfileService {
     }
   }
 
-  async findById(id: number): Promise<UserProfile> {
+  async findByUserId(userId: number): Promise<UserProfile> {
     try {
+      console.log(`findByUserId(${userId})`);
       return await this.userProfileRepository
-        .findById<UserProfile>(id);
+        .findOne<UserProfile>({ where: { userId } });
     } catch (error) {
-      console.error(`Arise an exception in the findById(${id}) method UserProfile Service`);
+      console.error(`Arise an exception in the findById(${userId}) method UserProfile Service`);
       throw error;
     }
   }
@@ -89,7 +91,7 @@ export class UsersProfileService {
     }
   }
 
-  async findByGender(sex: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
+  async findBySex(sex: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
     console.log(`server service: findByGender(${sex})`);
     try {
       return await this.userProfileRepository
@@ -116,7 +118,7 @@ export class UsersProfileService {
     try {
       console.log('Server UsersProfileService ' + id);
       return await this.userProfileRepository
-        .update(userProfileDto, {where: {id: id}});
+        .update(userProfileDto, {where: { id }});
     } catch (error) {
       throw error;
     }

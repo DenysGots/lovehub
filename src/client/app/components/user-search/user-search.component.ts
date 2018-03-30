@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 
 import { Subject } from 'rxjs/Subject';
 

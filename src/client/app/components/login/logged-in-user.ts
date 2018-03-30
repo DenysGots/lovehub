@@ -1,6 +1,5 @@
 export interface LoggedInUser {
   userId: number;
-  userRole: string;
-  firstName: string;
-  lastName: string;
+  name: string;
+  email: string;
 }

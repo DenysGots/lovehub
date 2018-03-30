@@ -28,9 +28,19 @@ export class UsersProfileService {
     return this.http.post<UserProfile>(this.usersProfileUrl, user, httpOptions);
   }
 
-  update(user: UserProfile): Observable<UserProfile> {
+  findByUserId(userId: number): Observable<UserProfile | {}> {
+    return this.http.get<UserProfile>(`${this.usersProfileUrl}/${userId}`).pipe(
+      tap(_ => console.log(`found UsersProfile-profile by userId ${userId}`)),
+      catchError(this.handleError<UserProfile>(`repository users-profile: findByUserId(${userId})` ))
+    );
+  }
+
+  update(user: UserProfile): Observable<[number, UserProfile[]]> {
     console.log('UsersProfileService updateUser ', user.id, user.firstName);
-    return this.http.put<UserProfile>(this.usersProfileUrl, user, httpOptions);
+    return this.http.put<[number, UserProfile[]]>(this.usersProfileUrl, user, httpOptions).pipe(
+      tap(_ => console.log(`update users-profile with id: "${user.id}"`)),
+      catchError(this.handleError<[number, UserProfile[]]>(`repository users-profile: update(${user.id})` ))
+    );
   }
 
   searchUsers(type, term, offset, perPage): Observable<FilteredUsersProfile> {
@@ -40,7 +50,7 @@ export class UsersProfileService {
     } else if(type == 'range') {
       return this.findByAge(term, offset, perPage);
     } else if(type == 'radio') {
-      return this.findByGender(term, offset, perPage);
+      return this.findBySex(term, offset, perPage);
     } else if(type == 'radio') {
       return this.findByPreference(term, perPage);
     }
@@ -69,14 +79,14 @@ export class UsersProfileService {
     );
   }
 
-  findByGender(gender, offset, limit): Observable<FilteredUsersProfile | {}> {
-    if (!gender.trim()) {
+  findBySex(sex, offset, limit): Observable<FilteredUsersProfile | {}> {
+    if (!sex.trim()) {
       return of([]);
     }
 
-    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?gender=${gender}&&offset=${offset}&&limit=${limit}`).pipe(
-      tap(_ => console.log(`found users-profile by "${gender}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${gender})` ))
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?gender=${sex}&&offset=${offset}&&limit=${limit}`).pipe(
+      tap(_ => console.log(`found users-profile by "${sex}"`)),
+      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${sex})` ))
     );
   }
 

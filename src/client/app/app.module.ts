@@ -63,7 +63,6 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { LeftPartComponent } from './components/profile-page/left-part/left-part.component';
 import { RightPartComponent } from './components/profile-page/right-part/right-part.component';
 
-// test
 import { AdministratorFooterComponent } from './components/administrator/administrator-footer/administrator-footer.component';
 import { AdministratorHeaderComponent } from './components/administrator/administrator-header/administrator-header.component';
 import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
@@ -82,6 +81,10 @@ import { ChatUserComponent } from './components/chat-user/chat-user.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {providerCustomHttpClient} from './http-interceptors/providers';
 import {CustomHttpClient} from './http-interceptors/custom-http-client';
+import {InlineEditComponent} from './components/user-profile-settings/inline-edit/inline-edit.component';
+import {CustomRenderService} from './services/custom-render.service';
+import {AuthProfileGuardService} from './services/auth-profile-guard.service';
+
 
 @NgModule({
   declarations: [
@@ -161,6 +164,7 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     httpInterceptorProviders,
     AuthService,
     AuthGuard,
+    AuthProfileGuardService,
     AuthErrorHandlerService,
     CustomRenderService,
     AdministratorService,

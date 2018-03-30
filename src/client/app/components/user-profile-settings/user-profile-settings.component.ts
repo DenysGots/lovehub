@@ -1,4 +1,4 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { AuthService } from '../../services/auth.service';
 import { UsersProfileService } from '../../services/users-profile.service';
@@ -6,7 +6,6 @@ import { UsersProfileService } from '../../services/users-profile.service';
 import { LoggedInUser } from '../login/logged-in-user';
 import { UserProfile } from '../../models/user-profile';
 import { User}  from '../../models/user';
-import {Router} from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -18,7 +17,8 @@ export class UserProfileSettingsComponent implements OnInit {
 
   private loggedInUser: LoggedInUser;
   public user: User;
-  public userProfile: UserProfile;
+  public userProfile: UserProfile =
+    new UserProfile(1,'', '', 1, '', '', '', '', '');
 
   constructor(private injector: Injector) { }
 
@@ -37,6 +37,9 @@ export class UserProfileSettingsComponent implements OnInit {
   public updateUser() {
     const usersProfileService = this.injector.get(UsersProfileService);
     console.log('UserProfileSettingsComponent updateUser');
-    usersProfileService.update(this.userProfile);
+    usersProfileService.update(this.userProfile)
+      .subscribe(updatedUser => {
+        console.log(updatedUser);
+      });
   }
 }

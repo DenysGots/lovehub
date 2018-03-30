@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
-import {LoggedInUser} from './logged-in-user';
+import { LoggedInUser } from './logged-in-user';
 
 @Component({
   moduleId: module.id,
-  template: `Logged In: {{ loggedInUser.firstName }}  {{loggedInUser.lastName}} | 
+  template: `Logged In: {{ loggedInUser.name}} | 
               <button (click)="logout()">Logout</button>
       `
 })

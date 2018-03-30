@@ -1,5 +1,3 @@
-import { User } from './user';
-
 export class UserProfile {
 
   id: number;
@@ -7,6 +5,7 @@ export class UserProfile {
   lastName: string;
   phoneNumber: number;
   age: number;
+  role: string;
   sex: string;
   preference: string;
   orientation: string;
@@ -14,12 +13,13 @@ export class UserProfile {
   isBaned: boolean;
   isActive: boolean;
   avatar: string;
-  userId: User;
+  userId: number;
 
   constructor(id: number,
               firstName: string,
               lastName: string,
               age: number,
+              role: string,
               sex: string,
               orientation: string,
               preference: string,
@@ -30,6 +30,7 @@ export class UserProfile {
     this.lastName = lastName;
     this.age = age;
     this.sex = sex;
+    this.role = role;
     this.orientation = orientation;
     this.preference = preference;
     this.location = location;

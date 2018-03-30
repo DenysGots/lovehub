@@ -14,8 +14,6 @@ export class AuthProfileGuardService implements CanActivate {
     const url: string = state.url,
       loginUrl = this.authService.getLoginUrl();
 
-    console.log(url, this.authService.isTokenExpired());
-
     if (this.authService.isLoggedInUser() && !this.authService.isTokenExpired()) {
       return true;
     } else {
