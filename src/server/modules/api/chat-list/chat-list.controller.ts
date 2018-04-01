@@ -3,12 +3,14 @@ import { ChatList } from './chat-list.entity';
 import { ChatListService } from './chat-list.service';
 import { ChatListDto } from './dto/chat-list.dto';
 import { UsersProfileService } from '../users-profile/users-profile.service';
+import { ChatMessagesService } from '../chat-messages/chat-messages.service';
 
 @Controller('api/chats')
 export class ChatListController {
   constructor(
     private chatsService: ChatListService,
-    private usersProfileService: UsersProfileService
+    private usersProfileService: UsersProfileService,
+    private chatMessagesService: ChatMessagesService
   ) {}
 
   // @HttpCode(201)
@@ -31,9 +33,14 @@ export class ChatListController {
       let user = await this.usersProfileService.findShortInfo(finalUser) || {};
       user = { ...user.dataValues, avatar: 'https://i.pinimg.com/736x/fb/e3/75/fbe37552637081f7bced381c7c464f3b--illustration-girl-girl-illustrations.jpg'};
 
+      const lastMessage = await this.chatMessagesService.getLastMessage(chat.chatId) || null;
+
+      console.log('lastMessage', lastMessage);
+      
       return {
         chatId: chat.chatId,
-        user
+        user,
+        lastMessage
       }
     });
 

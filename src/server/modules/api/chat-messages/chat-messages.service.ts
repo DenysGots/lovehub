@@ -21,4 +21,18 @@ export class ChatMessagesService {
   async findByChat(id: number): Promise<any> {
     return await this.chatModel.findOne({ chatId: id }).select('messages -_id');
   }
+
+  async getLastMessage(chatId: number): Promise<any> {
+    // return await this.chatModel
+    //   .findOne({ chatId})
+    //   .select({'messages':{"$last": -1}});
+
+    return await this.chatModel.aggregate([
+      {$match: { chatId }},
+      {$project: {
+        _id: 0,
+        message: {$arrayElemAt: ['$messages', -1]}
+      }}
+    ]);
+  }
 }
