@@ -40,3 +40,5 @@ Thumbs.db
 
 # config
 /src/server/config/config.yml
+
+package-lock.json
