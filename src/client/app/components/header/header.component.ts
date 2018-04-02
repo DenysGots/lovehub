@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
     this.router = _router;
   }
 
-
   ngOnInit() {
     const headerHeight = this.elementView.nativeElement.offsetHeight;
 

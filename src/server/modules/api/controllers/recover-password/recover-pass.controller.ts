@@ -21,19 +21,9 @@ export class RecoverPassController {
   @Get(':token')
   async checkTokenStatus(@Param() params, @Res() res) {
     try {
-      const isValid = await this.recPassService.isTokenValid(params.token);
-      const isUsed = await this.recPassService.isTokenUsed(params.token);
-      let message = {};
+      const result = await this.recPassService.validate(params.token);
 
-      if (!isValid) {
-        message = {error: 'Token time is over.'};
-      } else if (isUsed) {
-        message = {error: 'Token is already used'};
-      } else {
-        message = {message: 'Token is valid'};
-      }
-
-      res.status(HttpStatus.OK).send(message);
+      res.status(HttpStatus.OK).send(result);
     } catch (error) {
       res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(error);
     }
