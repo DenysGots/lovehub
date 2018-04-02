@@ -9,17 +9,21 @@ import { UserProfileInterest } from '../users-profile/user-profile-interest.enti
 import { Interest } from '../users-profile/interest.entity';
 import { ChatList } from '../chat-list/chat-list.entity';
 
+import { config } from '../../../config/config';
+
+const { host, port, db: database, user:username, pass: password } = config.postgres;
+
 export const databaseProviders = [
   {
     provide: 'SequelizeToken',
     useFactory: async () => {
       const sequelize = new Sequelize({
         dialect: 'postgres',
-        host: 'localhost',
-        port: 5432,
-        username: 'postgres',
-        password: '1111',
-        database: 'lovehub',
+        host,
+        port,
+        username,
+        password,
+        database,
         pool: {
           max: 5,
           min: 0,

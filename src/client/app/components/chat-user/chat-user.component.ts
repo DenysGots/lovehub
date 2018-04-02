@@ -11,7 +11,7 @@ import { ChatService } from '../../services/chat.service';
 export class ChatUserComponent implements OnInit {
   activeChat: number;
   @Input() chat: Chat;
-  @Output() onChatChecked = new EventEmitter<Array<object>>();
+  @Output() onChatChecked = new EventEmitter<Number>();
 
   constructor(private chatService: ChatService) { }
 
