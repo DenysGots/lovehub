@@ -32,11 +32,8 @@ export class CustomHttpClient extends HttpClient {
     if(!params.headers) {
       const token = localStorage.getItem('jwt_token');
       params.headers = new HttpHeaders({ 'authorization': `Bearer ${token}`});
-      debugger;
     }
 
-    console.log(params['headers']['authorization']);
-    debugger;
     return params;
   }
 
