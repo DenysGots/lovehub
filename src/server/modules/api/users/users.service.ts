@@ -13,7 +13,6 @@ export class UsersService {
     user.name = userDto.name;
     user.email = userDto.email;
     user.password = userDto.password;
-
     return await user.save();
   }
 
@@ -44,5 +43,4 @@ export class UsersService {
   async findByEmail(email: string): Promise<User> {
     return await this.userRepository.findOne<User>({where: {email}});
   }
-
 }

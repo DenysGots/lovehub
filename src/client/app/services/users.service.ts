@@ -28,6 +28,7 @@ export class UsersService {
   }
   registration(user: User): Observable<User> {
     const url = 'api/users';
+    console.log('On Client Service:', this.http.post<User>(url, user, httpOptions));
     return this.http.post<User>(url, user, httpOptions);
   }
 

@@ -1,8 +1,8 @@
 import { Component, Inject } from '@nestjs/common';
 import { UserProfile } from './user-profile.entity';
 import { UserProfileDto } from './dto/user-profile.dto';
-import {PREFERENCE} from './preference';
-import {ORIENTATION} from './orientation';
+import { PREFERENCE } from './preference';
+import { ORIENTATION } from './orientation';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -57,7 +57,7 @@ export class UsersProfileService {
       return await this.userProfileRepository
       .findOne<UserProfile>({
         where: {userId: id},
-        attributes: ['userId','firstName', 'lastName']
+        attributes: ['userId', 'firstName', 'lastName']
       });
     } catch (error) {
       console.error(`UserProfileService findShortInfo Error: (${id})`);

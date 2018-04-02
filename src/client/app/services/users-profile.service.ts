@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserProfile } from '../models/user-profile';
 
 import { of } from 'rxjs/observable/of';
@@ -29,13 +29,13 @@ export class UsersProfileService {
 
   searchUsers(type, term, offset, perPage): Observable<FilteredUsersProfile> {
     console.log(`angular: within searchUsers(${type}, ${term})`);
-    if (type == 'search') {
+    if (type === 'search') {
       return this.findByName(term, offset, perPage);
-    } else if(type == 'range') {
+    } else if (type === 'range') {
       return this.findByAge(term, offset, perPage);
-    } else if(type == 'radio') {
+    } else if (type === 'radio') {
       return this.findByGender(term, offset, perPage);
-    } else if(type == 'radio') {
+    } else if (type === 'radio') {
       return this.findByPreference(term, perPage);
     }
   }
@@ -56,7 +56,6 @@ export class UsersProfileService {
     if (!parseInt(age.trim())) {
       return of([]);
     }
-
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?age=${age}&&offset=${offset}&&limit=${limit}`).pipe(
       tap(_ => console.log(`found users-profile by "${age}"`)),
       catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})` ))

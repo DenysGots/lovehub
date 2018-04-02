@@ -11,14 +11,15 @@ export class UserProfile {
   isBaned: boolean;
   isActive: boolean;
   avatar: string;
+  userId: number;
 
-  constructor(id: number,
-              firstName: string,
-              lastName: string,
-              age: number,
-              sex: string,
-              orientation: string,
-              preference: string,
+  constructor(id: number = 0,
+              firstName: string = '',
+              lastName: string = '',
+              age: number = 0,
+              sex: string = '',
+              orientation: string = '',
+              preference: string = '',
               avatar: string = null) {
     this.id = id;
     this.firstName = firstName;
