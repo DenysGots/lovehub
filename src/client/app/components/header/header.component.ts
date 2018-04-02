@@ -38,5 +38,4 @@ export class HeaderComponent implements OnInit {
   setHeaderHeight(height): void {
     this.windowService.headerHeight = height;
   }
-
 }
