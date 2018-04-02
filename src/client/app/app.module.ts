@@ -62,6 +62,9 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { LeftPartComponent } from './components/profile-page/left-part/left-part.component';
 import { RightPartComponent } from './components/profile-page/right-part/right-part.component';
 
+import { LikesComponent } from './components/likes/likes.component';
+import { LikesService } from './services/likes.service';
+
 // test
 import { AdministratorFooterComponent } from './components/administrator/administrator-footer/administrator-footer.component';
 import { AdministratorHeaderComponent } from './components/administrator/administrator-header/administrator-header.component';
@@ -122,7 +125,8 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     RightPartComponent,
     PhotoSliderComponent,
     NotificationsComponent,
-    InterestsComponent
+    InterestsComponent,
+    LikesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -141,6 +145,7 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     ChartsModule,
   ],
   providers: [
+    LikesService,
     PhotosService,
     NavigationService,
     HomeService,

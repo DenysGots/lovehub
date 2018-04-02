@@ -14,6 +14,7 @@ import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { LikesComponent } from './components/likes/likes.component';
 
 export const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -27,6 +28,7 @@ export const routes = [
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
   { path: 'profile', component: ProfilePageComponent},
+  { path: 'likes', component: LikesComponent},
   { path: 'admin', component: AdministratorDashboardComponent,
     children: [
       {path: '', component: AdministratorDashboardComponent
