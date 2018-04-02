@@ -1,10 +1,32 @@
 <form (ngSubmit)="updateUser()" #updateForm="ngForm">
-  <app-inline-edit name="firstName" type="text" [(ngModel)]="userProfile.firstName" label="First Name" [required]="true" >
+  <app-inline-edit name="firstName" type="text" [(ngModel)]="userProfile.firstName"
+                   label="First Name" [required]="true" >
   </app-inline-edit>
-  <app-inline-edit name="lastName" type="text" [(ngModel)]="userProfile.lastName" label="Last Name" [required]="true" >
+
+  <app-inline-edit name="lastName" type="text" [(ngModel)]="userProfile.lastName"
+                   label="Last Name" [required]="true" >
   </app-inline-edit>
-  <app-inline-edit name="age" type="number" [(ngModel)]="userProfile.age" label="Age" [required]="true" >
+
+  <app-inline-edit name="phoneNumber" type="tel" [(ngModel)]="userProfile.phoneNumber"
+                   label="Phone Number" [required]="true">
   </app-inline-edit>
+
+  <app-inline-edit name="age" type="number" [(ngModel)]="userProfile.age"
+                   label="Age" [required]="true" >
+  </app-inline-edit>
+
+  <app-inline-edit list="sex" name="sex" type="text" [(ngModel)]="userProfile.sex"
+                   label="Sex" [required]="true" pattern="'MALE'|'FEMALE'" >
+  </app-inline-edit>
+
+  <app-inline-edit list="orientation" name="orientation" type="text" [(ngModel)]="userProfile.orientation"
+                   label="Orientation" [required]="true" pattern="'MAN'|'WOMAN'|'ALL'" >
+  </app-inline-edit>
+
+  <app-inline-edit list="preference" name="preference" type="text" [(ngModel)]="userProfile.preference"
+                   label="Preference" [required]="true" pattern="'DATE'|'FRIENDS'|'PARTY'" >
+  </app-inline-edit>
+
   <div>
     <input type="submit" value="Update" />
     <input type="reset" value="Reset" />

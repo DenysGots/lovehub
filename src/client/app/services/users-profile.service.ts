@@ -45,11 +45,11 @@ export class UsersProfileService {
 
   searchUsers(type, term, offset, perPage): Observable<FilteredUsersProfile> {
     console.log(`angular: within searchUsers(${type}, ${term})`);
-    if (type == 'search') {
+    if (type == 'firstName') {
       return this.findByName(term, offset, perPage);
-    } else if(type == 'range') {
+    } else if(type == 'age') {
       return this.findByAge(term, offset, perPage);
-    } else if(type == 'radio') {
+    } else if(type == 'sex') {
       return this.findBySex(term, offset, perPage);
     } else if(type == 'radio') {
       return this.findByPreference(term, perPage);
@@ -62,7 +62,8 @@ export class UsersProfileService {
       return of([]);
     }
 
-    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?name=${name}&&offset=${offset}&&limit=${limit}`).pipe(
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?name=${name}&&offset=${offset}&&limit=${limit}`)
+      .pipe(
         tap(_ => console.log(`found users-profile by "${name}"`)),
         catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})` ))
       );
@@ -73,9 +74,10 @@ export class UsersProfileService {
       return of([]);
     }
 
-    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?age=${age}&&offset=${offset}&&limit=${limit}`).pipe(
-      tap(_ => console.log(`found users-profile by "${age}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})` ))
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?age=${age}&&offset=${offset}&&limit=${limit}`)
+      .pipe(
+        tap(_ => console.log(`found users-profile by "${age}"`)),
+        catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})` ))
     );
   }
 
@@ -84,9 +86,10 @@ export class UsersProfileService {
       return of([]);
     }
 
-    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?gender=${sex}&&offset=${offset}&&limit=${limit}`).pipe(
-      tap(_ => console.log(`found users-profile by "${sex}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${sex})` ))
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?sex=${sex}&&offset=${offset}&&limit=${limit}`)
+      .pipe(
+        tap(_ => console.log(`found users-profile by "${sex}"`)),
+        catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findBySex(${sex})` ))
     );
   }
 

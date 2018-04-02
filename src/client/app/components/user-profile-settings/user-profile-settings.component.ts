@@ -17,8 +17,7 @@ export class UserProfileSettingsComponent implements OnInit {
 
   private loggedInUser: LoggedInUser;
   public user: User;
-  public userProfile: UserProfile =
-    new UserProfile(1,'', '', 1, '', '', '', '', '');
+  public userProfile: UserProfile = new UserProfile();
 
   constructor(private injector: Injector) { }
 
@@ -36,10 +35,10 @@ export class UserProfileSettingsComponent implements OnInit {
 
   public updateUser() {
     const usersProfileService = this.injector.get(UsersProfileService);
-    console.log('UserProfileSettingsComponent updateUser');
     usersProfileService.update(this.userProfile)
       .subscribe(updatedUser => {
-        console.log(updatedUser);
+        const [affected] = updatedUser;
+        console.log(`Count have been changed database rows: ${ affected }`);
       });
   }
 }

@@ -11,11 +11,9 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChatComponent } from './components/chat/chat.component';
-import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 import { AuthGuard } from './services/auth-guard.service';
-import { LogoutComponent } from './components/login/logout.component';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 
 export const routes = [
@@ -23,7 +21,6 @@ export const routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'search', component: UserSearchComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'forbidden', component: ForbiddenComponent },
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
@@ -52,5 +49,4 @@ export const routes = [
   { path: 'user-match', canActivate: [ AuthGuard ], component: UserMatchComponent },
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
-  { path: 'logout', component: LogoutComponent },
 ];

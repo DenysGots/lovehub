@@ -1,46 +1,32 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, HostListener, Input} from '@angular/core';
+import { ModalForbiddenService } from '../../services/modal-forbidden.service';
 
 @Component({
   moduleId: module.id,
+  selector: 'app-forbidden',
   templateUrl: 'forbidden.component.html',
   styleUrls: ['forbidden.component.scss']
 })
 export class ForbiddenComponent {
-
+  @Input() state: boolean;
   errorMessage = 'access forbidden!';
   userMessage = 'Your do not access to this resource';
 
-  constructor(private el: ElementRef) {
+  @HostListener('keyup')
+  public onMouseEnter(event) {
+    this.keyup(event);
   }
 
-  /*
-  ngOnInit(): void {
-    let modal = this;
-
-    document.body.appendChild(this.element);
-
-    this.open();
-
-    this.element.addListener('click', function (event: any) {
-      const target = event.target;
-      if (!target.closest('app-forbidden').length) {
-        modal.close();
-      }
-    });
+  constructor(private modalForbiddenService: ModalForbiddenService) {
   }
 
-  ngOnDestroy(): void {
-    this.element.remove();
+  public show(state: boolean): void {
+    this.modalForbiddenService.sendState(state);
   }
 
-  open(): void {
-    this.element.show();
-    document.body.classList.add('forbidden-modal-open');
+  private keyup(event: KeyboardEvent): void {
+    if (event.keyCode === 27) {
+      this.show(false);
+    }
   }
-
-  close(): void {
-    this.element.hide();
-    document.body.classList.remove('forbidden-modal-open');
-  }
-  */
 }

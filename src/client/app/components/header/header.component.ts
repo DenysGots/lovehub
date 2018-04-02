@@ -59,4 +59,9 @@ export class HeaderComponent implements OnInit {
   isLoggedInUser(): Observable<boolean> {
     return this.authService.isLoggedInUser();
   }
+
+  logoutUser(): void {
+    this.authService.logout();
+    this.router.navigate([ this.authService.getLoginUrl() ]);
+  }
 }

@@ -1,13 +1,27 @@
 <div>
   <div *ngIf="editing" class="form-group row">
-    <label class="col-sm-2 col-form-label">{{ label }}</label>
+    <label class="col-sm-2 col-form-label ">{{ label }}</label>
     <div class="col-sm-10">
-      <input #inlineEditControl [name]="value" [type]="type" [(ngModel)]="value" class="form-control"
-             [required]="required" [placeholder]="label" (blur)="onBlur($event)" />
+      <input #inlineEditControl list="list" [name]="value" [type]="type" [(ngModel)]="value" class="form-control"
+             [placeholder]="label" [required]="required" [pattern]="pattern" (blur)="onBlur($event)" />
+
+      <datalist id="list">
+        <option *ngIf="list === 'sex'" value="MALE">
+        <option *ngIf="list === 'sex'" value="FEMALE">
+        <option *ngIf="list === 'orientation'" value="MAN">
+        <option *ngIf="list === 'orientation'"value="WOMAN">
+        <option *ngIf="list === 'orientation'" value="ALL">
+        <option *ngIf="list === 'preference'" value="DATE">
+        <option *ngIf="list === 'preference'" value="FRIENDS">
+        <option *ngIf="list === 'preference'" value="PARTY">
+      </datalist>
     </div>
+
   </div>
   <div *ngIf="!editing" class="form-group">
     <label class="block bold">{{ label }}</label>
-    <div title="Click to edit" (click)="edit(value)" (focus)="edit(value);" tabindex="0" class="inline-edit">{{value}}&nbsp;</div>
+    <div title="Click to edit" (click)="edit(value)" (focus)="edit(value);" tabindex="0" class="inline-edit">
+      {{ value }}&nbsp;
+    </div>
   </div>
 </div>

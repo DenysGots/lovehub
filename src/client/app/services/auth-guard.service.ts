@@ -8,6 +8,7 @@ import { UsersService } from './users.service';
 import { UsersProfileService } from './users-profile.service';
 
 import { UserProfile } from '../models/user-profile'
+import {ModalForbiddenService} from './modal-forbidden.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -15,13 +16,14 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router,
               private authService:AuthService,
               private usersService: UsersService,
-              private usersProfileService: UsersProfileService) { }
+              private usersProfileService: UsersProfileService,
+              private modalForbiddenService: ModalForbiddenService) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const url: string = state.url,
       loginUrl = this.authService.getLoginUrl();
 
-    if (this.authService.isLoggedInUser() && !this.authService.isTokenExpired()) {
+    if (this.authService.isLoggedInUser()) {
       let { userId } = this.authService.getLoggedInUser(),
         userRole;
       this.usersProfileService.findByUserId(userId).subscribe(userProfile => {
@@ -33,7 +35,7 @@ export class AuthGuard implements CanActivate {
             return true;
           }
 
-          this.router.navigate(['/forbidden']);
+          this.modalForbiddenService.sendState(true);
           return false;
         });
       });

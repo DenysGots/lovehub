@@ -23,8 +23,8 @@ export class UserSearchComponent implements OnInit, OnChanges {
   users: UserProfile[];
   searchFilter: FilterParam;
   ageFilter: FilterParam;
-  genderFFilter: FilterParam;
-  genderMFilter: FilterParam;
+  sexFFilter: FilterParam;
+  sexMFilter: FilterParam;
   term: SearchParam = null;
 
   countItems: number;
@@ -32,17 +32,13 @@ export class UserSearchComponent implements OnInit, OnChanges {
   currentPage = 1;
   itemsPerPage = 6;
 
-  isDesc = false;
-  property: string;
-  direction: number;
-
   private searchTerms = new Subject<SearchParam>();
 
   constructor(private usersProfileService: UsersProfileService) {
-    this.searchFilter = new FilterParam('Name', 'search', '', 'Enter a favourite name..');
-    this.ageFilter = new FilterParam('Age', 'range', '0', '');
-    this.genderMFilter = new FilterParam('Male', 'radio', 'MALE', '');
-    this.genderFFilter = new FilterParam('Female', 'radio', 'FEMALE', '');
+    this.searchFilter = new FilterParam('Name', 'search', 'firstName', '','Enter a favourite name..');
+    this.ageFilter = new FilterParam('Age', 'range', 'age', '0');
+    this.sexMFilter = new FilterParam('Male', 'radio', 'sex', 'MALE');
+    this.sexFFilter = new FilterParam('Female', 'radio', 'sex', 'FEMALE');
   }
 
   ngOnInit(): void {
@@ -73,7 +69,7 @@ export class UserSearchComponent implements OnInit, OnChanges {
 
   fetchData() {
     return this.usersProfileService
-      .searchUsers(this.term.searchType, this.term.searchValue, this.offsetItems, this.itemsPerPage)
+      .searchUsers(this.term.searchName, this.term.searchValue, this.offsetItems, this.itemsPerPage)
       .subscribe(result => {
         console.log('UserSearchComponent');
         this.users = result.rows;

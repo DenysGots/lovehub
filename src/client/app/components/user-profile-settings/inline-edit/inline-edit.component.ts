@@ -20,12 +20,14 @@ export class InlineEditComponent implements ControlValueAccessor {
 
   @ViewChild('inlineEditControl') inlineEditControl: ElementRef;
   @Input() label: string = '';
-  @Input() type: string = 'text';
-  @Input() required: boolean = false;
-  @Input() disabled: boolean = false;
+  @Input() type: string = '';
+  @Input() list: string = '';
+  @Input() required = true;
+  @Input() pattern: string;
+  @Input() disabled = false;
   private _value: string = '';
   public preValue: string = '';
-  public editing: boolean = false;
+  public editing = false;
   public onChange: any = Function.prototype;
   public onTouched: any = Function.prototype;
 

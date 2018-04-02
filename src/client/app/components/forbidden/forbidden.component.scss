@@ -1,14 +1,49 @@
 :host {
-  display: block;
+  .closed {
+    .forbidden-modal{
+      top: -500%;
+    }
+    .modal-overlay{
+      display: none;
+    }
+  }
+
+  .right-align {
+    position: absolute;
+    right: 5px;
+    &, i{
+      line-height: 40px;
+    }
+
+    &:hover{
+      cursor: pointer;
+      transform: scale(1.2);
+    }
+  }
+
+  .modal-overlay {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+    background-color: #193952;
+    opacity: .7;
+  }
 
   .forbidden-modal {
-    //position: fixed;
-    //top: 0;
-    //right: 0;
-    //bottom: 0;
-    //left: 0;
-    //z-index: 1000;
-    //overflow: auto;
+    position: fixed;
+    width: 600px;
+    max-height: calc(100% - 10em);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+    z-index: 1100;
+    transition: all .5s ease;
+    background-color: #fff;
+    border: 4px solid #ef233c;
 
     .forbidden {
       display: flex;
@@ -18,8 +53,7 @@
       font-size: 18px;
       letter-spacing: 1px;
       padding: 20px;
-      background: #fff;
-      margin: 40px;
+      margin: 20px;
 
       div {
         flex: 1;
@@ -30,37 +64,12 @@
 
       .message {
         font-size: 22px;
-        color: #ee4444;
-        text-align: center;
+        color: #ef233c;
 
         div {
           font-size: 92px;
         }
       }
-
-      .anchor {
-        background: #1a2580;
-        border: 1px solid #007897;
-        border-radius: 4px 4px 4px 4px;
-        color: #f2f2f2;
-        margin: 2px;
-        padding: 6px 12px;
-      }
     }
-  }
-
-  .forbidden-modal-background {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: #000;
-    opacity: 0.75;
-    z-index: 900;
-  }
-
-  .forbidden-modal-open {
-    overflow: hidden;
   }
 }

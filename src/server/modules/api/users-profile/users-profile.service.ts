@@ -95,7 +95,7 @@ export class UsersProfileService {
     console.log(`server service: findByGender(${sex})`);
     try {
       return await this.userProfileRepository
-        .findAndCountAll<UserProfile>({where: {sex: sex}, offset: offset, limit: limit});
+        .findAndCountAll<UserProfile>({where: { sex }, offset: offset, limit: limit});
     } catch (error) {
       console.error(`Arise an exception in the findByGender(${sex}) method UserProfile Service`);
       throw error;
@@ -127,7 +127,7 @@ export class UsersProfileService {
   async remove(id: number): Promise<number> {
     try {
       return await this.userProfileRepository
-        .destroy({where: {id: id}});
+        .destroy({where: { id }});
     } catch (error) {
       throw error;
     }

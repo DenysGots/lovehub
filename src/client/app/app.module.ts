@@ -24,7 +24,6 @@ import { InterestsService } from './services/interests.service';
 import { ChatService } from './services/chat.service';
 import { WebsocketService } from './services/websocket.service';
 
-import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 import { MultilinePipe } from './pipes/multiline.pipe';
 
 import { AppComponent } from './app.component';
@@ -49,7 +48,6 @@ import { SliderComponent } from './components/home-slider/slider.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
 import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
-import { LogoutComponent } from './components/login/logout.component';
 
 import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
@@ -79,11 +77,12 @@ import { RecoverPassService} from './services/recover-pass.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatUserComponent } from './components/chat-user/chat-user.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import {providerCustomHttpClient} from './http-interceptors/providers';
-import {CustomHttpClient} from './http-interceptors/custom-http-client';
-import {InlineEditComponent} from './components/user-profile-settings/inline-edit/inline-edit.component';
-import {CustomRenderService} from './services/custom-render.service';
-import {AuthProfileGuardService} from './services/auth-profile-guard.service';
+import { providerCustomHttpClient } from './http-interceptors/providers';
+import { CustomHttpClient } from './http-interceptors/custom-http-client';
+import { InlineEditComponent } from './components/user-profile-settings/inline-edit/inline-edit.component';
+import { CustomRenderService } from './services/custom-render.service';
+import { AuthProfileGuardService } from './services/auth-profile-guard.service';
+import { ModalForbiddenService } from './services/modal-forbidden.service';
 
 
 @NgModule({
@@ -106,7 +105,6 @@ import {AuthProfileGuardService} from './services/auth-profile-guard.service';
     SliderComponent,
     PagerComponent,
     UserProfileComponent,
-    UsersProfileOrderByPipe,
     MultilinePipe,
     UserMatchComponent,
     RecoverPasswordComponent,
@@ -127,7 +125,6 @@ import {AuthProfileGuardService} from './services/auth-profile-guard.service';
     PhotoSliderComponent,
     NotificationsComponent,
     InterestsComponent,
-    LogoutComponent,
     UserProfileSettingsComponent,
     InlineEditComponent,
   ],
@@ -170,7 +167,8 @@ import {AuthProfileGuardService} from './services/auth-profile-guard.service';
     AdministratorService,
     RecoverPassService,
     NotificationsService,
-    InterestsService
+    InterestsService,
+    ModalForbiddenService,
   ],
   bootstrap: [AppComponent]
 })
