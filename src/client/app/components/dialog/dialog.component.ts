@@ -16,8 +16,7 @@ export class DialogComponent implements OnInit {
 
   @Input() messages: Array<object>;
 
-  constructor( private chat: ChatService) {
-   }
+  constructor( private chat: ChatService) {}
 
   ngOnInit() {
     this.chat.currentChatIdChange.subscribe(id => {

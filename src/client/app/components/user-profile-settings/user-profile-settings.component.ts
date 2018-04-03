@@ -18,6 +18,8 @@ export class UserProfileSettingsComponent implements OnInit {
   private loggedInUser: LoggedInUser;
   public user: User;
   public userProfile: UserProfile = new UserProfile();
+  public canUpdate = false;
+  public isSuccess = false;
 
   constructor(private injector: Injector) { }
 
@@ -38,7 +40,14 @@ export class UserProfileSettingsComponent implements OnInit {
     usersProfileService.update(this.userProfile)
       .subscribe(updatedUser => {
         const [affected] = updatedUser;
-        console.log(`Count have been changed database rows: ${ affected }`);
+        if(affected) {
+          this.isSuccess = !this.isSuccess;
+          setTimeout(() => this.isSuccess = !this.isSuccess, 3000);
+        }
       });
+  }
+
+  public triggerButton(flag: boolean) {
+    this.canUpdate = flag;
   }
 }

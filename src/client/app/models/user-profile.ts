@@ -1,10 +1,10 @@
 export class UserProfile {
 
-  constructor(public id: number = 0,
+  constructor(public id: number = 1,
               public firstName: string = '',
               public lastName: string = '',
-              public phoneNumber: number = 0,
-              public age: number = 0,
+              public phoneNumber: number = 987654321,
+              public age: number = 20,
               public role: string = '',
               public sex: string = '',
               public orientation: string = '',

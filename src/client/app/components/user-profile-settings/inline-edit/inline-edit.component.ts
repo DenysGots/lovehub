@@ -1,4 +1,4 @@
-import {Component, ElementRef, forwardRef, Input, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { CustomRenderService } from '../../../services/custom-render.service';
@@ -17,27 +17,34 @@ const INLINE_EDIT_CONTROL_VALUE_ACCESSOR = {
   styleUrls: ['inline-edit.component.scss']
 })
 export class InlineEditComponent implements ControlValueAccessor {
-
   @ViewChild('inlineEditControl') inlineEditControl: ElementRef;
   @Input() label: string = '';
   @Input() type: string = '';
   @Input() list: string = '';
   @Input() required = true;
-  @Input() pattern: string;
+  @Input() pattern = '';
   @Input() disabled = false;
+  @Input() placeholder = '';
+  @Output() showButton = new EventEmitter<boolean>();
   private _value: string = '';
   public preValue: string = '';
   public editing = false;
   public onChange: any = Function.prototype;
   public onTouched: any = Function.prototype;
 
+  dataList = {
+    sex: ['MALE', 'FEMALE'],
+    orientation: ['MAN', 'WOMAN', 'ALL'],
+    preference: ['DATE', 'FRIENDS', 'PARTY']
+  };
+
   constructor(public element: ElementRef, private _renderer: CustomRenderService) { }
 
-  get value(): any {
+  public get value(): any {
     return this._value;
   }
 
-  set value(value: any) {
+  public set value(value: any) {
     if (value !== this._value) {
       this._value = value;
       this.onChange(value);
@@ -56,7 +63,15 @@ export class InlineEditComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  public onBlur($event: Event) {
+  public onBlur(event: any, error: any) {
+    if(error) {
+      this.writeValue(this.preValue);
+    }
+
+    if(event.target.value !== this.preValue) {
+      this.showButton.emit(true);
+    }
+
     this.editing = false;
   }
 
@@ -67,9 +82,6 @@ export class InlineEditComponent implements ControlValueAccessor {
 
     this.preValue = value;
     this.editing = true;
-
-    setTimeout(_ => this._renderer.invokeElementMethod(this.inlineEditControl,
-      'focus'));
   }
 
 }
