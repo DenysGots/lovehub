@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserProfile } from '../models/user-profile';
 
 import { of } from 'rxjs/observable/of';
 import { catchError, tap } from 'rxjs/operators';
+import { CustomHttpClient } from '../http-interceptors/custom-http-client';
 
 
 export interface FilteredUsersProfile {
@@ -27,14 +28,29 @@ export class UsersProfileService {
     return this.http.post<UserProfile>(this.usersProfileUrl, user, httpOptions);
   }
 
+  findByUserId(userId: number): Observable<UserProfile | {}> {
+    return this.http.get<UserProfile>(`${this.usersProfileUrl}/${userId}`).pipe(
+      tap(_ => console.log(`found UsersProfile-profile by userId ${userId}`)),
+      catchError(this.handleError<UserProfile>(`repository users-profile: findByUserId(${userId})` ))
+    );
+  }
+
+  update(user: UserProfile): Observable<[number, UserProfile[]]> {
+    console.log('UsersProfileService updateUser ', user.id, user.firstName);
+    return this.http.put<[number, UserProfile[]]>(this.usersProfileUrl, user, httpOptions).pipe(
+      tap(_ => console.log(`update users-profile with id: "${user.id}"`)),
+      catchError(this.handleError<[number, UserProfile[]]>(`repository users-profile: update(${user.id})` ))
+    );
+  }
+
   searchUsers(type, term, offset, perPage): Observable<FilteredUsersProfile> {
     console.log(`angular: within searchUsers(${type}, ${term})`);
-    if (type == 'search') {
+    if (type == 'firstName') {
       return this.findByName(term, offset, perPage);
-    } else if(type == 'range') {
+    } else if(type == 'age') {
       return this.findByAge(term, offset, perPage);
-    } else if(type == 'radio') {
-      return this.findByGender(term, offset, perPage);
+    } else if(type == 'sex') {
+      return this.findBySex(term, offset, perPage);
     } else if(type == 'radio') {
       return this.findByPreference(term, perPage);
     }
@@ -46,7 +62,8 @@ export class UsersProfileService {
       return of([]);
     }
 
-    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?name=${name}&&offset=${offset}&&limit=${limit}`).pipe(
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?name=${name}&&offset=${offset}&&limit=${limit}`)
+      .pipe(
         tap(_ => console.log(`found users-profile by "${name}"`)),
         catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})` ))
       );
@@ -57,20 +74,22 @@ export class UsersProfileService {
       return of([]);
     }
 
-    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?age=${age}&&offset=${offset}&&limit=${limit}`).pipe(
-      tap(_ => console.log(`found users-profile by "${age}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})` ))
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?age=${age}&&offset=${offset}&&limit=${limit}`)
+      .pipe(
+        tap(_ => console.log(`found users-profile by "${age}"`)),
+        catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByAge(${age})` ))
     );
   }
 
-  findByGender(gender, offset, limit): Observable<FilteredUsersProfile | {}> {
-    if (!gender.trim()) {
+  findBySex(sex, offset, limit): Observable<FilteredUsersProfile | {}> {
+    if (!sex.trim()) {
       return of([]);
     }
 
-    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?gender=${gender}&&offset=${offset}&&limit=${limit}`).pipe(
-      tap(_ => console.log(`found users-profile by "${gender}"`)),
-      catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByGender(${gender})` ))
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}?sex=${sex}&&offset=${offset}&&limit=${limit}`)
+      .pipe(
+        tap(_ => console.log(`found users-profile by "${sex}"`)),
+        catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findBySex(${sex})` ))
     );
   }
 

@@ -46,6 +46,7 @@ export class PhotoSliderComponent implements OnInit {
   }
 
   fileChangeEvent(fileInput: any) {
+    console.log('FileChangeEvent');
     this.filesToUpload = <FileList>fileInput.target.files;
     if (this.filesToUpload) {
       this.upload();

@@ -1,8 +1,7 @@
-import {Body, Controller, Delete, Get, HttpCode, Param, Post, UseFilters} from '@nestjs/common';
+import {Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Req, UseFilters} from '@nestjs/common';
 import { User } from './user.entity';
 import { UsersService } from './users.service';
 import { UserDto } from './dto/user.dto';
-
 
 @Controller('api/users')
 export class UsersController {
@@ -13,6 +12,13 @@ export class UsersController {
   @Post()
   async create(@Body() userDto: UserDto) {
     await this.usersService.create(userDto);
+  }
+
+  @HttpCode(200)
+  @Post('/verify')
+  async verifyRole(@Body() body):  Promise<boolean> {
+    const { userId, userRole } = body;
+    return await this.usersService.verifyRole(userId, userRole);
   }
 
   @HttpCode(200)

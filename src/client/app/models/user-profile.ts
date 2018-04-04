@@ -1,32 +1,17 @@
 export class UserProfile {
 
-  id: number;
-  firstName: string;
-  lastName: string;
-  numberLike: number;
-  age: number;
-  sex: string;
-  preference: string;
-  orientation: string;
-  isBaned: boolean;
-  isActive: boolean;
-  avatar: string;
-
-  constructor(id: number,
-              firstName: string,
-              lastName: string,
-              age: number,
-              sex: string,
-              orientation: string,
-              preference: string,
-              avatar: string = null) {
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.age = age;
-    this.sex = sex;
-    this.orientation = orientation;
-    this.preference = preference;
-    this.avatar = avatar;
-  }
+  constructor(public id: number = 1,
+              public firstName: string = '',
+              public lastName: string = '',
+              public phoneNumber: number = 987654321,
+              public age: number = 20,
+              public role: string = '',
+              public sex: string = '',
+              public orientation: string = '',
+              public preference: string = '',
+              public location: string = '',
+              public isBaned: boolean = false,
+              public isActive: boolean = false,
+              public avatar: string = '',
+              public userId: number = 1) {}
 }

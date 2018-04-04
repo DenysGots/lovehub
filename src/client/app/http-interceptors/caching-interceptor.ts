@@ -30,6 +30,10 @@ export class CachingInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
+    if (req.url === 'api/chats') {
+      return next.handle(req);
+    }
+
     const cachedResponse = this.cache.get(req);
 
     return cachedResponse ? of(cachedResponse) : sendRequest(req, next, this.cache);

@@ -11,7 +11,7 @@ import { ROLE } from './role';
 import { PREFERENCE } from './preference';
 import { UserProfileInterest } from './user-profile-interest.entity';
 import { Interest } from './interest.entity';
-import {ORIENTATION} from './orientation';
+import { ORIENTATION } from './orientation';
 
 @Table({tableName: 'UsersProfile'})
 export class UserProfile extends Model<UserProfile> {
@@ -35,8 +35,6 @@ export class UserProfile extends Model<UserProfile> {
   @Column
   age: number;
 
-  @Column
-  photo: string;
   @Column(DataType.ENUM('MALE', 'FEMALE'))
   sex: SEX;
 

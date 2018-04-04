@@ -20,10 +20,6 @@ export class NavigationService {
       link: 'profile',
     },
     {
-      name: 'Log in/Register',
-      link: 'login'
-    },
-    {
       name: 'Matching',
       link: 'user-match'
     },
