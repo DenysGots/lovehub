@@ -23,9 +23,8 @@ export class UsersProfileController {
 
   @HttpCode(201)
   @Post()
-  async create(@Body() userProfileDto: UserProfileDto) {
-    console.log(userProfileDto);
-    await this.usersProfileService.create(userProfileDto);
+  async create(@Body() userProfileDto: UserProfileDto): Promise<UserProfileDto> {
+    return await this.usersProfileService.create(userProfileDto);
   }
 
   @Put()
@@ -50,21 +49,20 @@ export class UsersProfileController {
   @Get()
   async findAll(@Query() queries): Promise<FilteredUsersProfile> {
     const key = Object.keys(queries)[0];
-    if(key === 'name') {
+    if (key === 'name') {
       console.log(`server controller: findByName(${queries.name})`);
       return await this.usersProfileService.findByName(queries.name, queries.offset, queries.limit);
-    } else if(key === 'age') {
+    } else if (key === 'age') {
       console.log(`server controller: findByAge(${queries.age})`);
       return await this.usersProfileService.findByAge(parseInt(queries.age), queries.offset, queries.limit);
-    } else if(key === 'sex') {
+    } else if (key === 'sex') {
       console.log(`server controller: findByGender(${queries.sex})`);
       return await this.usersProfileService.findBySex(queries.sex, queries.offset, queries.limit);
-    } else if(key === 'preference') {
+    } else if (key === 'preference') {
       console.log(`server controller: findByPreference(${queries.preference})`);
       return await this.usersProfileService.findByPreference(queries.preference, queries.limit);
     }
     return await this.usersProfileService.findAll();
-
   }
 
   @HttpCode(204)

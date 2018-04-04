@@ -25,7 +25,6 @@ export class UserProfile extends Model<UserProfile> {
   @Column
   firstName: string;
 
-  @Length({min: 2, max: 15, msg: 'wrong length'})
   @Column
   lastName: string;
 
@@ -35,16 +34,19 @@ export class UserProfile extends Model<UserProfile> {
   @Column
   age: number;
 
-  @Column(DataType.ENUM('MALE', 'FEMALE'))
+  @Column
+  photo: string;
+
+  @Column(DataType.ENUM('MALE', 'FEMALE', 'UNDEFINED'))
   sex: SEX;
 
   @Column(DataType.ENUM('USER', 'MODERATOR', 'ADMIN'))
   role: ROLE;
 
-  @Column(DataType.ENUM('DATE', 'FRIENDS', 'PARTY'))
+  @Column(DataType.ENUM('DATE', 'FRIENDS', 'PARTY', 'UNDEFINED'))
   preference: PREFERENCE;
 
-  @Column(DataType.ENUM('MAN', 'WOMAN', 'ALL'))
+  @Column(DataType.ENUM('MAN', 'WOMAN', 'ALL', 'UNDEFINED'))
   orientation: ORIENTATION;
 
   @Column
