@@ -57,7 +57,7 @@ export class UsersProfileService {
       return await this.userProfileRepository
       .findOne<UserProfile>({
         where: {userId: id},
-        attributes: ['userId','firstName', 'lastName']
+        attributes: ['userId', 'firstName', 'lastName']
       });
     } catch (error) {
       console.error(`UserProfileService findShortInfo Error: (${id})`);

@@ -7,7 +7,7 @@ export class ChatService {
   currentChatId: number;
   currentChatIdChange: Subject<number> = new Subject<number>();
   socket: Subject<any>;
-  
+
   constructor(private wsService: WebsocketService) {
     this.socket = <Subject<any>>wsService
       .connect()
@@ -20,14 +20,18 @@ export class ChatService {
     });
    }
 
-  sendMessage(data){
-    if(this.currentChatId) {
+  sendMessage(data) {
+    if (this.currentChatId) {
       this.socket.next({event: 'send', data, chatId: this.currentChatId});
     }
   }
 
-  setChat(chatId: number){
+  setChat(chatId: number) {
     this.socket.next({event: 'changeRoom', prevChatId: this.currentChatId, chatId});
     this.currentChatIdChange.next(chatId);
+  }
+
+  deleteMessage(chatId: number, msgId: string) {
+    this.socket.next({event: 'deleteMessage', chatId, msgId});
   }
 }

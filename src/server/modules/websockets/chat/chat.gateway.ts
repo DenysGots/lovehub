@@ -5,9 +5,9 @@ import { CreateMessageDto } from '../../api/chat-messages/dto/create-message.dto
 import { ChatMessagesService } from '../../api/chat-messages/chat-messages.service';
 
 @WebSocketGateway({namespace: 'chat'})
-export class ChatGateway{
+export class ChatGateway {
 
-  constructor(private messagesService: ChatMessagesService){}
+  constructor(private messagesService: ChatMessagesService) {}
 
   @SubscribeMessage('changeRoom')
   changeRoom(client, data) {
@@ -18,14 +18,24 @@ export class ChatGateway{
   }
 
   @SubscribeMessage('send')
-  getNewMessage(client, data) {
+  async getNewMessage(client, data) {
     const parsedData = JSON.parse(data);
     const res = parsedData.data;
 
-    this.messagesService.create(res.chatId, res.message as CreateMessageDto);
-
+    const msg = await this.messagesService.create(res.chatId, res.message as CreateMessageDto);
     client.to(parsedData.chatId).emit('resFromServer', res.message);
-    
+
     return { event: 'resFromServer', data: res.message};
+  }
+
+  @SubscribeMessage('deleteMessage')
+  async deleteMessage(client, data) {
+    const parsedData = JSON.parse(data);
+    const {chatId, msgId} = parsedData;
+    console.log(msgId);
+    // const result = await this.messagesService.deleteMessageById(chatId, msgId);
+    // console.log(result);
+
+     return { event: 'messageIdFromServer', data: msgId};
   }
 }

@@ -10,19 +10,21 @@
     </span>
   </div>
   <div *ngIf="!!messages" class="message-list scrollbar">
-      <div 
-        *ngFor="let mess of messages" 
+      <div
+        *ngFor="let mess of messages"
         class="d-flex"
         [ngClass]="mess.userId === userId?'justify-content-end':'justify-content-start'"
       >
         <span
+          (click)="onSelect(mess)"
           class="message"
           [ngClass]="mess.userId === userId?'right':'left'"
+          [class.selected] = "selectedMessage === mess"
           [innerHTML]="mess.text | multiline"
         ></span>
       </div>
   </div>
-  <div *ngIf="!!messages">
+  <div *ngIf="!!messages && !selectedMessage">
       <div class="input-group input-container">
         <textarea
           class="textarea"
@@ -33,5 +35,8 @@
         ></textarea>
         <input type="button" value="Send" class="send" (click)="sendMes()" />
       </div>
+  </div>
+  <div *ngIf="!!messages && selectedMessage">
+    <app-message-editor [message]="selectedMessage" [chatId]="chatId"></app-message-editor>
   </div>
 </div>

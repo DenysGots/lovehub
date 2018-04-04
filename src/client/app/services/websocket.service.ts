@@ -16,7 +16,11 @@ export class WebsocketService {
     let observable = new Observable(observer => {
         this.socket.on('resFromServer', (data) => {
           observer.next(data);
-        })
+        });
+
+      this.socket.on('messageIdFromServer', (data) => {
+        observer.next(data);
+      });
         return () => {
           this.socket.disconnect();
         };
@@ -24,6 +28,7 @@ export class WebsocketService {
 
     let observer = {
         next: (data: any) => {
+          console.log(data.event);
             this.socket.emit(data.event, JSON.stringify(data));
         },
     };

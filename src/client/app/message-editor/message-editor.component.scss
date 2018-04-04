@@ -1,0 +1,24 @@
+.container{
+  margin-top: 25px;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-family: "Open Sans","OpenSans",sans-serif;
+}
+
+.btn {
+  font-size: 18px;
+  font-weight: 400;
+  border-radius: 10px;
+  width: 25%;
+  cursor: pointer;
+}
+
+.btn.btn-info{
+  background-color: #193952;
+}
+
+.btn.btn-danger{
+  background-color: #ef233c;
+}

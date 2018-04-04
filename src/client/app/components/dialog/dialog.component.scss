@@ -33,6 +33,14 @@
     margin-right: 5px;
     border-bottom-right-radius: 0;
 }
+.message.right:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+.selected {
+  background-color: gray;
+  color: #ffffff;
+}
 .input-container{
     margin-top: 15px;
 }

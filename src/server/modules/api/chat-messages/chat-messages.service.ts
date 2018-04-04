@@ -1,4 +1,5 @@
-import { Model } from 'mongoose';
+import * as mongoose from 'mongoose';
+import {Model, Types} from 'mongoose';
 import { Component, Inject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Chat } from './interfaces/chat.interface';
@@ -16,6 +17,15 @@ export class ChatMessagesService {
 
         return chat.save();
       });
+  }
+
+  async deleteMessageById(chatId: number, messageId: string): Promise<any> {
+    const msgId = mongoose.Types.ObjectId(messageId);
+    return await this.chatModel.update({chatId}, {$pull: {messages: {_id: msgId}}});
+  }
+
+  async editMessageText(chatId: number, messageId: number, text: string): Promise<any> {
+    return await this.chatModel.updateOne({chatId, 'messages._id': messageId}, {$set: {'messages.$.text': text}});
   }
 
   async findByChat(id: number): Promise<any> {

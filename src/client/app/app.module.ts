@@ -81,6 +81,7 @@ import { ChatUserComponent } from './components/chat-user/chat-user.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {providerCustomHttpClient} from './http-interceptors/providers';
 import {CustomHttpClient} from './http-interceptors/custom-http-client';
+import { MessageEditorComponent } from './message-editor/message-editor.component';
 
 @NgModule({
   declarations: [
@@ -122,7 +123,8 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     RightPartComponent,
     PhotoSliderComponent,
     NotificationsComponent,
-    InterestsComponent
+    InterestsComponent,
+    MessageEditorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),

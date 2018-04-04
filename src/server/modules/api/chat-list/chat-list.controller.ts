@@ -34,7 +34,7 @@ export class ChatListController {
       return {
         chatId: chat.chatId,
         user
-      }
+      };
     });
 
     return Promise.all(fullChats);

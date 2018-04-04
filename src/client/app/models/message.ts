@@ -4,4 +4,3 @@ export default class Chat {
     this.text = text;
   }
 }
-  

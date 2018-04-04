@@ -13,6 +13,7 @@ export class DialogComponent implements OnInit {
   userId: Number = null;
   text: String = '';
   chatId: Number = null;
+  selectedMessage = null;
 
   @Input() messages: Array<object>;
 
@@ -27,7 +28,7 @@ export class DialogComponent implements OnInit {
     this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
   }
 
-  sendMes(mes){
+  sendMes(mes) {
     const message = {
       chatId: this.chatId,
       message: {
@@ -37,6 +38,20 @@ export class DialogComponent implements OnInit {
     };
     this.chat.sendMessage(message);
     this.text = '';
+  }
+
+  onSelect(msg): void {
+    if (msg.userId !== this.userId) {
+      return;
+    }
+
+    if (this.selectedMessage === msg) {
+      this.selectedMessage = null;
+      return;
+    }
+
+    this.selectedMessage = msg;
+    console.log(this.selectedMessage === msg);
   }
 
 }
