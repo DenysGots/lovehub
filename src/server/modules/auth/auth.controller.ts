@@ -12,7 +12,6 @@ export class AuthController {
     }
 
     const token = await this.authService.sign(body);
-    console.log(`Server AuthController send ${token}`);
     res.status(HttpStatus.OK).json({ idToken : token });
   }
 }
