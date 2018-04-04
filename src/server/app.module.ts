@@ -4,6 +4,7 @@ import { StaticModule } from './modules/static/static.module';
 import { HomepageModule } from './modules/homepage/homepage.module';
 import { MatchingModule } from './modules/matching/matching.module';
 import { ChatModule } from './modules/websockets/chat/chat.module';
+import { NotificationModule } from './modules/websockets/notification/notification.module';
 import { ChatListModule } from './modules/api/chat-list/chat-list.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { NotificationsModule } from './modules/api/notifications/notifications.module';
@@ -22,6 +23,7 @@ import { PhotosModule } from './modules/api/photos/photos.module';
     StaticModule,
     NotificationsModule,
     AdministratorModule,
+    NotificationModule,
     StaticModule // Must be the last one !
   ],
   controllers: [],

@@ -15,7 +15,12 @@
 }
 .active{
     background: lightsteelblue;
-} 
-.non-active{
-    background: none;
+}
+.lastMsg{
+    color: #313335;
+    font-size: 13px;
+    font-weight: italic;
+}
+.unread{
+    background-color: lightgray;
 }

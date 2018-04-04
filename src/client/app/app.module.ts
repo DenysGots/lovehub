@@ -24,6 +24,7 @@ import { InterestsService } from './services/interests.service';
 
 import { ChatService } from './services/chat.service';
 import { WebsocketService } from './services/websocket.service';
+import { NotificationService } from './services/notification.service';
 
 import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 import { MultilinePipe } from './pipes/multiline.pipe';
@@ -70,6 +71,7 @@ import { AdministratorDashboardComponent } from './components/administrator/admi
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { InterestsComponent } from './components/interests/interests.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
@@ -77,7 +79,7 @@ import { RecoverPasswordComponent } from './components/recover-password/recover-
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { RecoverPassService} from './services/recover-pass.service';
 import { ChatComponent } from './components/chat/chat.component';
-import { ChatUserComponent } from './components/chat-user/chat-user.component';
+import { ChatListComponent } from './components/chat-list/chat-list.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {providerCustomHttpClient} from './http-interceptors/providers';
 import {CustomHttpClient} from './http-interceptors/custom-http-client';
@@ -109,7 +111,7 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     RecoverPasswordComponent,
     ResetPasswordComponent,
     ChatComponent,
-    ChatUserComponent,
+    ChatListComponent,
     DialogComponent,
     AdministratorFooterComponent,
     AdministratorHeaderComponent,
@@ -124,7 +126,8 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     PhotoSliderComponent,
     NotificationsComponent,
     InterestsComponent,
-    MessageEditorComponent
+    MessageEditorComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -163,7 +166,8 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     AdministratorService,
     RecoverPassService,
     NotificationsService,
-    InterestsService
+    InterestsService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })

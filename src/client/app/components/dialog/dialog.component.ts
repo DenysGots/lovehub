@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { EventEmitter } from 'events';
 import { ChatService } from '../../services/chat.service';
 
@@ -14,29 +14,53 @@ export class DialogComponent implements OnInit {
   text: String = '';
   chatId: Number = null;
   selectedMessage = null;
+  messages: Array<object> = null;
 
-  @Input() messages: Array<object>;
+  @ViewChild('scrollChat') private scrollChat: ElementRef;
 
-  constructor( private chat: ChatService) {
-   }
+  constructor( private chat: ChatService) {}
 
   ngOnInit() {
     this.chat.currentChatIdChange.subscribe(id => {
       this.chatId = id;
     });
 
+    this.chat.messagesUpdate.subscribe(data => {
+      if (!!data.new){
+        this.messages = data.data;
+      } else{
+        this.messages = [...this.messages, data.data];
+      }
+    });
+
     this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
+
+    this.scrollToBottom();
   }
 
-  sendMes(mes) {
-    const message = {
-      chatId: this.chatId,
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+        this.scrollChat.nativeElement.scrollTop = this.scrollChat.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
+
+  sendMes(mes){
+    const newMessage = {
+      chat: {
+        chatId: this.chatId,
+        toUser: this.chat.getFriend(this.chatId, this.userId)
+      },
       message: {
         userId: this.userId,
         text: this.text
       }
     };
-    this.chat.sendMessage(message);
+
+    this.chat.sendMessage(newMessage);
     this.text = '';
   }
 
