@@ -34,8 +34,6 @@ export class ChatListController {
       user = { ...user.dataValues, avatar: 'https://i.pinimg.com/736x/fb/e3/75/fbe37552637081f7bced381c7c464f3b--illustration-girl-girl-illustrations.jpg'};
 
       const lastMessage = await this.chatMessagesService.getLastMessage(chat.chatId) || null;
-
-      console.log('lastMessage', lastMessage);
       
       return {
         chatId: chat.chatId,

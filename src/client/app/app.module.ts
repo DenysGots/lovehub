@@ -79,7 +79,7 @@ import { RecoverPasswordComponent } from './components/recover-password/recover-
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { RecoverPassService} from './services/recover-pass.service';
 import { ChatComponent } from './components/chat/chat.component';
-import { ChatUserComponent } from './components/chat-user/chat-user.component';
+import { ChatListComponent } from './components/chat-list/chat-list.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import {providerCustomHttpClient} from './http-interceptors/providers';
 import {CustomHttpClient} from './http-interceptors/custom-http-client';
@@ -110,7 +110,7 @@ import {CustomHttpClient} from './http-interceptors/custom-http-client';
     RecoverPasswordComponent,
     ResetPasswordComponent,
     ChatComponent,
-    ChatUserComponent,
+    ChatListComponent,
     DialogComponent,
     AdministratorFooterComponent,
     AdministratorHeaderComponent,

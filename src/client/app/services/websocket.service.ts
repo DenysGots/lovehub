@@ -9,13 +9,11 @@ export class WebsocketService {
   private socket;
 
   constructor() { }
-
   connect(): Rx.Subject<MessageEvent> {
     this.socket = io(`${environment.CHAR_URL}/chat`);
 
     let observable = new Observable(observer => {
-        this.socket.on('resFromServer', (data) => {
-          console.log('here');
+        this.socket.on("resFromServer", (data) => {
           observer.next(data);
         });
         
@@ -26,8 +24,9 @@ export class WebsocketService {
 
     let observer = {
         next: (data: any) => {
-            this.socket.emit(data.event, JSON.stringify(data));
+          this.socket.emit(data.event, JSON.stringify(data.data));
         },
+        
     };
 
     return Rx.Subject.create(observer, observable);

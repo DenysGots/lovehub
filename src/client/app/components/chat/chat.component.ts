@@ -32,17 +32,5 @@ export class ChatComponent implements OnInit {
       this.chats = data;
       this.chat.setChats(data);
     });
-    
-    this.chat.socket.subscribe(data => {
-      this.messages = [...this.messages, data];
-    });
-  }
-
-  onChatChecked(chat){
-    this.chat.setChat(chat);
-
-    this.http.get<Message[]>(`api/messages/${chat}`).subscribe((data) => {
-      this.messages = data;
-    });
   }
 }

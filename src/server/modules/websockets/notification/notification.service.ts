@@ -23,14 +23,16 @@ export class NotificationService {
         }
     }
 
-    sendNotification(chat, message){
-        const conn = this.connected.find(conn => conn.userId === chat.friendId);
+    sendNotification(userId, message){
+        const conn = this.connected.find(conn => conn.userId === userId);
+
+        console.log('userId', userId, message)
 
         if(conn){
             conn.socket.emit('notification', {
                 type: 'notification',
                 title: 'New message',
-                text: message.text
+                data: message
             });
         }
     }

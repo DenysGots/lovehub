@@ -3,14 +3,22 @@ import { WebsocketService } from './websocket.service';
 import { Observable, Subject } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 
+import Message from '../models/message';
+import { NotificationService } from './notification.service';
+
 @Injectable()
 export class ChatService {
   currentChatId: number;
   chats = [];
+
   currentChatIdChange: Subject<number> = new Subject<number>();
+  messagesUpdate: Subject<any> = new Subject<any>();
   socket: Subject<any>;
   
-  constructor(private wsService: WebsocketService, private http: HttpClient) {
+  constructor(
+    private notifService: NotificationService,
+    private wsService: WebsocketService,
+    private http: HttpClient) {
     this.socket = <Subject<any>>wsService
       .connect()
       .map((response: any): any => {
@@ -19,6 +27,27 @@ export class ChatService {
 
     this.currentChatIdChange.subscribe((value) => {
         this.currentChatId = value;
+    });
+
+    this.notifService.getNotifications().subscribe((data: any) => {
+
+      this.chats = this.chats.map(chat => {
+        if(chat.chatId === data.data.chatId){
+          chat.lastMessage = data.data.message;
+          this.socket.next({
+            event: 'changeRoom',
+            data:{prevChatId: this.currentChatId, chatId: chat.chatId}
+            });
+        }
+
+        return chat;
+      });
+    });
+
+    this.socket.subscribe(data => {
+      if(data.event==='myMes' || data.event === 'newMes'){
+        this.messagesUpdate.next({data: data.data.message});
+      }
     });
   }
 
@@ -37,7 +66,11 @@ export class ChatService {
   }
 
   setChat(chatId: number){
-    this.socket.next({event: 'changeRoom', prevChatId: this.currentChatId, chatId});
+    this.socket.next({event: 'changeRoom', data: {prevChatId: this.currentChatId, chatId}});
     this.currentChatIdChange.next(chatId);
+
+    this.http.get<Array<Message>>(`api/messages/${chatId}`).subscribe((data) => {
+      this.messagesUpdate.next({new: true, data});
+    });
   }
 }

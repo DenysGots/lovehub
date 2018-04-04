@@ -1,4 +1,4 @@
-import { WebSocketGateway, SubscribeMessage, OnGatewayConnection } from '@nestjs/websockets';
+import { WebSocketGateway, SubscribeMessage, OnGatewayConnection, WebSocketServer } from '@nestjs/websockets';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 import { CreateMessageDto } from '../../api/chat-messages/dto/create-message.dto';
@@ -7,12 +7,18 @@ import { NotificationService } from '../notification/notification.service';
 
 @WebSocketGateway({namespace: 'chat'})
 export class ChatGateway{
-  connected = [];
+  @WebSocketServer() server;
 
   constructor(
     private messagesService: ChatMessagesService,
     private notifService: NotificationService){}
 
+  // @SubscribeMessage('readLast')
+  // setReadLast(client, data) {
+  //   const chat = JSON.parse(data);
+
+  //   console.log('cha', chat);
+  // }
   
   @SubscribeMessage('changeRoom')
   changeRoom(client, data) {
@@ -23,14 +29,19 @@ export class ChatGateway{
   }
 
   @SubscribeMessage('send')
-  getNewMessage(client, data) {
+  async getNewMessage(client, data) {
     const {chat, message}= JSON.parse(data).data;
-    
-    this.messagesService.create(chat.chatId, message as CreateMessageDto);
-    this.notifService.sendNotification(chat, message);
+    const dbMessage = await this.messagesService.create(chat.chatId, message as CreateMessageDto);
+   
+    this.notifService.sendNotification(chat.toUser, dbMessage);
 
-    client.to(chat.chatId).emit('resFromServer', message);
+    const res = {event: 'myMes', data: dbMessage};
 
-    return { event: 'resFromServer', data: message};
+    client.to(chat.chatId).emit('resFromServer', {event: 'newMes', data: dbMessage});
+
+    const setLastReadToBoth = this.server.adapter.rooms[chat.chatId].length > 1;
+    this.messagesService.setLastRead(dbMessage, setLastReadToBoth);
+
+    return { event: 'resFromServer', data: res};
   }
 }

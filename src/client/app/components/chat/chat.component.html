@@ -1,14 +1,13 @@
 <div class="container main" [ngStyle]="{'height.px': height}"> 
   <div class="row h-100 chat-container">
     <div class="col-md-4 col-sm-5 col-xs-12 chat-list scrollbar">
-      <chat-user
+      <chat-list
         *ngFor="let chat of chats"
-        (onChatChecked)="onChatChecked($event)"
         [chat]="chat"
-      ></chat-user>
+      ></chat-list>
     </div>
     <div class="col-md-8 col-sm-7 d-none d-sm-block message-list">
-      <chat-dialog [messages]="messages"></chat-dialog>
+      <chat-dialog></chat-dialog>
     </div>
   </div>
 </div>
