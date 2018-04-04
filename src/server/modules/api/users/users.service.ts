@@ -45,8 +45,4 @@ export class UsersService {
   async findByEmailAndPassword(email: string, password: string): Promise<User> {
     return await this.userRepository.findOne<User>({where: {email, password}, include: [UserProfile]});
   }
-
-  async findByEmail(email: string): Promise<User> {
-    return await this.userRepository.findOne<User>({where: {email}});
-  }
 }

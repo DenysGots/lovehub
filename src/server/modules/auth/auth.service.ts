@@ -11,7 +11,7 @@ import {MessageCodeError} from '../common/error/MessageCodeError';
 export class AuthService implements IAuthService {
   options: IJwtOptions = {
     algorithm: 'HS256',
-    expiresIn: '1m',
+    expiresIn: '15m',
     jwtid: process.env.JWT_ID || '1',
   };
 
