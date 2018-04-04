@@ -24,7 +24,7 @@ import { InterestsService } from './services/interests.service';
 import { ChatService } from './services/chat.service';
 import { WebsocketService } from './services/websocket.service';
 
-import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
+// import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 import { MultilinePipe } from './pipes/multiline.pipe';
 
 import { AppComponent } from './app.component';
@@ -109,7 +109,7 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     FooterComponent,
     SliderComponent,
     PagerComponent,
-    UsersProfileOrderByPipe,
+    // UsersProfileOrderByPipe,
     UserProfileComponent,
     MultilinePipe,
     UserMatchComponent,
