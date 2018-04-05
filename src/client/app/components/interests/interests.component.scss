@@ -69,11 +69,14 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
 .main {
   background-color: $color_12;
-  border-radius: 4px;
-  border: 1px solid $color_11;
-  box-shadow: $box-shadow_1;
-  margin: 30px;
-  max-width: 400px;
+  // border-radius: 4px;
+  // border: 1px solid $color_11;
+  // box-shadow: $box-shadow_1;
+  margin: 20px 0;
+  // max-width: 400px;
+  // overflow: auto;
+  border: 1px solid transparent;
+  position: relative;
   width: 100%;
 }
 
@@ -82,7 +85,7 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 }
 
 .text {
-  font: 1.0rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font: 1.0rem "Times New Roman", "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
 }
 
 .button {
@@ -92,7 +95,14 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
 .header {
   @include apply-flex(space-between, center, center);
-  margin: 10px 15px;
+  @include forbidTextSelection;
+  margin: 15px;
+  position: relative;
+}
+
+.header-heading {
+  color: $color_13;
+  font: 1.3rem 'Alegreya', serif;
 }
 
 .icon-container {
@@ -136,11 +146,6 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
   color: $color_6;
 }
 
-.header-heading {
-  color: $color_13;
-  font: 1.3rem 'Alegreya', serif;
-}
-
 .interests-section {
   margin: 10px;
 }
@@ -176,7 +181,7 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
 .input::placeholder {
   color: $color_13;
-  font: 1.1rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font: 1.1rem "Times New Roman", "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
   line-height: 1.6;
   text-align: left;
 }
@@ -212,6 +217,7 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 }
 
 .hints {
+  @include forbidTextSelection;
   background-color: $color_8;
   border-radius: 2px;
   border: 1px solid $color_11;
@@ -225,22 +231,16 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 }
 
 .hints_option {
-  @include apply-flex(space-between, center, center);
-  color: $color_13;
-  font: 1.1rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
-  height: 30px;
-  margin: 3px;
-}
-
-.hints_option:hover {
-  background-color: $color_11;
-  color: $color_6;
-  cursor: pointer;
-}
-
-.hints_option {
   @include apply-flex(flex-start, center, center);
-  margin: 0 5px;
+  color: $color_13;
+  font: 1.1rem "Times New Roman", "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  height: 30px;
+  margin: 5px;
+  &:hover {
+    background-color: $color_11;
+    color: $color_6;
+    cursor: pointer;
+  }
 }
 
 .hints_option-description {
@@ -250,6 +250,7 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
 .interest-list {
   @include apply-flex(space-between, center, center);
+  @include forbidTextSelection;
 }
 
 .interest {
@@ -259,9 +260,14 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
   margin: 5px;
   min-height: 25px;
   position: relative;
+  transition: 0.2s all ease-in-out;
   &:hover {
     box-shadow: $box-shadow_2;
     cursor: pointer;
+  }
+  &:hover .interest_description {
+    cursor: pointer;
+    margin: 5px 10px 5px 10px;
   }
 }
 
@@ -273,8 +279,10 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 .interest_description {
   color: $color_6;
   margin: 5px 15px 5px 5px;
+  transition: 0.2s all ease-in-out;
   &:hover {
     cursor: pointer;
+    margin: 5px 10px 5px 10px;
   }
 }
 
@@ -321,6 +329,7 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
 .footer {
   @include apply-flex(flex-end, center, center);
+  @include forbidTextSelection;
   height: 30px;
   margin: 15px 5px 15px 0;
   max-height: 30px;
@@ -334,7 +343,8 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
   box-shadow: none;
   color: transparent;
   height: 0;
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   max-height: 0;
   min-height: 0;
   overflow: hidden;
