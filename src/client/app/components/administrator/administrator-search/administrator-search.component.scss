@@ -1,0 +1,169 @@
+/* Page layout styles */
+
+@mixin apply-flex($justify-content, $align-items, $align-content) {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  align-content: $align-content;
+}
+
+@mixin remove-default-element-display {
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  text-decoration: none;
+}
+
+@mixin forbidTextSelection {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+$color_1: #fff;
+
+$color_2: #ccc9c9;
+
+$color_3: #333;
+
+$color_4: #555b6e;
+
+$color_5: #282828;
+
+$color_6: #000;
+
+$color_7: #20d6cd;
+
+$color_8: #d9e8f7;
+
+$color_9: #f6f6f6;
+
+$color_10: #ccc;
+
+$color_11: #e6e6e6;
+
+$color_12: #adadad;
+
+$color_13: #ddd;
+
+$color_14: #0275d8;
+
+$color_15: #193952;
+
+$color_16: #ef233c;
+
+$color_17: #a9a9a9;
+
+$color_18: #f1f1f1;
+
+$box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+/* Main section layout and styles */
+
+.main-section {
+  background-color: $color_18;
+  min-height: calc(100vh - 105px);
+  min-width: 920px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: relative;
+  width: 100%;
+  z-index: 90;
+}
+
+.main-section-content {
+  background-color: $color_18;
+  position: absolute;
+  width: 100%;
+}
+
+@media screen and (max-width: 640px) {
+  .main-section {
+    height: auto;
+    max-width: 100%;
+    min-height: 100vh;
+    overflow: scroll;
+    position: relative;
+  }
+
+  .main-section-content {
+    height: auto;
+  }
+}
+
+.full-screen {
+  min-width: 0;
+  width: calc(100vw - (100vw - 100%));
+}
+
+.text {
+  font: 1rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+}
+
+.heading {
+  color: $color_4;
+  font: bold 1.5rem 'Alegreya', serif;
+}
+
+/* Search section styles */
+
+.search-query {
+  margin: 30px 30px 0 30px;
+}
+
+.search-results {
+  @include apply-flex(space-between, flex-start, center);
+  background-color: $color_18;
+}
+
+.user-badge {
+  @include apply-flex(space-between, flex-start, flex-start);
+  @include forbidTextSelection;
+  background-color: $color_1;
+  border-radius: 4px;
+  border: 1px solid $color_2;
+  box-shadow: $box-shadow_1;
+  cursor: pointer;
+  height: 130px;
+  margin: 30px;
+  overflow: hidden;
+  position: relative;
+  width: 250px;
+}
+
+@media screen and (max-width: 640px) {
+  .user-badge {
+    marging: 10px;
+    width: 100%;
+  }
+}
+
+.photo-container {
+  @include apply-flex(center, center, center);                    //TODO: remove
+  background-color: $color_1;                                     //TODO: remove
+  border-radius: 50%;
+  border: 1px solid $color_15;
+  color: $color_15;                                               //TODO: remove
+  font-size: 1.7rem;                                              //TODO: remove
+  height: 40px;
+  margin: 15px 10px 15px 15px;
+  width: 40px;
+}
+
+@media screen and (max-width: 640px) {
+  .photo-container {
+    height: 35px;
+    width: 35px;
+  }
+}
+
+.user-information {
+  color: $color_6;
+  font-size: 0.8rem;
+  margin: 15px 15px 15px 0;
+}
