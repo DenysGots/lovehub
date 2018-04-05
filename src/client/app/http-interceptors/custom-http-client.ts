@@ -30,13 +30,10 @@ export class CustomHttpClient extends HttpClient {
     }
 
     if(!params.headers) {
-      params.headers = new HttpHeaders();
+      const token = localStorage.getItem('jwt_token');
+      params.headers = new HttpHeaders({ 'authorization': `Bearer ${token}`});
     }
 
-    const token = localStorage.getItem('jwt_token');
-    params.headers = params.headers.append('authorization', `Bearer ${token}`);
-
-    console.log(params['headers']['authorization']);
     return params;
   }
 
@@ -45,7 +42,6 @@ export class CustomHttpClient extends HttpClient {
       if (error['status'] === 401 || error['status'] === 403) {
         console.log('CustomHttpClient ', error);
         this.authErrorHandlerService.handleError(error);
-        return Observable.empty();
       }
       return Observable.of(error);
     }

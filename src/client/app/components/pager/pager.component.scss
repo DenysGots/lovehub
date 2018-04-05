@@ -1,6 +1,4 @@
 :host {
-  display: flex;
-  background: #1a2580;
   .pagination {
     display: flex;
     flex-direction: row;
@@ -20,14 +18,14 @@
         padding: 10px;
         background: transparent;
         cursor: pointer;
-        border: 1px solid yellowgreen;
+        border: 1px solid #555b6e;
 
         &.active {
-          color: yellow;
+          color: #ef233c;
         }
 
         &.disabled {
-          color: lightgrey;
+          color: #8d99ae;
         }
       }
     }

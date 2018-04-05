@@ -1,8 +1,9 @@
 import { Component, Inject } from '@nestjs/common';
 import { UserProfile } from './user-profile.entity';
 import { UserProfileDto } from './dto/user-profile.dto';
-import {PREFERENCE} from './preference';
-import {ORIENTATION} from './orientation';
+import { PREFERENCE } from './preference';
+import { ORIENTATION } from './orientation';
+import {where} from 'sequelize';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -18,8 +19,10 @@ export class UsersProfileService {
     const userProfile = new UserProfile();
     userProfile.firstName = userProfileDto.firstName;
     userProfile.lastName = userProfileDto.lastName;
+    userProfile.phoneNumber = userProfileDto.phoneNumber;
     userProfile.age = userProfileDto.age;
     userProfile.sex = userProfileDto.sex;
+    userProfile.role = userProfileDto.role;
     userProfile.preference = userProfileDto.preference;
     userProfile.orientation = userProfileDto.orientation;
     userProfile.userId = userProfileDto.userId;
@@ -42,12 +45,26 @@ export class UsersProfileService {
     }
   }
 
-  async findById(id: number): Promise<UserProfile> {
+  async findByUserId(userId: number): Promise<UserProfile> {
+    try {
+      console.log(`findByUserId(${userId})`);
+      return await this.userProfileRepository
+        .findOne<UserProfile>({ where: { userId } });
+    } catch (error) {
+      console.error(`Arise an exception in the findById(${userId}) method UserProfile Service`);
+      throw error;
+    }
+  }
+
+  async findShortInfo(id: number): Promise<any>{
     try {
       return await this.userProfileRepository
-        .findById<UserProfile>(id);
+      .findOne<UserProfile>({
+        where: {userId: id},
+        attributes: ['userId', 'firstName', 'lastName']
+      });
     } catch (error) {
-      console.error(`Arise an exception in the findById(${id}) method UserProfile Service`);
+      console.error(`UserProfileService findShortInfo Error: (${id})`);
       throw error;
     }
   }
@@ -74,11 +91,11 @@ export class UsersProfileService {
     }
   }
 
-  async findByGender(sex: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
+  async findBySex(sex: string, offset: number, limit: number): Promise<FilteredUsersProfile> {
     console.log(`server service: findByGender(${sex})`);
     try {
       return await this.userProfileRepository
-        .findAndCountAll<UserProfile>({where: {sex: sex}, offset: offset, limit: limit});
+        .findAndCountAll<UserProfile>({where: { sex }, offset: offset, limit: limit});
     } catch (error) {
       console.error(`Arise an exception in the findByGender(${sex}) method UserProfile Service`);
       throw error;
@@ -99,8 +116,9 @@ export class UsersProfileService {
 
   async update(id: number, userProfileDto: UserProfileDto): Promise<[number, UserProfile[]]> {
     try {
+      console.log('Server UsersProfileService ' + id);
       return await this.userProfileRepository
-        .update(userProfileDto, {where: {id: id}});
+        .update(userProfileDto, {where: { id }});
     } catch (error) {
       throw error;
     }
@@ -109,7 +127,7 @@ export class UsersProfileService {
   async remove(id: number): Promise<number> {
     try {
       return await this.userProfileRepository
-        .destroy({where: {id: id}});
+        .destroy({where: { id }});
     } catch (error) {
       throw error;
     }

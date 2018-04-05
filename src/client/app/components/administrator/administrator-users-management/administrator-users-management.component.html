@@ -2,7 +2,9 @@
   <app-administrator-navbar class="admin-navbar">
   </app-administrator-navbar>
 
-  <app-administrator-header class="header" [ngClass]="{'header-full-screen': !mainSectionIsVisible}">
+  <app-administrator-header
+    class="header"
+    [ngClass]="{'header-full-screen': !mainSectionIsVisible}">
   </app-administrator-header>
 
   <section
@@ -13,7 +15,7 @@
     <div class="main-section-content" [ngClass]="{'full-screen': !mainSectionIsVisible}">
       <div class="users-management">
         <div class="users-management_apply-action">
-          <h5>Apply action on selected users</h5>
+          <h5 class="heading">Apply action on selected users</h5>
 
           <div class="users-management_actions">
             <form class="form actions-form" #actionsForm="ngForm">
@@ -24,8 +26,8 @@
                   title="Choose an action"
                   #action="ngModel"
                   [(ngModel)]="updateUsersOptions.appliedAction">
-                  <option value="disable">
-                    Disable
+                  <option value="ban">
+                    Ban
                   </option>
 
                   <option value="delete">
@@ -43,7 +45,7 @@
                 [ngClass]="{'button-disabled': updateUsersOptions.usersList.length === 0}"
                 title="Apply an operation"
                 [attr.disabled]="(updateUsersOptions.usersList.length === 0) ? '' : null"
-                (click)="updateUsers(); false">
+                (click)="updateUsers(); resetSelectedUsersList(); false">
                 Apply
               </button>
             </form>
@@ -51,7 +53,7 @@
         </div>
 
         <div class="users-management_apply-filter">
-          <h5>Filter users</h5>
+          <h5 class="heading">Filter users</h5>
 
           <div class="users-management_filters">
             <form class="form filters-form" #filtersForm="ngForm">
@@ -67,16 +69,16 @@
                   title="Select users by role"
                   #role="ngModel"
                   [(ngModel)]="getUsersOptions.userRole"
-                  (change)="getUsers()">
+                  (change)="getUsers(); resetSortingOptions(); resetNextPage()">
                   <option value="any">
                     All users
                   </option>
 
-                  <option value="moderators">
+                  <option value="Moderator">
                     Moderators
                   </option>
 
-                  <option value="users">
+                  <option value="User">
                     Users
                   </option>
                 </select>
@@ -94,21 +96,17 @@
                   title="Select users by status"
                   #status="ngModel"
                   [(ngModel)]="getUsersOptions.userStatus"
-                  (change)="getUsers()">
+                  (change)="getUsers(); resetSortingOptions(); resetNextPage()">
                   <option value="any">
                     All users
                   </option>
 
-                  <option value="active">
+                  <option value="Active">
                     Active
                   </option>
 
-                  <option value="disabled">
-                    Disabled
-                  </option>
-
-                  <option value="deleted">
-                    Deleted
+                  <option value="Baned">
+                    Banned
                   </option>
                 </select>
               </div>
@@ -125,7 +123,7 @@
                   title="Select number of users shown per page"
                   #usersPerPage="ngModel"
                   [(ngModel)]="getUsersOptions.usersPerPage"
-                  (change)="getUsers()">
+                  (change)="getUsers(); resetSortingOptions(); resetNextPage()">
                   <option value="5">
                     5
                   </option>
@@ -138,7 +136,7 @@
                     15
                   </option>
 
-                  <option value="10">
+                  <option value="20">
                     20
                   </option>
                 </select>
@@ -286,7 +284,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="table-row" *ngFor="let user of users">   <!-- TODO: change binding to usersList.users upon obtaining usersList from server -->
+            <tr class="table-row" *ngFor="let user of usersList.users">
               <td class="table_cell">
                 {{ user.id }}
               </td>
@@ -308,7 +306,7 @@
               </td>
 
               <td class="table_cell">
-                {{ user.lastActive }}
+                {{ user.lastActiveDate }}
               </td>
 
               <td class="table_cell">
@@ -335,7 +333,7 @@
         <div class="users-table-pagination">
           <div
             class="pagination-element pagination-previous"
-            (click)="goToPage('previous'); getUsers()">
+            (click)="goToPage({pageTitle: 'previous'}); getUsers()">
             <span class="arrow left-arrow"></span>
             <span class="arrow left-arrow"></span>
           </div>
@@ -345,17 +343,17 @@
             *ngFor="let page of pages">
             <div
               class="pagination-page"
-              [ngClass]="{'pagination-current': usersList.currentPage === page}"
+              [ngClass]="{'pagination-current': usersList.currentPage === page.pageTitle}"
               (click)="goToPage(page); getUsers()">
               <p class="page">
-                {{ page }}
+                {{ page.pageTitle }}
               </p>
             </div>
           </div>
 
           <div
             class="pagination-element pagination-next"
-            (click)="goToPage('next'); getUsers()">
+            (click)="goToPage({pageTitle: 'next'}); getUsers()">
             <span class="arrow right-arrow"></span>
             <span class="arrow right-arrow"></span>
           </div>
