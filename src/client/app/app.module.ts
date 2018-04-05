@@ -66,6 +66,7 @@ import { AdministratorHeaderComponent } from './components/administrator/adminis
 import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
+import { AdministratorSearchComponent } from './components/administrator/administrator-search/administrator-search.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { InterestsComponent } from './components/interests/interests.component';
 
@@ -117,6 +118,7 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     AdministratorNavbarComponent,
     AdministratorDashboardComponent,
     AdministratorUsersManagementComponent,
+    AdministratorSearchComponent,
     ForbiddenComponent,
     PhotosComponent,
     ProfilePageComponent,

@@ -26,8 +26,6 @@ export class NotificationsServiceComponent {
     userParameters.clientId = client.id;
 
     this.connectedUsers.push(<ConnectedUser>userParameters);
-
-    console.log('Connected users', this.connectedUsers);
   }
 
   removeUser(client): void {
@@ -46,9 +44,6 @@ export class NotificationsServiceComponent {
         }
       }
     }
-
-    console.log(`User ${clientId} disconnected`);
-    console.log('Connected users', this.connectedUsers);
   }
 
   handleNotification(client, userId): NotificationReceiver {
@@ -59,7 +54,6 @@ export class NotificationsServiceComponent {
     const notificationReceiver = {} as NotificationReceiver;
 
     for (let i = 0; i < connectedUsersLength; i += 1) {
-
       if (connectedUsers[i].clientId === senderClientId) {
         notificationReceiver.senderUserName = connectedUsers[i].firstName + ' ' + connectedUsers[i].lastName;
         break;
@@ -72,13 +66,6 @@ export class NotificationsServiceComponent {
         break;
       }
     }
-
-    // MultiBrowser test
-    // for (let i = 0; i < connectedUsersLength; i += 1) {
-    //   if (connectedUsers[i].clientId !== senderClientId) {
-    //     notificationReceiver.receiverClientId = connectedUsers[i].clientId;
-    //   }
-    // }
 
     return notificationReceiver;
   }

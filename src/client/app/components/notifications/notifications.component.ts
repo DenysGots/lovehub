@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 import { NotificationsService } from '../../services/notifications.service';
 
@@ -25,13 +26,14 @@ interface CurrentUser {
   ]
 })
 export class NotificationsComponent implements OnInit, OnDestroy {
-  messages = [];
-  connection;
-  notificationsList = {
+  public connection;
+  public messages = [];
+  public notificationsList = {
     isHidden: true,
     minHeight: '0'
   };
-  currentUser: CurrentUser = {
+  public currentUserId: number;
+  public currentUser: CurrentUser = {
     userId: 1234,
     firstName: 'User_1',
     lastName: 'User_1',
@@ -46,8 +48,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       this.handleMessages(message);
     });
 
-    // TODO: acquire current logged user parameters with some service and save them to this.currentUser
-
+    this.currentUser = parseInt(jwt_decode(localStorage.getItem('jwt_token')), 10);
+    this.currentUserId = this.currentUser.id;
     this.notificationsService.currentUser = this.currentUser;
   }
 

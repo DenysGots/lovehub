@@ -1,7 +1,5 @@
 /* Page layout styles */
 
-@import url('https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css');
-
 @mixin apply-flex($justify-content, $align-items, $align-content) {
   display: flex;
   flex-wrap: wrap;
@@ -107,90 +105,65 @@ $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
   font: 1rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
 }
 
-/* Dashboard section styles */
+.heading {
+  color: $color_4;
+  font: bold 1.5rem 'Alegreya', serif;
+}
 
-/* General site information section */
+/* Search section styles */
 
-.general-information {
+.search-query {
+  margin: 30px 30px 0 30px;
+}
+
+.search-results {
+  @include apply-flex(space-between, flex-start, center);
+  background-color: $color_18;
+}
+
+.user-badge {
+  @include apply-flex(space-between, flex-start, flex-start);
+  @include forbidTextSelection;
+  background-color: $color_1;
   border-radius: 4px;
   border: 1px solid $color_2;
   box-shadow: $box-shadow_1;
-  display: grid;
-  grid-template: auto/ repeat(4, 1fr);
+  cursor: pointer;
+  height: 130px;
   margin: 30px;
   overflow: hidden;
-  width: calc(100% - 60px);
+  position: relative;
+  width: 250px;
 }
 
 @media screen and (max-width: 640px) {
-  .general-information {
-    display: grid;
-    grid-template: auto/ repeat(1, 1fr);
-    margin: 20px;
-    min-width: 100%;
+  .user-badge {
+    marging: 10px;
     width: 100%;
   }
 }
 
-.general-information_wrapper {
-  border-left: 1px solid $color_2;
-  margin: 15px 0;
-  &:first-of-type {
-    border-left: none;
-    margin-left: 5px;
-  }
-  &:last-of-type {
-    margin-right: 5px;
+.photo-container {
+  @include apply-flex(center, center, center);                    //TODO: remove
+  background-color: $color_1;                                     //TODO: remove
+  border-radius: 50%;
+  border: 1px solid $color_15;
+  color: $color_15;                                               //TODO: remove
+  font-size: 1.7rem;                                              //TODO: remove
+  height: 40px;
+  margin: 15px 10px 15px 15px;
+  width: 40px;
+}
+
+@media screen and (max-width: 640px) {
+  .photo-container {
+    height: 35px;
+    width: 35px;
   }
 }
 
-.general-information_section {
-  color: $color_4;
+.user-information {
+  color: $color_6;
   font-size: 0.8rem;
-  margin: 0 20px;
-}
-
-.section-title {
-  font: 1.4rem 'Alegreya', serif;
-  min-height: 65px;
-}
-
-.section-counter {
-  font: 2.4rem 'Alegreya', serif;
-}
-
-.increase {
-  color: $color_14;
-}
-
-.decrease {
-  color: $color_16;
-}
-
-/* Charts section */
-
-.charts-section {
-  @include apply-flex(space-around, flex-start, center);
-  margin: 20px;
-}
-
-.chart-container {
-  border-radius: 4px;
-  border: 1px solid $color_2;
-  box-shadow: $box-shadow_1;
-  margin: 10px;
-  width: calc(50% - 20px);
-  overflow: hidden;
-}
-
-.chart-header {
-  background-color: $color_13;
-  border-bottom: 1px solid $color_2;
-  color: $color_4;
-  font: 1.3rem 'Alegreya', serif;
-  padding: 5px;
-}
-
-.chart {
-  margin: 5px;
+  margin: 15px 15px 15px 0;
 }

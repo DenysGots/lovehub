@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ChatComponent } from './components/chat/chat.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
+import { AdministratorSearchComponent } from './components/administrator/administrator-search/administrator-search.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 
@@ -28,7 +29,8 @@ export const routes = [
   { path: 'admin', canActivate: [ AuthGuard ],
     children: [
       { path: '', component: AdministratorDashboardComponent },
-      { path: 'users-management', component: AdministratorUsersManagementComponent }
+      { path: 'users-management', component: AdministratorUsersManagementComponent },
+      { path: 'search', component: AdministratorSearchComponent }
     ]
   },
   { path: 'chat', component: ChatComponent },
