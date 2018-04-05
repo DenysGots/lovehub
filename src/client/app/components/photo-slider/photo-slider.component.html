@@ -28,9 +28,11 @@
       <div class="carousel-inner row w-100" role="listbox">
 
         <div class="carousel-item col-md-4 active">
-          <img class="image img-fluid d-block" *ngIf="photos.length > 0" [src]="photos[0].base64" (click)="deletePhoto(photos[0]._id)" title="Click to delete photo">
+          <img class="image img-fluid d-block" *ngIf="photos.length > 0" [src]="photos[0].base64" (click)="deletePhoto(photos[0]._id)"
+               title="Click to delete photo">
         </div>
-        <div class="carousel-item col-md-4" *ngFor="let photo of photos | slice:1; let i = index;" title="Click to delete photo">
+        <div class="carousel-item col-md-4" *ngFor="let photo of photos | slice:1; let i = index;"
+             title="Click to delete photo">
           <img class="image img-fluid d-block" [src]="photo.base64" id="photo" (click)="deletePhoto(photo._id)">
         </div>
 
