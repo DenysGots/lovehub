@@ -1,1 +1,1 @@
-export type PREFERENCE = 'DATE'|'FRIENDS'|'PARTY';
+export type PREFERENCE = 'DATE'|'FRIENDS'|'PARTY'|'UNDEFINED';

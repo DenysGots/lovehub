@@ -1,1 +1,1 @@
-export type SEX = 'MALE'|'FEMALE';
+export type SEX = 'MALE'|'FEMALE'|'UNDEFINED';

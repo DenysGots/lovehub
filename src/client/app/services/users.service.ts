@@ -24,6 +24,7 @@ export class UsersService {
   }
 
   registration(user: User): Observable<User> {
+    console.log('On Client Service:', this.http.post<User>(`${this.usersUrl}`, user, httpOptions));
     return this.http.post<User>(`${this.usersUrl}`, user, httpOptions);
   }
 

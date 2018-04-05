@@ -14,7 +14,7 @@ import {ModalForbiddenService} from './modal-forbidden.service';
 export class AuthGuard implements CanActivate {
 
   constructor(private router: Router,
-              private authService:AuthService,
+              private authService: AuthService,
               private usersService: UsersService,
               private usersProfileService: UsersProfileService,
               private modalForbiddenService: ModalForbiddenService) { }

@@ -1,8 +1,8 @@
 import { Component, Inject } from '@nestjs/common';
 import { User } from './user.entity';
 import { UserDto } from './dto/user.dto';
-import {UserProfile} from '../users-profile/user-profile.entity';
-import {ROLE} from '../users-profile/role';
+import { UserProfile } from '../users-profile/user-profile.entity';
+import { ROLE } from '../users-profile/role';
 
 @Component()
 export class UsersService {
@@ -14,7 +14,6 @@ export class UsersService {
     user.name = userDto.name;
     user.email = userDto.email;
     user.password = userDto.password;
-
     return await user.save();
   }
 
@@ -46,5 +45,4 @@ export class UsersService {
   async findByEmailAndPassword(email: string, password: string): Promise<User> {
     return await this.userRepository.findOne<User>({where: {email, password}, include: [UserProfile]});
   }
-
 }

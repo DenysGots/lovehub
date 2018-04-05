@@ -45,13 +45,13 @@ export class UsersProfileService {
 
   searchUsers(type, term, offset, perPage): Observable<FilteredUsersProfile> {
     console.log(`angular: within searchUsers(${type}, ${term})`);
-    if (type == 'firstName') {
+    if (type === 'firstName') {
       return this.findByName(term, offset, perPage);
-    } else if(type == 'age') {
+    } else if (type === 'age') {
       return this.findByAge(term, offset, perPage);
-    } else if(type == 'sex') {
+    } else if (type === 'sex') {
       return this.findBySex(term, offset, perPage);
-    } else if(type == 'radio') {
+    } else if (type === 'radio') {
       return this.findByPreference(term, perPage);
     }
   }
@@ -70,7 +70,7 @@ export class UsersProfileService {
   }
 
   findByAge(age, offset, limit): Observable<FilteredUsersProfile | {}> {
-    if (!parseInt(age.trim())) {
+    if (!parseInt(age.trim(), 10)) {
       return of([]);
     }
 
