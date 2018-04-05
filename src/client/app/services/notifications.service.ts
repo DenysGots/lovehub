@@ -12,7 +12,7 @@ interface CurrentUser {
 @Injectable()
 export class NotificationsService {
   private serverURL = 'http://localhost:5400';  // TODO: change on server's url change
-  private socket = io(this.serverURL);          // TODO: add namespace to URL for notifications WS connection
+  private socket = io(`${this.serverURL}`);  // (`${this.serverURL}/notifications`)
 
   public currentUser = {} as CurrentUser;
 
@@ -30,7 +30,7 @@ export class NotificationsService {
       });
 
       this.socket.on('connection-successful', () => {
-        console.log('Connected to server via websocket');
+        console.log('Notifications connected to server via websocket');
       });
 
       this.socket.on('receive-notification', (data) => {

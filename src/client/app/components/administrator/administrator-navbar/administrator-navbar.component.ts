@@ -19,7 +19,7 @@ export class AdministratorNavbarComponent implements OnInit {
   };
 
   currentUser = {
-    userId: 1,        // TODO: get userId on init from URL
+    userId: 1,
     firstName: '',
     lastName: '',
     role: ''

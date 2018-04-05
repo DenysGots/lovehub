@@ -79,6 +79,7 @@ $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
 }
 
 .main-section-content {
+  background-color: $color_18;
   position: absolute;
   width: 100%;
 }
@@ -133,7 +134,7 @@ $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
 
 .general-information_wrapper {
   border-left: 1px solid $color_2;
-  margin: 10px 0;
+  margin: 15px 0;
   &:first-of-type {
     border-left: none;
     margin-left: 5px;
@@ -151,6 +152,7 @@ $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
 
 .section-title {
   font: 1.4rem 'Alegreya', serif;
+  min-height: 65px;
 }
 
 .section-counter {

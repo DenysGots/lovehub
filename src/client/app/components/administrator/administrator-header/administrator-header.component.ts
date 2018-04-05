@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AdministratorService } from '../../../services/administrator.service';
 
@@ -12,15 +13,18 @@ import { AdministratorService } from '../../../services/administrator.service';
   ]
 })
 export class AdministratorHeaderComponent implements OnInit {
-  mainSectionIsVisible: boolean;
+  public mainSectionIsVisible: boolean;
+  public searchInput: string;
 
-  currentUser = {
+  public currentUser = {
     firstName: '',
     lastName: '',
     role: ''
   };
 
-  constructor(private administratorService: AdministratorService) {
+  constructor(
+    private administratorService: AdministratorService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -36,4 +40,12 @@ export class AdministratorHeaderComponent implements OnInit {
   hideNavBar(): void {
     this.administratorService.changeNavBarState();
   }
+
+  searchUsers(): void {
+    if (this.searchInput) {
+      this.administratorService.searchUsers(this.searchInput.trim().toLowerCase());
+      this.router.navigate(['admin/search']);
+    }
+  }
+
 }

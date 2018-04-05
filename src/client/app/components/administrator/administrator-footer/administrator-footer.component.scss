@@ -41,9 +41,15 @@ $color_7: #fff;
 
 $color_8: #555b6e;
 
+$color_9: #8d99ae;
+
+$color_10: #a9a9a9;     // Home page dark theme sections background color
+
+$color_11: #343a40;     // Home page dark theme header background color
+
 .main {
   @include apply-flex(space-around, center, center);
-  background-color: $color_1;
+  background-color: $color_11;
   border-top: 1px solid $color_8;
   height: 55px;
   min-width: 220px;
@@ -69,17 +75,17 @@ $color_8: #555b6e;
   width: 45px;
   &:hover {
     background-color: $color_6;
-    border-color: $color_4;
+    border-color: $color_7;
     cursor: pointer;
     & .icon {
-      color: $color_4;
+      color: $color_7;
     }
   }
   &:active {
-    border-color: $color_2;
-    box-shadow: 0 0 15px $color_2;
+    border-color: $color_7;
+    box-shadow: 0 0 10px $color_7;
     & .icon {
-      color: $color_2;
+      color: $color_7;
     }
   }
 }
