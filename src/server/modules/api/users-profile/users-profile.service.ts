@@ -1,5 +1,6 @@
 import { Component, Inject } from '@nestjs/common';
 import { UserProfile } from './user-profile.entity';
+import { Likes } from './likes.entity';
 import { UserProfileDto } from './dto/user-profile.dto';
 import { PREFERENCE } from './preference';
 import { ORIENTATION } from './orientation';
@@ -132,4 +133,12 @@ export class UsersProfileService {
       throw error;
     }
   }
+
+
+  // operations with likes
+
+  async addLike() {
+
+  }
+
 }

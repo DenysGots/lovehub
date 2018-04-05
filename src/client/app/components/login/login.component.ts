@@ -52,9 +52,9 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
 
     this.authService.sign(email, password).subscribe((response) => {
-      if(response.isLoggedIn) {
-        const url: string = this.authService.getRedirectUrl(),
-          redirectUrl = '/profile';
+      if (response.isLoggedIn) {
+        const redirectUrl: string = this.authService.getRedirectUrl();
+        //   const redirectUrl = `/profile/${:userId}`;
         this.onRedirect(redirectUrl);
       }
     });

@@ -2,10 +2,11 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, Req, 
 import { UserProfileDto } from './dto/user-profile.dto';
 import { UsersProfileService } from './users-profile.service';
 import { UserProfile } from './user-profile.entity';
+
 import { HttpExceptionFilter } from '../../common/filters/http-exception.filter';
 
 import * as jwt from 'jsonwebtoken';
-import {UsersService} from '../users/users.service';
+import { UsersService } from '../users/users.service';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -18,7 +19,7 @@ export class UsersProfileController {
 
   constructor(
     private readonly usersProfileService: UsersProfileService,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
     ) {}
 
   @HttpCode(201)
@@ -71,4 +72,9 @@ export class UsersProfileController {
     const affected = await this.usersProfileService.remove(params.id);
     return {statusCode: affected};
   }
+
+  // operations with likes
+
+
+
 }

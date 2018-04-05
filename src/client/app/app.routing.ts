@@ -25,7 +25,7 @@ export const routes = [
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
-  { path: 'profile', component: ProfilePageComponent},
+  { path: 'profile/:userId', component: ProfilePageComponent},
   { path: 'likes', component: LikesComponent},
   { path: 'admin', component: AdministratorDashboardComponent,
     children: [
