@@ -9,13 +9,6 @@ interface Message {
   isShifted: boolean;
 }
 
-interface CurrentUser {
-  userId: number;
-  firstName: string;
-  lastName: string;
-  role: string;
-}
-
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -32,13 +25,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     isHidden: true,
     minHeight: '0'
   };
-  public currentUserId: number;
-  public currentUser: CurrentUser = {
-    userId: 1234,
-    firstName: 'User_1',
-    lastName: 'User_1',
-    role: 'User'
-  };
+  public currentUser = {} as any;
 
   constructor(private notificationsService: NotificationsService) {
   }
@@ -48,8 +35,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       this.handleMessages(message);
     });
 
-    this.currentUser = parseInt(jwt_decode(localStorage.getItem('jwt_token')), 10);
-    this.currentUserId = this.currentUser.id;
+    this.currentUser = jwt_decode(localStorage.getItem('jwt_token'));
     this.notificationsService.currentUser = this.currentUser;
   }
 
@@ -57,7 +43,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     this.connection.unsubscribe();
   }
 
-  // Must receive receiver user id somehow
+  // Must receive receiver user id
   sendLike(receiverUserId): void {
     // TODO: get receiverUserId from user's profile URL
     this.notificationsService.sendMessage(receiverUserId);

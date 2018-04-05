@@ -24,17 +24,17 @@ interface Results {
 export class InterestsComponent implements OnInit, OnDestroy {
   public connection: any;
   public router: any;
-  public interestsToSave: string[] = [];
-  public interestsToDelete: string[] = [];
-  public typedInterestChanged: Subject<string> = new Subject<string>();
   public currentUserId: number;
   public editMode = false;
   public editingIsForbidden = false;
   public inputFieldFocus = false;
-  public interestsToShow: string[] = [];
   public hints: string[] = [];
   public interests: string[] = [];
+  public interestsToShow: string[] = [];
+  public interestsToSave: string[] = [];
+  public interestsToDelete: string[] = [];
   public typedInterest: string;
+  public typedInterestChanged: Subject<string> = new Subject<string>();
   public changesInInterests = {
     interestsToSave: this.interestsToSave,
     interestsToDelete: this.interestsToDelete
@@ -56,7 +56,11 @@ export class InterestsComponent implements OnInit, OnDestroy {
     this.connection = this.interestsService.getData().subscribe((results: Results) => {
       this.hints = results.hints;
       this.interests = results.interests;
-      this.interestsToShow = [...this.interests];
+
+      if (this.interests && this.interests.length > 0) {
+        this.interestsToShow = [...this.interests]
+          .filter(interest => !!interest);
+      }
     });
 
     this.distinctProfileOwner();
@@ -136,7 +140,7 @@ export class InterestsComponent implements OnInit, OnDestroy {
   }
 
   distinctProfileOwner() {
-    let profileOwnerId; // TODO: get id from, then: (profileOwnerId !== currentUserId) => (editingIsForbidden = true)
+    let profileOwnerId; // TODO: get id from url, then: (profileOwnerId !== currentUserId) => (editingIsForbidden = true)
 
     this.currentUserId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
     this.interestsService.currentUserId = this.currentUserId;

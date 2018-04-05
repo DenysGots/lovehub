@@ -1,13 +1,5 @@
 import { Component } from '@nestjs/common';
 
-interface ConnectedUser {
-  clientId: string;
-  userId: string;
-  firstName: string;
-  lastName: string;
-  role: string;
-}
-
 interface NotificationReceiver {
   receiverClientId: string;
   senderUserName: string;
@@ -25,7 +17,7 @@ export class NotificationsServiceComponent {
 
     userParameters.clientId = client.id;
 
-    this.connectedUsers.push(<ConnectedUser>userParameters);
+    this.connectedUsers.push(userParameters);
   }
 
   removeUser(client): void {
@@ -55,13 +47,13 @@ export class NotificationsServiceComponent {
 
     for (let i = 0; i < connectedUsersLength; i += 1) {
       if (connectedUsers[i].clientId === senderClientId) {
-        notificationReceiver.senderUserName = connectedUsers[i].firstName + ' ' + connectedUsers[i].lastName;
+        notificationReceiver.senderUserName = connectedUsers[i].name;
         break;
       }
     }
 
     for (let i = 0; i < connectedUsersLength; i += 1) {
-      if (connectedUsers[i].userId === receiverUserId) {
+      if (connectedUsers[i].id === receiverUserId) {
         notificationReceiver.receiverClientId = connectedUsers[i].clientId;
         break;
       }
