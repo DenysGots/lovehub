@@ -5,7 +5,7 @@ import { UserProfileDto } from './dto/user-profile.dto';
 import { LikeDto } from './dto/like.dto';
 import { PREFERENCE } from './preference';
 import { ORIENTATION } from './orientation';
-import {where} from 'sequelize';
+import { where } from 'sequelize';
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -15,7 +15,8 @@ export interface FilteredUsersProfile {
 @Component()
 export class UsersProfileService {
 
-  constructor(@Inject('UsersProfileRepository') private readonly userProfileRepository: typeof UserProfile) {}
+  constructor(@Inject('UsersProfileRepository') private readonly userProfileRepository: typeof UserProfile,
+              @Inject('LikesRepository') private readonly likesRepository: typeof Likes) {}
 
   async create(userProfileDto: UserProfileDto): Promise<UserProfile> {
     const userProfile = new UserProfile();
@@ -58,7 +59,7 @@ export class UsersProfileService {
     }
   }
 
-  async findShortInfo(id: number): Promise<any>{
+  async findShortInfo(id: number): Promise<any> {
     try {
       return await this.userProfileRepository
       .findOne<UserProfile>({
@@ -145,4 +146,30 @@ export class UsersProfileService {
     return await like.save();
   }
 
+  async findWhoLikesUser(userId: number): Promise<Likes[]> {
+    try {
+      return await this.likesRepository
+        .findAll<Likes>({where: { whatLike: userId }});
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findWhatLikeUser(userId: number): Promise<Likes[]> {
+    try {
+      return await this.likesRepository
+        .findAll<Likes>({where: { whoLike: userId }});
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteLike(userId: number): Promise<number> {
+    try {
+      return await this.likesRepository
+        .destroy({where: { whoLike: userId }});
+    } catch (error) {
+      throw error;
+    }
+  }
 }

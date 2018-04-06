@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, Req, 
 import { UserProfileDto } from './dto/user-profile.dto';
 import { UsersProfileService } from './users-profile.service';
 import { UserProfile } from './user-profile.entity';
+import { Likes } from './likes.entity';
 import { LikeDto } from './dto/like.dto';
 
 import { HttpExceptionFilter } from '../../common/filters/http-exception.filter';
@@ -78,9 +79,27 @@ export class UsersProfileController {
   // operations with likes
 
   @HttpCode(201)
-  @Post(':likes')
+  @Post('/likes')
   async addLike(@Body() likeDto: LikeDto): Promise<LikeDto> {
     return await this.usersProfileService.createLike(likeDto);
   }
 
+  @HttpCode(200)
+  @Get(':userId/likes/who')
+  async findWhoLikesUser(@Param() params): Promise<Likes[]> {
+    return await this.usersProfileService.findWhoLikesUser(params.userId);
+  }
+
+  @HttpCode(200)
+  @Get(':userId/likes/what')
+  async findWhatLikeUser(@Param() params): Promise<Likes[]> {
+    return await this.usersProfileService.findWhatLikeUser(params.userId);
+  }
+
+  @HttpCode(204)
+  @Delete(':userId/likes')
+  async dislike(@Param() params): Promise<{ statusCode: number }> {
+    const affected = await this.usersProfileService.deleteLike(params.userId);
+    return { statusCode: affected };
+  }
 }

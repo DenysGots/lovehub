@@ -19,7 +19,8 @@ export class LikesComponent implements OnInit {
 
   photos: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: false, name: ''} ];
 
-  constructor(private photosService: PhotosService, private likesService: LikesService) { }
+  constructor(private photosService: PhotosService,
+              private likesService: LikesService) { }
 
   ngOnInit() {
     this.like = new Like();
@@ -51,6 +52,16 @@ export class LikesComponent implements OnInit {
 
   }
 
+  findMutualLikes() {
 
+  }
+
+  getUsersAva() {
+
+  }
+
+  getUsersName() {
+
+  }
 
 }
