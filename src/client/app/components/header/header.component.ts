@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     private navService: NavigationService,
     private windowService: WindowService,
     private authService: AuthService,
-    _router: Router
+    private _router: Router
   ) {
     this.router = _router;
   }

@@ -12,19 +12,7 @@ export class NavigationService {
       link: 'contact',
     },
     {
-      name: 'Search',
-      link: 'search',
-    },
-    {
-      name: 'Profile',
-      link: 'profile',
-    },
-    {
-      name: 'Matching',
-      link: 'user-match'
-    },
-    {
-      name: 'Login/Register',
+      name: 'Register',
       link: 'register-full'
     },
   ];

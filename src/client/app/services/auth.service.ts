@@ -14,7 +14,7 @@ import { LoggedInUser } from '../components/login/logged-in-user';
 @Injectable()
 export class AuthService {
   private token: string;
-  private redirectUrl: string = '/';
+  private redirectUrl: string;
   private loginUrl: string = '/login';
   private isLoggedIn: boolean = false;
   private isLoggedIn$ = new BehaviorSubject<boolean>(this.isLoggedIn);
@@ -30,6 +30,7 @@ export class AuthService {
         if(this.token) {
           this.setSession();
           this.loggedInUser = this.getLoggedInUserCredential();
+          this.redirectUrl = `/profile/${this.loggedInUser.userId}`;
           this.setLoggedIn(true);
         } else {
           this.isLoggedIn = false;
