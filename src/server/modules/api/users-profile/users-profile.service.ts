@@ -2,6 +2,7 @@ import { Component, Inject } from '@nestjs/common';
 import { UserProfile } from './user-profile.entity';
 import { Likes } from './likes.entity';
 import { UserProfileDto } from './dto/user-profile.dto';
+import { LikeDto } from './dto/like.dto';
 import { PREFERENCE } from './preference';
 import { ORIENTATION } from './orientation';
 import {where} from 'sequelize';
@@ -137,8 +138,11 @@ export class UsersProfileService {
 
   // operations with likes
 
-  async addLike() {
-
+  async createLike(likeDto: LikeDto): Promise<Likes> {
+    const like = new Likes();
+    like.whatLike = likeDto.whatLike;
+    like.whoLike = likeDto.whoLike;
+    return await like.save();
   }
 
 }

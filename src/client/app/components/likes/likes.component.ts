@@ -15,14 +15,16 @@ export class LikesComponent implements OnInit {
 
   userId: number;
   userId2: number;
+  like: Like;
 
   photos: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: false, name: ''} ];
 
   constructor(private photosService: PhotosService, private likesService: LikesService) { }
 
   ngOnInit() {
+    this.like = new Like();
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
-    // this.userId2 = ;
+    this.userId2 = 67;
 
     this.photosService.getPhotos(this.userId)
       .subscribe(items => {
@@ -31,13 +33,24 @@ export class LikesComponent implements OnInit {
   }
 
   addLike() {
-    const like = { whoLike: this.userId, whatLike: this.userId2 };
-    this.likesService.addLike(like).subscribe();
+    this.like.whoLike = this.userId;
+    this.like.whatLike = this.userId2;
+    this.likesService.addLike(this.like as Like).subscribe();
+    console.log('Like wrote');
   }
 
-  getUsersLikes() {
+  getwhatUserLike() {
 
   }
+
+  getLikesForUser() {
+
+  }
+
+  dislike() {
+
+  }
+
 
 
 }

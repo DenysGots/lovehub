@@ -8,7 +8,7 @@
       <img class="" [src]="photo.base64" alt="Image">
       <div class="hidden-block">
         <i class="material-icons heart" title="unlike">thumb_down</i>
-        <i class="material-icons chat" title="go to chat">mode_comment</i>
+        <i class="material-icons chat" title="go to chat" (click)="addLike()">mode_comment</i>
       </div>
       <div class="user-cred"><strong>firstName lastName, age</strong></div>
     </div>

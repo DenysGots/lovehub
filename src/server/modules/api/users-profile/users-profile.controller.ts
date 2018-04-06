@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, Query, Req, 
 import { UserProfileDto } from './dto/user-profile.dto';
 import { UsersProfileService } from './users-profile.service';
 import { UserProfile } from './user-profile.entity';
+import { LikeDto } from './dto/like.dto';
 
 import { HttpExceptionFilter } from '../../common/filters/http-exception.filter';
 
@@ -33,7 +34,7 @@ export class UsersProfileController {
     const userId = req.id,
       user = await this.usersService.findById(req.id);
 
-    if(user.userProfile.id) {
+    if (user.userProfile.id) {
       return await this.usersProfileService.update(user.userProfile.id, userProfileDto);
     } else {
       return await this.usersProfileService.create({...userProfileDto, ...{ userId }});
@@ -73,8 +74,13 @@ export class UsersProfileController {
     return {statusCode: affected};
   }
 
+
   // operations with likes
 
-
+  @HttpCode(201)
+  @Post(':likes')
+  async addLike(@Body() likeDto: LikeDto): Promise<LikeDto> {
+    return await this.usersProfileService.createLike(likeDto);
+  }
 
 }

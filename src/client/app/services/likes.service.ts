@@ -12,7 +12,7 @@ export class LikesService {
 
   constructor(private http: HttpClient) { }
 
-  addLike(like): Observable<Like> {
+  addLike(like: Like): Observable<Like> {
     const url = `api/users-profile/likes`;
     return this.http.post<Like>(url, like, httpOptions);
   }
