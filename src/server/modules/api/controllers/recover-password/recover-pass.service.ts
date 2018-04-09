@@ -1,24 +1,24 @@
 import {Component, Inject} from '@nestjs/common';
 import { RecoverPassEntity } from './recover-pass.entity';
-import * as nodemailer from 'nodemailer';
-import * as crypto from 'crypto';
 import {MailService} from '../../services/mail.service';
 import {User} from '../../users/user.entity';
 import {UsersService} from '../../users/users.service';
+import {TokenService} from '../../services/token.service';
 
 @Component()
 export class RecoverPassService {
 
   constructor(@Inject('RecoverPassRepository') private readonly recoverPassRepository: typeof RecoverPassEntity,
-              @Inject('MailService') private readonly mailService: MailService,
-              @Inject('UsersService') private readonly userService: UsersService) {}
+              private readonly mailService: MailService,
+              private readonly userService: UsersService,
+              private readonly tokenService: TokenService) {}
 
 
   async recoverPassByEmail(email: string): Promise<any> {
     const user: User = await this.userService.findByEmail(email);
     if (user) {
-      const token = await this.mailService.createToken();
-      await this.create(user.id, token);
+      const token = await this.tokenService.generateToken();
+      await this.tokenService.create(user.id, token);
       await this.mailService.sendRecoverPassEmail(email, token);
       return {message: 'Mail was send.'};
     } else {
@@ -27,51 +27,32 @@ export class RecoverPassService {
   }
 
   async updateUserPassword(token: string, newPass: string): Promise<any> {
-    const isTokenValid = await this.isTokenValid(token);
+    const isTokenValid = await this.tokenService.isTokenValid(token);
 
     if (isTokenValid) {
-      const userToken = await this.findTokenByValue(token);
+      const userToken = await this.tokenService.findTokenByValue(token);
 
       await this.userService.updatePass(newPass, userToken.userId);
 
-      return await this.updateTokenStatus(token);
+      return await this.tokenService.updateTokenStatus(token);
     } else {
       return null;
     }
   }
 
-  async create(userId: number, token: string): Promise<RecoverPassEntity> {
-    const recPassEntity = new RecoverPassEntity();
-    recPassEntity.token = token;
-    recPassEntity.date = Date.now() + '';
-    recPassEntity.userId = userId;
-    recPassEntity.used = false;
+  async validate(token: string) {
+    const isValid = await this.tokenService.isTokenValid(token);
+    const isUsed = await this.tokenService.isTokenUsed(token);
+    let message = {};
 
-    return await recPassEntity.save();
-  }
-
-  async findTokenByValue(value: string): Promise<RecoverPassEntity> {
-    return await this.recoverPassRepository.findOne({where: {token: value}});
-  }
-
-  async updateTokenStatus(value: string) {
-    return await this.recoverPassRepository.update({used: true}, {where: {token: value}});
-  }
-
-  async isTokenUsed(value: string): Promise<boolean> {
-    const token = await this.findTokenByValue(value);
-    const isUsed = token.used;
-
-    return isUsed;
-  }
-
-  async isTokenValid(value: string): Promise<boolean> {
-    const token = await this.findTokenByValue(value);
-    const currDate = Date.now();
-    if (currDate - (+token.date) > 300000) {
-      return false;
+    if (!isValid) {
+      message = {error: 'Token time is over.'};
+    } else if (isUsed) {
+      message = {error: 'Token is already used'};
+    } else {
+      message = {message: 'Token is valid'};
     }
 
-    return true;
+    return message;
   }
 }

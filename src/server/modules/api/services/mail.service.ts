@@ -5,9 +5,16 @@ import * as crypto from 'crypto';
 @Component()
 export class MailService {
 
-  service = 'gmail';
-  authMail = 'lovehub.kv034@gmail.com';
-  authPass = 'Q32xr710061997';
+  private readonly service = 'gmail';
+  private readonly authMail = 'lovehub.kv034@gmail.com';
+  private readonly authPass = 'Q32xr710061997';
+  private readonly transporter = nodemailer.createTransport({
+    service: this.service,
+    auth: {
+      user: this.authMail,
+      pass: this.authPass
+    }
+  });
 
 
   async createToken(): Promise<string> {
@@ -22,27 +29,35 @@ export class MailService {
   }
 
   async sendRecoverPassEmail(email: string, token: string) {
-    const transporter = nodemailer.createTransport({
-      service: this.service,
-      auth: {
-        user: this.authMail,
-        pass: this.authPass
-      }
-    });
-
     const mailOptions = {
-      from: 'lovehub.kv034@gmail.com',
+      from: this.authMail,
       to: email,
       subject: 'LoveHub Password Reset',
       text: `Its your reset password link http://localhost:4200/forgot/${token}`
     };
 
     try {
-      const res = await transporter.sendMail(mailOptions);
+      const res = await this.transporter.sendMail(mailOptions);
       console.log(res);
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async sendMail(email: string, subject: string, text: string) {
+   const options = {
+     from: this.authMail,
+     to: email,
+     subject,
+     text
+   } ;
+
+   try {
+     const res = await this.transporter.sendMail(options);
+     console.log(res);
+   } catch (e) {
+     console.log(e);
+   }
   }
 
 }

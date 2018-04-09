@@ -1,1 +1,1 @@
-export type ORIENTATION = 'MAN'|'WOMAN'|'ALL';
+export type ORIENTATION = 'MAN'|'WOMAN'|'ALL'|'UNDEFINED';

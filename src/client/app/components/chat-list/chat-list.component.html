@@ -4,11 +4,14 @@
   (click)="checkChat()"
 >
   <div class="avatar-container d-inline-flex mr-3">
-    <img
-      [src]="chat.user.avatar"
-      [alt]="chat.user.firstName"
-      class="avatar"
-    />
+    <a class="avatar-container" routerLink="../profile">
+        <img
+        [src]="!!chat.user.avatar ? chat.user.avatar.base64: 'https://d30y9cdsu7xlg0.cloudfront.net/png/404950-200.png'"
+        [alt]="chat.user.firstName"
+        class="avatar"
+      />
+    </a>
+    
   </div>
   <div class="info-container d-inline-flex">
     <div class="d-flex flex-column justify-content-around">

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 import { NotificationsService } from '../../services/notifications.service';
 
@@ -6,13 +7,6 @@ interface Message {
   user: string;
   isHidden: boolean;
   isShifted: boolean;
-}
-
-interface CurrentUser {
-  userId: number;
-  firstName: string;
-  lastName: string;
-  role: string;
 }
 
 @Component({
@@ -25,18 +19,13 @@ interface CurrentUser {
   ]
 })
 export class NotificationsComponent implements OnInit, OnDestroy {
-  messages = [];
-  connection;
-  notificationsList = {
+  public connection;
+  public messages = [];
+  public notificationsList = {
     isHidden: true,
     minHeight: '0'
   };
-  currentUser: CurrentUser = {
-    userId: 1234,
-    firstName: 'User_1',
-    lastName: 'User_1',
-    role: 'User'
-  };
+  public currentUser = {} as any;
 
   constructor(private notificationsService: NotificationsService) {
   }
@@ -46,8 +35,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       this.handleMessages(message);
     });
 
-    // TODO: acquire current logged user parameters with some service and save them to this.currentUser
-
+    this.currentUser = jwt_decode(localStorage.getItem('jwt_token'));
     this.notificationsService.currentUser = this.currentUser;
   }
 
@@ -55,7 +43,7 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     this.connection.unsubscribe();
   }
 
-  // Must receive receiver user id somehow
+  // Must receive receiver user id
   sendLike(receiverUserId): void {
     // TODO: get receiverUserId from user's profile URL
     this.notificationsService.sendMessage(receiverUserId);

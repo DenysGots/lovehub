@@ -14,7 +14,7 @@ export class LoginController {
   async findById(@Body() body) {
     const {email, password} = body;
 
-    const user: User = await this.usersService.findByEmailAndPass(email, password);
+    const user: User = await this.usersService.findByEmailAndPassword(email, password);
 
     return user ? user : {};
   }

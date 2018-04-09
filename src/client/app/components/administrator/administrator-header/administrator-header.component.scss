@@ -51,9 +51,15 @@ $color_12: #f6f6f6;
 
 $color_13: #e6e6e6;
 
+$color_14: #8d99ae;
+
+$color_15: #a9a9a9;     // Home page dark theme sections background color
+
+$color_16: #343a40;     // Home page dark theme header background color
+
 .main {
   @include apply-flex(space-between, flex-end, center);
-  background-color: $color_7;
+  background-color: $color_15;
   border-bottom: 1px solid $color_1;
   height: 105px;
   width: 100%;
@@ -116,7 +122,7 @@ $color_13: #e6e6e6;
 }
 
 .icon {
-  color: $color_1;
+  color: $color_3;
   font-size: 1.8rem;
   transition: 0.05s ease-in-out;
 }
@@ -175,17 +181,18 @@ $color_13: #e6e6e6;
 
 .mail-icon:hover .mail-counter,
 .mail-counter:hover {
-  background-color: $color_4;
+  background-color: $color_3;
   color: $color_2;
   transition: 0.05s ease-in-out;
 }
 
 .photo-container {
   @include apply-flex(center, center, center);
-  background-color: $color_4;                                         //TODO: remove
+  background-color: $color_16;                                         //TODO: remove
   border-radius: 50%;
-  color: $color_5;                                                    //TODO: remove
-  font-size: 1.2rem;                                                    //TODO: remove
+  border: 2px solid $color_2;
+  color: $color_6;                                                    //TODO: remove
+  font-size: 1.2rem;                                                   //TODO: remove
   height: 35px;
   width: 35px;
 }
@@ -196,7 +203,7 @@ $color_13: #e6e6e6;
 }
 
 .open-list-arrow {
-  border: solid $color_4;
+  border: solid $color_3;
   border-width: 0 0.2em 0.2em 0;
   display: inline-block;
   margin-left: -0.2em;
@@ -286,7 +293,8 @@ $color_13: #e6e6e6;
 .button {
   @include apply-flex(center, center, center);
   @include forbidTextSelection;
-  background-color: $color_8;
+  @include remove-default-element-display;
+  background-color: $color_12;
   border-radius: 3px 0 0 3px;
   border: 1px solid $color_9;
   border-right: 1px solid $color_8;

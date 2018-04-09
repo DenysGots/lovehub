@@ -11,6 +11,7 @@ export class UserFilterComponent implements OnChanges {
 
   @Input() label: string;
   @Input() type: string;
+  @Input() name: string;
   @Input() placeholder: string;
   @Input() value: string;
   @Output() onSearch = new EventEmitter<SearchParam>();
@@ -20,7 +21,7 @@ export class UserFilterComponent implements OnChanges {
 
   search() {
     const searchParams: SearchParam = {
-      searchType: this.type,
+      searchName: this.name,
       searchValue: this.value
     };
     this.onSearch.emit(searchParams);
