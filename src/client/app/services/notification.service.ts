@@ -24,4 +24,16 @@ export class NotificationService {
       };
     });
   }
+
+  setRead() {
+    return new Observable(observer => {
+      this.socket.on('setRead', (data) => {
+        observer.next(data);
+      });
+
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+  }
 }

@@ -18,15 +18,38 @@ export class ChatListComponent implements OnInit {
   constructor(private chatService: ChatService) {}
 
   ngOnInit() {
-    this.chatService.currentChatIdChange.subscribe(id => {
-      this.activeChat = id;
+    this.chatService.currentChatChange.subscribe(chat => {
+      this.activeChat = chat.chatId;
     });
 
     this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
   }
 
-  checkChat(chatId) {
-    this.chatService.setChat(chatId);
+  checkChat() {
+    this.chatService.setChat(this.chat);
+  }
+
+  setClasses() {
+    const ownMessage = !!this.chat.lastMessage ? this.chat.lastMessage.userId === this.userId : false;
+    const activeChat = this.chat.chatId === this.activeChat;
+    const unread = !!this.chat.lastMessage
+      ? !ownMessage && !activeChat && !this.chat.lastMessage.read
+      : false;
+
+    return {
+      'unread': unread,
+      'active': activeChat
+    }
+  }
+
+  setLastMessStatus(){
+    const ownMessage = !!this.chat.lastMessage ? this.chat.lastMessage.userId === this.userId : false;
+    
+    const friendUnread = ownMessage && !this.chat.lastMessage.read;
+
+    return {
+      friendUnread
+    }
   }
 
 }

@@ -13,35 +13,30 @@ export class ChatGateway{
     private messagesService: ChatMessagesService,
     private notifService: NotificationService){}
 
-  // @SubscribeMessage('readLast')
-  // setReadLast(client, data) {
-  //   const chat = JSON.parse(data);
-
-  //   console.log('cha', chat);
-  // }
-  
   @SubscribeMessage('changeRoom')
-  changeRoom(client, data) {
-    const chat = JSON.parse(data);
+  async changeRoom(client, data) {
+    const {prevChatId, chat} = JSON.parse(data);
 
-    client.leave(chat.prevChatId);
+    await this.messagesService.setRead(chat.chatId, chat.user.userId);
+
+    client.leave(prevChatId);
     client.join(chat.chatId);
+
+    this.notifService.sendSetRead(chat.user.userId, chat.chatId);
   }
 
   @SubscribeMessage('send')
   async getNewMessage(client, data) {
-    const {chat, message}= JSON.parse(data).data;
+    const {chat, message}= JSON.parse(data);
+
+    const isFriendOnline = await this.server.adapter.rooms[chat.chatId].length;
+    message.read = isFriendOnline > 1;
+
     const dbMessage = await this.messagesService.create(chat.chatId, message as CreateMessageDto);
-   
-    this.notifService.sendNotification(chat.toUser, dbMessage);
+    const res = {event: 'newMessage', data: dbMessage};
+    client.to(chat.chatId).emit('resFromServer', res);
+    this.notifService.sendNotification(chat.user.userId, dbMessage);
 
-    const res = {event: 'myMes', data: dbMessage};
-
-    client.to(chat.chatId).emit('resFromServer', {event: 'newMes', data: dbMessage});
-
-    const setLastReadToBoth = this.server.adapter.rooms[chat.chatId].length > 1;
-    this.messagesService.setLastRead(dbMessage, setLastReadToBoth);
-
-    return { event: 'resFromServer', data: res};
+    return { event: 'resFromServer', data:res};
   }
 }

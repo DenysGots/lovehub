@@ -4,8 +4,6 @@ import { WindowService } from '../../services/window.service';
 import { ChatService } from '../../services/chat.service';
 import { HttpClient } from '@angular/common/http';
 
-import * as jwt_decode from 'jwt-decode';
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -14,11 +12,10 @@ import * as jwt_decode from 'jwt-decode';
 export class ChatComponent implements OnInit {
   height = 100;
   chats = [];
-  messages = null;
 
   constructor(
     private windowService: WindowService,
-    private chat: ChatService,
+    private chatService: ChatService,
     private http: HttpClient
   ) {
     this.height = this.windowService.freeHeight;
@@ -26,11 +23,21 @@ export class ChatComponent implements OnInit {
 
 
   ngOnInit() {
-    const userId = jwt_decode(localStorage.getItem('jwt_token')).id;
-    
-    this.http.get<any[]>(`api/chats/${userId}`).subscribe((data) => {
+
+    this.chatService.userlistUpdate.subscribe(data => {
       this.chats = data;
-      this.chat.setChats(data);
+      // if(data.type === 'setRead'){
+      //   console.log('d',data)
+      //   const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
+      //   if(!!updateChat.lastMessage){
+      //     updateChat.lastMessage.read = true;
+      //   }
+        
+      // } else {
+      //   console.log('dd', data)
+      //   const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
+      //   updateChat.lastMessage = data.data.message;
+      // }
     });
   }
 }

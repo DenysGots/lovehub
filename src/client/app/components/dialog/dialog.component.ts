@@ -12,24 +12,15 @@ import * as jwt_decode from 'jwt-decode';
 export class DialogComponent implements OnInit {
   userId: Number = null;
   text: String = '';
-  chatId: Number = null;
-  messages: Array<object> = null;
+  messages: Array<any> = null;
 
   @ViewChild('scrollChat') private scrollChat: ElementRef;
 
   constructor( private chat: ChatService) {}
 
   ngOnInit() {
-    this.chat.currentChatIdChange.subscribe(id => {
-      this.chatId = id;
-    });
-
     this.chat.messagesUpdate.subscribe(data => {
-      if(!!data.new){
-        this.messages = data.data;
-      } else{
-        this.messages = [...this.messages, data.data];
-      }
+      this.messages = data;
     });
 
     this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
@@ -49,18 +40,21 @@ export class DialogComponent implements OnInit {
 
   sendMes(mes){
     const newMessage = {
-      chat: {
-        chatId: this.chatId,
-        toUser: this.chat.getFriend(this.chatId, this.userId)
-      },
-      message: {
         userId: this.userId,
         text: this.text
-      }
     };
 
     this.chat.sendMessage(newMessage);
     this.text = '';
   }
 
+  setClasses(mess) {
+    const ownMessage = mess.userId === this.userId;
+    
+    return {
+      'justify-content-end': ownMessage,
+      'justify-content-start': !ownMessage,
+      'unread': ownMessage && !mess.read
+    }
+  }
 }

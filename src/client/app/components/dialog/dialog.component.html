@@ -13,7 +13,7 @@
     <div 
       *ngFor="let mess of messages" 
       class="d-flex"
-      [ngClass]="mess.userId === userId?'justify-content-end':'justify-content-start'"
+      [ngClass]="setClasses(mess)"
     >
       <span
         class="message"

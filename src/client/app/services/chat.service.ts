@@ -6,13 +6,18 @@ import { HttpClient } from '@angular/common/http';
 import Message from '../models/message';
 import { NotificationService } from './notification.service';
 
+import * as jwt_decode from 'jwt-decode';
+
 @Injectable()
 export class ChatService {
-  currentChatId: number;
+  currentChat: any = null;
+  userId: Number = null;
+  messages: Array<any> = null;
   chats = [];
 
-  currentChatIdChange: Subject<number> = new Subject<number>();
+  currentChatChange: Subject<any> = new Subject<any>();
   messagesUpdate: Subject<any> = new Subject<any>();
+  userlistUpdate: Subject<any> = new Subject<any>();
   socket: Subject<any>;
   
   constructor(
@@ -25,52 +30,72 @@ export class ChatService {
         return response;
       });
 
-    this.currentChatIdChange.subscribe((value) => {
-        this.currentChatId = value;
+    this.currentChatChange.subscribe((value) => {
+        this.currentChat = value;
+        if(!!this.currentChat.lastMessage){
+          this.currentChat.lastMessage.read = true;
+        }
     });
 
+    this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
+
     this.notifService.getNotifications().subscribe((data: any) => {
+      console.log('getNotifications',data);
+      const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
+        updateChat.lastMessage = data.data.message;
 
-      this.chats = this.chats.map(chat => {
-        if(chat.chatId === data.data.chatId){
-          chat.lastMessage = data.data.message;
-          this.socket.next({
-            event: 'changeRoom',
-            data:{prevChatId: this.currentChatId, chatId: chat.chatId}
-            });
+        this.userlistUpdate.next(this.chats);
+    });
+
+    this.notifService.setRead().subscribe((data: any) => {
+      if(!!this.messages){
+        this.messages
+        .filter(mes => mes.read === false)
+        .map(mes => mes.read = true);
+      
+       this.messagesUpdate.next( this.messages);
+      }
+      const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
+        if(!!updateChat.lastMessage && updateChat.lastMessage.userId === this.userId){
+          updateChat.lastMessage.read = true;
+          this.userlistUpdate.next(this.chats);
         }
-
-        return chat;
-      });
+      
     });
 
     this.socket.subscribe(data => {
-      if(data.event==='myMes' || data.event === 'newMes'){
-        this.messagesUpdate.next({data: data.data.message});
+      if(data.event === 'newMessage'){
+        this.messages = [...this.messages, data.data.message];
+        this.messagesUpdate.next(this.messages);
+
+        const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
+        updateChat.lastMessage = data.data.message;
+
+        this.userlistUpdate.next(this.chats);
       }
+    });
+
+    this.http.get<any>(`api/chats/${this.userId}`).subscribe((data) => {
+      this.chats = data;
+      this.userlistUpdate.next(this.chats);
     });
   }
 
-  setChats(chats){
-    this.chats = chats;
-  }
-
-  getFriend(chatId, userId){
-    return this.chats.find(chat => chat.chatId === chatId).user.userId || -1;
-  }
-
-  sendMessage(data){
-    if(this.currentChatId) {
-      this.socket.next({event: 'send', data});
+  sendMessage(message){
+    if(this.currentChat) {
+      this.socket.next({event: 'send', data:{chat: this.currentChat, message}});
     }
   }
 
-  setChat(chatId: number){
-    this.socket.next({event: 'changeRoom', data: {prevChatId: this.currentChatId, chatId}});
-    this.currentChatIdChange.next(chatId);
+  setChat(chat: any){
+    const prevChatId = !!this.currentChat ? this.currentChat.chatId : null;
 
-    this.http.get<Array<Message>>(`api/messages/${chatId}`).subscribe((data) => {
-      this.messagesUpdate.next({new: true, data});
+    this.socket.next({event: 'changeRoom', data: {prevChatId, chat}});
+    this.currentChatChange.next(chat);
+
+    this.http.get<Array<Message>>(`api/messages/${chat.chatId}`).subscribe((data) => {
+      this.messages = data;
+      this.messagesUpdate.next(this.messages);
     });
   }
 }

@@ -2,23 +2,12 @@ import * as mongoose from 'mongoose';
 
 const MessageSchema = new mongoose.Schema({
   userId: Number,
-  text: String
+  text: String,
+  read: Boolean
 });
 
-MessageSchema.virtual('title').get(function(){
-  console.log('!!', this);
-  return this.userId+ this.text;
-});
 
 export const ChatSchema = new mongoose.Schema({
   chatId: Number,
-  messages: [ MessageSchema ],
-  user1: {
-    id: Number,
-    lastReadId: mongoose.Schema.Types.ObjectId
-  },
-  user2: {
-    userId: Number, 
-    lastReadId: mongoose.Schema.Types.ObjectId
-  }
+  messages: [ MessageSchema ]
 }, {collection: 'Chats'});

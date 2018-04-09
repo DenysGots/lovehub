@@ -26,13 +26,21 @@ export class NotificationService {
     sendNotification(userId, message){
         const conn = this.connected.find(conn => conn.userId === userId);
 
-        console.log('userId', userId, message)
-
         if(conn){
             conn.socket.emit('notification', {
                 type: 'notification',
                 title: 'New message',
                 data: message
+            });
+        }
+    }
+
+    sendSetRead(userId, chatId){
+        const conn = this.connected.find(conn => conn.userId === userId);
+
+        if(conn){
+            conn.socket.emit('setRead', {
+                data: { chatId }
             });
         }
     }

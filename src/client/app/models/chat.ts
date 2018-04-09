@@ -3,7 +3,7 @@ import { UserProfile } from './user-profile';
 export default class Chat {
   chatId: number;
   user: UserProfile;
-  lastMessage: object;
+  lastMessage: any;
   read: boolean;
 
   constructor(chatId: number, user: UserProfile, lastMessage: object, read: boolean) {

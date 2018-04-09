@@ -25,33 +25,19 @@ export class ChatMessagesService {
       }));
   }
 
-  async setLastRead(message, both = false){
-    console.log('mes', message);
-
-    return await this.chatModel
-      .findOne({ chatId: message.chatId })
-      .then(chat => {
-        console.log('both', both);
-
-        if(both){
-          chat.user1.lastReadId = message.message._id;
-          chat.user2.lastReadId = message.message._id;
-        } else {
-          console.log('chat', chat);
-          if(chat.user1.userId === message.message.userId){
-            chat.user1.lastReadId = message.message._id;
-          } else {
-            chat.user2.lastReadId = message.message._id;
-          }
-        }
-
-        chat.save();
-        
-      });
-  }
-
   async findByChat(id: number): Promise<any> {
     return await this.chatModel.findOne({ chatId: id }).select('messages -_id');
+  }
+  
+  async setRead(chatId, userId){
+    const res = await this.chatModel.update({
+      chatId,
+      "messages": {$elemMatch: { "userId": userId, "read": false } }
+      // "messages": {$elemMatch: { "userId": {$ne: userId}, "read": false } }
+    },{
+        $set: { "messages.$[].read" : true}
+    },
+    {multi:true});
   }
 
   async getLastMessage(chatId: number): Promise<any> {
