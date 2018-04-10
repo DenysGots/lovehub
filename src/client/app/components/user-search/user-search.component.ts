@@ -11,6 +11,7 @@ import { UsersProfileService } from '../../services/users-profile.service';
 import { SearchParam } from './shared/search-param';
 import { FilterParam } from './shared/filter-param';
 import { UserProfile } from '../../models/user-profile';
+import {PhotosService} from '../../services/photos.service';
 
 @Component({
   moduleId: module.id,
@@ -34,8 +35,9 @@ export class UserSearchComponent implements OnInit, OnChanges {
 
   private searchTerms = new Subject<SearchParam>();
 
-  constructor(private usersProfileService: UsersProfileService) {
-    this.searchFilter = new FilterParam('Name', 'search', 'firstName', '','Enter a favourite name..');
+  constructor(private usersProfileService: UsersProfileService, private photosService: PhotosService) {
+    this.searchFilter = new FilterParam('Name', 'search', 'firstName', '',
+      'Enter a favourite name..');
     this.ageFilter = new FilterParam('Age', 'range', 'age', '0');
     this.sexMFilter = new FilterParam('Male', 'radio', 'sex', 'MALE');
     this.sexFFilter = new FilterParam('Female', 'radio', 'sex', 'FEMALE');
@@ -53,13 +55,6 @@ export class UserSearchComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    /*
-    this.setDefaultParamService.getValue().subscribe(type => {
-      if(type == 'search') {
-        this.ageFilter.value = '0';
-      }
-    });
-    */
   }
 
   search(term: SearchParam): void {
