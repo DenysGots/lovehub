@@ -111,7 +111,7 @@ export class AuthService {
     return date;
   }
 
-  private getLoggedInUserCredential(): any {
+  public getLoggedInUserCredential(): any {
     const decoded = jwt_decode(this.getSession());
 
     const user = {

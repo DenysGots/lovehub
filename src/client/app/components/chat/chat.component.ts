@@ -26,12 +26,10 @@ export class ChatComponent implements OnInit {
 
 
   ngOnInit() {
-    this.chatService.currentChatChange.subscribe(chat => {
-        this.chat = chat;
-    });
+    this.chatService.currentChatChange.subscribe(chat => this.chat = chat);
 
     this.chatService.userlistUpdate.subscribe(data => this.chats = data);
     
-    this.chatService.showDialogsUpdate.subscribe(show => this.showDialogs = show)
+    this.chatService.showDialogsUpdate.subscribe(show => this.showDialogs = show);
   }
 }

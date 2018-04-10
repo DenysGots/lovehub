@@ -30,7 +30,7 @@ export class NotificationService {
             conn.socket.emit('notification', {
                 type: 'notification',
                 title: 'New message',
-                data: message
+                message
             });
         }
     }
@@ -39,9 +39,7 @@ export class NotificationService {
         const conn = this.connected.find(conn => conn.userId === userId);
 
         if(conn){
-            conn.socket.emit('setRead', {
-                data: { chatId }
-            });
+            conn.socket.emit('setRead', chatId);
         }
     }
 }

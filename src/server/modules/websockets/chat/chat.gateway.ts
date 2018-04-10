@@ -33,10 +33,9 @@ export class ChatGateway{
     message.read = isFriendOnline > 1;
 
     const dbMessage = await this.messagesService.create(chat.chatId, message as CreateMessageDto);
-    const res = {event: 'newMessage', data: dbMessage};
-    client.to(chat.chatId).emit('resFromServer', res);
+    client.to(chat.chatId).emit('newMessage', dbMessage);
     this.notifService.sendNotification(chat.user.userId, dbMessage);
 
-    return { event: 'resFromServer', data:res};
+    return { event: 'newMessage', data:dbMessage};
   }
 }

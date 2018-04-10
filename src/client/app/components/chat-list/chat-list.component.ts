@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 
 import Chat from '../../models/chat';
-import { ChatService } from '../../services/chat.service';
 
-import * as jwt_decode from 'jwt-decode';
+import { ChatService } from '../../services/chat.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'chat-list',
@@ -15,22 +15,26 @@ export class ChatListComponent implements OnInit {
   activeChat: number;
   @Input() chat: Chat;
 
-  constructor(private chatService: ChatService) {}
+  constructor(
+    private chatService: ChatService,
+    private authService: AuthService) {}
 
   ngOnInit() {
     this.chatService.currentChatChange.subscribe(chat => {
       this.activeChat = chat.chatId;
     });
 
-    this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
+    this.userId = this.authService.getLoggedInUserCredential().userId;
   }
 
   checkChat() {
-    this.chatService.setChat(this.chat);
+    this.chatService.setActiveChat(this.chat);
   }
 
   setClasses() {
-    const ownMessage = !!this.chat.lastMessage ? this.chat.lastMessage.userId === this.userId : false;
+    const ownMessage = !!this.chat.lastMessage
+      ? this.chat.lastMessage.userId === this.userId
+      : false;
     const activeChat = this.chat.chatId === this.activeChat;
     const unread = !!this.chat.lastMessage
       ? !ownMessage && !activeChat && !this.chat.lastMessage.read
@@ -43,13 +47,11 @@ export class ChatListComponent implements OnInit {
   }
 
   setLastMessStatus(){
-    const ownMessage = !!this.chat.lastMessage ? this.chat.lastMessage.userId === this.userId : false;
-    
+    const ownMessage = !!this.chat.lastMessage
+      ? this.chat.lastMessage.userId === this.userId
+      : false;
     const friendUnread = ownMessage && !this.chat.lastMessage.read;
 
-    return {
-      friendUnread
-    }
+    return { friendUnread };
   }
-
 }

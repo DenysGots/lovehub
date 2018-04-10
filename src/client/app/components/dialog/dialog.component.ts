@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { EventEmitter } from 'events';
-import { ChatService } from '../../services/chat.service';
 
-import * as jwt_decode from 'jwt-decode';
 import Chat from '../../models/chat';
+
+import { ChatService } from '../../services/chat.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'chat-dialog',
@@ -20,14 +21,13 @@ export class DialogComponent implements OnInit {
 
   @ViewChild('scrollChat') private scrollChat: ElementRef;
 
-  constructor( private chatService: ChatService) {}
+  constructor(
+    private chatService: ChatService,
+    private authService: AuthService) {}
 
   ngOnInit() {
-    this.chatService.messagesUpdate.subscribe(data => {
-      this.messages = data;
-    });
-
-    this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
+    this.chatService.messagesUpdate.subscribe(data => this.messages = data);
+    this.userId = this.authService.getLoggedInUserCredential().userId;
 
     this.scrollToBottom();
   }
@@ -42,7 +42,7 @@ export class DialogComponent implements OnInit {
   }
 
   goBack(){
-    this.chatService.goBack();
+    this.chatService.closeMessages();
   }
 
   ngAfterViewChecked() {        

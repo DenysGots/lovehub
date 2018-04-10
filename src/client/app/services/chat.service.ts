@@ -4,79 +4,70 @@ import { Observable, Subject } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 
 import Message from '../models/message';
-import { NotificationService } from './notification.service';
+import Chat from '../models/chat';
 
-import * as jwt_decode from 'jwt-decode';
+import { NotificationService } from './notification.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ChatService {
-  currentChat: any = null;
+  currentChat: Chat = null;
   userId: Number = null;
-  messages: Array<any> = null;
+  messages: Message[] = null;
   chats = [];
 
-  currentChatChange: Subject<any> = new Subject<any>();
-  messagesUpdate: Subject<any> = new Subject<any>();
-  userlistUpdate: Subject<any> = new Subject<any>();
-  showDialogsUpdate: Subject<any> = new Subject<any>();
-  socket: Subject<any>;
-  
+  currentChatChange: Subject<Chat> = new Subject<Chat>();
+  messagesUpdate: Subject<Message[]> = new Subject<Message[]>();
+  userlistUpdate: Subject<Chat[]> = new Subject<Chat[]>();
+  showDialogsUpdate: Subject<boolean> = new Subject<boolean>();
+
   constructor(
     private notifService: NotificationService,
     private wsService: WebsocketService,
-    private http: HttpClient) {
-    this.socket = <Subject<any>>wsService
-      .connect()
-      .map((response: any): any => {
-        return response;
-      });
+    private http: HttpClient,
+    private authService: AuthService) {
 
-    this.currentChatChange.subscribe((value) => {
-        this.currentChat = value;
+    wsService.connect('newMessage').subscribe(data => {
+      this.messages = [...this.messages, data.message];
+      this.messagesUpdate.next(this.messages);
+
+      const updateChat = this.chats.find(chat => chat.chatId === data.chatId);
+      updateChat.lastMessage = data.message;
+    });
+
+    this.currentChatChange.subscribe((chat: Chat) => {
+        this.currentChat = chat;
 
         if(!!this.currentChat.lastMessage){
           this.currentChat.lastMessage.read = true;
         }
     });
 
-    this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
+    this.userId = this.authService.getLoggedInUserCredential().userId;
 
-    this.notifService.getNotifications().subscribe((data: any) => {
-      const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
-        updateChat.lastMessage = data.data.message;
+    this.notifService.getNotifications().subscribe((notification: any) => {
+      const { chatId, message } = notification.message;
+      const updateChat = this.chats.find(chat => chat.chatId === chatId);
+      updateChat.lastMessage = message;
 
-        this.userlistUpdate.next(this.chats);
+      this.userlistUpdate.next(this.chats);
     });
 
-    this.notifService.setRead().subscribe((data: any) => {
+    this.notifService.setRead().subscribe((chatId: Number) => {
       if(!!this.messages){
         this.messages
         .filter(mes => mes.read === false)
         .map(mes => mes.read = true);
-      
-       this.messagesUpdate.next( this.messages);
       }
-      const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
+
+      const updateChat = this.chats.find(chat => chat.chatId === chatId);
         if(!!updateChat.lastMessage && updateChat.lastMessage.userId === this.userId){
           updateChat.lastMessage.read = true;
           this.userlistUpdate.next(this.chats);
         }
-      
     });
 
-    this.socket.subscribe(data => {
-      if(data.event === 'newMessage'){
-        this.messages = [...this.messages, data.data.message];
-        this.messagesUpdate.next(this.messages);
-
-        const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
-        updateChat.lastMessage = data.data.message;
-
-        this.userlistUpdate.next(this.chats);
-      }
-    });
-
-    this.http.get<any>(`api/chats/${this.userId}`).subscribe((data) => {
+    this.http.get<Chat[]>(`api/chats/${this.userId}`).subscribe((data) => {
       this.chats = data;
       this.userlistUpdate.next(this.chats);
     });
@@ -84,25 +75,25 @@ export class ChatService {
 
   sendMessage(message){
     if(this.currentChat) {
-      this.socket.next({event: 'send', data:{chat: this.currentChat, message}});
+      this.wsService.send('send', {chat: this.currentChat, message});
     }
   }
 
-  setChat(chat: any){
+  setActiveChat(chat: Chat){
     const prevChatId = !!this.currentChat ? this.currentChat.chatId : null;
 
-    this.socket.next({event: 'changeRoom', data: {prevChatId, chat}});
+    this.wsService.send('changeRoom', {prevChatId, chat});
+
     this.currentChatChange.next(chat);
+    this.showDialogsUpdate.next(true);
 
     this.http.get<Array<Message>>(`api/messages/${chat.chatId}`).subscribe((data) => {
       this.messages = data;
       this.messagesUpdate.next(this.messages);
     });
-
-    this.showDialogsUpdate.next(true);
   }
 
-  goBack(){
+  closeMessages(){
     this.showDialogsUpdate.next(false);
   }
 }
