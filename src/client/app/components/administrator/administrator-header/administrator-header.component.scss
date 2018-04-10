@@ -37,29 +37,25 @@ $color_5: #bf71ce;
 
 $color_6: #ef233c;
 
-$color_7: #afbbf7;
+$color_7: #d9e8f7;
 
-$color_8: #d9e8f7;
+$color_8: #ccc9c9;
 
-$color_9: #ccc9c9;
+$color_9: #2e2e2e;
 
-$color_10: #2e2e2e;
+$color_10: #20d6cd;
 
-$color_11: #20d6cd;
+$color_11: #f6f6f6;
 
-$color_12: #f6f6f6;
+$color_12: #e6e6e6;
 
-$color_13: #e6e6e6;
+$color_13: #a9a9a9;     // Home page dark theme sections background color
 
-$color_14: #8d99ae;
-
-$color_15: #a9a9a9;     // Home page dark theme sections background color
-
-$color_16: #343a40;     // Home page dark theme header background color
+$color_14: #343a40;     // Home page dark theme header background color
 
 .main {
   @include apply-flex(space-between, flex-end, center);
-  background-color: $color_15;
+  background-color: $color_13;
   border-bottom: 1px solid $color_1;
   height: 105px;
   width: 100%;
@@ -188,11 +184,12 @@ $color_16: #343a40;     // Home page dark theme header background color
 
 .photo-container {
   @include apply-flex(center, center, center);
-  background-color: $color_16;                                         //TODO: remove
+  background: no-repeat center $color_14;
+  background-size: cover;
   border-radius: 50%;
   border: 2px solid $color_2;
-  color: $color_6;                                                    //TODO: remove
-  font-size: 1.2rem;                                                   //TODO: remove
+  color: $color_6;
+  font-size: 1.2rem;
   height: 35px;
   width: 35px;
 }
@@ -243,7 +240,7 @@ $color_16: #343a40;     // Home page dark theme header background color
 /* Dropdown list section */
 
 .dropdown-list {
-  background-color: $color_13;
+  background-color: $color_12;
   border-radius: 2px;
   border: 1px solid transparent;
   color: $color_1;
@@ -264,7 +261,7 @@ $color_16: #343a40;     // Home page dark theme header background color
 .user-name-container:hover ~ .dropdown-list,
 .open-list-arrow-container:hover ~ .dropdown-list,
 .dropdown-list:hover {
-  border: 1px solid $color_9;
+  border: 1px solid $color_8;
   height: auto;
   max-height: 68px;
   min-height: 68px;
@@ -279,7 +276,7 @@ $color_16: #343a40;     // Home page dark theme header background color
 }
 
 .dropdown-list_option:hover {
-  background-color: $color_9;
+  background-color: $color_8;
   color: $color_3;
   cursor: pointer;
 }
@@ -294,24 +291,24 @@ $color_16: #343a40;     // Home page dark theme header background color
   @include apply-flex(center, center, center);
   @include forbidTextSelection;
   @include remove-default-element-display;
-  background-color: $color_12;
+  background-color: $color_11;
   border-radius: 3px 0 0 3px;
-  border: 1px solid $color_9;
-  border-right: 1px solid $color_8;
+  border: 1px solid $color_8;
+  border-right: 1px solid $color_7;
   height: 30px;
   width: 30px;
 }
 
 .button:hover {
-  border-color: $color_11;
+  border-color: $color_10;
   border-radius: 3px;
   cursor: pointer;
 }
 
 .button:active {
-  border-color: $color_11;
+  border-color: $color_10;
   border-radius: 3px;
-  box-shadow: 0 0 10px $color_11;
+  box-shadow: 0 0 10px $color_10;
 }
 
 .button:hover .magnifying-glass,
@@ -338,8 +335,8 @@ $color_16: #343a40;     // Home page dark theme header background color
 .input {
   background-color: $color_2;
   border-radius: 0 3px 3px 0;
-  border: 1px solid $color_9;
-  color: $color_10;
+  border: 1px solid $color_8;
+  color: $color_9;
   font-size: 1.1rem;
   height: 30px;
   padding: 0 0 0 8px;
@@ -360,9 +357,9 @@ $color_16: #343a40;     // Home page dark theme header background color
 }
 
 .input:focus {
-  border-color: $color_11;
+  border-color: $color_10;
   border-radius: 3px;
-  box-shadow: 0 0 10px $color_11;
+  box-shadow: 0 0 10px $color_10;
 }
 
 .full-screen {

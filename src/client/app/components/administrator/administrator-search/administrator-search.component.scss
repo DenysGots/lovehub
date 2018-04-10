@@ -29,44 +29,30 @@ $color_1: #fff;
 
 $color_2: #ccc9c9;
 
-$color_3: #333;
+$color_3: #555b6e;
 
-$color_4: #555b6e;
+$color_4: #282828;
 
-$color_5: #282828;
+$color_5: #000;
 
-$color_6: #000;
+$color_6: #ccc;
 
-$color_7: #20d6cd;
+$color_7: #e6e6e6;
 
-$color_8: #d9e8f7;
+$color_8: #adadad;
 
-$color_9: #f6f6f6;
+$color_9: #193952;
 
-$color_10: #ccc;
-
-$color_11: #e6e6e6;
-
-$color_12: #adadad;
-
-$color_13: #ddd;
-
-$color_14: #0275d8;
-
-$color_15: #193952;
-
-$color_16: #ef233c;
-
-$color_17: #a9a9a9;
-
-$color_18: #f1f1f1;
+$color_10: #f1f1f1;
 
 $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+$box-shadow_2: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
 /* Main section layout and styles */
 
 .main-section {
-  background-color: $color_18;
+  background-color: $color_10;
   min-height: calc(100vh - 105px);
   min-width: 920px;
   overflow-x: hidden;
@@ -77,7 +63,7 @@ $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
 }
 
 .main-section-content {
-  background-color: $color_18;
+  background-color: $color_10;
   position: absolute;
   width: 100%;
 }
@@ -102,12 +88,12 @@ $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
 }
 
 .text {
-  font: 1rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font: 0.9rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
 }
 
 .heading {
-  color: $color_4;
-  font: bold 1.5rem 'Alegreya', serif;
+  color: $color_3;
+  font: bold 1.3rem 'Alegreya', serif;
 }
 
 /* Search section styles */
@@ -118,22 +104,21 @@ $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
 
 .search-results {
   @include apply-flex(space-between, flex-start, center);
-  background-color: $color_18;
+  background-color: $color_10;
 }
 
 .user-badge {
-  @include apply-flex(space-between, flex-start, flex-start);
+  @include apply-flex(flex-start, flex-start, flex-start);
   @include forbidTextSelection;
   background-color: $color_1;
   border-radius: 4px;
   border: 1px solid $color_2;
   box-shadow: $box-shadow_1;
-  cursor: pointer;
-  height: 130px;
+  height: 160px;
   margin: 30px;
   overflow: hidden;
   position: relative;
-  width: 250px;
+  width: 280px;
 }
 
 @media screen and (max-width: 640px) {
@@ -143,16 +128,23 @@ $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
   }
 }
 
+.photo-section {
+  @include apply-flex(center, flex-start, center);
+  width: 65px;
+}
+
 .photo-container {
-  @include apply-flex(center, center, center);                    //TODO: remove
-  background-color: $color_1;                                     //TODO: remove
+  @include apply-flex(center, center, center);
+  background: no-repeat center $color_1;
+  background-size: cover;
   border-radius: 50%;
-  border: 1px solid $color_15;
-  color: $color_15;                                               //TODO: remove
-  font-size: 1.7rem;                                              //TODO: remove
-  height: 40px;
-  margin: 15px 10px 15px 15px;
-  width: 40px;
+  border: 1px solid $color_9;
+  color: $color_9;
+  cursor: pointer;
+  font-size: 1.7rem;
+  height: 50px;
+  margin: 10px 5px 5px 10px;
+  width: 50px;
 }
 
 @media screen and (max-width: 640px) {
@@ -163,7 +155,52 @@ $box-shadow_1: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
 }
 
 .user-information {
-  color: $color_6;
+  color: $color_5;
   font-size: 0.8rem;
-  margin: 15px 15px 15px 0;
+  margin: 10px 10px 10px 15px;
+  width: 170px;
+}
+
+.button-container {
+  @include apply-flex(center, center, center);
+  width: 100%;
+}
+
+.button {
+  @include remove-default-element-display;
+  @include forbidTextSelection;
+  background-color: $color_1;
+  border-radius: 5px;
+  border: 1px solid $color_6;
+  color: $color_4;
+  font-size: 0.9rem;
+  height: 34px;
+  margin: 5px 5px 5px 10px;
+  width: 50px;
+  text-align: center;
+  transition: 0.05s ease-in-out;
+  vertical-align: middle;
+}
+
+.button:hover {
+  background-color: $color_7;
+  border-color: $color_8;
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: $color_7;
+  border-color: $color_8;
+  box-shadow: $box-shadow_2;
+  padding: 0;
+}
+
+.button-disabled,
+.button-disabled:hover,
+.button-disabled:active {
+  background-color: $color_7;
+  border-color: $color_8;
+  box-shadow: none;
+  color: $color_8;
+  cursor: default;
 }

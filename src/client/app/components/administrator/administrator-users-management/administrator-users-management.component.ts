@@ -13,6 +13,7 @@ import { AdministratorService } from '../../../services/administrator.service';
 })
 export class AdministratorUsersManagementComponent implements OnInit {
   public mainSectionIsVisible: boolean;
+  public allUsersSelected: boolean;
   public pages = [];
   public getUsersOptions = {
     userRole: 'any',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AdministratorService } from '../../../services/administrator.service';
+import { PhotosService } from '../../../services/photos.service';
 
 @Component({
   selector: 'app-administrator-search',
@@ -16,7 +17,9 @@ export class AdministratorSearchComponent implements OnInit {
   public searchResults = {} as any;
   public isSearchUnsuccessful: boolean;
 
-  constructor(private administratorService: AdministratorService) { }
+  constructor(private administratorService: AdministratorService,
+              private photosService: PhotosService) {
+  }
 
   ngOnInit() {
     this.administratorService.navBarState.subscribe(data => {
@@ -25,7 +28,26 @@ export class AdministratorSearchComponent implements OnInit {
 
     this.administratorService.receivedSearchResults.subscribe(data => {
       (data.users && data.users.length > 0) ? (this.isSearchUnsuccessful = false) : (this.isSearchUnsuccessful = true);
-      return this.searchResults = data;
+      this.searchResults = data;
+
+      if (this.searchResults.users) {
+        this.getUsersAvatars(this.searchResults.users);
+      }
+    });
+  }
+
+  getUsersAvatars(users) {
+    users.forEach(user => {
+      this.photosService.getAvatar(user.id)
+        .subscribe(avatar => {
+          if (avatar) {
+            const img = new Image();
+
+            img.src = avatar.base64;
+
+            return user['avatarUrl'] = 'url(\'' + img.src + '\')';
+          }
+        });
     });
   }
 
