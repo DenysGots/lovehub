@@ -9,6 +9,10 @@ import { ChatSchema } from './schemas/chat.schema';
 export class ChatMessagesService {
   constructor(@Inject('ChatModelToken') private readonly chatModel: Model<Chat>) {}
 
+  async createChat(chatId): Promise<any> {
+    return await this.chatModel.collection.insert({chatId, messages: []});
+  }
+
   async create(chatId, createMessageDto: CreateMessageDto): Promise<any> {
     createMessageDto.created = new Date();
     return await this.chatModel

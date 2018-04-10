@@ -15,11 +15,12 @@ export class ChatListController {
     private photosService: PhotosService
   ) {}
 
-  // @HttpCode(201)
-  // @Post()
-  // async create(@Body() chatDto: ChatDto) {
-  //   await this.chatsService.create(chatDto);
-  // }
+  @HttpCode(201)
+  @Post()
+  async create(@Body() chatDto: ChatList) {
+    const chat = await this.chatsService.create(chatDto);
+    await this.chatMessagesService.createChat(chat.dataValues.chatId);
+  }
 
   @HttpCode(200)
   @Get(':id')

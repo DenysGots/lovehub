@@ -5,20 +5,7 @@ import { ChatMessagesService } from './chat-messages.service';
 @Controller('api/messages')
 export class ChatMessagesController {
   constructor( private messagesService: ChatMessagesService) {}
-
-  @HttpCode(201)
-  @Post()
-  async create(@Request() req, @Response() res, @Body() data) {
-    const mess = {
-      userId: data.message.userId,
-      text: data.message.text,
-      created: new Date()
-    };
-    const createdMessage = await this.messagesService.create(data.chatId, mess as CreateMessageDto);
-
-    res.status(HttpStatus.OK).json({data: 'success'});
-  }
-
+  
   @HttpCode(200)
   @Get(':id')
   async findById(@Param() params): Promise<any[]> {
