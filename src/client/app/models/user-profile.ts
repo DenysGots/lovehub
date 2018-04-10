@@ -14,6 +14,8 @@ export class UserProfile {
   userId: number;
   role: string;
   phoneNumber: number;
+  registrationDate: number;
+  lastActiveDate: number;
 
   constructor(id: number = 0,
               firstName: string = '',
@@ -24,7 +26,11 @@ export class UserProfile {
               preference: string = '',
               avatar: string = null,
               role: string = 'USER',
-              phoneNumber: number = 1) {
+              phoneNumber: number = 1,
+              isBaned: boolean = false,
+              isActive: boolean = true,
+              registrationDate: number = 0,
+              lastActiveDate: number = 0) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -35,5 +41,9 @@ export class UserProfile {
     this.avatar = avatar;
     this.role = role;
     this.phoneNumber = phoneNumber;
+    this.isBaned = isBaned;
+    this.isActive = isActive;
+    this.registrationDate = registrationDate;
+    this.lastActiveDate = lastActiveDate;
   }
 }
