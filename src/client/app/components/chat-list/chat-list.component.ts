@@ -22,8 +22,6 @@ export class ChatListComponent implements OnInit {
       this.activeChat = chat.chatId;
     });
 
-    console.log('a', this.chat.user.avatar)
-
     this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
   }
 

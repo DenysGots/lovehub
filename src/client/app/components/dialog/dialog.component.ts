@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { EventEmitter } from 'events';
 import { ChatService } from '../../services/chat.service';
 
 import * as jwt_decode from 'jwt-decode';
+import Chat from '../../models/chat';
 
 @Component({
   selector: 'chat-dialog',
@@ -12,20 +13,38 @@ import * as jwt_decode from 'jwt-decode';
 export class DialogComponent implements OnInit {
   userId: Number = null;
   text: String = '';
+  windowWidth: number = window.innerWidth;
   messages: Array<any> = null;
+
+  @Input() chat: Chat;
 
   @ViewChild('scrollChat') private scrollChat: ElementRef;
 
-  constructor( private chat: ChatService) {}
+  constructor( private chatService: ChatService) {}
 
   ngOnInit() {
-    this.chat.messagesUpdate.subscribe(data => {
+    this.chatService.messagesUpdate.subscribe(data => {
       this.messages = data;
     });
+
+    console.log('ca', this.chat);
 
     this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
 
     this.scrollToBottom();
+  }
+
+  ngAfterViewInit() {
+    this.windowWidth = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  resize(event) {
+      this.windowWidth = window.innerWidth;
+  }
+
+  goBack(){
+    this.chatService.goBack();
   }
 
   ngAfterViewChecked() {        
@@ -44,17 +63,26 @@ export class DialogComponent implements OnInit {
         text: this.text
     };
 
-    this.chat.sendMessage(newMessage);
+    this.chatService.sendMessage(newMessage);
     this.text = '';
   }
 
-  setClasses(mess) {
-    const ownMessage = mess.userId === this.userId;
+  setClasses(mes) {
+    const ownMessage = mes.userId === this.userId;
     
     return {
       'justify-content-end': ownMessage,
-      'justify-content-start': !ownMessage,
-      'unread': ownMessage && !mess.read
+      'justify-content-start': !ownMessage
+    }
+  }
+
+  setMesClasses(mes){
+    const ownMessage = mes.userId === this.userId;
+    
+    return {
+      'right': mes.userId === this.userId,
+      'left': mes.userId !== this.userId,
+      'unread': ownMessage && !mes.read
     }
   }
 }

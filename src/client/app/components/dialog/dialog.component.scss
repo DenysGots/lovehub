@@ -1,3 +1,9 @@
+.dialog-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
 .message-list{
     overflow-y: auto;
 }
@@ -24,6 +30,7 @@
     background-color: lightgrey;
     margin: 5px 0;
     max-width: 50%;
+    word-wrap: break-word;
 }
 .left{
     margin-left: 5px;
@@ -62,5 +69,37 @@ input:focus, textarea:focus {outline:0;}
     color: grey;
 }
 .unread{
-    background-color: lightgreen;
+    background-color: lightslategray;
+}
+header{
+    height: 50px;
+    background-color: grey;
+    border-radius: 9px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    color: white;
+}
+.back{
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+.avatar-container{
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+}
+
+.avatar{
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+    width: inherit;
+    height: inherit;
 }

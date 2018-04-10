@@ -18,6 +18,7 @@ export class ChatService {
   currentChatChange: Subject<any> = new Subject<any>();
   messagesUpdate: Subject<any> = new Subject<any>();
   userlistUpdate: Subject<any> = new Subject<any>();
+  showDialogsUpdate: Subject<any> = new Subject<any>();
   socket: Subject<any>;
   
   constructor(
@@ -32,6 +33,8 @@ export class ChatService {
 
     this.currentChatChange.subscribe((value) => {
         this.currentChat = value;
+
+      console.log("222");
         if(!!this.currentChat.lastMessage){
           this.currentChat.lastMessage.read = true;
         }
@@ -97,5 +100,11 @@ export class ChatService {
       this.messages = data;
       this.messagesUpdate.next(this.messages);
     });
+
+    this.showDialogsUpdate.next(true);
+  }
+
+  goBack(){
+    this.showDialogsUpdate.next(false);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import Message from '../../models/message';
 import { WindowService } from '../../services/window.service';
 import { ChatService } from '../../services/chat.service';
@@ -12,6 +12,9 @@ import { HttpClient } from '@angular/common/http';
 export class ChatComponent implements OnInit {
   height = 100;
   chats = [];
+  chat: any;
+  showDialogs: boolean = false;
+  windowWidth: number = window.innerWidth;
 
   constructor(
     private windowService: WindowService,
@@ -23,21 +26,13 @@ export class ChatComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.chatService.userlistUpdate.subscribe(data => {
-      this.chats = data;
-      // if(data.type === 'setRead'){
-      //   console.log('d',data)
-      //   const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
-      //   if(!!updateChat.lastMessage){
-      //     updateChat.lastMessage.read = true;
-      //   }
-        
-      // } else {
-      //   console.log('dd', data)
-      //   const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
-      //   updateChat.lastMessage = data.data.message;
-      // }
+    this.chatService.currentChatChange.subscribe(chat => {
+      console.log("111");
+        this.chat = chat;
     });
+
+    this.chatService.userlistUpdate.subscribe(data => this.chats = data);
+    
+    this.chatService.showDialogsUpdate.subscribe(show => this.showDialogs = show)
   }
 }
