@@ -58,21 +58,25 @@ export class DialogComponent implements OnInit {
   }
 
   sendMes(mes){
-    const newMessage = {
+    const text = this.text.trim();
+    
+    if(!!text.length){
+      const newMessage = {
         userId: this.userId,
-        text: this.text
+        text
     };
 
     this.chatService.sendMessage(newMessage);
     this.text = '';
+    }
   }
 
   setClasses(mes) {
     const ownMessage = mes.userId === this.userId;
     
     return {
-      'justify-content-end': ownMessage,
-      'justify-content-start': !ownMessage
+      'align-items-end': ownMessage,
+      'align-items-start': !ownMessage
     }
   }
 

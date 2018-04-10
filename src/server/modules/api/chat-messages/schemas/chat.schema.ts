@@ -3,7 +3,8 @@ import * as mongoose from 'mongoose';
 const MessageSchema = new mongoose.Schema({
   userId: Number,
   text: String,
-  read: Boolean
+  read: Boolean,
+  created: Date
 });
 
 

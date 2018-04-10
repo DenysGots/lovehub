@@ -25,14 +25,17 @@
         <div *ngIf="!!messages" class="message-list scrollbar" #scrollChat>
           <div 
             *ngFor="let mess of messages" 
-            class="d-flex"
+            class="d-flex message-container"
             [ngClass]="setClasses(mess)"
           >
-            <span
+            <p
               class="message"
               [ngClass]="setMesClasses(mess)"
-              [innerHTML]="mess.text | multiline"
-            ></span>
+            >
+              <span class="message-text">{{mess.text}}</span>
+              <span class="date">{{mess.created | date:"HH:mm"}}</span>
+            </p>
+            
           </div>
         </div>
         <div *ngIf="!!messages">

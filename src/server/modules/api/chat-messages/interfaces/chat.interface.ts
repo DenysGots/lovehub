@@ -5,6 +5,7 @@ export interface Chat extends Document {
   readonly messages: Array<{
     read: boolean,
     userId: number,
-    text: string
+    text: string,
+    creates: Date
   }>;
 }

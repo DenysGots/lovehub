@@ -10,6 +10,8 @@ export class ChatMessagesService {
   constructor(@Inject('ChatModelToken') private readonly chatModel: Model<Chat>) {}
 
   async create(chatId, createMessageDto: CreateMessageDto): Promise<any> {
+    console.log("createMessageDto", createMessageDto);
+    createMessageDto.created = new Date();
     return await this.chatModel
       .findOneAndUpdate(
         { chatId },

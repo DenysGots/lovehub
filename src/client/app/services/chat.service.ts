@@ -79,6 +79,7 @@ export class ChatService {
     });
 
     this.http.get<any>(`api/chats/${this.userId}`).subscribe((data) => {
+      console.log('res', data);
       this.chats = data;
       this.userlistUpdate.next(this.chats);
     });

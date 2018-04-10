@@ -9,10 +9,13 @@ export class ChatMessagesController {
   @HttpCode(201)
   @Post()
   async create(@Request() req, @Response() res, @Body() data) {
-    const createdMessage = await this.messagesService.create(data.chatId, {
-        userId: data.message.userId,
-        text: data.message.text
-    } as CreateMessageDto);
+    const mess = {
+      userId: data.message.userId,
+      text: data.message.text,
+      created: new Date()
+    };
+    console.log('mes', mess);
+    const createdMessage = await this.messagesService.create(data.chatId, mess as CreateMessageDto);
 
     res.status(HttpStatus.OK).json({data: 'success'});
   }
