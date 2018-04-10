@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -23,18 +23,20 @@ interface Results {
 })
 export class InterestsComponent implements OnInit, OnDestroy {
   public connection: any;
-  public router: any;
-  public interestsToSave: string[] = [];
-  public interestsToDelete: string[] = [];
-  public typedInterestChanged: Subject<string> = new Subject<string>();
   public currentUserId: number;
+  public profileOwnerId: number;
   public editMode = false;
   public editingIsForbidden = false;
   public inputFieldFocus = false;
-  public interestsToShow: string[] = [];
+  public validationMessageIsVisible = false;
+  public isInputValid = true;
   public hints: string[] = [];
   public interests: string[] = [];
+  public interestsToShow: string[] = [];
+  public interestsToSave: string[] = [];
+  public interestsToDelete: string[] = [];
   public typedInterest: string;
+  public typedInterestChanged: Subject<string> = new Subject<string>();
   public changesInInterests = {
     interestsToSave: this.interestsToSave,
     interestsToDelete: this.interestsToDelete
@@ -42,9 +44,14 @@ export class InterestsComponent implements OnInit, OnDestroy {
 
   constructor(
       private interestsService: InterestsService,
-      private _router: Router
+      private route: ActivatedRoute,
+      private router: Router
   ) {
-    this.router = _router;
+    this.route.params.subscribe(params => {
+      this.profileOwnerId = parseInt(params.id, 10);
+      this.distinctProfileOwner();
+      this.getInterests();
+    });
 
     this.typedInterestChanged
       .debounceTime(300)
@@ -56,7 +63,23 @@ export class InterestsComponent implements OnInit, OnDestroy {
     this.connection = this.interestsService.getData().subscribe((results: Results) => {
       this.hints = results.hints;
       this.interests = results.interests;
-      this.interestsToShow = [...this.interests];
+
+      if (this.interests && this.interests.length > 0 && this.interestsToShow.length === 0) {
+        this.interestsToShow = [...this.interests]
+          .filter(interest => !!interest);
+      }
+    });
+
+    this.route.url.subscribe(() => {
+      this.distinctProfileOwner();
+      this.getInterests();
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.distinctProfileOwner();
+        this.getInterests();
+      }
     });
 
     this.distinctProfileOwner();
@@ -73,11 +96,13 @@ export class InterestsComponent implements OnInit, OnDestroy {
     this.getHints(this.typedInterest);
   }
 
-  getInterests() {
-    this.interestsService.getInterests();
+  getInterests(): void {
+    if (this.profileOwnerId) {
+      this.interestsService.getInterests(this.profileOwnerId);
+    }
   }
 
-  getHints(input) {
+  getHints(input): void {
     if (input) {
       this.interestsService.getHints(input.trim().toLowerCase());
     } else {
@@ -85,21 +110,28 @@ export class InterestsComponent implements OnInit, OnDestroy {
     }
   }
 
-  addInterest() {
-    if (this.typedInterest) {
-      this.interestsToSave.push(this.typedInterest.trim().toLowerCase());
-    }
+  addInterest(): void {
+    const checkInputPattern = /^[a-zA-Z\s]+$/g;
 
-    this.interestsToShow = [...new Set([...this.interestsToShow, ...this.interestsToSave])]
-        .sort((a, b) => a.localeCompare(b));
-    this.typedInterest = '';
+    if (this.typedInterest) {
+      if (checkInputPattern.test(this.typedInterest)) {
+        this.interestsToSave.push(this.typedInterest.trim().toLowerCase());
+        this.interestsToShow = [...new Set([...this.interestsToShow, ...this.interestsToSave])]
+          .sort((a, b) => a.localeCompare(b));
+        this.typedInterest = '';
+      } else {
+        this.isInputValid = false;
+      }
+    } else {
+      this.isInputValid = false;
+    }
   }
 
-  addInterestFromHint(hint) {
+  addInterestFromHint(hint): void {
     this.typedInterest = hint;
   }
 
-  deleteInterest(interest) {
+  deleteInterest(interest): void {
     this.interestsToDelete.push(interest);
     this.interestsToShow.splice(this.interestsToShow.indexOf(interest), 1);
 
@@ -108,14 +140,16 @@ export class InterestsComponent implements OnInit, OnDestroy {
     }
   }
 
-  saveChanges() {
+  saveChanges(): void {
     this.interests = this.interestsToShow;
     this.interestsService.saveChanges(this.changesInInterests);
     this.editMode = false;
+    this.validationMessageIsVisible = false;
   }
 
-  toggleEditMode() {
+  toggleEditMode(): void {
     this.editMode = !this.editMode;
+    this.validationMessageIsVisible = false;
 
     if (!this.editMode) {
       this.interestsToShow = this.interests;
@@ -124,22 +158,26 @@ export class InterestsComponent implements OnInit, OnDestroy {
     }
   }
 
-  onInputFocus() {
+  onInputFocus(): void {
     this.inputFieldFocus = true;
+    this.validationMessageIsVisible = true;
+    this.isInputValid = true;
     this.getHints(this.typedInterest || '');
   }
 
-  onInputBlur() {
+  onInputBlur(): void {
     setTimeout(() => {
       this.inputFieldFocus = false;
     }, 100);
   }
 
-  distinctProfileOwner() {
-    let profileOwnerId; // TODO: get id from, then: (profileOwnerId !== currentUserId) => (editingIsForbidden = true)
+  distinctProfileOwner(): void {
+    if (localStorage.getItem('jwt_token')) {
+      this.currentUserId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
+      this.interestsService.currentUserId = this.currentUserId;
+    }
 
-    this.currentUserId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
-    this.interestsService.currentUserId = this.currentUserId;
+    (this.profileOwnerId === this.currentUserId) ? (this.editingIsForbidden = false) : (this.editingIsForbidden = true);
   }
 
 }

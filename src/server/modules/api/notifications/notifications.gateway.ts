@@ -25,17 +25,9 @@ export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisco
     this.notificationsService.removeUser(client);
   }
 
-  // Received data must contain user properties:
-  // user id, first name and message type: 'like', new mail, chat message, etc.
   @SubscribeMessage('user-parameters')
-  onConnect(client: any, connectedUserParameters) {
+  onOnlineUser(client: any, connectedUserParameters) {
     this.notificationsService.addUser(client, connectedUserParameters);
-  }
-
-  @SubscribeMessage('user-disconnected')
-  onDisconect(client: any) {
-    console.log(`User ${client.id} disconnected`);
-    this.notificationsService.removeUser(client);
   }
 
   // Received data must contain link to user-receiver profile (user id)
@@ -49,6 +41,21 @@ export class NotificationsGateway implements OnGatewayConnection, OnGatewayDisco
         .to(notificationReceiver.receiverClientId)
         .emit('receive-notification', notificationReceiver.senderUserName);
     }
+  }
+
+  @SubscribeMessage('is-user-online')
+  checkIfUserIsOnline(client: any, profileOwnerId) {
+    const isUserOnline = this.notificationsService.checkIfUserIsOnline(profileOwnerId);
+
+    this.server.sockets
+        .to(client.id)
+        .emit('user-state', isUserOnline);
+  }
+
+  @SubscribeMessage('user-disconnected')
+  onDisconect(client: any) {
+    console.log(`User ${client.id} disconnected`);
+    this.notificationsService.removeUser(client);
   }
 
 }

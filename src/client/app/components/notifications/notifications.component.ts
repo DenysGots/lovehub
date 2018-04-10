@@ -2,18 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
 
 import { NotificationsService } from '../../services/notifications.service';
+import { AuthService } from '../../services/auth.service';
 
 interface Message {
   user: string;
   isHidden: boolean;
   isShifted: boolean;
-}
-
-interface CurrentUser {
-  userId: number;
-  firstName: string;
-  lastName: string;
-  role: string;
 }
 
 @Component({
@@ -32,34 +26,34 @@ export class NotificationsComponent implements OnInit, OnDestroy {
     isHidden: true,
     minHeight: '0'
   };
-  public currentUserId: number;
-  public currentUser: CurrentUser = {
-    userId: 1234,
-    firstName: 'User_1',
-    lastName: 'User_1',
-    role: 'User'
-  };
+  public currentUser = {} as any;
 
-  constructor(private notificationsService: NotificationsService) {
+  constructor(private notificationsService: NotificationsService,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
     this.connection = this.notificationsService.getMessages().subscribe(message => {
-      this.handleMessages(message);
+      if (message) {
+        this.handleMessages(message);
+      }
     });
 
-    this.currentUser = parseInt(jwt_decode(localStorage.getItem('jwt_token')), 10);
-    this.currentUserId = this.currentUser.id;
-    this.notificationsService.currentUser = this.currentUser;
+    this.authService.isUserLoggedIn.subscribe(data => {
+      if (data) {
+        this.currentUser = jwt_decode(localStorage.getItem('jwt_token'));
+        this.notificationsService.sendOnlineUser(this.currentUser);
+      }
+    });
   }
 
   ngOnDestroy() {
     this.connection.unsubscribe();
   }
 
-  // Must receive receiver user id somehow
+  // TODO: attach to some button to test 'Like' notifications
   sendLike(receiverUserId): void {
-    // TODO: get receiverUserId from user's profile URL
+    // TODO: get 'like' receiver user id
     this.notificationsService.sendMessage(receiverUserId);
   }
 
