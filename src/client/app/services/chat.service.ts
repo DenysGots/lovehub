@@ -34,7 +34,6 @@ export class ChatService {
     this.currentChatChange.subscribe((value) => {
         this.currentChat = value;
 
-      console.log("222");
         if(!!this.currentChat.lastMessage){
           this.currentChat.lastMessage.read = true;
         }
@@ -43,7 +42,6 @@ export class ChatService {
     this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
 
     this.notifService.getNotifications().subscribe((data: any) => {
-      console.log('getNotifications',data);
       const updateChat = this.chats.find(chat => chat.chatId === data.data.chatId);
         updateChat.lastMessage = data.data.message;
 
@@ -79,7 +77,6 @@ export class ChatService {
     });
 
     this.http.get<any>(`api/chats/${this.userId}`).subscribe((data) => {
-      console.log('res', data);
       this.chats = data;
       this.userlistUpdate.next(this.chats);
     });

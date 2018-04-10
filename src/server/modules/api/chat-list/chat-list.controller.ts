@@ -24,7 +24,6 @@ export class ChatListController {
   @HttpCode(200)
   @Get(':id')
   async findById(@Param() params): Promise<any[]> {
-    console.log("!!!!");
     const id = parseInt(params.id);
     const chats = await this.chatsService.findByUser(id);
 
@@ -34,7 +33,6 @@ export class ChatListController {
       const finalUser = userId1 === id ? userId2 : userId1;
 
       let user = await this.usersProfileService.findShortInfo(finalUser) || {};
-      console.log('user', user);
       const userId = user.dataValues.userId;
       const avatar = await this.photosService.findAvatarByUserId(userId) || null;
       user = { ...user.dataValues, avatar };

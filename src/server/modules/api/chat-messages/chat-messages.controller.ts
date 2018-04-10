@@ -14,7 +14,6 @@ export class ChatMessagesController {
       text: data.message.text,
       created: new Date()
     };
-    console.log('mes', mess);
     const createdMessage = await this.messagesService.create(data.chatId, mess as CreateMessageDto);
 
     res.status(HttpStatus.OK).json({data: 'success'});

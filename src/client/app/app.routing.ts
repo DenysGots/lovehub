@@ -25,7 +25,7 @@ export const routes = [
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
   { path: 'photo', component: PhotosComponent},
-  { path: 'profile',  component: ProfilePageComponent},//canActivate: [AuthProfileGuardService],
+  { path: 'profile', canActivate: [AuthProfileGuardService], component: ProfilePageComponent},
   { path: 'admin', canActivate: [ AuthGuard ],
     children: [
       { path: '', component: AdministratorDashboardComponent },

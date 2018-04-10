@@ -10,7 +10,6 @@ export class ChatMessagesService {
   constructor(@Inject('ChatModelToken') private readonly chatModel: Model<Chat>) {}
 
   async create(chatId, createMessageDto: CreateMessageDto): Promise<any> {
-    console.log("createMessageDto", createMessageDto);
     createMessageDto.created = new Date();
     return await this.chatModel
       .findOneAndUpdate(
@@ -35,7 +34,6 @@ export class ChatMessagesService {
     const res = await this.chatModel.update({
       chatId,
       "messages": {$elemMatch: { "userId": userId, "read": false } }
-      // "messages": {$elemMatch: { "userId": {$ne: userId}, "read": false } }
     },{
         $set: { "messages.$[].read" : true}
     },

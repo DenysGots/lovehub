@@ -27,8 +27,6 @@ export class DialogComponent implements OnInit {
       this.messages = data;
     });
 
-    console.log('ca', this.chat);
-
     this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
 
     this.scrollToBottom();
@@ -59,7 +57,7 @@ export class DialogComponent implements OnInit {
 
   sendMes(mes){
     const text = this.text.trim();
-    
+
     if(!!text.length){
       const newMessage = {
         userId: this.userId,
