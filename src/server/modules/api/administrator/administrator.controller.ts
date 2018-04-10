@@ -9,32 +9,43 @@ export class AdministratorController {
   constructor(private readonly administratorService: AdministratorServiceComponent) {
   }
 
-  // Get user from DB by id
   @Get('get-user/:id')
   async getUser(@Param('id', new ParseIntPipe()) id) {
     await this.administratorService.getUser(id);
     return this.administratorService.currentUser;
   }
 
-  // Get site statistics information
-  @Get('get-statistics')
-  async getStatistics() {
-    return await this.administratorService.collectSiteStatistics();
-  }
-
-  // Get search results
   @Get('search/:input')
   async getSearchResults(@Param('input') input) {
     return await this.administratorService.getSearchResults(input);
   }
 
-  // Create an array of users according to options, received from client
+  @Get('get-hints-for-email/:input')
+  async getHints(@Param('input') input) {
+    return await this.administratorService.getHints(input);
+  }
+
+  @Get('get-statistics')
+  async getStatistics() {
+    return await this.administratorService.collectSiteStatistics();
+  }
+
   @Post('get-users')
   async getUsers(@Body() getUsersEnquiryDto) {
     return await this.administratorService.manageUsersList(getUsersEnquiryDto);
   }
 
-  // Update users parameters in DB according to options, received from client
+  @Post('send-email')
+  async sendEmail(@Body() emailDto) {
+    // return await this.administratorService.sendEmail(emailDto);
+
+    console.log(emailDto);
+
+    await this.administratorService.sendEmail(emailDto);
+
+    return ('Email processed');
+  }
+
   @Patch('update-users')
   async updateUsers(@Body() updateUsersEnquiryDto) {
     return await this.administratorService.updateUsersList(updateUsersEnquiryDto);
