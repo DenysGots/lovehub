@@ -47,6 +47,7 @@ export class UserProfileSettingsComponent implements OnInit {
         if(affected) {
           this.isSuccess = !this.isSuccess;
           setTimeout(() => this.isSuccess = !this.isSuccess, 3000);
+          this.canUpdate = false
         }
       });
   }
