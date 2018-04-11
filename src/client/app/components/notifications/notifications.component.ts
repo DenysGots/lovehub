@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
 
 import { NotificationsService } from '../../services/notifications.service';
+import { AuthService } from '../../services/auth.service';
 
 interface Message {
   user: string;
@@ -27,25 +28,32 @@ export class NotificationsComponent implements OnInit, OnDestroy {
   };
   public currentUser = {} as any;
 
-  constructor(private notificationsService: NotificationsService) {
+  constructor(private notificationsService: NotificationsService,
+              private authService: AuthService) {
   }
 
   ngOnInit() {
     this.connection = this.notificationsService.getMessages().subscribe(message => {
-      this.handleMessages(message);
+      if (message) {
+        this.handleMessages(message);
+      }
     });
 
-    this.currentUser = jwt_decode(localStorage.getItem('jwt_token'));
-    this.notificationsService.currentUser = this.currentUser;
+    this.authService.isUserLoggedIn.subscribe(data => {
+      if (data) {
+        this.currentUser = jwt_decode(localStorage.getItem('jwt_token'));
+        this.notificationsService.sendOnlineUser(this.currentUser);
+      }
+    });
   }
 
   ngOnDestroy() {
     this.connection.unsubscribe();
   }
 
-  // Must receive receiver user id
+  // TODO: attach to some button to test 'Like' notifications
   sendLike(receiverUserId): void {
-    // TODO: get receiverUserId from user's profile URL
+    // TODO: get 'like' receiver user id
     this.notificationsService.sendMessage(receiverUserId);
   }
 

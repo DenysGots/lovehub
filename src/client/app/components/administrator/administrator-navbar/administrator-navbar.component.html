@@ -1,19 +1,23 @@
 <main class="main"
       [ngClass]="{'section-hidden': !mainSectionIsVisible}">
   <div class="logo-container">
-    <img class="logo-img" src="../../../../../assets/img/logo3.png" alt="logo">
+    <a class="link logo-container-link" routerLink="/home">
+      <img class="logo-img" src="../../../../../assets/img/logo3.png" alt="logo">
 
-    <p class="logo">
-      LoveHub
-    </p>
+      <p class="logo">
+        LoveHub
+      </p>
+    </a>
   </div>
 
   <div class="admin-badge">
-    <div class="photo-container">
-      <!--
-      <img src="" alt="User Photo" class="user-photo">      TODO: add binding to usersList => administrator here and remove svg icon
-      -->
-      <i class="fas fa-user"></i>
+    <div
+      class="photo-container"
+      [ngStyle]="currentUserAvatar && {'background-image': currentUserAvatar}">
+      <i
+        class="fas fa-user"
+        *ngIf="!currentUserAvatar">
+      </i>
     </div>
 
     <div>
@@ -29,7 +33,11 @@
 
   <div class="user-status">
     <p class="text white-text">
-      {{ (currentUser) ? currentUser.role : "undefined" }}
+      {{
+        (currentUser)
+          ? ((currentUser.role === 'ADMIN') ? 'Administrator' : 'Moderator')
+          : "undefined"
+      }}
     </p>
   </div>
 
@@ -68,18 +76,19 @@
           </div>
         </a>
 
-        <a class="link">
+        <a class="link" routerLink="/admin/email">
           <div class="admin-navbar_option">
             <p class="admin-navbar_option-description text white-text">
-              Notifications
+              Send E-mail
             </p>
           </div>
         </a>
 
+
         <a class="link">
-          <div class="admin-navbar_option">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
             <p class="admin-navbar_option-description text white-text">
-              Send E-mail
+              Notifications
             </p>
           </div>
         </a>
@@ -121,7 +130,7 @@
         </a>
 
         <a class="link">
-          <div class="admin-navbar_option">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
             <p class="admin-navbar_option-description text white-text">
               Create New Moderator
             </p>
@@ -129,7 +138,7 @@
         </a>
 
         <a class="link">
-          <div class="admin-navbar_option">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
             <p class="admin-navbar_option-description text white-text">
               Last Users Activities
             </p>
@@ -165,7 +174,7 @@
       <div class="admin-navbar_dropdown-list"
            [ngClass]="{'hidden': !dropdownLists.analyticsDropdownList}">
         <a class="link">
-          <div class="admin-navbar_option">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
             <p class="admin-navbar_option-description text white-text">
               Charts
             </p>
@@ -173,7 +182,7 @@
         </a>
 
         <a class="link">
-          <div class="admin-navbar_option">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
             <p class="admin-navbar_option-description text white-text">
               Tables
             </p>

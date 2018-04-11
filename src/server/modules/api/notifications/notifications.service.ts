@@ -62,4 +62,12 @@ export class NotificationsServiceComponent {
     return notificationReceiver;
   }
 
+  checkIfUserIsOnline(profileOwnerId): boolean {
+    const connectedUsers = this.connectedUsers;
+
+    return connectedUsers.some(user => {
+      return user.id === profileOwnerId;
+    });
+  }
+
 }

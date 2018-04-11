@@ -18,8 +18,8 @@ export class InterestsService {
   constructor() {
   }
 
-  getInterests() {
-    this.socket.emit('get-user-interests');
+  getInterests(profileOwnerId) {
+    this.socket.emit('get-user-interests', profileOwnerId);
   }
 
   getHints(userInput) {

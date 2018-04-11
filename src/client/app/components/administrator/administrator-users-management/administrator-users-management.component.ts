@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AdministratorService } from '../../../services/administrator.service';
 
@@ -13,6 +14,7 @@ import { AdministratorService } from '../../../services/administrator.service';
 })
 export class AdministratorUsersManagementComponent implements OnInit {
   public mainSectionIsVisible: boolean;
+  public allUsersSelected: boolean;
   public pages = [];
   public getUsersOptions = {
     userRole: 'any',
@@ -36,7 +38,8 @@ export class AdministratorUsersManagementComponent implements OnInit {
     maxPagesToShow: 3
   };
 
-  constructor(private administratorService: AdministratorService) {
+  constructor(private administratorService: AdministratorService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -57,7 +60,28 @@ export class AdministratorUsersManagementComponent implements OnInit {
   }
 
   updateUsers(): void {
-    this.administratorService.updateUsersEnquiryRequest(this.updateUsersOptions);
+    const checkedUsers = this.updateUsersOptions.usersList;
+    const usersList = this.usersList.users;
+
+    if (this.updateUsersOptions.appliedAction === 'send e-mail') {
+      this.router.navigate(['/admin/email'])
+          .then(() => {
+            checkedUsers.forEach(user => {
+              let userObject;
+
+              for (let i = 0; i < usersList.length; i += 1) {
+                if (usersList[i].id = user) {
+                  userObject = usersList[i];
+                  break;
+                }
+              }
+
+              this.administratorService.receivedSelectedUserData.next(userObject);
+            });
+          });
+    } else {
+      this.administratorService.updateUsersEnquiryRequest(this.updateUsersOptions);
+    }
   }
 
   manageUsersListParameters(data): void {
@@ -125,6 +149,16 @@ export class AdministratorUsersManagementComponent implements OnInit {
       const userListIndex = this.updateUsersOptions.usersList.indexOf(user.id);
 
       this.updateUsersOptions.usersList.splice(userListIndex, 1);
+    }
+  }
+
+  pushAllToSelectedUsersList(): void {
+    if (this.allUsersSelected) {
+      this.usersList.users.forEach(user => {
+        this.updateUsersOptions.usersList.push(user.id);
+      });
+    } else {
+      this.updateUsersOptions.usersList = [] as any;
     }
   }
 

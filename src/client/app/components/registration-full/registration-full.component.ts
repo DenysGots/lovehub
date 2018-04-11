@@ -50,8 +50,11 @@ export class RegistrationFullComponent implements OnInit {
     this.usersService.registration(this.user as User).subscribe(user => {
       this.userProfile.firstName = $event.firstName;
       this.userProfile.lastName = $event.lastName;
-      this.userProfile.age = $event.age;
+      this.userProfile.age = parseInt($event.age, 10);
       this.userProfile.userId = user.id;
+      this.userProfile.isBaned = false;
+      this.userProfile.isActive = true;
+      this.userProfile.registrationDate = Date.now();
       this.usersProfileService.registration(this.userProfile as UserProfile).subscribe();
       console.log('Form Submitted!');
     });

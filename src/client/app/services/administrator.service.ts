@@ -14,7 +14,9 @@ export class AdministratorService {
   private usersList: any = {};
   private usersData: any = {};
   private currentUser: any = {};
+  private selectedUser: any = {};
   private searchResults: any[] = [];
+  private hintsToEmail: any[] = [];
   private getUsersOptions: any = {};
   private updateUsersOptions: any = {};
   private serverURL = 'api/administrator';
@@ -24,12 +26,17 @@ export class AdministratorService {
   private receivedUsersData = new BehaviorSubject<any>(this.usersData);
   private receivedCurrentUserData = new BehaviorSubject<any>(this.currentUser);
   private receivedSearchData = new BehaviorSubject<any>(this.searchResults);
+  private receivedHintsList = new BehaviorSubject<any>(this.hintsToEmail);
+
+  public receivedSelectedUserData = new BehaviorSubject<any>(this.selectedUser);
 
   public navBarState = this.isVisibleSource.asObservable();
   public receivedUsers = this.receivedUsersList.asObservable();
   public receivedData = this.receivedUsersData.asObservable();
   public receivedCurrentUser = this.receivedCurrentUserData.asObservable();
   public receivedSearchResults = this.receivedSearchData.asObservable();
+  public receivedHints = this.receivedHintsList.asObservable();
+  public receivedSelectedUser = this.receivedSelectedUserData.asObservable();
 
   constructor(private http: HttpClient) {
   }
@@ -52,7 +59,7 @@ export class AdministratorService {
     }
 
     return this.http.post((`${this.serverURL}/get-users`), JSON.stringify(this.getUsersOptions), httpOptions)
-       .subscribe(response => this.receivedUsersList.next(response));
+      .subscribe(response => this.receivedUsersList.next(response));
   }
 
   updateUsersEnquiryRequest(enquiry): any {
@@ -74,6 +81,21 @@ export class AdministratorService {
       .subscribe(response => {
         this.receivedSearchData.next(response);
       });
+  }
+
+  getHints(input) {
+    return this.http.get((`${this.serverURL}/get-hints-for-email/${input}`), httpOptions)
+      .subscribe(response => {
+        this.receivedHintsList.next(response);
+      });
+  }
+
+  sendEmail(selectedUsers) {
+    return this.http.post((`${this.serverURL}/send-email`), JSON.stringify(selectedUsers), httpOptions)
+        .subscribe(response => {
+          console.log(response);
+          return alert('The mails have been successfully sent');
+        });
   }
 
 }

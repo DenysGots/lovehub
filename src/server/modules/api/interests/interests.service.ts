@@ -4,8 +4,6 @@ import { UserProfile } from '../users-profile/user-profile.entity';
 import { UserProfileInterest } from '../users-profile/user-profile-interest.entity';
 import { Interest } from '../users-profile/interest.entity';
 
-import { usersInterests } from './mock-users-interests';   // For testing TODO: delete
-
 interface ConnectedUser {
   clientId: string;
   userId: string;
@@ -13,10 +11,9 @@ interface ConnectedUser {
 
 @Component()
 export class InterestsServiceComponent {
-  currentUserInterests: any[] = [];
-  connectedUsers: any[] = [];
-  interests: any[] = [];
-  // interests: any[] = usersInterests;       // For testing TODO: delete
+  public currentUserInterests: any[] = [];
+  public connectedUsers: any[] = [];
+  public interests: any[] = [];
 
   constructor(
     @Inject('UsersProfileRepository') private readonly userProfileRepository: typeof UserProfile,
@@ -26,8 +23,6 @@ export class InterestsServiceComponent {
   }
 
   async getAllInterests() {
-    // this.interests = usersInterests;       // For testing TODO: delete
-
     this.interests = [];
 
     return await this.interestRepository
@@ -47,31 +42,10 @@ export class InterestsServiceComponent {
       });
   }
 
-  async getInterests(client) {
-    // const interests = this.interests;       // For testing TODO: delete
-    const clientId = client.id;
-    const connectedUsers = this.connectedUsers;
-    const connectedUsersLength = connectedUsers.length;
-
-    let currentUserId;
-
-    for (let i = 0; i < connectedUsersLength; i += 1) {
-      if (connectedUsers[i] && (connectedUsers[i].clientId === clientId)) {
-        currentUserId = connectedUsers[i].userId;
-        break;
-      }
-    }
-
-    // for (let i = 0; i < interests.length; i += 1) {       // For testing TODO: delete
-    //   if (interests[i].id === currentUserId) {
-    //     this.currentUserInterests = interests[i].interests;
-    //     break;
-    //   }
-    // }
-
+  async getInterests(profileOwnerId) {
     return await this.userProfileRepository
       .findAll({
-        where: { userId: currentUserId },
+        where: { userId: profileOwnerId },
         attributes: ['userId'],
         raw: true,
         include: [{
@@ -105,13 +79,6 @@ export class InterestsServiceComponent {
         break;
       }
     }
-
-    // for (let i = 0; i < this.interests.length; i += 1) {       // For testing TODO: delete
-    //   if (this.interests[i].clientId === client.id) {
-    //     this.interests[i].interests = interests;
-    //     break;
-    //   }
-    // }
 
     for (const interest of interests.interestsToSave) {
       await this.interestRepository
@@ -151,7 +118,7 @@ export class InterestsServiceComponent {
           await this.userProfileInterestRepository
                 .destroy({
                   where: {interestId: interestId}
-                })
+                });
           });
     }
   }

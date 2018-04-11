@@ -35,8 +35,8 @@ export class InterestsGateway implements OnGatewayConnection, OnGatewayDisconnec
   }
 
   @SubscribeMessage('get-user-interests')
-  getInterests(client: any) {
-    this.interestsService.getInterests(client).then(interests => {
+  getInterests(client: any, profileOwnerId) {
+    this.interestsService.getInterests(profileOwnerId).then(interests => {
       client.emit('receive-interests', interests);
     });
   }
