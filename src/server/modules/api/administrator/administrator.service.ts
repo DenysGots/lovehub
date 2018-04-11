@@ -425,11 +425,7 @@ export class AdministratorServiceComponent {
   }
 
   async sendEmail(emailDto) {
-    console.log('Here');
-
     if (emailDto.selectedUsers && emailDto.selectedUsers.length > 0) {
-      console.log(emailDto.selectedUsers);
-
       emailDto.selectedUsers.forEach(async user => {
         return await this.userRepository
           .findById<User>(user.id)
