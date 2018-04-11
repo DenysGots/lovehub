@@ -31,10 +31,10 @@ export class AuthGuard implements CanActivate {
       return this.usersProfileService.findByUserId(userId)
         .map(userProfile => {
           userRole = (<UserProfile>userProfile).role;
-          this.usersService.verifyUserRole(userId, userRole);
+          return this.usersService.verifyUserRole(userId, userRole);
         })
         .switchMap(isAuth => {
-          if (!isAuth) {
+          if (isAuth) {
             return Observable.of(true);
           } else {
             this.modalForbiddenService.sendState(true);

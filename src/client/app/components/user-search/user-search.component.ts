@@ -9,7 +9,7 @@ import { PhotosService } from '../../services/photos.service';
 import { SearchParam } from './shared/search-param';
 import { FilterParam } from './shared/filter-param';
 import { UserProfile } from '../../models/user-profile';
-import {PhotosService} from '../../services/photos.service';
+
 
 interface UsersProfileAvatar {
   userProfile: UserProfile;

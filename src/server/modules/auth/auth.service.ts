@@ -24,9 +24,9 @@ export class AuthService implements IAuthService {
       },
       include: [{
         model: UserProfile,
-        where: {
-          [Sequelize.Op.not]: [{isBaned: true}]
-        }
+        // where: {
+        //   [Sequelize.Op.not]: [{isBaned: true}]
+        // }
       }]
     });
 
