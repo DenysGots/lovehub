@@ -3,6 +3,7 @@ import { PhotosService } from '../../services/photos.service';
 import { Photo } from '../../models/photo';
 import * as jwt_decode from 'jwt-decode';
 import 'rxjs/add/operator/map';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-upload-avatar',
@@ -17,12 +18,14 @@ export class PhotosComponent implements OnInit {
   avatar: Photo;
   photos: Photo[];
 
-  constructor(private photosService: PhotosService) {}
+  constructor(private photosService: PhotosService,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
-    // TODo url
-    this.userIdUrl = 3;
+    this.route.params.subscribe(params => {
+    this.userIdUrl = params['userId'];
+  });
     this.getAva();
   }
 
@@ -57,7 +60,7 @@ export class PhotosComponent implements OnInit {
   }
 
   getAva() {
-    this.photosService.getAvatar(this.userId)
+    this.photosService.getAvatar(this.userIdUrl)
       .subscribe(avatar => {
         this.avatar = avatar;
         console.log(this.avatar);
@@ -76,9 +79,4 @@ export class PhotosComponent implements OnInit {
         'url(https://kiittnp.in/8134d463acc8c7b66744a481847ab4b/assets/img/user.png)';
     }
   }
-
-  // deletePhoto(photoId) {
-  //   this.photosService.deletePhoto(photoId).subscribe();
-  // }
-
 }

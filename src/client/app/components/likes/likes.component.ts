@@ -4,6 +4,7 @@ import * as jwt_decode from 'jwt-decode';
 import { Photo } from '../../models/photo';
 import { Like } from '../../models/like';
 import { LikesService } from '../../services/likes.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -22,12 +23,16 @@ export class LikesComponent implements OnInit {
   photos: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: false, name: ''} ];
 
   constructor(private photosService: PhotosService,
-              private likesService: LikesService) { }
+              private likesService: LikesService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.like = new Like();
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
-    this.userIdUrl = 67;
+    this.route.params.subscribe(params => {
+      this.userIdUrl = params['userId'];
+      console.log('URLID', params['userId']);
+    });
 
     this.photosService.getPhotos(this.userId)
       .subscribe(items => {

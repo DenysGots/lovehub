@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {PhotosService} from '../../services/photos.service';
+import { Component, OnInit } from '@angular/core';
+import { PhotosService } from '../../services/photos.service';
 import * as jwt_decode from 'jwt-decode';
-import {Photo} from '../../models/photo';
+import { Photo } from '../../models/photo';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,25 +18,20 @@ export class PhotoSliderComponent implements OnInit {
   userIdUrl: number;
   photos: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: false, name: ''} ];
 
-  constructor(private photosService: PhotosService) {}
+  constructor(private photosService: PhotosService,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
-    // TODO get id from url
-    this.userIdUrl = 3;
-    this.photosService.getPhotos(this.userId)
+    this.route.params.subscribe(params => {
+      this.userIdUrl = params['userId'];
+    });
+
+    this.photosService.getPhotos(this.userIdUrl)
       .subscribe(items => {
         this.photos = items;
       });
   }
-
-  // displayButton() {
-  //   document.getElementById('button').style.visibility = 'visible';
-  // }
-  //
-  // hideButton() {
-  //   document.getElementById('button').style.visibility = 'hidden';
-  // }
 
   deletePhoto(photoId: string) {
     if (confirm('Delete photo?')) {

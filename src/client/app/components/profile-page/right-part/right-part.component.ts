@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as jwt_decode from 'jwt-decode';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-right-part',
@@ -13,14 +14,15 @@ export class RightPartComponent implements OnInit {
   userName: string;
   age: number;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
     this.userName = jwt_decode(localStorage.getItem('jwt_token')).firstName;
     this.age = parseInt(jwt_decode(localStorage.getItem('jwt_token')).age, 10);
-    // TODO id url
-    this.userIdUrl = 3;
+    this.route.params.subscribe(params => {
+      this.userIdUrl = params['userId'];
+    });
   }
 
 }
