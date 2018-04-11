@@ -26,9 +26,12 @@ export class DialogComponent implements OnInit {
     });
 
     this.chat.messagesUpdate.subscribe(data => {
-      if (!!data.new){
+      if (data.msgId) {
+        this.messages = this.messages.filter( message => message['_id'] !== data.msgId);
+        this.selectedMessage = null;
+      } else  if (!!data.new) {
         this.messages = data.data;
-      } else{
+      } else {
         this.messages = [...this.messages, data.data];
       }
     });
@@ -48,7 +51,11 @@ export class DialogComponent implements OnInit {
     } catch (err) { }
   }
 
-  sendMes(mes){
+  sendMes(mes) {
+    if (!this.text) {
+      return;
+    }
+
     const newMessage = {
       chat: {
         chatId: this.chatId,

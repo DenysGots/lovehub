@@ -32,11 +32,11 @@ export class ChatService {
     this.notifService.getNotifications().subscribe((data: any) => {
 
       this.chats = this.chats.map(chat => {
-        if(chat.chatId === data.data.chatId){
+        if (chat.chatId === data.data.chatId) {
           chat.lastMessage = data.data.message;
           this.socket.next({
             event: 'changeRoom',
-            data:{prevChatId: this.currentChatId, chatId: chat.chatId}
+            data: {prevChatId: this.currentChatId, chatId: chat.chatId}
           });
         }
 
@@ -45,22 +45,28 @@ export class ChatService {
     });
 
     this.socket.subscribe(data => {
-      if(data.event==='myMes' || data.event === 'newMes'){
+      if (data.event === 'myMes' || data.event === 'newMes') {
         this.messagesUpdate.next({data: data.data.message});
+      }
+
+      if (data.event === 'messageIdFromServer') {
+        console.log(`socket messageIdFromServer work: ${data}`);
+        console.dir(data);
+        this.messagesUpdate.next(data);
       }
     });
   }
 
-  setChats(chats){
+  setChats(chats) {
     this.chats = chats;
   }
 
-  getFriend(chatId, userId){
+  getFriend(chatId, userId) {
     return this.chats.find(chat => chat.chatId === chatId).user.userId || -1;
   }
 
-  sendMessage(data){
-    if(this.currentChatId) {
+  sendMessage(data) {
+    if (this.currentChatId) {
       this.socket.next({event: 'send', data});
     }
   }
@@ -75,6 +81,10 @@ export class ChatService {
   }
 
   deleteMessage(chatId: number, msgId: string) {
-    this.socket.next({event: 'deleteMessage', chatId, msgId});
+    this.socket.next({event: 'deleteMessage', data: {chatId, msgId}});
+  }
+
+  editMessage(chatId: number, msgId: number, text: string) {
+    this.socket.next({event: 'editMessage', data: {chatId, msgId, text}});
   }
 }

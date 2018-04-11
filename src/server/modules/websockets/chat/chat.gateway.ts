@@ -11,7 +11,7 @@ export class ChatGateway {
 
   constructor(
     private messagesService: ChatMessagesService,
-    private notifService: NotificationService){}
+    private notifService: NotificationService) {}
 
   @SubscribeMessage('changeRoom')
   changeRoom(client, data) {
@@ -23,7 +23,7 @@ export class ChatGateway {
 
   @SubscribeMessage('send')
   async getNewMessage(client, data) {
-    const {chat, message}= JSON.parse(data).data;
+    const {chat, message} = JSON.parse(data);
     const dbMessage = await this.messagesService.create(chat.chatId, message as CreateMessageDto);
 
     this.notifService.sendNotification(chat.toUser, dbMessage);
@@ -43,9 +43,20 @@ export class ChatGateway {
     const parsedData = JSON.parse(data);
     const {chatId, msgId} = parsedData;
     console.log(msgId);
-    // const result = await this.messagesService.deleteMessageById(chatId, msgId);
-    // console.log(result);
+    const dbRes = await this.messagesService.deleteMessageById(chatId, msgId);
+    console.log(dbRes);
+    const result = { event: 'messageIdFromServer', msgId};
+     return { event: 'resFromServer', data: result};
+  }
 
-     return { event: 'messageIdFromServer', data: msgId};
+  @SubscribeMessage('editMessage')
+  async editMessage(client, data) {
+      const parseData = JSON.parse(data);
+      const {chatId, msgId, text} = parseData;
+      console.log(parseData);
+      const dbRes = await this.messagesService.editMessageText(chatId, msgId, text);
+       const result = { event: 'modifiedMessage', msgId, text};
+
+      return { event: 'resFromServer', data: result};
   }
 }

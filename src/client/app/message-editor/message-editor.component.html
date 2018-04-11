@@ -1,4 +1,29 @@
-<div class="container">
-    <button type="button" class="btn btn-info">Edit</button>
+<div class="container" *ngIf="!isEditable">
+  <div class="btn-group">
+    <button type="button" class="btn btn-info" (click)="toggle()">Edit</button>
     <button type="button" class="btn btn-danger" (click)="onDelete(chatId, message['_id'])">Delete</button>
+  </div>
+</div>
+<div class="container" *ngIf="isEditable">
+  <h4>Editable message:</h4>
+  <p>{{message.text}}</p>
+  <div>
+    <div class="form-group">
+      <textarea
+        class="textarea"
+        rows="3"
+        autofocus
+        placeholder="Type text here..."
+        [(ngModel)]="text"
+        (keydown.esc)="toggle()"
+      >
+      </textarea>
+    </div>
+  </div>
+  <div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-info" (click)="onEdit(chatId, message['_id'], text)">Save</button>
+        <button type="button" class="btn btn-danger" (click)="toggle()">Cancel</button>
+      </div>
+  </div>
 </div>

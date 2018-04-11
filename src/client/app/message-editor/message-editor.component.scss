@@ -1,10 +1,13 @@
 .container{
   margin-top: 25px;
   margin-bottom: 15px;
+  font-family: "Open Sans","OpenSans",sans-serif;
+}
+
+.btn-group{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  font-family: "Open Sans","OpenSans",sans-serif;
 }
 
 .btn {
@@ -21,4 +24,12 @@
 
 .btn.btn-danger{
   background-color: #ef233c;
+}
+
+.textarea {
+  border-radius: 10px;
+  resize: none;
+  width: 100%;
+  border: 1px solid lightgray;
+  padding: 10px 15px;
 }
