@@ -4,21 +4,21 @@
   </div>
   <div class="video-block" [ngStyle]="{'max-height.px': videoHeight}">
       <video autoplay loop class="d-none d-lg-block" id="video-background" muted plays-inline>
-          <source src="../../../assets/videos/typing.mp4" type="video/mp4">
+          <source src="../../../assets/videos/3.mov" type="video/mp4">
           Your browser does not support HTML5 video.
         </video>
   </div>
 </section>
 <section>
-  <home-slider iden='demo'>
-    <div *ngFor="let slider of slider; let i = index" class="carousel-item" [class.active]="i === 0">
-      <img src={{slider.image}} alt={{slider.title}} class='main-slide'>
-      <div class="carousel-caption">
-        <h3>{{slider.title}}</h3>
-        <p>{{slider.text}}</p>
-      </div>
-    </div>
-  </home-slider>
+  <!--<home-slider iden='demo'>-->
+    <!--<div *ngFor="let slider of slider; let i = index" class="carousel-item" [class.active]="i === 0">-->
+      <!--<img src={{slider.image}} alt={{slider.title}} class='main-slide'>-->
+      <!--<div class="carousel-caption">-->
+        <!--<h3>{{slider.title}}</h3>-->
+        <!--<p>{{slider.text}}</p>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</home-slider>-->
 </section>
 <section id='find'>
   <div>

@@ -7,7 +7,7 @@
     <div class="p-2 mr-auto user-img" *ngFor="let photo of photos">
       <img class="" [src]="photo.base64" alt="Image">
       <div class="hidden-block">
-        <i class="material-icons heart" title="unlike">thumb_down</i>
+        <i class="material-icons heart" title="unlike" (click)="dislike()">thumb_down</i>
         <i class="material-icons chat" title="go to chat" (click)="addLike()">mode_comment</i>
       </div>
       <div class="user-cred"><strong>firstName lastName, age</strong></div>

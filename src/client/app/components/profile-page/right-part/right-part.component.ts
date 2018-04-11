@@ -9,6 +9,7 @@ import * as jwt_decode from 'jwt-decode';
 export class RightPartComponent implements OnInit {
 
   userId: number;
+  userIdUrl: number;
   userName: string;
   age: number;
 
@@ -18,6 +19,8 @@ export class RightPartComponent implements OnInit {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
     this.userName = jwt_decode(localStorage.getItem('jwt_token')).firstName;
     this.age = parseInt(jwt_decode(localStorage.getItem('jwt_token')).age, 10);
+    // TODO id url
+    this.userIdUrl = 3;
   }
 
 }

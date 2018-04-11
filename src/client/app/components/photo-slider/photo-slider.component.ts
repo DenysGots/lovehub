@@ -14,12 +14,15 @@ export class PhotoSliderComponent implements OnInit {
 
   filesToUpload: FileList;
   userId: number;
+  userIdUrl: number;
   photos: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: false, name: ''} ];
 
   constructor(private photosService: PhotosService) {}
 
   ngOnInit() {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
+    // TODO get id from url
+    this.userIdUrl = 3;
     this.photosService.getPhotos(this.userId)
       .subscribe(items => {
         this.photos = items;
@@ -35,7 +38,7 @@ export class PhotoSliderComponent implements OnInit {
   // }
 
   deletePhoto(photoId: string) {
-    if (confirm('Delete photo?')){
+    if (confirm('Delete photo?')) {
       this.photosService.deletePhoto(photoId).subscribe(() => {
         this.photosService.getPhotos(this.userId)
           .subscribe(items => {

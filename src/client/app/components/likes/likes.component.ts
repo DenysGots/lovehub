@@ -14,8 +14,10 @@ import { LikesService } from '../../services/likes.service';
 export class LikesComponent implements OnInit {
 
   userId: number;
-  userId2: number;
+  userIdUrl: number;
   like: Like;
+  whatUserLike: Like[];
+  likesForUser: Like[];
 
   photos: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: false, name: ''} ];
 
@@ -25,31 +27,42 @@ export class LikesComponent implements OnInit {
   ngOnInit() {
     this.like = new Like();
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
-    this.userId2 = 67;
+    this.userIdUrl = 67;
 
     this.photosService.getPhotos(this.userId)
       .subscribe(items => {
         this.photos = items;
       });
+
+    this.getWhatUserLike();
+    this.getLikesForUser();
   }
 
   addLike() {
     this.like.whoLike = this.userId;
-    this.like.whatLike = this.userId2;
+    this.like.whatLike = this.userIdUrl;
     this.likesService.addLike(this.like as Like).subscribe();
     console.log('Like wrote');
   }
 
-  getwhatUserLike() {
-
+  getWhatUserLike() {
+    this.likesService.getWhatLikeUser(this.userId)
+      .subscribe(whatUserLike => {
+        this.whatUserLike = whatUserLike;
+        console.log(this.whatUserLike);
+      });
   }
 
   getLikesForUser() {
-
+    this.likesService.getWhoLikesUser(this.userId)
+      .subscribe(likesForUser => {
+        this.likesForUser = likesForUser;
+        console.log(this.likesForUser);
+      });
   }
 
   dislike() {
-
+    this.likesService.dislikeUser(this.userId).subscribe();
   }
 
   findMutualLikes() {

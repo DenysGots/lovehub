@@ -3,3 +3,23 @@
   margin: 0 auto;
   background-color: white;
 }
+
+.user-page {
+
+}
+
+@keyframes pound {
+  to { transform: scale(1.4); }
+}
+
+.heart {
+  margin-top: 40px;
+  display: inline-block;
+  font-size: 150px;
+  color: #e00;
+  animation: pound .25s infinite alternate;
+  transform-origin: center;
+  cursor: pointer;
+}
+.user-page { text-align: center; }
+

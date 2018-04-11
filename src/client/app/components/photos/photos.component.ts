@@ -13,6 +13,7 @@ export class PhotosComponent implements OnInit {
 
   filesToUpload: FileList;
   userId: number;
+  userIdUrl: number;
   avatar: Photo;
   photos: Photo[];
 
@@ -20,6 +21,8 @@ export class PhotosComponent implements OnInit {
 
   ngOnInit() {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
+    // TODo url
+    this.userIdUrl = 3;
     this.getAva();
   }
 
