@@ -434,8 +434,6 @@ export class AdministratorServiceComponent {
         return await this.userRepository
           .findById<User>(user.id)
           .then(async result => {
-            console.log(result);
-
             return await this.mailService.sendMail(result.email, emailDto.emailSubject, emailDto.emailBody);
           });
       });

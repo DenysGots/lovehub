@@ -87,12 +87,7 @@ export class AdministratorService {
   }
 
   sendEmail(selectedUsers) {
-    console.log(selectedUsers);
-
-    return this.http.post((`${this.serverURL}/send-email`), JSON.stringify(selectedUsers), httpOptions)
-      .subscribe(response => {
-        console.log(response);
-      });
+    return this.http.post((`${this.serverURL}/send-email`), JSON.stringify(selectedUsers), httpOptions);
   }
 
 }

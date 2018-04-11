@@ -37,13 +37,8 @@ export class AdministratorController {
 
   @Post('send-email')
   async sendEmail(@Body() emailDto) {
-    // return await this.administratorService.sendEmail(emailDto);
-
-    console.log(emailDto);
-
     await this.administratorService.sendEmail(emailDto);
-
-    return ('Email processed');
+    return ('Emails processed');
   }
 
   @Patch('update-users')
