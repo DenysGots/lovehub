@@ -4,79 +4,92 @@ import { Observable, Subject } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 
 import Message from '../models/message';
+import Chat from '../models/chat';
+
 import { NotificationService } from './notification.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ChatService {
-  currentChatId: number;
+  currentChat: Chat = null;
+  userId: Number = null;
+  messages: Message[] = null;
   chats = [];
 
-  currentChatIdChange: Subject<number> = new Subject<number>();
-  messagesUpdate: Subject<any> = new Subject<any>();
-  socket: Subject<any>;
+  currentChatChange: Subject<Chat> = new Subject<Chat>();
+  messagesUpdate: Subject<Message[]> = new Subject<Message[]>();
+  userlistUpdate: Subject<Chat[]> = new Subject<Chat[]>();
+  showDialogsUpdate: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private notifService: NotificationService,
     private wsService: WebsocketService,
-    private http: HttpClient) {
-    this.socket = <Subject<any>>wsService
-      .connect()
-      .map((response: any): any => {
-        return response;
-      });
+    private http: HttpClient,
+    private authService: AuthService) {
 
-    this.currentChatIdChange.subscribe((value) => {
-      this.currentChatId = value;
+    wsService.connect('newMessage').subscribe(data => {
+      this.messages = [...this.messages, data.message];
+      this.messagesUpdate.next(this.messages);
+
+      const updateChat = this.chats.find(chat => chat.chatId === data.chatId);
+      updateChat.lastMessage = data.message;
     });
 
-    this.notifService.getNotifications().subscribe((data: any) => {
+    this.currentChatChange.subscribe((chat: Chat) => {
+        this.currentChat = chat;
 
-      this.chats = this.chats.map(chat => {
-        if (chat.chatId === data.data.chatId) {
-          chat.lastMessage = data.data.message;
-          this.socket.next({
-            event: 'changeRoom',
-            data: {prevChatId: this.currentChatId, chatId: chat.chatId}
-          });
+        if (!!this.currentChat.lastMessage){
+          this.currentChat.lastMessage.read = true;
         }
-
-        return chat;
-      });
     });
 
-    this.socket.subscribe(data => {
-      if (data.event === 'myMes' || data.event === 'newMes') {
-        this.messagesUpdate.next({data: data.data.message});
+    this.userId = this.authService.getLoggedInUserCredential().userId;
+
+    this.notifService.getNotifications().subscribe((notification: any) => {
+      const { chatId, message } = notification.message;
+      const updateChat = this.chats.find(chat => chat.chatId === chatId);
+      updateChat.lastMessage = message;
+
+      this.userlistUpdate.next(this.chats);
+    });
+
+    this.notifService.setRead().subscribe((chatId: Number) => {
+      if (!!this.messages) {
+        this.messages
+        .filter(mes => mes.read === false)
+        .map(mes => mes.read = true);
       }
 
-      if (data.event === 'messageIdFromServer') {
-        console.log(`socket messageIdFromServer work: ${data}`);
-        console.dir(data);
-        this.messagesUpdate.next(data);
+      const updateChat = this.chats.find(chat => chat.chatId === chatId);
+      if (!!updateChat.lastMessage && updateChat.lastMessage.userId === this.userId){
+        updateChat.lastMessage.read = true;
+        this.userlistUpdate.next(this.chats);
       }
+    });
+
+    this.http.get<Chat[]>(`api/chats/${this.userId}`).subscribe((data) => {
+      this.chats = data;
+      this.userlistUpdate.next(this.chats);
     });
   }
 
-  setChats(chats) {
-    this.chats = chats;
-  }
-
-  getFriend(chatId, userId) {
-    return this.chats.find(chat => chat.chatId === chatId).user.userId || -1;
-  }
-
-  sendMessage(data) {
-    if (this.currentChatId) {
-      this.socket.next({event: 'send', data});
+  sendMessage(message){
+    if(this.currentChat) {
+      this.wsService.send('send', {chat: this.currentChat, message});
     }
   }
 
-  setChat(chatId: number){
-    this.socket.next({event: 'changeRoom', data: {prevChatId: this.currentChatId, chatId}});
-    this.currentChatIdChange.next(chatId);
+  setActiveChat(chat: Chat){
+    const prevChatId = !!this.currentChat ? this.currentChat.chatId : null;
 
-    this.http.get<Array<Message>>(`api/messages/${chatId}`).subscribe((data) => {
-      this.messagesUpdate.next({new: true, data});
+    this.wsService.send('changeRoom', {prevChatId, chat});
+
+    this.currentChatChange.next(chat);
+    this.showDialogsUpdate.next(true);
+
+    this.http.get<Array<Message>>(`api/messages/${chat.chatId}`).subscribe((data) => {
+      this.messages = data;
+      this.messagesUpdate.next(this.messages);
     });
   }
 
@@ -86,5 +99,9 @@ export class ChatService {
 
   editMessage(chatId: number, msgId: number, text: string) {
     this.socket.next({event: 'editMessage', data: {chatId, msgId, text}});
+  }
+
+  closeMessages() {
+    this.showDialogsUpdate.next(false);
   }
 }

@@ -10,7 +10,7 @@ export class UserProfile {
   orientation: string;
   isBaned: boolean;
   isActive: boolean;
-  avatar: string;
+  avatar: any;
   userId: number;
   role: string;
   phoneNumber: number;
@@ -22,7 +22,7 @@ export class UserProfile {
               sex: string = '',
               orientation: string = '',
               preference: string = '',
-              avatar: string = null,
+              avatar: any = null,
               role: string = 'USER',
               phoneNumber: number = 1) {
     this.id = id;

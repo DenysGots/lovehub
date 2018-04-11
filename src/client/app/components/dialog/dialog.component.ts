@@ -1,8 +1,10 @@
-import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { EventEmitter } from 'events';
-import { ChatService } from '../../services/chat.service';
 
-import * as jwt_decode from 'jwt-decode';
+import Chat from '../../models/chat';
+
+import { ChatService } from '../../services/chat.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'chat-dialog',
@@ -12,33 +14,36 @@ import * as jwt_decode from 'jwt-decode';
 export class DialogComponent implements OnInit {
   userId: Number = null;
   text: String = '';
-  chatId: Number = null;
+  windowWidth: number = window.innerWidth;
+  messages: Array<any> = null;
   selectedMessage = null;
-  messages: Array<object> = null;
+
+  @Input() chat: Chat;
 
   @ViewChild('scrollChat') private scrollChat: ElementRef;
 
-  constructor( private chat: ChatService) {}
+  constructor(
+    private chatService: ChatService,
+    private authService: AuthService) {}
 
   ngOnInit() {
-    this.chat.currentChatIdChange.subscribe(id => {
-      this.chatId = id;
-    });
-
-    this.chat.messagesUpdate.subscribe(data => {
-      if (data.msgId) {
-        this.messages = this.messages.filter( message => message['_id'] !== data.msgId);
-        this.selectedMessage = null;
-      } else  if (!!data.new) {
-        this.messages = data.data;
-      } else {
-        this.messages = [...this.messages, data.data];
-      }
-    });
-
-    this.userId = jwt_decode(localStorage.getItem('jwt_token')).id;
+    this.chatService.messagesUpdate.subscribe(data => this.messages = data);
+    this.userId = this.authService.getLoggedInUserCredential().userId;
 
     this.scrollToBottom();
+  }
+
+  ngAfterViewInit() {
+    this.windowWidth = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  resize(event) {
+      this.windowWidth = window.innerWidth;
+  }
+
+  goBack(){
+    this.chatService.closeMessages();
   }
 
   ngAfterViewChecked() {
@@ -51,26 +56,38 @@ export class DialogComponent implements OnInit {
     } catch (err) { }
   }
 
-  sendMes(mes) {
-    if (!this.text) {
-      return;
-    }
+  sendMes(mes){
+    const text = this.text.trim();
 
-    const newMessage = {
-      chat: {
-        chatId: this.chatId,
-        toUser: this.chat.getFriend(this.chatId, this.userId)
-      },
-      message: {
+    if (!!text.length){
+      const newMessage = {
         userId: this.userId,
-        text: this.text
-      }
+        text
     };
 
-    this.chat.sendMessage(newMessage);
+    this.chatService.sendMessage(newMessage);
     this.text = '';
+    }
   }
 
+  setClasses(mes) {
+    const ownMessage = mes.userId === this.userId;
+
+    return {
+      'align-items-end': ownMessage,
+      'align-items-start': !ownMessage
+    };
+  }
+
+  setMesClasses(mes){
+    const ownMessage = mes.userId === this.userId;
+
+    return {
+      'right': mes.userId === this.userId,
+      'left': mes.userId !== this.userId,
+      'unread': ownMessage && !mes.read
+    };
+  }
   onSelect(msg): void {
     if (msg.userId !== this.userId) {
       return;

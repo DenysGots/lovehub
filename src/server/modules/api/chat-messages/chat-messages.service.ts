@@ -10,14 +10,19 @@ import { ChatSchema } from './schemas/chat.schema';
 export class ChatMessagesService {
   constructor(@Inject('ChatModelToken') private readonly chatModel: Model<Chat>) {}
 
+  async createChat(chatId): Promise<any> {
+    return await this.chatModel.collection.insert({chatId, messages: []});
+  }
+
   async create(chatId, createMessageDto: CreateMessageDto): Promise<any> {
+    createMessageDto.created = new Date();
     return await this.chatModel
       .findOneAndUpdate(
         { chatId },
-        {$push: {"messages": createMessageDto}},
+        {$push: {'messages': createMessageDto}},
         {
-          "fields": { "messages": { $slice: -1 } },
-          "new": true 
+          'fields': { 'messages': { $slice: -1 } },
+          'new': true
         }
       )
       .then(chat => ({
@@ -25,32 +30,6 @@ export class ChatMessagesService {
         message: chat.messages[0]
       }));
   }
-
-  async setLastRead(message, both = false){
-    console.log('mes', message);
-
-    return await this.chatModel
-      .findOne({ chatId: message.chatId })
-      .then(chat => {
-        console.log('both', both);
-
-        if(both){
-          chat.user1.lastReadId = message.message._id;
-          chat.user2.lastReadId = message.message._id;
-        } else {
-          console.log('chat', chat);
-          if(chat.user1.userId === message.message.userId){
-            chat.user1.lastReadId = message.message._id;
-          } else {
-            chat.user2.lastReadId = message.message._id;
-          }
-        }
-
-        chat.save();
-        
-      });
-  }
-
   async deleteMessageById(chatId: number, messageId: string): Promise<any> {
     const msgId = mongoose.Types.ObjectId(messageId);
     return await this.chatModel.update({chatId}, {$pull: {messages: {_id: msgId}}});
@@ -59,9 +38,18 @@ export class ChatMessagesService {
   async editMessageText(chatId: number, messageId: number, text: string): Promise<any> {
     return await this.chatModel.updateOne({chatId, 'messages._id': messageId}, {$set: {'messages.$.text': text}});
   }
-
   async findByChat(id: number): Promise<any> {
     return await this.chatModel.findOne({ chatId: id }).select('messages -_id');
+  }
+
+  async setRead(chatId, userId){
+    const res = await this.chatModel.update({
+      chatId,
+      'messages': {$elemMatch: { 'userId': userId, 'read': false } }
+    }, {
+        $set: { 'messages.$[].read' : true}
+    },
+    {multi: true});
   }
 
   async getLastMessage(chatId: number): Promise<any> {

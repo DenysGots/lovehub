@@ -15,8 +15,20 @@ export class NotificationService {
 
   getNotifications() {
     return new Observable(observer => {
-      this.socket.on('notification', (data) => {
-        observer.next(data);
+      this.socket.on('notification', (notification) => {
+        observer.next(notification);
+      });
+
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+  }
+
+  setRead() {
+    return new Observable(observer => {
+      this.socket.on('setRead', (chatId) => {
+        observer.next(chatId);
       });
 
       return () => {

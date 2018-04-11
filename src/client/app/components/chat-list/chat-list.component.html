@@ -1,19 +1,23 @@
 <div
-  class="container scrollbar p-2 d-flex flex-row"
-  [ngClass]="{'unread': chat.read === false && chat.chatId !== activeChat , 'active': chat.chatId === activeChat}"
-  (click)="checkChat(chat.chatId)"
+  class="container scrollbar d-flex flex-row"
+  [ngClass]="setClasses()"
+  (click)="checkChat()"
 >
   <div class="avatar-container d-inline-flex mr-3">
-    <img
-      [src]="chat.user.avatar"
-      [alt]="chat.user.firstName"
-      class="avatar"
-    />
+    <a class="avatar-container" routerLink="../profile">
+        <img
+        [src]="!!chat.user.avatar ? chat.user.avatar.base64: 'https://d30y9cdsu7xlg0.cloudfront.net/png/404950-200.png'"
+        [alt]="chat.user.firstName"
+        class="avatar"
+      />
+    </a>
+    
   </div>
   <div class="info-container d-inline-flex">
-    <div class="d-flex flex-column justify-content-around">
+    <div class="text d-flex flex-column justify-content-around">
         <p class="name">{{chat.user.firstName+" "+ chat.user.lastName}}</p>
-        <p>
+        <p
+          [ngClass]="setLastMessStatus()">
           <span
             *ngIf="!!chat.lastMessage"
             class="lastMsg"
