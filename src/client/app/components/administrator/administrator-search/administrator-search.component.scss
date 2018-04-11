@@ -89,11 +89,13 @@ $box-shadow_2: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
 .text {
   font: 0.9rem "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  margin: 3px 0;
 }
 
 .heading {
   color: $color_3;
   font: bold 1.3rem 'Alegreya', serif;
+  margin: 5px 0;
 }
 
 /* Search section styles */
@@ -193,14 +195,4 @@ $box-shadow_2: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
   border-color: $color_8;
   box-shadow: $box-shadow_2;
   padding: 0;
-}
-
-.button-disabled,
-.button-disabled:hover,
-.button-disabled:active {
-  background-color: $color_7;
-  border-color: $color_8;
-  box-shadow: none;
-  color: $color_8;
-  cursor: default;
 }

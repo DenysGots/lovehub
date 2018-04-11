@@ -76,18 +76,19 @@
           </div>
         </a>
 
-        <a class="link">
-          <div class="admin-navbar_option">
-            <p class="admin-navbar_option-description text white-text">
-              Notifications
-            </p>
-          </div>
-        </a>
-
         <a class="link" routerLink="/admin/email">
           <div class="admin-navbar_option">
             <p class="admin-navbar_option-description text white-text">
               Send E-mail
+            </p>
+          </div>
+        </a>
+
+
+        <a class="link">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
+            <p class="admin-navbar_option-description text white-text">
+              Notifications
             </p>
           </div>
         </a>
@@ -129,7 +130,7 @@
         </a>
 
         <a class="link">
-          <div class="admin-navbar_option">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
             <p class="admin-navbar_option-description text white-text">
               Create New Moderator
             </p>
@@ -137,7 +138,7 @@
         </a>
 
         <a class="link">
-          <div class="admin-navbar_option">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
             <p class="admin-navbar_option-description text white-text">
               Last Users Activities
             </p>
@@ -173,7 +174,7 @@
       <div class="admin-navbar_dropdown-list"
            [ngClass]="{'hidden': !dropdownLists.analyticsDropdownList}">
         <a class="link">
-          <div class="admin-navbar_option">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
             <p class="admin-navbar_option-description text white-text">
               Charts
             </p>
@@ -181,7 +182,7 @@
         </a>
 
         <a class="link">
-          <div class="admin-navbar_option">
+          <div class="admin-navbar_option admin-navbar_option-inactive">
             <p class="admin-navbar_option-description text white-text">
               Tables
             </p>

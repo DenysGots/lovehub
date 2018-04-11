@@ -49,6 +49,10 @@ export class AdministratorSendEmailComponent implements OnInit {
     this.administratorService.receivedHints.subscribe(data => {
       this.hints = data;
     });
+
+    this.administratorService.receivedSelectedUser.subscribe(data => {
+      this.selectedUsers.push(data);
+    });
   }
 
   async inputChange(input: string) {

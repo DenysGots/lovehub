@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 import { AdministratorService } from '../../../services/administrator.service';
 import { PhotosService } from '../../../services/photos.service';
@@ -18,7 +20,8 @@ export class AdministratorSearchComponent implements OnInit {
   public isSearchUnsuccessful: boolean;
 
   constructor(private administratorService: AdministratorService,
-              private photosService: PhotosService) {
+              private photosService: PhotosService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -49,6 +52,13 @@ export class AdministratorSearchComponent implements OnInit {
           }
         });
     });
+  }
+
+  sendEmail(user): void {
+    this.router.navigate(['admin/email'])
+        .then(() => {
+          this.administratorService.receivedSelectedUserData.next(user);
+        });
   }
 
 }

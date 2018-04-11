@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AdministratorService } from '../../../services/administrator.service';
 
@@ -37,7 +38,8 @@ export class AdministratorUsersManagementComponent implements OnInit {
     maxPagesToShow: 3
   };
 
-  constructor(private administratorService: AdministratorService) {
+  constructor(private administratorService: AdministratorService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -58,7 +60,16 @@ export class AdministratorUsersManagementComponent implements OnInit {
   }
 
   updateUsers(): void {
-    this.administratorService.updateUsersEnquiryRequest(this.updateUsersOptions);
+    if (this.updateUsersOptions.appliedAction === 'send e-mail') {
+      this.router.navigate(['/admin/email'])
+          .then(() => {
+            this.updateUsersOptions.usersList.forEach(user => {
+              this.administratorService.receivedSelectedUserData.next(user);
+            });
+          });
+    } else {
+      this.administratorService.updateUsersEnquiryRequest(this.updateUsersOptions);
+    }
   }
 
   manageUsersListParameters(data): void {

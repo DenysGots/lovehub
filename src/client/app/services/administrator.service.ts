@@ -14,6 +14,7 @@ export class AdministratorService {
   private usersList: any = {};
   private usersData: any = {};
   private currentUser: any = {};
+  private selectedUser: any = {};
   private searchResults: any[] = [];
   private hintsToEmail: any[] = [];
   private getUsersOptions: any = {};
@@ -27,12 +28,15 @@ export class AdministratorService {
   private receivedSearchData = new BehaviorSubject<any>(this.searchResults);
   private receivedHintsList = new BehaviorSubject<any>(this.hintsToEmail);
 
+  public receivedSelectedUserData = new BehaviorSubject<any>(this.selectedUser);
+
   public navBarState = this.isVisibleSource.asObservable();
   public receivedUsers = this.receivedUsersList.asObservable();
   public receivedData = this.receivedUsersData.asObservable();
   public receivedCurrentUser = this.receivedCurrentUserData.asObservable();
   public receivedSearchResults = this.receivedSearchData.asObservable();
   public receivedHints = this.receivedHintsList.asObservable();
+  public receivedSelectedUser = this.receivedSelectedUserData.asObservable();
 
   constructor(private http: HttpClient) {
   }
