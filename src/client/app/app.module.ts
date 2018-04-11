@@ -23,8 +23,7 @@ import { InterestsService } from './services/interests.service';
 
 import { ChatService } from './services/chat.service';
 import { WebsocketService } from './services/websocket.service';
-
-import { MultilinePipe } from './pipes/multiline.pipe';
+import { NotificationService } from './services/notification.service';
 
 import { AppComponent } from './app.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -69,6 +68,7 @@ import { AdministratorUsersManagementComponent } from './components/administrato
 import { AdministratorSearchComponent } from './components/administrator/administrator-search/administrator-search.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { InterestsComponent } from './components/interests/interests.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 import { IUserStorage } from './services/IUserStorage';
 import { UserLocalStorageService } from './services/user-local-storage.service';
@@ -76,7 +76,7 @@ import { RecoverPasswordComponent } from './components/recover-password/recover-
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { RecoverPassService} from './services/recover-pass.service';
 import { ChatComponent } from './components/chat/chat.component';
-import { ChatUserComponent } from './components/chat-user/chat-user.component';
+import { ChatListComponent } from './components/chat-list/chat-list.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { providerCustomHttpClient } from './http-interceptors/providers';
 import { CustomHttpClient } from './http-interceptors/custom-http-client';
@@ -106,12 +106,11 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     SliderComponent,
     PagerComponent,
     UserProfileComponent,
-    MultilinePipe,
     UserMatchComponent,
     RecoverPasswordComponent,
     ResetPasswordComponent,
     ChatComponent,
-    ChatUserComponent,
+    ChatListComponent,
     DialogComponent,
     AdministratorFooterComponent,
     AdministratorHeaderComponent,
@@ -127,6 +126,7 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     PhotoSliderComponent,
     NotificationsComponent,
     InterestsComponent,
+    NotificationComponent,
     UserProfileSettingsComponent,
     InlineEditComponent,
   ],
@@ -170,7 +170,8 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     RecoverPassService,
     NotificationsService,
     InterestsService,
-    ModalForbiddenService,
+    NotificationService,
+    ModalForbiddenService
   ],
   bootstrap: [AppComponent]
 })
