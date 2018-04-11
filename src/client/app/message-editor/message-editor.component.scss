@@ -13,7 +13,7 @@
 .btn {
   font-size: 18px;
   font-weight: 400;
-  border-radius: 10px;
+  border-radius: 10px !important;
   width: 25%;
   cursor: pointer;
 }
@@ -32,4 +32,16 @@
   width: 100%;
   border: 1px solid lightgray;
   padding: 10px 15px;
+}
+
+textarea:focus {
+  outline: 0;
+}
+
+h4{
+  margin-bottom: 10px;
+}
+
+p{
+  margin-bottom: 10px;
 }
