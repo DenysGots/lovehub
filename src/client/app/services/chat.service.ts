@@ -95,5 +95,8 @@ export class ChatService {
 
   closeMessages(){
     this.showDialogsUpdate.next(false);
+    this.wsService.send('leaveRoom', {chatId: this.currentChat.chatId});
+
+    this.currentChat = null;
   }
 }

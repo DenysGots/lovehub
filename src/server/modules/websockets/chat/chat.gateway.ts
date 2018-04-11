@@ -13,6 +13,13 @@ export class ChatGateway{
     private messagesService: ChatMessagesService,
     private notifService: NotificationService){}
 
+  @SubscribeMessage('leaveRoom')
+  async leaveRoom(client,data){
+    const { chatId }  = JSON.parse(data);
+
+    client.leave(chatId);
+  }
+
   @SubscribeMessage('changeRoom')
   async changeRoom(client, data) {
     const {prevChatId, chat} = JSON.parse(data);
