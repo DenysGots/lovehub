@@ -33,4 +33,8 @@
   <div *ngIf="isLoggedIn" class="nav-item menu-item">
     <a class="nav-link menu-item" [routerLink]="['/profile', loggedInUser.userId]">{{ loggedInUser.name }}</a>
   </div>
+
+  <div *ngIf="isLoggedIn && (loggedInUserRole === 'ADMIN')" class="nav-item menu-item admin-panel-item" [routerLink]="['/admin']">
+    <a class="nav-link menu-item" [routerLink]="['/admin']">Admin Panel</a>
+  </div>
 </nav>

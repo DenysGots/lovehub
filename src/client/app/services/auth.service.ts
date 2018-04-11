@@ -35,6 +35,7 @@ export class AuthService {
       this.setLoggedIn(false);
     }
   }
+  public isUserLoggedIn = this.isLoggedIn$.asObservable();
 
   sign(email: string, password: string): Observable<any> {
     return this.http.post<Response>('api/auth', { email: email, password: password })
@@ -130,7 +131,7 @@ export class AuthService {
     return date;
   }
 
-  private getLoggedInUserCredential(): any {
+  public getLoggedInUserCredential(): any {
     const decoded = jwt_decode(this.getSession());
 
     const user = {

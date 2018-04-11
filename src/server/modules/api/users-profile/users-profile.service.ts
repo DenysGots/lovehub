@@ -26,6 +26,9 @@ export class UsersProfileService {
     userProfile.preference = userProfileDto.preference;
     userProfile.orientation = userProfileDto.orientation;
     userProfile.userId = userProfileDto.userId;
+    userProfile.isBaned = userProfileDto.isBaned;
+    userProfile.isActive = userProfileDto.isActive;
+    userProfile.registrationDate = userProfileDto.registrationDate;
 
     try {
       return await userProfile.save();
