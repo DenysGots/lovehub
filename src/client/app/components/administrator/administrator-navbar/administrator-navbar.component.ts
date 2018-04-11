@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as jwt_decode from 'jwt-decode';
 
 import { AdministratorService } from '../../../services/administrator.service';
 
@@ -12,20 +13,14 @@ import { AdministratorService } from '../../../services/administrator.service';
   ]
 })
 export class AdministratorNavbarComponent implements OnInit {
-  dropdownLists = {
+  public dropdownLists = {
     homeDropdownList: false,
     usersDropdownList: false,
     analyticsDropdownList: false
   };
-
-  currentUser = {
-    userId: 1,        // TODO: get userId on init from URL
-    firstName: '',
-    lastName: '',
-    role: ''
-  };
-
-  mainSectionIsVisible: boolean;
+  public currentUserId: number;
+  public currentUser = {} as any;
+  public mainSectionIsVisible: boolean;
 
   constructor(private administratorService: AdministratorService) {
   }
@@ -35,7 +30,8 @@ export class AdministratorNavbarComponent implements OnInit {
       return this.mainSectionIsVisible = data;
     });
 
-    this.administratorService.getCurrentUserParameters(this.currentUser.userId);
+    this.currentUserId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
+    this.administratorService.getCurrentUserParameters(this.currentUserId);
 
     this.administratorService.receivedCurrentUser.subscribe(data => {
       return this.currentUser = data;

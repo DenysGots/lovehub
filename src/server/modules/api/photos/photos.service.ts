@@ -10,14 +10,24 @@ export class PhotosService {
   constructor(
     @Inject('PhotoModelToken') private readonly photoModel: Model<Photo>) {}
 
-  async create(createPhotoDto: CreatePhotoDto): Promise<Photo> {
-    const createdPhoto = new this.photoModel(createPhotoDto);
+  async create({name, base64, avatar, userId}): Promise<Photo> {
+    const createdPhoto = new this.photoModel({
+      name: name,
+      base64: base64,
+      avatar: avatar,
+      userId: userId,
+      time: Date.now()
+    });
     return await createdPhoto.save();
   }
 
   async findAllByUserId(userId: number): Promise<Photo[]> {
     console.log(userId);
-    return this.photoModel.find({ 'userId': userId, 'avatar': false });
+    return this.photoModel.find({ 'userId': userId, 'avatar': false }).sort({time: -1})
+      .then(arr => {
+        arr.map(photo => console.log(photo['time']));
+        return arr;
+      });
   }
 
   async findAvatarByUserId(userId: number): Promise<Photo> {

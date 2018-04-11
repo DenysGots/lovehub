@@ -4,7 +4,6 @@ import { PreloadAllModules, RouterModule } from '@angular/router';
 import {HttpClientModule, HttpHandler} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { routes } from './app.routing';
@@ -26,7 +25,6 @@ import { ChatService } from './services/chat.service';
 import { WebsocketService } from './services/websocket.service';
 import { NotificationService } from './services/notification.service';
 
-import { UsersProfileOrderByPipe } from './pipes/users-profile-orderby.pipe';
 import { MultilinePipe } from './pipes/multiline.pipe';
 
 import { AppComponent } from './app.component';
@@ -50,6 +48,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SliderComponent } from './components/home-slider/slider.component';
 import { PagerComponent } from './components/pager/pager.component';
 import { ForbiddenComponent } from './components/forbidden/forbidden.component';
+import { UserProfileSettingsComponent } from './components/user-profile-settings/user-profile-settings.component';
 
 import {UserMatchComponent} from './components/user-match/user-match.component';
 import {AgmCoreModule} from '@agm/core';
@@ -57,18 +56,18 @@ import {MatchingService} from './services/matching.service';
 
 import { PhotosService } from './services/photos.service';
 import { PhotosComponent } from './components/photos/photos.component';
-import { PhotoSliderComponent } from './components/carousel/photo-slider.component';
+import { PhotoSliderComponent } from './components/photo-slider/photo-slider.component';
 
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { LeftPartComponent } from './components/profile-page/left-part/left-part.component';
 import { RightPartComponent } from './components/profile-page/right-part/right-part.component';
 
-// test
 import { AdministratorFooterComponent } from './components/administrator/administrator-footer/administrator-footer.component';
 import { AdministratorHeaderComponent } from './components/administrator/administrator-header/administrator-header.component';
 import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
+import { AdministratorSearchComponent } from './components/administrator/administrator-search/administrator-search.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { InterestsComponent } from './components/interests/interests.component';
 import { NotificationComponent } from './components/notification/notification.component';
@@ -81,9 +80,14 @@ import { RecoverPassService} from './services/recover-pass.service';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatListComponent } from './components/chat-list/chat-list.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import {providerCustomHttpClient} from './http-interceptors/providers';
-import {CustomHttpClient} from './http-interceptors/custom-http-client';
+import { providerCustomHttpClient } from './http-interceptors/providers';
+import { CustomHttpClient } from './http-interceptors/custom-http-client';
+import { InlineEditComponent } from './components/user-profile-settings/inline-edit/inline-edit.component';
+import { CustomRenderService } from './services/custom-render.service';
+import { AuthProfileGuardService } from './services/auth-profile-guard.service';
+import { ModalForbiddenService } from './services/modal-forbidden.service';
 import { MessageEditorComponent } from './message-editor/message-editor.component';
+
 
 @NgModule({
   declarations: [
@@ -104,7 +108,6 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     FooterComponent,
     SliderComponent,
     PagerComponent,
-    UsersProfileOrderByPipe,
     UserProfileComponent,
     MultilinePipe,
     UserMatchComponent,
@@ -118,6 +121,7 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     AdministratorNavbarComponent,
     AdministratorDashboardComponent,
     AdministratorUsersManagementComponent,
+    AdministratorSearchComponent,
     ForbiddenComponent,
     PhotosComponent,
     ProfilePageComponent,
@@ -127,7 +131,9 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     NotificationsComponent,
     InterestsComponent,
     MessageEditorComponent,
-    NotificationComponent
+    NotificationComponent,
+    UserProfileSettingsComponent,
+    InlineEditComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
@@ -162,12 +168,16 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     httpInterceptorProviders,
     AuthService,
     AuthGuard,
+    AuthProfileGuardService,
     AuthErrorHandlerService,
+    CustomRenderService,
     AdministratorService,
     RecoverPassService,
     NotificationsService,
     InterestsService,
-    NotificationService
+    NotificationService,
+    ModalForbiddenService,
+
   ],
   bootstrap: [AppComponent]
 })

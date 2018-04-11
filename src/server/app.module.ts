@@ -7,6 +7,7 @@ import { ChatModule } from './modules/websockets/chat/chat.module';
 import { NotificationModule } from './modules/websockets/notification/notification.module';
 import { ChatListModule } from './modules/api/chat-list/chat-list.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { InterestsModule } from './modules/api/interests/interests.module';
 import { NotificationsModule } from './modules/api/notifications/notifications.module';
 import { AdministratorModule } from './modules/api/administrator/administrator.module';
 import { PhotosModule } from './modules/api/photos/photos.module';
@@ -20,7 +21,7 @@ import { PhotosModule } from './modules/api/photos/photos.module';
     ChatListModule,
     AuthModule,
     PhotosModule,
-    StaticModule,
+    InterestsModule,
     NotificationsModule,
     AdministratorModule,
     NotificationModule,

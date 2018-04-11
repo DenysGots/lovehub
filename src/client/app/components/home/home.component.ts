@@ -33,9 +33,9 @@ export class HomeComponent implements OnInit {
   getAllInfo(){
     this._homeService.getAllInfo().subscribe(
       data => {
-        this.slider = data[0]; 
+        this.slider = data[0];
         this.reasons = data[1];
-        this.feedbacks = data[2]; 
+        this.feedbacks = data[2];
       },
       err => {
         console.log(err)

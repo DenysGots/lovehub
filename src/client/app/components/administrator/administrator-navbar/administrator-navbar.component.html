@@ -17,17 +17,19 @@
     </div>
 
     <div>
-      <h4>Welcome,</h4>
+      <h4 class="grey-text">
+        Welcome,
+      </h4>
 
       <h5 class="white-text">
-        {{ currentUser.firstName + ' ' + currentUser.lastName }}
+        {{ (currentUser) ? (currentUser.firstName + ' ' + currentUser.lastName) : "undefined" }}
       </h5>
     </div>
   </div>
 
   <div class="user-status">
     <p class="text white-text">
-      {{ currentUser.role }}
+      {{ (currentUser) ? currentUser.role : "undefined" }}
     </p>
   </div>
 

@@ -7,14 +7,14 @@ import {Photo} from '../../models/photo';
 @Component({
   selector: 'app-photo-slider',
   templateUrl: './photo-slider.component.html',
-  styleUrls: ['./carousel.component.scss']
+  styleUrls: ['./photo-slider.component.scss']
 })
 
 export class PhotoSliderComponent implements OnInit {
 
   filesToUpload: FileList;
   userId: number;
-  photos: Photo[] = [];
+  photos: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: false, name: ''} ];
 
   constructor(private photosService: PhotosService) {}
 
@@ -22,8 +22,8 @@ export class PhotoSliderComponent implements OnInit {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
     this.photosService.getPhotos(this.userId)
       .subscribe(items => {
-      this.photos = items;
-    });
+        this.photos = items;
+      });
   }
 
   // displayButton() {
@@ -35,15 +35,18 @@ export class PhotoSliderComponent implements OnInit {
   // }
 
   deletePhoto(photoId: string) {
-    this.photosService.deletePhoto(photoId).subscribe(() => {
-      this.photosService.getPhotos(this.userId)
-        .subscribe(items => {
-          this.photos = items;
-        });
-    });
+    if (confirm('Delete photo?')){
+      this.photosService.deletePhoto(photoId).subscribe(() => {
+        this.photosService.getPhotos(this.userId)
+          .subscribe(items => {
+            this.photos = items;
+          });
+      });
+    } else { return; }
   }
 
   fileChangeEvent(fileInput: any) {
+    console.log('FileChangeEvent');
     this.filesToUpload = <FileList>fileInput.target.files;
     if (this.filesToUpload) {
       this.upload();

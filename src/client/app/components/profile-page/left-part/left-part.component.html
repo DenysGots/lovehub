@@ -5,30 +5,13 @@
     <div class="progress">
       <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
     </div>
-
   </div>
   <hr>
   <div class="menu-bar">
     <div class="menu-bar-box">
-      <div>
-        <i class="material-icons">account_circle</i>
-        <a>My profile</a>
-      </div>
-      <div>
-        <i class="material-icons">search</i>
-        <a>Search people</a>
-      </div>
-      <div>
-        <i class="material-icons">star_half</i>
-        <a>Matching</a>
-      </div>
-      <div>
-        <i class="material-icons">favorite</i>
-        <a>Mutual likes</a>
-      </div>
-      <div>
-        <i class="material-icons">chat</i>
-        <a>Chats</a>
+      <div *ngFor="let item of profileMenu">
+        <i class="material-icons item-icon">{{item.icon}}</i>
+        <a class="item-link" routerLink={{item.link}}>{{item.name}}</a>
       </div>
     </div>
   </div>
