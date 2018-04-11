@@ -60,11 +60,23 @@ export class AdministratorUsersManagementComponent implements OnInit {
   }
 
   updateUsers(): void {
+    const checkedUsers = this.updateUsersOptions.usersList;
+    const usersList = this.usersList.users;
+
     if (this.updateUsersOptions.appliedAction === 'send e-mail') {
       this.router.navigate(['/admin/email'])
           .then(() => {
-            this.updateUsersOptions.usersList.forEach(user => {
-              this.administratorService.receivedSelectedUserData.next(user);
+            checkedUsers.forEach(user => {
+              let userObject;
+
+              for (let i = 0; i < usersList.length; i += 1) {
+                if (usersList[i].id = user) {
+                  userObject = usersList[i];
+                  break;
+                }
+              }
+
+              this.administratorService.receivedSelectedUserData.next(userObject);
             });
           });
     } else {
@@ -137,6 +149,16 @@ export class AdministratorUsersManagementComponent implements OnInit {
       const userListIndex = this.updateUsersOptions.usersList.indexOf(user.id);
 
       this.updateUsersOptions.usersList.splice(userListIndex, 1);
+    }
+  }
+
+  pushAllToSelectedUsersList(): void {
+    if (this.allUsersSelected) {
+      this.usersList.users.forEach(user => {
+        this.updateUsersOptions.usersList.push(user.id);
+      });
+    } else {
+      this.updateUsersOptions.usersList = [] as any;
     }
   }
 

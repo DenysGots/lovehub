@@ -94,6 +94,7 @@ export class AdministratorService {
     return this.http.post((`${this.serverURL}/send-email`), JSON.stringify(selectedUsers), httpOptions)
         .subscribe(response => {
           console.log(response);
+          return alert('The mails have been successfully sent');
         });
   }
 

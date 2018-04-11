@@ -51,7 +51,9 @@ export class AdministratorSendEmailComponent implements OnInit {
     });
 
     this.administratorService.receivedSelectedUser.subscribe(data => {
-      this.selectedUsers.push(data);
+      if (data && data.id) {
+        this.selectedUsers.push(data);
+      }
     });
   }
 
@@ -124,8 +126,7 @@ export class AdministratorSendEmailComponent implements OnInit {
     if (this.emailSubject && this.emailBody) {
       if (this.allUsersSelected) {
         this.administratorService.sendEmail(this.emailDto);
-
-        // TODO: add modal window - email sent successfully
+        // this.administratorService.receivedSelectedUserData.next('');
 
         this.allUsersSelected = false;
         this.userSelectedFromHints = false;
@@ -137,8 +138,7 @@ export class AdministratorSendEmailComponent implements OnInit {
         this.selectedUser = <SelectedUser>{};
       } else if (this.selectedUsers.length > 0) {
         this.administratorService.sendEmail(this.emailDto);
-
-        // TODO: add modal window - email sent successfully
+        // this.administratorService.receivedSelectedUserData.next('');
 
         this.allUsersSelected = false;
         this.userSelectedFromHints = false;
@@ -149,10 +149,10 @@ export class AdministratorSendEmailComponent implements OnInit {
         this.typedUser = '';
         this.selectedUser = <SelectedUser>{};
       } else {
-        // TODO: add modal window - not a single user selected
+        alert('Select users to send email')
       }
     } else {
-      // TODO: add modal window - email subject and body are not filled
+      alert('Email subject and body are not filled')
     }
   }
 
