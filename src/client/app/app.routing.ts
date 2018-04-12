@@ -40,5 +40,5 @@ export const routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'forgot', component:  RecoverPasswordComponent},
   { path: 'forgot/:token', component: ResetPasswordComponent},
-  { path: 'user-match', component: UserMatchComponent},
+  { path: 'user-match', component: UserMatchComponent },
 ];
