@@ -33,9 +33,9 @@ export class UserProfileSettingsComponent implements OnInit {
         this.userId = +params.get('id');
         return usersService.findById(this.userId);
       }).subscribe(user => {
-      this.user = <User>user;
-      this.userProfile = <UserProfile>user.userProfile;
-      console.log(this.userProfile.firstName);
+        this.user = <User>user;
+        this.userProfile = <UserProfile>user.userProfile;
+        console.log(this.userProfile.firstName);
     });
   }
 
@@ -47,6 +47,7 @@ export class UserProfileSettingsComponent implements OnInit {
         if(affected) {
           this.isSuccess = !this.isSuccess;
           setTimeout(() => this.isSuccess = !this.isSuccess, 3000);
+          this.canUpdate = false
         }
       });
   }

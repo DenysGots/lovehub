@@ -77,7 +77,7 @@ export class AdministratorHeaderComponent implements OnInit {
   }
 
   isLoggedInUser(): Observable<boolean> {
-    return this.authService.isLoggedInUser();
+    return this.authService.isLoggedInUser$();
   }
 
   logOut(): void {
