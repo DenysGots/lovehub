@@ -1,27 +1,4 @@
 <footer #footer *ngIf="router.url !== '/admin'">
-  <div class="info">
-    <div class="row text-center text-sm-left">
-      <div class="col-md-4 col-sm-4">
-        <h3>Support our work</h3>
-        <input type="button" value="Donate us" class="lh-btn donate butt">
-      </div>
-      <div class="col-md-4 col-sm-4">
-        <p class="text-sm-center">
-          LOVEHUB UKRAINE, LLC DOES NOT CONDUCT BACKGROUND CHECKS ON THE MEMBERS OR SUBSCRIBERS OF THIS WEBSITE. HOWEVER, THE SAFETY AND SECURITY OF OUR MEMBERS IS OUR TOP PRIORITY. WE URGE ALL MEMBERS TO FOLLOW OUR ONLINE SAFETY TIPS.
-        </p>
-      </div>
-      <div class="col-md-4 col-sm-4 text-sm-right">
-        <h3>Technical support:</h3>
-        <ul>
-          <li *ngFor="let tel of contacts.phones">
-            {{tel}}
-          </li>
-          <li>{{contacts.mail}}</li>
-          <li>{{contacts.address}}</li>
-        </ul>
-      </div>
-    </div>
-  </div>
   <div class="authors">
     <div class="row align-items-center">
       <div class="col-md-6 col-sm-5">

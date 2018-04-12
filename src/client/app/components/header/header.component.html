@@ -14,18 +14,18 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav menu ml-auto">
       <li *ngFor="let item of menu" class="nav-item">
-        <a class="nav-link menu-item" routerLink={{item.link}}>{{item.name}}</a>
+        <a class="menu-item" routerLink={{item.link}}>{{item.name}}</a>
       </li>
       <li *ngIf="!isLoggedIn; then login else logout" class="nav-item">
       </li>
       <ng-template #login>
         <li class="nav-item">
-          <a class="nav-link menu-item" routerLink="login">Login</a>
+          <a class="menu-item" routerLink="login">Login</a>
         </li>
       </ng-template>
       <ng-template #logout>
         <li class="nav-item">
-          <a class="nav-link menu-item" (click)="logoutUser();">Logout</a>
+          <a class="menu-item" (click)="logoutUser();">Logout</a>
         </li>
       </ng-template>
     </ul>

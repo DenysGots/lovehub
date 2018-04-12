@@ -2,10 +2,6 @@ footer {
   background-color: rgba(233, 236, 239, 0.9);
 }
 
-.info {
-    padding: 15px 30px;
-}
-
 .authors {
     background-color: #313335;
     color: white;
@@ -14,15 +10,6 @@ footer {
 
 .center {
     text-align: center;
-}
-
-.donate {
-    margin-top: 10px;
-    width: max-content;
-    &:hover {
-        background-color: brown;
-        color: white;
-    }
 }
 
 .developers {
