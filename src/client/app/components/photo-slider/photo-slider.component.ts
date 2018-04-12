@@ -24,7 +24,7 @@ export class PhotoSliderComponent implements OnInit {
   ngOnInit() {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
     this.route.params.subscribe(params => {
-      this.userIdUrl = parseInt(params['userId'], 10);
+      this.userIdUrl = parseInt(params['id'], 10);
     });
 
     this.photosService.getPhotos(this.userIdUrl)

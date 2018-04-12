@@ -19,11 +19,6 @@ export class NavigationService {
 
   profileMenu = [
     {
-      name: 'My Profile',
-      link: '/profile',
-      icon: 'account_circle',
-    },
-    {
       name: 'Search People',
       link: '/search',
       icon: 'search',

@@ -23,17 +23,9 @@ export class RightPartComponent implements OnInit {
     this.age = parseInt(jwt_decode(localStorage.getItem('jwt_token')).age, 10);
     this.route.params.subscribe(params => {
       this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
-      this.userIdUrl = params['userId'];
-      this.isTrue = this.userId == this.userIdUrl;
+      this.userIdUrl = parseInt(params['id'], 10);
+      this.isTrue = this.userId === this.userIdUrl;
     });
-    // this.condition = this.route.params.map(params => {
-    //   console.log(params);
-    //   this.userIdUrl = params['userId'];
-    //   this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
-    //   console.log('userID', this.userId);
-    //   console.log('URLID', params['userId']);
-    //   return this.userId === this.userIdUrl;
-    // });
   }
 
 }

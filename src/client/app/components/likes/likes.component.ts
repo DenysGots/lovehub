@@ -43,8 +43,8 @@ export class LikesComponent implements OnInit {
     this.like = new Like();
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
     this.route.params.subscribe(params => {
-      this.userIdUrl = parseInt(params['userId'], 10);
-      console.log('URLID', params['userId']);
+      this.userIdUrl = parseInt(params['id'], 10);
+      console.log('URLID', params['id']);
     });
 
     this.photosService.getPhotos(this.userId)

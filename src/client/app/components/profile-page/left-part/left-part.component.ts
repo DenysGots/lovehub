@@ -36,7 +36,7 @@ export class LeftPartComponent implements OnInit {
     this.getProfileMenu();
     this.route.params.subscribe(params => {
       this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
-      this.userIdUrl = parseInt(params['userId'], 10);
+      this.userIdUrl = parseInt(params['id'], 10);
       this.isTrue = this.userId === this.userIdUrl;
     });
 

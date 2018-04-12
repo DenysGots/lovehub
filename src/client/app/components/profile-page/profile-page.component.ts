@@ -26,10 +26,10 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit() {
     this.condition = this.route.params.map(params => {
       console.log(params);
-      this.userIdUrl = parseInt(params['userId'], 10);
+      this.userIdUrl = parseInt(params['id'], 10);
       this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
       console.log('userID', this.userId);
-      console.log('URLID', params['userId']);
+      console.log('URLID', params['id']);
       return this.userIdUrl === this.userId;
     });
   }
