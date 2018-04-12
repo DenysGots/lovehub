@@ -99,7 +99,7 @@ export class UsersProfileController {
   @HttpCode(204)
   @Delete(':userId/likes')
   async dislike(@Param() params): Promise<{ statusCode: number }> {
-    const affected = await this.usersProfileService.deleteLike(params.userId);
+    const affected = await this.usersProfileService.deleteLike(params.userId, params.userIdUrl);
     return { statusCode: affected };
   }
 }

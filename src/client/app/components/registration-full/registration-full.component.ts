@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {UsersService} from '../../services/users.service';
-import {UsersProfileService} from '../../services/users-profile.service';
-import {UserProfile} from '../../models/user-profile';
-import {User} from '../../models/user';
+import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../services/users.service';
+import { UsersProfileService } from '../../services/users-profile.service';
+import { UserProfile } from '../../models/user-profile';
+import { User } from '../../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-full',
@@ -16,7 +17,9 @@ export class RegistrationFullComponent implements OnInit {
   userProfile: UserProfile;
   enable = { step0: false, step1: false, step2: false, step3: false };
 
-  public constructor(private usersProfileService: UsersProfileService, private usersService: UsersService) {}
+  public constructor(private usersProfileService: UsersProfileService,
+                     private usersService: UsersService,
+                     private router: Router) {}
 
   ngOnInit() {
     this.userProfile = new UserProfile();
@@ -56,9 +59,7 @@ export class RegistrationFullComponent implements OnInit {
       console.log('Form Submitted!');
     });
     alert('Congratulation! You are registered!');
-    // console.log(this.userProfile);
-    // console.log(this.user);
-    // this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 
   isNext() {

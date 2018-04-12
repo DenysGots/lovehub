@@ -1,9 +1,10 @@
-import { Component, OnInit, NgModule, Pipe} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { UsersProfileService } from '../../services/users-profile.service';
 import { User } from '../../models/user';
 import { UserProfile } from '../../models/user-profile';
-import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -20,7 +21,9 @@ export class RegistrationComponent implements OnInit {
   user: User;
   userProfile: UserProfile;
 
-  constructor(private userService: UsersService, private usersProfileService: UsersProfileService) {}
+  constructor(private userService: UsersService,
+              private usersProfileService: UsersProfileService,
+              private router: Router) {}
 
   ngOnInit() {
     this.createFormControls();
@@ -74,6 +77,7 @@ export class RegistrationComponent implements OnInit {
       });
       alert('Congratulation! You are registered!');
       this.myform.reset();
+      this.router.navigate(['/login']);
     }
   }
 }

@@ -38,6 +38,10 @@
 #find {
     padding-top: 100px;
 }
+#questions {
+    background-color: rgba(233, 236, 239, 0.9);
+    color: black;
+}
 
 .find-items {
     margin-top: 30px;
@@ -81,10 +85,6 @@
 .find-info-text {
     font-size: 12px;
     margin: 0;
-}
-
-#questions {
-    background-color: darkgray;
 }
 
 .chat-btn {
@@ -133,6 +133,20 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.butt {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: rgba(245, 55, 55, 0.8);
+  color: white;
+  height: 40px;
+}
+.butt:hover {
+  font-size: 15px;
+  background-color: rgba(245, 55, 55, 0.9);
 }
 
 @media (max-width: 1200px) {

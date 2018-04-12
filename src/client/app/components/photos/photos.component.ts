@@ -24,7 +24,7 @@ export class PhotosComponent implements OnInit {
   ngOnInit() {
     this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
     this.route.params.subscribe(params => {
-    this.userIdUrl = params['userId'];
+    this.userIdUrl = parseInt(params['userId'], 10);
   });
     this.getAva();
   }

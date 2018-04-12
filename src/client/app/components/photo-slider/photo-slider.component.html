@@ -29,14 +29,14 @@
 
         <div class="carousel-item col-md-4 active">
           <img class="image rounded img-fluid d-block" [src]="photos[0].base64">
-          <div class="hidden-block-del" (click)="deletePhoto(photos[0]._id)" title="Click to delete photo" *ngIf="userId === userIdUrl">
-            <i class="material-icons">clear</i>
+          <div class="hidden-block-del" (click)="deletePhoto(photos[0]._id)" title="Click to delete photo" *ngIf="userId == userIdUrl">
+            Delete photo
           </div>
         </div>
         <div class="carousel-item col-md-4" *ngFor="let photo of photos | slice:1; let i = index;">
           <img class="image rounded img-fluid d-block" [src]="photo.base64" id="photo" >
-          <div class="hidden-block-del" (click)="deletePhoto(photo._id)" title="Click to delete photo" *ngIf="userId === userIdUrl">
-            <i class="material-icons">clear</i>
+          <div class="hidden-block-del" (click)="deletePhoto(photo._id)" title="Click to delete photo" *ngIf="userId == userIdUrl">
+            Delete photo
           </div>
         </div>
 
@@ -55,7 +55,7 @@
 
 
 <div>
-  <div class="buttons" *ngIf="userId === userIdUrl">
+  <div class="buttons" *ngIf="userId == userIdUrl">
     <button>Upload photo
       <input type="file" (change)="fileChangeEvent($event)"/>
     </button>

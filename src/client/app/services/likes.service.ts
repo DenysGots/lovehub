@@ -27,8 +27,8 @@ export class LikesService {
     return this.http.get<Like[]>(url);
   }
 
-  dislikeUser(userId: number): Observable<any> {
-    const url = `api/users-profile/${userId}/likes`;
+  dislikeUser(userId: number, userIdUrl: number): Observable<any> {
+    const url = `api/users-profile/${userId}/likes/${userIdUrl}`;
     return this.http.delete(url);
   }
 

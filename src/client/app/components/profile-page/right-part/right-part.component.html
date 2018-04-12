@@ -2,8 +2,8 @@
   <div>
     <app-photo-slider></app-photo-slider>
   </div>
-  <hr style="width: 105%" *ngIf="userId === userIdUrl">
-  <div *ngIf="userId === userIdUrl">
+  <hr style="width: 105%" *ngIf="isTrue">
+  <div *ngIf="isTrue">
     <app-user-profile-settings></app-user-profile-settings>
   </div>
 

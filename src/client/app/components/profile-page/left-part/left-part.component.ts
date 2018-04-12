@@ -10,22 +10,24 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './left-part.component.html',
   styleUrls: ['./left-part.component.scss']
 })
+
 export class LeftPartComponent implements OnInit {
 
   profileMenu: object[];
   userId: number;
   userIdUrl: number;
+  isTrue = false;
 
-  constructor(
-    private navService: NavigationService,
-    public router: Router,
-    private route: ActivatedRoute) {}
+  constructor(private navService: NavigationService,
+              public router: Router,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.getProfileMenu();
-    this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
     this.route.params.subscribe(params => {
-      this.userIdUrl = params['userId'];
+      this.userId = parseInt(jwt_decode(localStorage.getItem('jwt_token')).id, 10);
+      this.userIdUrl = parseInt(params['userId'], 10);
+      this.isTrue = this.userId === this.userIdUrl;
     });
   }
 

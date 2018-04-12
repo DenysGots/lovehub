@@ -164,10 +164,10 @@ export class UsersProfileService {
     }
   }
 
-  async deleteLike(userId: number): Promise<number> {
+  async deleteLike(userId: number, userIdUrl: number): Promise<number> {
     try {
       return await this.likesRepository
-        .destroy({where: { whoLike: userId }});
+        .destroy({where: { whoLike: userId, whatLike: userIdUrl }});
     } catch (error) {
       throw error;
     }

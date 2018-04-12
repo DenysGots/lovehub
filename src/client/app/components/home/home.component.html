@@ -1,4 +1,4 @@
-<section id="registration">
+<section id="registration" xmlns="http://www.w3.org/1999/html">
   <div class="reg-block">
     <app-registration></app-registration>
   </div>
@@ -22,7 +22,7 @@
 </section>
 <section id='find'>
   <div>
-    <h2 class="title">The way to find your true love starts here</h2>
+    <h2 class="title"><strong>The way to find your true love starts here</strong></h2>
     <div class="find-items">
       <div *ngFor="let item of reasons" class="find-block">
         <div >
@@ -50,7 +50,7 @@
       </p>
     </div>
     <div class="col-md-4 col-sm-4 col-xs-2 text-sm-right">
-      <input type="button" value="Chat now" class='chat-btn lh-btn'>
+      <input type="button" value="Chat now" class='chat-btn lh-btn butt'>
     </div>
   </div>
 </section>
@@ -58,7 +58,7 @@
   <h2 class="title">Some positive feedbacks from our users</h2>
   <h3 class="subtitle">It's kinda surprising that feedbacks are always positive, isn`t it?</h3>
   <div class="row">
-    <home-slider iden='feeds' class="col-sm-12" breads>
+    <home-slider iden='feeds' class="col-sm-12" breads >
       <div *ngFor="let feed of feedbacks; let i = index" class="carousel-item" [class.active]="i === 0">
         <img src={{feed.image}} alt={{feed.title}} class='main-slide'>
         <div class="carousel-caption">
