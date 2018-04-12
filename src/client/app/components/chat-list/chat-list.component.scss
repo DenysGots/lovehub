@@ -1,0 +1,44 @@
+.container{
+    cursor: pointer;
+    padding: 5px 15px;
+}
+.avatar-container{
+    width: 50px;
+    height: 50px;
+    display: inherit;
+}
+.info-container{
+    width: 100%;
+}
+.text{
+    width: 100%;
+}
+.avatar{
+    border-radius: 50%;
+    overflow: hidden;
+    object-fit: cover;
+}
+.message{
+    color: grey;
+}
+.active{
+    background: lightsteelblue;
+}
+.lastMsg{
+    color: #313335;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
+    display: block;
+    height: 20px;
+    line-height: 20px;
+}
+.unread{
+    background-color: lightgray;
+}
+
+.friendUnread{
+    background-color: gainsboro;
+    height: 20px;
+}

@@ -73,6 +73,9 @@ export class RegistrationComponent implements OnInit {
         this.userProfile.orientation = 'UNDEFINED';
         this.userProfile.preference = 'UNDEFINED';
         this.userProfile.userId = user.id;
+        this.userProfile.isBaned = false;
+        this.userProfile.isActive = true;
+        this.userProfile.registrationDate = Date.now();
         this.usersProfileService.registration(this.userProfile as UserProfile).subscribe();
       });
       alert('Congratulation! You are registered!');

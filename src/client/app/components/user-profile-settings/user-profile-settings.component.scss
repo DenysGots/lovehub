@@ -7,7 +7,13 @@
 
     .button-update {
       height: 4vh;
-      width: 40%;
+      width: 100%;
+      text-align: right;
+
+      input {
+        width: 40%;
+        text-align: center;
+      }
     }
   }
 
