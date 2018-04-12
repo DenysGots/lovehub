@@ -3,12 +3,14 @@
     max-width: 900px;
 }
 .chat-container{
-    background-color: #f5f5f5;
+    background-color: white;
     height: 100%;
+    //temp
+    border: 1px solid black;
 }
 .chat-list{
     border-right: 1px solid #d4d4d4;
-    padding: 10px 0px;
+    padding: 10px;
     overflow-y: auto;
     max-height: 100%;
 }

@@ -32,13 +32,25 @@
 .message{
     padding: 8px 40px 5px 10px;
     border-radius: 10px;
-    background-color: lightgrey;
+    background-color: #c7cace;
     max-width: 50%;
     word-wrap: break-word;
     position: relative;
 }
+.message.right:hover {
+    background-color: #8d99ae;
+    cursor: pointer;
+}
 .message-text{
     white-space: pre-wrap;
+}
+.selected {
+    background-color: #ef233c !important;
+    color: #ffffff;
+}
+.unread{
+    background-color: #555b6e;
+    color: white;
 }
 .date{
     position: absolute;
@@ -52,14 +64,6 @@
 }
 .right{
     border-bottom-right-radius: 0;
-}
-.message.right:hover {
-  background-color: gray;
-  cursor: pointer;
-}
-.selected {
-  background-color: darkgrey !important;
-  color: #ffffff;
 }
 .input-container{
     margin-top: 15px;
@@ -88,9 +92,6 @@ input:focus, textarea:focus {outline:0;}
 }
 .default{
     color: grey;
-}
-.unread{
-    background-color: lightslategray;
 }
 header{
     height: 50px;

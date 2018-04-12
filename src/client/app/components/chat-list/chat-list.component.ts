@@ -24,7 +24,7 @@ export class ChatListComponent implements OnInit {
       this.activeChat = chat.chatId;
     });
 
-    this.userId = this.authService.getLoggedInUserCredential().userId;
+    this.userId = this.authService.getLoggedInUser().userId;
   }
 
   checkChat() {
