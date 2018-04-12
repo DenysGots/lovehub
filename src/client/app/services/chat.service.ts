@@ -65,7 +65,6 @@ export class ChatService {
         }
     });
 
-    console.log('this.authService.getLoggedInUser()', this.authService.getLoggedInUser());
     this.userId = this.authService.getLoggedInUser().userId;
 
     this.notifService.getNotifications().subscribe((notification: any) => {
