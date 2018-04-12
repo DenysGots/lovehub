@@ -60,6 +60,9 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { LeftPartComponent } from './components/profile-page/left-part/left-part.component';
 import { RightPartComponent } from './components/profile-page/right-part/right-part.component';
 
+import { LikesComponent } from './components/likes/likes.component';
+import { LikesService } from './services/likes.service';
+
 import { AdministratorFooterComponent } from './components/administrator/administrator-footer/administrator-footer.component';
 import { AdministratorHeaderComponent } from './components/administrator/administrator-header/administrator-header.component';
 import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
@@ -127,6 +130,7 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     RightPartComponent,
     PhotoSliderComponent,
     NotificationsComponent,
+    LikesComponent,
     InterestsComponent,
     MessageEditorComponent,
     NotificationComponent,
@@ -150,6 +154,7 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     ChartsModule,
   ],
   providers: [
+    LikesService,
     PhotosService,
     NavigationService,
     HomeService,

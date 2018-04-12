@@ -1,11 +1,11 @@
 <div class="right-part">
   <div>
-    <h2>Name, age</h2>
-  </div>
-  <div>
     <app-photo-slider></app-photo-slider>
   </div>
-  <app-user-profile-settings></app-user-profile-settings>
+  <hr style="width: 105%" *ngIf="isTrue">
+  <div *ngIf="isTrue">
+    <app-user-profile-settings></app-user-profile-settings>
+  </div>
   <div>
     <app-interests></app-interests>
   </div>

@@ -1,12 +1,16 @@
 .photo-carousel {
   background-color: rgba(233, 236, 239, 0.9);
   margin-top: 20px;
+  width: 105%;
+  border-radius: 6px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .photos-container {
   width: 100%;
   height: 200px;
   margin: 10px 0;
+  position: relative;
 }
 
 .image {
@@ -14,16 +18,18 @@
   width: 300px;
   height: 200px;
   margin-right: 10px;
+  object-fit: cover;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .buttons {
-  margin: 20px 0px;
+  margin: 17px 0px;
 }
 
 .buttons button {
-  width: 47%;
+  width: 105%;
   height: 40px;
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -54,14 +60,9 @@
   padding-top: 6px;
 }
 
-.image:hover {
-  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.9);
-  //background-image: url("https://cdn2.iconfinder.com/data/icons/picons-basic-1/57/basic1-180_cross_no-512.png");
-  opacity: 0.6;
-}
-
 .img-fluid {
   max-width: 106%;
+  border-radius: 6px;
 }
 
 .cont-fluid {
@@ -70,6 +71,32 @@
 
 .carousel {
   width: 103%;
+}
+
+.image:hover {
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.9);
+  opacity: 0.6;
+}
+
+.hidden-block-del {
+  width: 202px;
+  height: 25px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: rgba(245, 55, 55, 0.6);
+  color: rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  border-radius: 2px;
+  font-size: 13px;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  padding-top: 6px;
+}
+
+.hidden-block-del:hover {
+  font-size: 15px;
+  background-color: rgba(245, 55, 55, 0.8);
+  transition: .5s;
 }
 
 
