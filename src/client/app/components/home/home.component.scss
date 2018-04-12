@@ -37,11 +37,9 @@
 
 #find, #questions, #feedbacks {
     padding: 15px 70px;
-    color: white;
+    background-color: white;
 }
-#find {
-    padding-top: 100px;
-}
+
 #questions {
     background-color: rgba(233, 236, 239, 0.9);
     color: black;
@@ -171,20 +169,6 @@
 .feedbacks{
     justify-content: space-between;
     align-items: center;
-}
-
-.butt {
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background-color: rgba(245, 55, 55, 0.8);
-  color: white;
-  height: 40px;
-}
-.butt:hover {
-  font-size: 15px;
-  background-color: rgba(245, 55, 55, 0.9);
 }
 
 @media (max-width: 1200px) {
