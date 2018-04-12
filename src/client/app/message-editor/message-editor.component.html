@@ -16,6 +16,7 @@
         placeholder="Type text here..."
         [(ngModel)]="text"
         (keydown.esc)="toggle()"
+        (keydown.enter)="onEdit(message['_id'], text)"
       >
       </textarea>
     </div>
