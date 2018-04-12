@@ -85,6 +85,7 @@ import { InlineEditComponent } from './components/user-profile-settings/inline-e
 import { CustomRenderService } from './services/custom-render.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 import { ModalForbiddenService } from './services/modal-forbidden.service';
+import { ModalAuthService } from './services/modal-auth.service';
 
 @NgModule({
   declarations: [
@@ -172,7 +173,8 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     NotificationsService,
     InterestsService,
     NotificationService,
-    ModalForbiddenService
+    ModalForbiddenService,
+    ModalAuthService,
   ],
   bootstrap: [AppComponent]
 })

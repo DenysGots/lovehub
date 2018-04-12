@@ -24,8 +24,8 @@ interface UsersProfileAvatar {
 })
 export class UserSearchComponent implements OnInit, OnChanges {
 
-  users: UserProfile[];
-  usersWithAva: UsersProfileAvatar[];
+  users: UserProfile[] = [];
+  usersWithAva: UsersProfileAvatar[] = [];
   searchFilter: FilterParam;
   ageFilter: FilterParam;
   sexFFilter: FilterParam;

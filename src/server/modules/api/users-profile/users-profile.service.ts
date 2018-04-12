@@ -38,10 +38,9 @@ export class UsersProfileService {
     }
   }
 
-  async findAll(): Promise<FilteredUsersProfile> {
+  async findAll(): Promise<UserProfile[]> {
     try {
-      return await this.userProfileRepository
-        .findAndCountAll<UserProfile>();
+      return await this.userProfileRepository.findAll<UserProfile>();
     } catch (error) {
       console.error(`Arise an exception in the findAll() method UserProfile Service`);
       throw error;
