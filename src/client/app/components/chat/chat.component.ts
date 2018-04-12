@@ -32,4 +32,14 @@ export class ChatComponent implements OnInit {
     
     this.chatService.showDialogsUpdate.subscribe(show => this.showDialogs = show);
   }
+
+  ngAfterViewInit() {
+    this.windowWidth = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  resize(event) {
+      this.windowWidth = window.innerWidth;
+      this.height = this.windowService.freeHeight;
+  }
 }
