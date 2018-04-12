@@ -53,7 +53,7 @@
           </div>
         </div>
         <div *ngIf="!!messages && selectedMessage">
-          <app-message-editor [message]="selectedMessage" [chatId]="chatId"></app-message-editor>
+          <app-message-editor [message]="selectedMessage" (unSelect)="unSelect()"></app-message-editor>
         </div>
       </div>
 </div>

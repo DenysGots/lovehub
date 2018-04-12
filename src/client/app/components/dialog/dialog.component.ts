@@ -42,7 +42,7 @@ export class DialogComponent implements OnInit {
       this.windowWidth = window.innerWidth;
   }
 
-  goBack(){
+  goBack() {
     this.chatService.closeMessages();
   }
 
@@ -56,10 +56,10 @@ export class DialogComponent implements OnInit {
     } catch (err) { }
   }
 
-  sendMes(mes){
+  sendMes(mes) {
     const text = this.text.trim();
 
-    if (!!text.length){
+    if (!!text.length) {
       const newMessage = {
         userId: this.userId,
         text
@@ -79,7 +79,7 @@ export class DialogComponent implements OnInit {
     };
   }
 
-  setMesClasses(mes){
+  setMesClasses(mes) {
     const ownMessage = mes.userId === this.userId;
 
     return {
@@ -100,6 +100,10 @@ export class DialogComponent implements OnInit {
 
     this.selectedMessage = msg;
     console.log(this.selectedMessage === msg);
+  }
+
+  unSelect() {
+    this.selectedMessage = null;
   }
 
 }

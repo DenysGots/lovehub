@@ -42,22 +42,22 @@ export class ChatGateway {
   @SubscribeMessage('deleteMessage')
   async deleteMessage(client, data) {
     const parsedData = JSON.parse(data);
-    const {chatId, msgId} = parsedData;
+    const {chat, msgId} = parsedData;
     console.log(msgId);
+    const chatId = await this.server.adapter.rooms[chat.chatId].length;
     const dbRes = await this.messagesService.deleteMessageById(chatId, msgId);
     console.log(dbRes);
-    const result = { event: 'messageIdFromServer', msgId};
-     return { event: 'resFromServer', data: result};
+    return { event: 'deletedMessageIdFromServer', data: msgId};
   }
 
   @SubscribeMessage('editMessage')
   async editMessage(client, data) {
       const parseData = JSON.parse(data);
-      const {chatId, msgId, text} = parseData;
+      const {chat, msgId, text} = parseData;
+      const chatId = await this.server.adapter.rooms[chat.chatId].length;
       console.log(parseData);
       const dbRes = await this.messagesService.editMessageText(chatId, msgId, text);
-       const result = { event: 'modifiedMessage', msgId, text};
 
-      return { event: 'resFromServer', data: result};
+      return { event: 'modifiedMessage', data: {msgId, text}};
   }
 }

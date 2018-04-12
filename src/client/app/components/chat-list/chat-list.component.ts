@@ -43,7 +43,7 @@ export class ChatListComponent implements OnInit {
     return {
       'unread': unread,
       'active': activeChat
-    }
+    };
   }
 
   setLastMessStatus(){

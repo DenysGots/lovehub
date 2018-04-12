@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ChatService} from '../services/chat.service';
 
 @Component({
@@ -9,7 +9,8 @@ import { ChatService} from '../services/chat.service';
 export class MessageEditorComponent implements OnInit {
 
   @Input() message;
-  @Input() chatId;
+
+  @Output() unSelect = new EventEmitter<any>();
 
   text = '';
   isEditable = false;
@@ -20,18 +21,18 @@ export class MessageEditorComponent implements OnInit {
     this.text = this.message.text;
   }
 
-  onDelete(chatId: number, msgId: string): void {
-    console.log(`im here onDelete ${chatId}: ${msgId}`);
-    this.chat.deleteMessage(chatId, msgId);
+  onDelete(msgId: string): void {
+    this.chat.deleteMessage(msgId);
+    this.unSelect.emit();
   }
 
   toggle(): void {
     this.isEditable = !this.isEditable;
   }
 
-  onEdit(chatId: number, msgId: number, text: string): void {
-    console.log('im here onChange');
-    this.chat.editMessage(chatId, msgId, text);
+  onEdit(msgId: number, text: string): void {
+    this.chat.editMessage(msgId, text);
+    this.unSelect.emit();
   }
 
 }

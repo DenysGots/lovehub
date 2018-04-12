@@ -1,7 +1,7 @@
 <div class="container" *ngIf="!isEditable">
   <div class="btn-group">
     <button type="button" class="btn btn-info" (click)="toggle()">Edit</button>
-    <button type="button" class="btn btn-danger" (click)="onDelete(chatId, message['_id'])">Delete</button>
+    <button type="button" class="btn btn-danger" (click)="onDelete(message['_id'])">Delete</button>
   </div>
 </div>
 <div class="container" *ngIf="isEditable">
@@ -22,7 +22,7 @@
   </div>
   <div>
       <div class="btn-group">
-        <button type="button" class="btn btn-info" (click)="onEdit(chatId, message['_id'], text)">Save</button>
+        <button type="button" class="btn btn-info" (click)="onEdit(message['_id'], text)">Save</button>
         <button type="button" class="btn btn-danger" (click)="toggle()">Cancel</button>
       </div>
   </div>

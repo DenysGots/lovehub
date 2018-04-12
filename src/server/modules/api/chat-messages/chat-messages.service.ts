@@ -36,7 +36,8 @@ export class ChatMessagesService {
   }
 
   async editMessageText(chatId: number, messageId: number, text: string): Promise<any> {
-    return await this.chatModel.updateOne({chatId, 'messages._id': messageId}, {$set: {'messages.$.text': text}});
+    const msgId = mongoose.Types.ObjectId(messageId);
+    return await this.chatModel.updateOne({chatId, 'messages._id': msgId}, {$set: {'messages.$.text': text}});
   }
   async findByChat(id: number): Promise<any> {
     return await this.chatModel.findOne({ chatId: id }).select('messages -_id');

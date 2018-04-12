@@ -35,6 +35,27 @@ export class ChatService {
       updateChat.lastMessage = data.message;
     });
 
+    wsService.connect('deletedMessageIdFromServer').subscribe(msgId => {
+      console.dir(this.messages);
+      this.messages = this.messages.filter( message => message['_id'] !== msgId);
+      console.dir(this.messages);
+      this.messagesUpdate.next(this.messages);
+    });
+
+    wsService.connect('modifiedMessage').subscribe(data => {
+      console.dir(this.messages);
+      this.messages = this.messages.map((message, index, array) => {
+        if (message['_id'] === data.msgId) {
+          message['text'] = data.text;
+          return message;
+        }
+
+        return message;
+      });
+      console.dir(this.messages);
+      this.messagesUpdate.next(this.messages);
+    });
+
     this.currentChatChange.subscribe((chat: Chat) => {
         this.currentChat = chat;
 
@@ -73,8 +94,8 @@ export class ChatService {
     });
   }
 
-  sendMessage(message){
-    if(this.currentChat) {
+  sendMessage(message) {
+    if (this.currentChat) {
       this.wsService.send('send', {chat: this.currentChat, message});
     }
   }
@@ -93,12 +114,12 @@ export class ChatService {
     });
   }
 
-  deleteMessage(chatId: number, msgId: string) {
-    this.socket.next({event: 'deleteMessage', data: {chatId, msgId}});
+  deleteMessage(msgId: string) {
+    this.wsService.send('deleteMessage', {chat: this.currentChat, msgId});
   }
 
-  editMessage(chatId: number, msgId: number, text: string) {
-    this.socket.next({event: 'editMessage', data: {chatId, msgId, text}});
+  editMessage(msgId: number, text: string) {
+    this.wsService.send('editMessage', {chat: this.currentChat, msgId, text});
   }
 
   closeMessages() {
