@@ -26,12 +26,13 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isLoggedInUser()) {
       let { userId } = this.authService.getLoggedInUser(),
         userRole;
+
       this.usersProfileService.findByUserId(userId).subscribe(userProfile => {
         userRole = (<UserProfile>userProfile).role;
 
         console.log(userId, userRole);
         this.usersService.verifyUserRole(userId, userRole).subscribe(isAuth => {
-          if (!isAuth) {
+          if (isAuth) {
             return true;
           }
 

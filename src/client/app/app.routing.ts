@@ -13,6 +13,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 import { AdministratorSearchComponent } from './components/administrator/administrator-search/administrator-search.component';
+import { AdministratorSendEmailComponent } from './components/administrator/administrator-send-email/administrator-send-email.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 
@@ -25,12 +26,13 @@ export const routes = [
   { path: 'register', component: RegistrationComponent},
   { path: 'register-full', component: RegistrationFullComponent},
   { path: 'photo', component: PhotosComponent},
-  { path: 'profile', canActivate: [AuthProfileGuardService], component: ProfilePageComponent},
+  { path: 'profile/:id', canActivate: [AuthProfileGuardService], component: ProfilePageComponent},
   { path: 'admin', canActivate: [ AuthGuard ],
     children: [
       { path: '', component: AdministratorDashboardComponent },
       { path: 'users-management', component: AdministratorUsersManagementComponent },
-      { path: 'search', component: AdministratorSearchComponent }
+      { path: 'search', component: AdministratorSearchComponent },
+      { path: 'email', component: AdministratorSendEmailComponent }
     ]
   },
   { path: 'chat', component: ChatComponent },

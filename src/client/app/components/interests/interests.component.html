@@ -1,6 +1,10 @@
 <main class="main">
   <header class="header">
-    <span class="header-heading">Interests</span>
+    <div class="header-heading">
+      <i class="fas fa-gamepad"></i>
+
+      <span class="header-title">Interests</span>
+    </div>
 
     <div
       class="icon-container"
@@ -40,6 +44,17 @@
         </button>
 
         <div
+          class="validation-message"
+          [ngClass]="{'hidden': !validationMessageIsVisible}"
+          [ngStyle]="isInputValid && {'color': 'green'} || {'color': 'red'}">
+          {{
+            (isInputValid)
+              ? "Interest must be a word or group of words"
+              : "Invalid input! Please try again"
+          }}
+        </div>
+
+        <div
           class="hints"
           [ngClass]="{'hidden': !inputFieldFocus || !hints || (hints.length === 0)}">
           <div
@@ -58,7 +73,10 @@
     <div class="interest-list">
       <div
         class="interest"
-        [ngClass]="{'interest-active': editMode}"
+        [ngClass]="{
+          'interest-active': editMode,
+          'interest-inactive': editingIsForbidden
+        }"
         *ngFor="let interest of interestsToShow">
         <span class="interest_description text">
           {{ interest }}

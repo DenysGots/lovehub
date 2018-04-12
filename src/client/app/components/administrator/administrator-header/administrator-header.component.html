@@ -15,18 +15,19 @@
 
         <div class="mail-counter text white-text mail-counter-text">
           <p class="mail-counter-text">
-            12                                                   <!--TODO: add binding here-->
+            -                                                   <!--TODO: add binding here-->
           </p>
         </div>
       </div>
 
       <div class="admin-badge">
-        <div class="photo-container">
-          <!--
-          <img src="" alt="User Photo" class="user-photo">       TODO: add binding here and remove icon
-          -->
-
-          <i class="fas fa-user"></i>
+        <div
+          class="photo-container"
+          [ngStyle]="currentUserAvatar && {'background-image': currentUserAvatar}">
+          <i
+            class="fas fa-user"
+            *ngIf="!currentUserAvatar">
+          </i>
         </div>
 
         <div class="user-name-container">
@@ -40,7 +41,7 @@
         </div>
 
         <div class="dropdown-list">
-          <a class="link" routerLink="">    <!-- TODO: change link to admin profile -->
+          <a class="link" [routerLink]="['/profile', loggedInUser.userId]">
             <div class="dropdown-list_option">
               <p class="dropdown-list_option-description text dropdown-list-text">
                 Profile
@@ -48,7 +49,7 @@
             </div>
           </a>
 
-          <a class="link" routerLink="/home">
+          <a class="link" (click)="logOut()" routerLink="/home">
             <div class="dropdown-list_option">
               <p class="dropdown-list_option-description text dropdown-list-text">
                 Log Out

@@ -66,6 +66,7 @@ import { AdministratorNavbarComponent } from './components/administrator/adminis
 import { AdministratorDashboardComponent } from './components/administrator/administrator-dashboard/administrator-dashboard.component';
 import { AdministratorUsersManagementComponent } from './components/administrator/administrator-users-management/administrator-users-management.component';
 import { AdministratorSearchComponent } from './components/administrator/administrator-search/administrator-search.component';
+import { AdministratorSendEmailComponent } from './components/administrator/administrator-send-email/administrator-send-email.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { InterestsComponent } from './components/interests/interests.component';
 import { NotificationComponent } from './components/notification/notification.component';
@@ -85,7 +86,6 @@ import { CustomRenderService } from './services/custom-render.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 import { ModalForbiddenService } from './services/modal-forbidden.service';
 import { MessageEditorComponent } from './message-editor/message-editor.component';
-
 
 @NgModule({
   declarations: [
@@ -119,6 +119,7 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     AdministratorDashboardComponent,
     AdministratorUsersManagementComponent,
     AdministratorSearchComponent,
+    AdministratorSendEmailComponent,
     ForbiddenComponent,
     PhotosComponent,
     ProfilePageComponent,
@@ -130,7 +131,7 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     MessageEditorComponent,
     NotificationComponent,
     UserProfileSettingsComponent,
-    InlineEditComponent,
+    InlineEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'nestJS' }),
