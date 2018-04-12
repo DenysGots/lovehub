@@ -29,12 +29,11 @@ export class UsersProfileService {
     userProfile.preference = userProfileDto.preference;
     userProfile.orientation = userProfileDto.orientation;
     userProfile.userId = userProfileDto.userId;
-<<<<<<< Updated upstream
     userProfile.isBaned = userProfileDto.isBaned;
     userProfile.isActive = userProfileDto.isActive;
     userProfile.registrationDate = userProfileDto.registrationDate;
 
-=======
+
     const mongoProfile = new this.userProfileModel({
     userId: userProfileDto.userId,
     firstName: userProfileDto.firstName,
@@ -43,7 +42,6 @@ export class UsersProfileService {
     preference: userProfileDto.preference,
     });
     mongoProfile.save();
->>>>>>> Stashed changes
     try {
       return await userProfile.save();
     } catch (error) {

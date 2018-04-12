@@ -85,14 +85,7 @@ import { InlineEditComponent } from './components/user-profile-settings/inline-e
 import { CustomRenderService } from './services/custom-render.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 import { ModalForbiddenService } from './services/modal-forbidden.service';
-<<<<<<< Updated upstream
-=======
-import { NgxMapboxGLModule } from 'ngx-mapbox-gl';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { environment } from './../environments/environment';
->>>>>>> Stashed changes
+
 
 @NgModule({
   declarations: [
@@ -146,12 +139,12 @@ import { environment } from './../environments/environment';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
+    }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCdhaZA2fOUM-rLoI95dNDssEdiaGiLDtM'
     }),
     ChartsModule,
   ],
