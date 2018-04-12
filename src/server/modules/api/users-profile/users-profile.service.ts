@@ -4,6 +4,8 @@ import { UserProfileDto } from './dto/user-profile.dto';
 import { PREFERENCE } from './preference';
 import { ORIENTATION } from './orientation';
 import {where} from 'sequelize';
+import { Model } from 'mongoose';
+import {UserProfileInterface} from "./user-profile.interface";
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -13,7 +15,8 @@ export interface FilteredUsersProfile {
 @Component()
 export class UsersProfileService {
 
-  constructor(@Inject('UsersProfileRepository') private readonly userProfileRepository: typeof UserProfile) {}
+  constructor(@Inject('UsersProfileRepository') private readonly userProfileRepository: typeof UserProfile,
+              @Inject('UsersProfileModelToken') private readonly userProfileModel: Model<UserProfileInterface>) {}
 
   async create(userProfileDto: UserProfileDto): Promise<UserProfile> {
     const userProfile = new UserProfile();
@@ -26,7 +29,21 @@ export class UsersProfileService {
     userProfile.preference = userProfileDto.preference;
     userProfile.orientation = userProfileDto.orientation;
     userProfile.userId = userProfileDto.userId;
+<<<<<<< Updated upstream
+    userProfile.isBaned = userProfileDto.isBaned;
+    userProfile.isActive = userProfileDto.isActive;
+    userProfile.registrationDate = userProfileDto.registrationDate;
 
+=======
+    const mongoProfile = new this.userProfileModel({
+    userId: userProfileDto.userId,
+    firstName: userProfileDto.firstName,
+    lastName: userProfileDto.lastName,
+    age: userProfileDto.age,
+    preference: userProfileDto.preference,
+    });
+    mongoProfile.save();
+>>>>>>> Stashed changes
     try {
       return await userProfile.save();
     } catch (error) {
