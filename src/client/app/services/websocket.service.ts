@@ -15,15 +15,15 @@ export class WebsocketService {
   }
 
   connect(event: string): Rx.Observable<any> {
-    if(!this.socket){
+    if (!this.socket){
       this.createSocket();
     }
 
-    let observable = new Observable(observer => {
+    const observable = new Observable(observer => {
         this.socket.on(event, (data) => {
           observer.next(data);
         });
-        
+
         return () => {
           this.socket.disconnect();
         };

@@ -1,7 +1,7 @@
 <div class="dialog-container">
     <header *ngIf="(windowWidth < 576) && !!chat">
         <input type="button" value="🡠 Back" class="back" (click)="goBack()"/>
-        
+
         <span class="name">{{chat.user.firstName+" "+ chat.user.lastName}}</span>
         <a class="avatar-container" routerLink="../profile">
           <img
@@ -23,22 +23,24 @@
           </span>
         </div>
         <div *ngIf="!!messages" class="message-list scrollbar" #scrollChat>
-          <div 
-            *ngFor="let mess of messages" 
+          <div
+            *ngFor="let mess of messages"
             class="d-flex message-container"
             [ngClass]="setClasses(mess)"
           >
             <p
+              (click)="onSelect(mess)"
+              [class.selected] = "selectedMessage === mess"
               class="message"
               [ngClass]="setMesClasses(mess)"
             >
               <span class="message-text">{{mess.text}}</span>
               <span class="date">{{mess.created | date:"HH:mm"}}</span>
             </p>
-            
+
           </div>
         </div>
-        <div *ngIf="!!messages">
+        <div *ngIf="!!messages && !selectedMessage">
           <div class="input-group input-container">
             <textarea
               class="textarea"
@@ -50,6 +52,8 @@
             <input type="button" value="Send" class="send" (click)="sendMes()" />
           </div>
         </div>
+        <div *ngIf="!!messages && selectedMessage">
+          <app-message-editor [message]="selectedMessage" (unSelect)="unSelect()"></app-message-editor>
+        </div>
       </div>
-      
 </div>

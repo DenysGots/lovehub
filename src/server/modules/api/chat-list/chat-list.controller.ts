@@ -39,12 +39,12 @@ export class ChatListController {
       user = { ...user.dataValues, avatar };
 
       const lastMessage = await this.chatMessagesService.getLastMessage(chat.chatId) || null;
-      
+
       return {
         chatId: chat.chatId,
         user,
         lastMessage
-      }
+      };
     });
 
     return Promise.all(fullChats);

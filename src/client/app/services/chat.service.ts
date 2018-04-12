@@ -35,10 +35,31 @@ export class ChatService {
       updateChat.lastMessage = data.message;
     });
 
+    wsService.connect('deletedMessageIdFromServer').subscribe(msgId => {
+      console.dir(this.messages);
+      this.messages = this.messages.filter( message => message['_id'] !== msgId);
+      console.dir(this.messages);
+      this.messagesUpdate.next(this.messages);
+    });
+
+    wsService.connect('modifiedMessage').subscribe(data => {
+      console.dir(this.messages);
+      this.messages = this.messages.map((message, index, array) => {
+        if (message['_id'] === data.msgId) {
+          message['text'] = data.text;
+          return message;
+        }
+
+        return message;
+      });
+      console.dir(this.messages);
+      this.messagesUpdate.next(this.messages);
+    });
+
     this.currentChatChange.subscribe((chat: Chat) => {
         this.currentChat = chat;
 
-        if(!!this.currentChat.lastMessage){
+        if (!!this.currentChat.lastMessage){
           this.currentChat.lastMessage.read = true;
         }
     });
@@ -54,17 +75,17 @@ export class ChatService {
     });
 
     this.notifService.setRead().subscribe((chatId: Number) => {
-      if(!!this.messages){
+      if (!!this.messages) {
         this.messages
         .filter(mes => mes.read === false)
         .map(mes => mes.read = true);
       }
 
       const updateChat = this.chats.find(chat => chat.chatId === chatId);
-        if(!!updateChat.lastMessage && updateChat.lastMessage.userId === this.userId){
-          updateChat.lastMessage.read = true;
-          this.userlistUpdate.next(this.chats);
-        }
+      if (!!updateChat.lastMessage && updateChat.lastMessage.userId === this.userId){
+        updateChat.lastMessage.read = true;
+        this.userlistUpdate.next(this.chats);
+      }
     });
 
     this.http.get<Chat[]>(`api/chats/${this.userId}`).subscribe((data) => {
@@ -73,8 +94,8 @@ export class ChatService {
     });
   }
 
-  sendMessage(message){
-    if(this.currentChat) {
+  sendMessage(message) {
+    if (this.currentChat) {
       this.wsService.send('send', {chat: this.currentChat, message});
     }
   }
@@ -93,7 +114,15 @@ export class ChatService {
     });
   }
 
-  closeMessages(){
+  deleteMessage(msgId: string) {
+    this.wsService.send('deleteMessage', {chat: this.currentChat, msgId});
+  }
+
+  editMessage(msgId: number, text: string) {
+    this.wsService.send('editMessage', {chat: this.currentChat, msgId, text});
+  }
+
+  closeMessages() {
     this.showDialogsUpdate.next(false);
     this.wsService.send('leaveRoom', {chatId: this.currentChat.chatId});
 

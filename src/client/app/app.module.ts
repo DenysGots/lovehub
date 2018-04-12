@@ -85,6 +85,7 @@ import { InlineEditComponent } from './components/user-profile-settings/inline-e
 import { CustomRenderService } from './services/custom-render.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 import { ModalForbiddenService } from './services/modal-forbidden.service';
+import { MessageEditorComponent } from './message-editor/message-editor.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,7 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     PhotoSliderComponent,
     NotificationsComponent,
     InterestsComponent,
+    MessageEditorComponent,
     NotificationComponent,
     UserProfileSettingsComponent,
     InlineEditComponent
@@ -172,7 +174,8 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     NotificationsService,
     InterestsService,
     NotificationService,
-    ModalForbiddenService
+    ModalForbiddenService,
+
   ],
   bootstrap: [AppComponent]
 })

@@ -13,7 +13,7 @@ export class ChatComponent implements OnInit {
   height = 100;
   chats = [];
   chat: any;
-  showDialogs: boolean = false;
+  showDialogs = false;
   windowWidth: number = window.innerWidth;
 
   constructor(
@@ -29,7 +29,7 @@ export class ChatComponent implements OnInit {
     this.chatService.currentChatChange.subscribe(chat => this.chat = chat);
 
     this.chatService.userlistUpdate.subscribe(data => this.chats = data);
-    
+
     this.chatService.showDialogsUpdate.subscribe(show => this.showDialogs = show);
   }
 

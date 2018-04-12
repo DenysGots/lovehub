@@ -1,6 +1,6 @@
-<div class="container main" [ngStyle]="{'height.px': height}"> 
+<div class="container main" [ngStyle]="{'height.px': height}">
   <div class="row chat-container">
-    <div 
+    <div
       *ngIf="(windowWidth < 576) ? !showDialogs : true"
       class="col-md-4 col-sm-5 col-xs-12 chat-list scrollbar">
       <chat-list

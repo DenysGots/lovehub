@@ -53,6 +53,14 @@
 .right{
     border-bottom-right-radius: 0;
 }
+.message.right:hover {
+  background-color: gray;
+  cursor: pointer;
+}
+.selected {
+  background-color: darkgrey !important;
+  color: #ffffff;
+}
 .input-container{
     margin-top: 15px;
 }
