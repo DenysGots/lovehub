@@ -1,8 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { NavigationService } from '../../../services/navigation.service';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { PhotosService } from '../../../services/photos.service';
+import { InterestsService } from '../../../services/interests.service';
 import { NotificationsService } from '../../../services/notifications.service';
+import { UsersProfileService } from '../../../services/users-profile.service';
+
+interface Results {
+  interests: string[];
+  hints: string[];
+}
+
+interface UserRating {
+  rating: number;
+  unfilledProfileEntries: string[];
+  barWidth: string;
+}
 
 @Component({
   selector: 'app-left-part',
@@ -15,9 +29,18 @@ export class LeftPartComponent implements OnInit {
 
   public profileOwnerId: number;
   public isUserOnline: boolean;
+  public userHasAvatar: boolean;
+  public userHasInterests: boolean;
+  public lowRatingAlerted = false;
+  public interests: string[] = [];
+  public userProfile = {} as any;
+  public userRating = <UserRating>{};
 
   constructor(
     private navService: NavigationService,
+    private photosService: PhotosService,
+    private interestsService: InterestsService,
+    private usersProfileService: UsersProfileService,
     private notificationsService: NotificationsService,
     private route: ActivatedRoute,
     public router: Router
@@ -25,6 +48,7 @@ export class LeftPartComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.profileOwnerId = parseInt(params.id, 10);
       this.checkIfUserIsOnline();
+      this.getUserRating();
     });
   }
 
@@ -35,6 +59,26 @@ export class LeftPartComponent implements OnInit {
       this.isUserOnline = data;
     });
 
+    this.interestsService.getData().subscribe((results: Results) => {
+      this.interests = results.interests;
+    });
+
+    this.interestsService.getInterests(this.profileOwnerId);
+
+    this.usersProfileService.findByUserId(this.profileOwnerId)
+          .subscribe(result => {
+            this.userProfile = result;
+            this.getUserRating();
+          });
+
+    this.photosService.getAvatar(this.profileOwnerId)
+          .subscribe(avatar => {
+            if (avatar && avatar.base64) {
+              this.userHasAvatar = true;
+              this.getUserRating();
+            }
+          });
+
     this.checkIfUserIsOnline();
   }
 
@@ -42,8 +86,54 @@ export class LeftPartComponent implements OnInit {
     this.profileMenu = this.navService.getProfileMenuItems();
   }
 
-  checkIfUserIsOnline() {
+  checkIfUserIsOnline(): void {
     this.notificationsService.checkIfUserIsOnline(this.profileOwnerId);
+  }
+
+  getUserRating() {
+    const totalUserFieldsToFill = 8;
+    const unfilledFields = [] as any;
+    const notAffectingUserFields = [
+      'userId', 'firstName', 'role', 'registrationDate', 'lastActiveDate', 'photo', 'isActive', 'isBaned', 'lastActiveDate'
+    ];
+
+    let rating: number;
+    let filledFieldsNumber = 0;
+
+    if (this.interests && this.interests.length > 0) {
+      this.userHasInterests = true;
+    }
+
+    for (const p in this.userProfile) {
+      if (this.userProfile.hasOwnProperty(p)) {
+        if (notAffectingUserFields.every(field => p !== field)) {
+          (this.userProfile[p]) ? (filledFieldsNumber += 1) : unfilledFields.push(p);
+        }
+      }
+    }
+
+    (this.userHasInterests) ? (filledFieldsNumber += 1) : unfilledFields.push('Interests');
+    (this.userHasAvatar) ? (filledFieldsNumber += 1) : unfilledFields.push('Avatar');
+
+    rating = Math.round(filledFieldsNumber / totalUserFieldsToFill * 100);
+
+    console.log(unfilledFields);
+    console.log(rating);
+
+    if (rating && unfilledFields) {
+      this.userRating.rating = rating;
+      this.userRating.unfilledProfileEntries = unfilledFields;
+      this.userRating.barWidth = `${rating}%`;
+    }
+
+    // setTimeout(() => {
+    //   if (this.userRating.rating && this.userRating.rating < 70 && !this.lowRatingAlerted) {
+    //     alert(this.userRating.unfilledProfileEntries);
+    //     this.lowRatingAlerted = true;
+    //   }
+    // }, 1000)
+
+    // Notification.requestPermission()
   }
 
 }
