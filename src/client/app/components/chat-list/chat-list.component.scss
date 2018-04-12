@@ -22,23 +22,24 @@
     color: grey;
 }
 .active{
-    background: lightsteelblue;
+    background: #8d99ae;
+    color: white;
 }
 .lastMsg{
-    color: #313335;
+    padding: 5px;
+    padding-left: 0;
     font-size: 13px;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 100px;
-    display: block;
-    height: 20px;
-    line-height: 20px;
+    display: inline-table;
 }
 .unread{
-    background-color: lightgray;
+    background-color: #555b6e;
+    color: white;
+
 }
 
 .friendUnread{
-    background-color: gainsboro;
-    height: 20px;
+    background-color: #8d99ae;
+    color: white;
 }

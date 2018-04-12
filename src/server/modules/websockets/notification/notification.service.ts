@@ -26,6 +26,7 @@ export class NotificationService {
     sendNotification(userId, message){
         const conn = this.connected.find(conn => conn.userId === userId);
 
+        console.log('con', conn)
         if(conn){
             conn.socket.emit('notification', {
                 type: 'notification',

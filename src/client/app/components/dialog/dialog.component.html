@@ -13,7 +13,7 @@
       </header>
       <div
         class="d-flex flex-column h-100"
-        [ngClass]="!messages || !messages.length?'justify-content-between':'justify-content-end'"
+        [ngClass]="!messages?'justify-content-center':'justify-content-end'"
         >
         <div *ngIf="!messages || !messages.length" class="d-flex justify-content-center">
           <span class="default">

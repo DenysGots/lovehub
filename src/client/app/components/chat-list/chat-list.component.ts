@@ -46,10 +46,12 @@ export class ChatListComponent implements OnInit {
   }
 
   setLastMessStatus(){
+    console.log('!', this.chat, this.userId);
     const ownMessage = !!this.chat.lastMessage
       ? this.chat.lastMessage.userId === this.userId
       : false;
     const friendUnread = ownMessage && !this.chat.lastMessage.read;
+    console.log("friendUnread", friendUnread)
 
     return { friendUnread };
   }
