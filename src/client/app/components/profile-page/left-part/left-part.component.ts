@@ -125,15 +125,6 @@ export class LeftPartComponent implements OnInit {
       this.userRating.unfilledProfileEntries = unfilledFields;
       this.userRating.barWidth = `${rating}%`;
     }
-
-    // setTimeout(() => {
-    //   if (this.userRating.rating && this.userRating.rating < 70 && !this.lowRatingAlerted) {
-    //     alert(this.userRating.unfilledProfileEntries);
-    //     this.lowRatingAlerted = true;
-    //   }
-    // }, 1000)
-
-    // Notification.requestPermission()
   }
 
 }
