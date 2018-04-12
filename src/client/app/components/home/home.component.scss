@@ -37,6 +37,12 @@
 
 #find, #questions, #feedbacks {
     padding: 15px 70px;
+    background-color: white;
+}
+
+#questions {
+    background-color: rgba(233, 236, 239, 0.9);
+    color: black;
 }
 
 .find-items {
@@ -80,10 +86,6 @@
 .find-info-text {
     font-size: 12px;
     margin: 0;
-}
-
-#questions {
-    background-color: darkgray;
 }
 
 .chat-btn {

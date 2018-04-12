@@ -53,7 +53,7 @@ export class HomepageController {
         title:'Friends',
         text:'Friends',
         info: 'I`m happy! Here I found so much interesting people who are my friends now'
-      
+
       },
       {
         image:'https://www.w3schools.com/bootstrap4/ny.jpg',

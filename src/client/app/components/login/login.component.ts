@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
   }
 
   public onRegisterRedirect() {
-    this.router.navigateByUrl('/register');
+    this.router.navigateByUrl('/register-full');
   }
 
   public onRedirect(redirectUrl: string) {
