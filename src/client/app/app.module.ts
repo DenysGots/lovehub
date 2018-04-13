@@ -85,6 +85,7 @@ import { InlineEditComponent } from './components/user-profile-settings/inline-e
 import { CustomRenderService } from './services/custom-render.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 import { ModalForbiddenService } from './services/modal-forbidden.service';
+import {NguiMapModule} from "@ngui/map";
 
 
 @NgModule({
@@ -139,9 +140,7 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_KEY'
-    }),
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyAiekoph6xCh46f7RbPRoUNV3gtXWkPcUk'}),
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
