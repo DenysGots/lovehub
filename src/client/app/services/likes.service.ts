@@ -17,14 +17,19 @@ export class LikesService {
     return this.http.post<Like>(url, like, httpOptions);
   }
 
-  getWhoLikesUser(userId: number): Observable<Like[]> {
-    const url = `api/users-profile/${userId}/likes/who`;
+  getLikes(): Observable<Like[]> {
+    const url = `api/users-profile/likes`;
     return this.http.get<Like[]>(url);
   }
 
-  getWhatLikeUser(userId: number): Observable<Like[]> {
+  getWhoLikesUser(userId: number): Observable<number[]> {
+    const url = `api/users-profile/${userId}/likes/who`;
+    return this.http.get<number[]>(url);
+  }
+
+  getWhatLikeUser(userId: number): Observable<number[]> {
     const url = `api/users-profile/${userId}/likes/what`;
-    return this.http.get<Like[]>(url);
+    return this.http.get<number[]>(url);
   }
 
   dislikeUser(userId: number, userIdUrl: number): Observable<any> {

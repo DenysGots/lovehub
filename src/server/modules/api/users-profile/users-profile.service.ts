@@ -148,19 +148,34 @@ export class UsersProfileService {
     return await like.save();
   }
 
-  async findWhoLikesUser(userId: number): Promise<Likes[]> {
+  async findLikes(): Promise<Likes[]> {
     try {
       return await this.likesRepository
-        .findAll<Likes>({where: { whatLike: userId }});
+        .findAll<Likes>();
     } catch (error) {
       throw error;
     }
   }
 
-  async findWhatLikeUser(userId: number): Promise<Likes[]> {
+  async findWhoLikesUser(userId: number): Promise<number[]> {
     try {
-      return await this.likesRepository
-        .findAll<Likes>({where: { whoLike: userId }});
+      const b = await this.likesRepository
+        .findAll<Likes>({where: { whatLike: userId }, attributes: ['whoLike']});
+      const who = b.map(({whoLike}) => whoLike);
+      console.log('who:', who);
+      return who;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findWhatLikeUser(userId: number): Promise<number[]> {
+    try {
+      const a = await this.likesRepository
+        .findAll<Likes>({where: { whoLike: userId }, attributes: ['whatLike']});
+      const what = a.map(({whatLike}) => whatLike);
+      console.log('what:', what);
+      return what;
     } catch (error) {
       throw error;
     }
