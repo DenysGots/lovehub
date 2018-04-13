@@ -28,7 +28,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
     this.chatService.messagesUpdate.subscribe(data => this.messages = data);
-    this.userId = this.authService.getLoggedInUserCredential().userId;
+    this.userId = this.authService.getLoggedInUser().userId;
 
     this.scrollToBottom();
   }

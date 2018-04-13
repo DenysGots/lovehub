@@ -59,12 +59,13 @@ export class ChatService {
     this.currentChatChange.subscribe((chat: Chat) => {
         this.currentChat = chat;
 
-        if (!!this.currentChat.lastMessage){
+        if (!!this.currentChat.lastMessage
+          && this.currentChat.lastMessage.userId !== this.userId){
           this.currentChat.lastMessage.read = true;
         }
     });
 
-    this.userId = this.authService.getLoggedInUserCredential().userId;
+    this.userId = this.authService.getLoggedInUser().userId;
 
     this.notifService.getNotifications().subscribe((notification: any) => {
       const { chatId, message } = notification.message;

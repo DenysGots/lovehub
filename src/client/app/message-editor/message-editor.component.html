@@ -1,4 +1,7 @@
-<div class="container" *ngIf="!isEditable">
+<div
+  class="container"
+  *ngIf="!isEditable"
+  [ngClass]="isEditable ? '' : 'container-buttons'">
   <div class="btn-group">
     <button type="button" class="btn btn-info" (click)="toggle()">Edit</button>
     <button type="button" class="btn btn-danger" (click)="onDelete(message['_id'])">Delete</button>

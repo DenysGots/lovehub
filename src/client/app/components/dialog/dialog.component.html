@@ -3,7 +3,7 @@
         <input type="button" value="🡠 Back" class="back" (click)="goBack()"/>
 
         <span class="name">{{chat.user.firstName+" "+ chat.user.lastName}}</span>
-        <a class="avatar-container" routerLink="../profile">
+        <a class="avatar-container" routerLink="../profile/{{chat.user.userId}}">
           <img
             [src]="!!chat && chat.user.avatar ? chat.user.avatar.base64: 'https://d30y9cdsu7xlg0.cloudfront.net/png/404950-200.png'"
             [alt]="!!chat && chat.user.firstName"
@@ -13,7 +13,7 @@
       </header>
       <div
         class="d-flex flex-column h-100"
-        [ngClass]="!messages || !messages.length?'justify-content-between':'justify-content-end'"
+        [ngClass]="!messages?'justify-content-center':'justify-content-end'"
         >
         <div *ngIf="!messages || !messages.length" class="d-flex justify-content-center">
           <span class="default">

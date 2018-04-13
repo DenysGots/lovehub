@@ -7,6 +7,9 @@
         *ngFor="let chat of chats"
         [chat]="chat"
       ></chat-list>
+      <div *ngIf="!chats.length" class="no-chat-container">
+          <span class="no-chat">No chats</span>
+      </div>
     </div>
     <div
       *ngIf="(windowWidth < 576) ? showDialogs : true"
