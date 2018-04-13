@@ -5,7 +5,9 @@ import { UserProfileDto } from './dto/user-profile.dto';
 import { LikeDto } from './dto/like.dto';
 import { PREFERENCE } from './preference';
 import { ORIENTATION } from './orientation';
-import { where } from 'sequelize';
+import {where} from 'sequelize';
+import { Model } from 'mongoose';
+import {UserProfileInterface} from "./user-profile.interface";
 
 export interface FilteredUsersProfile {
   rows?: UserProfile[];
@@ -16,7 +18,8 @@ export interface FilteredUsersProfile {
 export class UsersProfileService {
 
   constructor(@Inject('UsersProfileRepository') private readonly userProfileRepository: typeof UserProfile,
-              @Inject('LikesRepository') private readonly likesRepository: typeof Likes) {}
+              @Inject('LikesRepository') private readonly likesRepository: typeof Likes,
+              @Inject('UsersProfileModelToken') private readonly userProfileModel: Model<UserProfileInterface>) {}
 
   async create(userProfileDto: UserProfileDto): Promise<UserProfile> {
     const userProfile = new UserProfile();
@@ -33,6 +36,15 @@ export class UsersProfileService {
     userProfile.isActive = userProfileDto.isActive;
     userProfile.registrationDate = userProfileDto.registrationDate;
 
+
+    const mongoProfile = new this.userProfileModel({
+    userId: userProfileDto.userId,
+    firstName: userProfileDto.firstName,
+    lastName: userProfileDto.lastName,
+    age: userProfileDto.age,
+    preference: userProfileDto.preference,
+    });
+    mongoProfile.save();
     try {
       return await userProfile.save();
     } catch (error) {
@@ -81,6 +93,17 @@ export class UsersProfileService {
         .findAndCountAll<UserProfile>({where: {firstName: {$iLike: `${name}%`}}, offset: offset, limit: limit});
     } catch (error) {
       console.error(`Arise an exception in the findByName(${name}) method UserProfile Service`);
+      throw error;
+    }
+  }
+
+  async findByAll(): Promise<FilteredUsersProfile> {
+    console.log(`server service: findByAll()`);
+    try {
+      return await this.userProfileRepository
+        .findAndCountAll<UserProfile>();
+    } catch (error) {
+      console.error(`Arise an exception in the findByAll() method UserProfile Service`);
       throw error;
     }
   }
