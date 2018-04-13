@@ -18,7 +18,7 @@ export class ProfilePageComponent implements OnInit {
   userIdUrl: number;
   like: Like = { whoLike: 0, whatLike: 0};
   condition: Observable<boolean>;
-  likeMode: boolean;
+  likeMode: boolean = true;
   likes: Like[];
 
   constructor(private route: ActivatedRoute,
@@ -33,16 +33,6 @@ export class ProfilePageComponent implements OnInit {
       console.log('URLID', params['id']);
       return this.userIdUrl === this.userId;
     });
-    this.getLikes();
-
-    for (let i = 0; i < this.likes.length; i++) {
-      if (this.likes && (this.likes[i].whoLike == this.userId && this.likes[i].whatLike == this.userIdUrl)) {
-        this.likeMode = false;
-      } else {
-        return this.likeMode = true;
-      }
-    }
-    console.log('LIKE:', this.likeMode);
   }
 
   addLike() {

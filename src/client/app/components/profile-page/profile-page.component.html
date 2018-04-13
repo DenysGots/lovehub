@@ -19,7 +19,7 @@
           <app-user-profile-settings></app-user-profile-settings>
         </div>
         <div class="col-md-3">
-          <div class="heart" title="DISLIKE" (click)="dislike()" *ngIf="likeMode; else heart">&#x2665;</div>
+          <div class="heart" title="DISLIKE" (click)="dislike()" *ngIf="!likeMode; else heart">&#x2665;</div>
           <ng-template #heart>
             <div class="heart2" title="LIKE ME!" (click)="addLike()">&#x2665;</div>
           </ng-template>

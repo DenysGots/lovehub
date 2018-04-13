@@ -22,14 +22,14 @@ export class LikesService {
     return this.http.get<Like[]>(url);
   }
 
-  getWhoLikesUser(userId: number): Observable<Like[]> {
+  getWhoLikesUser(userId: number): Observable<number[]> {
     const url = `api/users-profile/${userId}/likes/who`;
-    return this.http.get<Like[]>(url);
+    return this.http.get<number[]>(url);
   }
 
-  getWhatLikeUser(userId: number): Observable<Like[]> {
+  getWhatLikeUser(userId: number): Observable<number[]> {
     const url = `api/users-profile/${userId}/likes/what`;
-    return this.http.get<Like[]>(url);
+    return this.http.get<number[]>(url);
   }
 
   dislikeUser(userId: number, userIdUrl: number): Observable<any> {

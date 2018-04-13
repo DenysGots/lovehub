@@ -98,13 +98,13 @@ export class UsersProfileController {
 
   @HttpCode(200)
   @Get(':userId/likes/who')
-  async findWhoLikesUser(@Param() params): Promise<Likes[]> {
+  async findWhoLikesUser(@Param() params): Promise<number[]> {
     return await this.usersProfileService.findWhoLikesUser(params.userId);
   }
 
   @HttpCode(200)
   @Get(':userId/likes/what')
-  async findWhatLikeUser(@Param() params): Promise<Likes[]> {
+  async findWhatLikeUser(@Param() params): Promise<number[]> {
     return await this.usersProfileService.findWhatLikeUser(params.userId);
   }
 
