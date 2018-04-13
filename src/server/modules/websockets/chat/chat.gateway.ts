@@ -50,10 +50,8 @@ export class ChatGateway {
   async deleteMessage(client, data) {
     const parsedData = JSON.parse(data);
     const {chat, msgId} = parsedData;
-    console.log(msgId);
-    const chatId = await this.server.adapter.rooms[chat.chatId].length;
-    const dbRes = await this.messagesService.deleteMessageById(chatId, msgId);
-    console.log(dbRes);
+    const dbRes = await this.messagesService.deleteMessageById(chat.chatId, msgId);
+    client.to(chat.chatId).emit('deletedMessageIdFromServer', msgId);
     return { event: 'deletedMessageIdFromServer', data: msgId};
   }
 
@@ -61,10 +59,8 @@ export class ChatGateway {
   async editMessage(client, data) {
       const parseData = JSON.parse(data);
       const {chat, msgId, text} = parseData;
-      const chatId = await this.server.adapter.rooms[chat.chatId].length;
-      console.log(parseData);
-      const dbRes = await this.messagesService.editMessageText(chatId, msgId, text);
-
+      const dbRes = await this.messagesService.editMessageText(chat.chatId, msgId, text);
+      client.to(chat.chatId).emit('modifiedMessage', {msgId, text});
       return { event: 'modifiedMessage', data: {msgId, text}};
   }
 }

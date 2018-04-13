@@ -36,14 +36,11 @@ export class ChatService {
     });
 
     wsService.connect('deletedMessageIdFromServer').subscribe(msgId => {
-      console.dir(this.messages);
       this.messages = this.messages.filter( message => message['_id'] !== msgId);
-      console.dir(this.messages);
       this.messagesUpdate.next(this.messages);
     });
 
     wsService.connect('modifiedMessage').subscribe(data => {
-      console.dir(this.messages);
       this.messages = this.messages.map((message, index, array) => {
         if (message['_id'] === data.msgId) {
           message['text'] = data.text;
@@ -52,7 +49,6 @@ export class ChatService {
 
         return message;
       });
-      console.dir(this.messages);
       this.messagesUpdate.next(this.messages);
     });
 
@@ -111,6 +107,7 @@ export class ChatService {
 
     this.http.get<Array<Message>>(`api/messages/${chat.chatId}`).subscribe((data) => {
       this.messages = data;
+      console.log('data update', data);
       this.messagesUpdate.next(this.messages);
     });
   }
