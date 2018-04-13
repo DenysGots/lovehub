@@ -35,7 +35,7 @@ export class ProfilePageComponent implements OnInit {
     });
     this.getLikes();
 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < this.likes.length; i++) {
       if (this.likes && (this.likes[i].whoLike == this.userId && this.likes[i].whatLike == this.userIdUrl)) {
         this.likeMode = false;
       } else {

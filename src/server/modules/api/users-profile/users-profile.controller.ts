@@ -68,11 +68,11 @@ export class UsersProfileController {
     return await this.usersProfileService.findAll();
   }
 
-  @HttpCode(200)
-  @Get(':id')
-  async findShortInfo(@Param() params): Promise<UserProfile> {
-    return await this.usersProfileService.findShortInfo(params.id);
-  }
+  // @HttpCode(200)
+  // @Get(':id')
+  // async findShortInfo(@Param() params): Promise<UserProfile> {
+  //   return await this.usersProfileService.findShortInfo(params.id);
+  // }
 
   @HttpCode(204)
   @Delete(':id')

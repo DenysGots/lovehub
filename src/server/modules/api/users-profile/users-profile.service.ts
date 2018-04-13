@@ -62,10 +62,10 @@ export class UsersProfileService {
     }
   }
 
-  async findShortInfo(id: number): Promise<FilteredUsersProfile> {
+  async findShortInfo(id: number): Promise<any> {
     try {
       return await this.userProfileRepository
-      .findAndCountAll<UserProfile>({
+      .findOne<UserProfile>({
         where: {userId: id},
         attributes: ['userId', 'firstName', 'lastName']
       });
