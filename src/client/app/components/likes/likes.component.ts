@@ -7,7 +7,13 @@ import { LikesService } from '../../services/likes.service';
 import { ActivatedRoute } from '@angular/router';
 import { UsersProfileService } from '../../services/users-profile.service';
 import { UserProfile } from '../../models/user-profile';
+import 'rxjs/add/operator/map';
+import {SearchParam} from "../user-search/shared/search-param";
 
+interface UsersProfileAvatar {
+  userProfile: UserProfile;
+  avatar: string;
+}
 
 @Component({
   selector: 'app-likes',
@@ -19,9 +25,17 @@ export class LikesComponent implements OnInit {
   userId: number;
   userIdUrl: number;
   like: Like;
+  term: SearchParam = null;
+
+  users: UserProfile[];
+  usersWithAva: UsersProfileAvatar[];
+
+
+
 
   whatUserLike: Like[];
   likesForUser: Like[];
+  likes: Like[];
   mutualLikes: number[];
 
   avatars_1: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: true, name: ''} ];
@@ -31,6 +45,12 @@ export class LikesComponent implements OnInit {
   users_1: UserProfile[];
   users_2: UserProfile[];
   users_3: UserProfile[];
+
+  // userInfo = {
+  //   id: 0,
+  //   name: '',
+  //   ava: ''
+  // };
 
   photos: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: false, name: ''} ];
 
@@ -52,17 +72,24 @@ export class LikesComponent implements OnInit {
         this.photos = items;
       });
 
+    // this.fetchData(this.userId);
+
     this.getWhatUserLike();
     this.getLikesForUser();
-    // this.findMutualLikes(this.whatUserLike, this.likesForUser);
+    this.getLikes();
+    this.findMutualLikes(this.whatUserLike, this.likesForUser);
 
-    // this.getUsersAva(this.mutualLikes, this.avatars_1);
-    // this.getUsersAva(this.whatUserLike, this.avatars_2);
-    // this.getUsersAva(this.likesForUser, this.avatars_3);
-    //
-    // this.getUsersName(this.mutualLikes, this.users_1);
-    // this.getUsersName(this.whatUserLike, this.users_2);
-    // this.getUsersName(this.likesForUser, this.users_3);
+    this.getUsersAva(this.mutualLikes, this.avatars_1);
+    this.getUsersAva(this.whatUserLike, this.avatars_2);
+    this.getUsersAva(this.likesForUser, this.avatars_3);
+
+    console.log('AV1', this.avatars_1);
+    console.log('AV2', this.avatars_2);
+    console.log('AV3', this.avatars_3);
+
+    this.getUsersName(this.mutualLikes, this.users_1);
+    this.getUsersName(this.whatUserLike, this.users_2);
+    this.getUsersName(this.likesForUser, this.users_3);
   }
 
   addLike(otherId: number) {
@@ -76,7 +103,7 @@ export class LikesComponent implements OnInit {
     this.likesService.getWhatLikeUser(this.userId)
       .subscribe(whatUserLike => {
         this.whatUserLike = whatUserLike;
-        console.log(this.whatUserLike);
+        console.log('WHAT:', this.whatUserLike);
       });
   }
 
@@ -84,39 +111,77 @@ export class LikesComponent implements OnInit {
     this.likesService.getWhoLikesUser(this.userId)
       .subscribe(likesForUser => {
         this.likesForUser = likesForUser;
-        console.log(this.likesForUser);
+        console.log('FOR:', this.likesForUser);
       });
+  }
+
+  getLikes() {
+    this.likesService.getLikes().subscribe(likes => {
+      this.likes = likes;
+      console.log('LIKES:', this.likes);
+    });
   }
 
   dislike(otherId: number) {
     this.likesService.dislikeUser(this.userId, otherId).subscribe();
+    console.log('Dislike');
   }
 
-  findMutualLikes(arr1: number[], arr2: number[]) {
+  findMutualLikes(arr1: any[], arr2: any[]) {
     for (let i = 0; i < arr1.length; i++) {
       for (let j = 0; j < arr2.length; j++) {
-        if (arr1[i] === arr2[j]) {
+        if (arr1[i] == arr2[j]) {
           this.mutualLikes.push(arr1[i]);
         }
       }
     }
-    return ;
+    console.log('MUTUAL:', this.mutualLikes);
   }
 
-  getUsersAva(arr: number[], avatars: Photo[]) {
+  getUsersAva(arr: any[], avatars: Photo[]) {
     for (let i = 0; i < arr.length; i++) {
-      this.photosService.getAvatar(arr[i]).subscribe(avatar => {
+      this.photosService.getAvatar(parseInt(arr[i], 10)).subscribe(avatar => {
         avatars.push(avatar);
       });
     }
   }
 
-  getUsersName(arr: number[], users: any[]) {
+  getUsersName(arr: any[], users: any[]) {
     for (let i = 0; i < arr.length; i++) {
-      this.usersProfileService.findByUserId(arr[i]).subscribe(user => {
+      this.usersProfileService.findByUserId(parseInt(arr[i], 10)).subscribe(user => {
         users.push(user);
       });
     }
   }
+
+
+
+
+  // fetchData(userId: number) {
+  //   this.usersWithAva = [];
+  //   return this.usersProfileService
+  //     .findShortInfo(userId)
+  //     .subscribe(result => {
+  //       console.log('RES', result);
+  //       this.users = result.rows;
+  //       for (let user of this.users) {
+  //         this.getAvatars(user);
+  //       }
+  //     });
+  // }
+  //
+  // private getAvatars(user: UserProfile): void {
+  //   this.photosService.getAvatar(user.userId).subscribe(photo => {
+  //     this.usersWithAva.push({ userProfile: user, avatar: photo.base64 });
+  //   });
+  // }
+
+  // getUserCred(arr: any[]) {
+  //   for (let i = 0; i < arr.length; i++) {
+  //     this.usersProfileService.findByUserId(parseInt(arr[i], 10)).subscribe(user => {
+  //       this.userInfo.;
+  //     });
+  //   }
+  // }
 
 }

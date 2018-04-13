@@ -17,6 +17,11 @@ export class LikesService {
     return this.http.post<Like>(url, like, httpOptions);
   }
 
+  getLikes(): Observable<Like[]> {
+    const url = `api/users-profile/likes`;
+    return this.http.get<Like[]>(url);
+  }
+
   getWhoLikesUser(userId: number): Observable<Like[]> {
     const url = `api/users-profile/${userId}/likes/who`;
     return this.http.get<Like[]>(url);

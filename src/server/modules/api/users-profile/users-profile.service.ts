@@ -62,10 +62,10 @@ export class UsersProfileService {
     }
   }
 
-  async findShortInfo(id: number): Promise<any> {
+  async findShortInfo(id: number): Promise<FilteredUsersProfile> {
     try {
       return await this.userProfileRepository
-      .findOne<UserProfile>({
+      .findAndCountAll<UserProfile>({
         where: {userId: id},
         attributes: ['userId', 'firstName', 'lastName']
       });
@@ -149,10 +149,19 @@ export class UsersProfileService {
     return await like.save();
   }
 
-  async findWhoLikesUser(userId: number): Promise<Likes[]> {
+  async findLikes(): Promise<Likes[]> {
     try {
       return await this.likesRepository
-        .findAll<Likes>({where: { whatLike: userId }});
+        .findAll<Likes>();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findWhoLikesUser(userId: number): Promise<any[]> {
+    try {
+      return await this.likesRepository
+        .findAll<Likes>({where: { whatLike: userId }, attributes: ['whoLike']});
     } catch (error) {
       throw error;
     }
@@ -160,8 +169,10 @@ export class UsersProfileService {
 
   async findWhatLikeUser(userId: number): Promise<Likes[]> {
     try {
-      return await this.likesRepository
-        .findAll<Likes>({where: { whoLike: userId }});
+      const a = await this.likesRepository
+        .findAll<Likes>({where: { whoLike: userId }, attributes: ['whatLike']});
+      console.log('A:', a);
+      return a;
     } catch (error) {
       throw error;
     }

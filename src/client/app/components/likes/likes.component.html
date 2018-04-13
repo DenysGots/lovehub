@@ -20,10 +20,10 @@
               flex-column flex-md-row
               justify-content-center justify-content-md-between
               align-items-start">
-        <div class="p-2 mr-auto user-img" *ngFor="let photo of photos">
-          <img class="" [src]="photo.base64" alt="Image">
+        <div class="p-2 mr-auto user-img" *ngFor="let avatar of avatars_1">
+          <img class="" [src]="avatar.base64" alt="Image">
           <div class="hidden-block">
-            <i class="material-icons heart" title="unlike" (click)="dislike(photo.userId)">thumb_down</i>
+            <i class="material-icons heart" title="unlike" (click)="dislike(avatar.userId)">thumb_down</i>
             <i class="material-icons chat" title="go to chat" [routerLink]="['/chat']">mode_comment</i>
           </div>
           <div class="user-cred" *ngFor="let user of users">
