@@ -20,6 +20,7 @@
 .menu-item {
     display: inline-flex;
     color: white;
+    padding: 10px;
     &:hover {
       cursor: pointer;
     }
@@ -36,7 +37,7 @@
 .admin-panel-item {
     background-color: #d3d3d3;
     cursor: pointer;
-    padding: 3px 7px;
+    padding: 5px 10px;
     &:hover {
       background-color: #a52a2a;
       color: #fff;

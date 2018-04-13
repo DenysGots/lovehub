@@ -8,8 +8,8 @@
   </a>
 
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav menu ml-auto">
@@ -30,11 +30,11 @@
       </ng-template>
     </ul>
   </div>
-  <div *ngIf="isLoggedIn" class="nav-item menu-item">
+  <div *ngIf="isLoggedIn" class="nav-item">
     <a class="nav-link menu-item" [routerLink]="['/profile', loggedInUser.userId]">{{ loggedInUser.name }}</a>
   </div>
 
-  <div *ngIf="isLoggedIn && (loggedInUserRole === 'ADMIN')" class="nav-item menu-item admin-panel-item" [routerLink]="['/admin']">
+  <div *ngIf="isLoggedIn && (loggedInUserRole === 'ADMIN')" class="nav-item admin-panel-item" [routerLink]="['/admin']">
     <a class="nav-link menu-item" [routerLink]="['/admin']">Admin Panel</a>
   </div>
 </nav>

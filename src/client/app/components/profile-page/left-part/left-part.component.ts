@@ -52,7 +52,26 @@ export class LeftPartComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.profileOwnerId = parseInt(params.id, 10);
       this.checkIfUserIsOnline();
-      this.getUserRating();
+
+      this.interestsService.getData().subscribe((results: Results) => {
+        this.interests = results.interests;
+      });
+
+      this.interestsService.getInterests(this.profileOwnerId);
+
+      this.usersProfileService.findByUserId(this.profileOwnerId)
+        .subscribe(result => {
+          this.userProfile = result;
+          this.lowRatingAlerted = false;
+
+          this.photosService.getAvatar(this.profileOwnerId)
+            .subscribe(avatar => {
+              (avatar && avatar.base64) ? this.userHasAvatar = true : this.userHasAvatar = false;
+
+              this.getUserRating();
+              this.lowRatingAlerted = true;
+            });
+        });
     });
   }
 
@@ -68,25 +87,27 @@ export class LeftPartComponent implements OnInit {
       this.isUserOnline = data;
     });
 
-    this.interestsService.getData().subscribe((results: Results) => {
-      this.interests = results.interests;
-    });
+    this.route.url.subscribe(() => {
+      this.interestsService.getData().subscribe((results: Results) => {
+        this.interests = results.interests;
+      });
 
-    this.interestsService.getInterests(this.profileOwnerId);
+      this.interestsService.getInterests(this.profileOwnerId);
 
-    this.usersProfileService.findByUserId(this.profileOwnerId)
-          .subscribe(result => {
-            this.userProfile = result;
-            this.getUserRating();
-          });
+      this.usersProfileService.findByUserId(this.profileOwnerId)
+        .subscribe(result => {
+          this.userProfile = result;
+          this.lowRatingAlerted = false;
 
-    this.photosService.getAvatar(this.profileOwnerId)
-          .subscribe(avatar => {
-            if (avatar && avatar.base64) {
-              this.userHasAvatar = true;
+          this.photosService.getAvatar(this.profileOwnerId)
+            .subscribe(avatar => {
+              (avatar && avatar.base64) ? this.userHasAvatar = true : this.userHasAvatar = false;
+
               this.getUserRating();
-            }
-          });
+              this.lowRatingAlerted = true;
+            });
+        });
+    });
 
     this.checkIfUserIsOnline();
   }
@@ -100,7 +121,7 @@ export class LeftPartComponent implements OnInit {
   }
 
   getUserRating() {
-    const totalUserFieldsToFill = 8;
+    const totalUserFieldsToFill = 9;
     const unfilledFields = [] as any;
     const notAffectingUserFields = [
       'userId', 'firstName', 'role', 'registrationDate', 'lastActiveDate', 'photo', 'isActive', 'isBaned', 'lastActiveDate'
@@ -126,13 +147,26 @@ export class LeftPartComponent implements OnInit {
 
     rating = Math.round(filledFieldsNumber / totalUserFieldsToFill * 100);
 
-    console.log(unfilledFields);
-    console.log(rating);
-
     if (rating && unfilledFields) {
       this.userRating.rating = rating;
       this.userRating.unfilledProfileEntries = unfilledFields;
       this.userRating.barWidth = `${rating}%`;
+    }
+
+    if (this.profileOwnerId === this.userId &&
+        this.userRating.rating &&
+        this.userRating.rating < 90 &&
+        !this.lowRatingAlerted) {
+      Notification.requestPermission().then(function(result) {
+        if (result === 'granted') {
+          const notificationOptions = {
+            body: `Fill out additional fields: ${unfilledFields.join(', ')}`
+          };
+          const lowRatingNotification = new Notification('You rating is low!', notificationOptions);
+
+          setTimeout(lowRatingNotification.close.bind(lowRatingNotification), 5000);
+        }
+      });
     }
   }
 

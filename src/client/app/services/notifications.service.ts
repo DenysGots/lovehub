@@ -5,7 +5,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class NotificationsService {
-  private serverURL = 'http://localhost:5400';  // TODO: change on server's url change
+  private serverURL = 'http://localhost:5400';
   private socket = io(`${this.serverURL}`);  // (`${this.serverURL}/notifications`)
   private userState: boolean;
   private userStateData = new BehaviorSubject<boolean>(this.userState);
@@ -25,6 +25,10 @@ export class NotificationsService {
 
   checkIfUserIsOnline(profileOwnerId) {
     this.socket.emit('is-user-online', profileOwnerId);
+  }
+
+  disconnectUser() {
+    this.socket.emit('user-disconnected');
   }
 
   getMessages() {
