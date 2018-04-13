@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -44,8 +44,7 @@ export class InterestsComponent implements OnInit, OnDestroy {
 
   constructor(
       private interestsService: InterestsService,
-      private route: ActivatedRoute,
-      private router: Router
+      private route: ActivatedRoute
   ) {
     this.route.params.subscribe(params => {
       this.profileOwnerId = parseInt(params.id, 10);
@@ -64,26 +63,28 @@ export class InterestsComponent implements OnInit, OnDestroy {
       this.hints = results.hints;
       this.interests = results.interests;
 
-      if (this.interests && this.interests.length > 0 && this.interestsToShow.length === 0) {
-        this.interestsToShow = [...this.interests]
-          .filter(interest => !!interest);
+      if (this.interests && this.interests.length > 0) {
+        if (!this.editingIsForbidden) {
+          this.interestsToShow = [...new Set([...this.interests, ...this.interestsToShow])]
+            .filter(interest => !!interest);
+        } else {
+          this.interestsToShow = [...this.interests]
+            .filter(interest => !!interest);
+        }
       }
     });
 
     this.route.url.subscribe(() => {
-      this.distinctProfileOwner();
-      this.getInterests();
-    });
-
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
+      if (this.profileOwnerId) {
         this.distinctProfileOwner();
         this.getInterests();
       }
     });
 
-    this.distinctProfileOwner();
-    this.getInterests();
+    if (this.profileOwnerId) {
+      this.distinctProfileOwner();
+      this.getInterests();
+    }
   }
 
   ngOnDestroy() {

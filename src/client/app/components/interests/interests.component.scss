@@ -263,7 +263,7 @@ $box-shadow_7: 0px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 .interest-list {
-  @include apply-flex(space-between, center, center);
+  @include apply-flex(flex-start, center, center);
   @include forbidTextSelection;
 }
 

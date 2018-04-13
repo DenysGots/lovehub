@@ -28,7 +28,7 @@
       <div class="carousel-inner row w-100" role="listbox">
 
         <div class="carousel-item col-md-4 active">
-          <img class="image rounded img-fluid d-block" [src]="photos[0].base64">
+          <img class="image rounded img-fluid d-block" [src]="(photos[0] && photos[0].base64) ? photos[0].base64 : ''">
           <div class="hidden-block-del" (click)="deletePhoto(photos[0]._id)" title="Click to delete photo" *ngIf="userId == userIdUrl">
             Delete photo
           </div>
