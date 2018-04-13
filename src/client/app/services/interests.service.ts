@@ -63,7 +63,7 @@ export class InterestsService {
             return;
           }
           this.socket.connect()
-        }, 1000);
+        }, 5000);
       });
 
       return () => {
