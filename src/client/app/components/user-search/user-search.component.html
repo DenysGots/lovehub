@@ -31,7 +31,7 @@
   </section>
 
   <section>
-    <section class="user__gallery">
+    <section class="user__gallery" *ngIf="usersWithAva.length > 0">
       <div class="user__container" *ngFor="let userWithAva of usersWithAva">
         <figure class="user__img">
           <img [src]="userWithAva.avatar" alt="User_Photo">
@@ -47,7 +47,7 @@
       </div>
     </section>
   </section>
-  <section class="pager">
+  <section class="pager" *ngIf="usersWithAva.length > 0">
     <app-pager
       [itemsPerPage]="itemsPerPage"
       [countItems]="countItems"

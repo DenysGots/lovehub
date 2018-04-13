@@ -89,6 +89,7 @@ import { CustomRenderService } from './services/custom-render.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 import { ModalForbiddenService } from './services/modal-forbidden.service';
 import { MessageEditorComponent } from './message-editor/message-editor.component';
+import { ModalAuthService } from './services/modal-auth.service';
 
 @NgModule({
   declarations: [
@@ -180,7 +181,7 @@ import { MessageEditorComponent } from './message-editor/message-editor.componen
     InterestsService,
     NotificationService,
     ModalForbiddenService,
-
+    ModalAuthService,
   ],
   bootstrap: [AppComponent]
 })

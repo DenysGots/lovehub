@@ -11,10 +11,6 @@ export class NavigationService {
       name: 'Contact',
       link: 'contact',
     },
-    {
-      name: 'Register',
-      link: 'register-full'
-    },
   ];
 
   profileMenu = [

@@ -16,8 +16,11 @@
       <li *ngFor="let item of menu" class="nav-item">
         <a class="menu-item" routerLink={{item.link}}>{{item.name}}</a>
       </li>
-      <li *ngIf="!isLoggedIn; then login else logout" class="nav-item">
+      <li *ngIf="!isLoggedIn" class="nav-item">
+        <a class="nav-link menu-item" routerLink="register-full">Register</a>
       </li>
+      <li *ngIf="!isLoggedIn; then login else logout" class="nav-item">
+      </li>'
       <ng-template #login>
         <li class="nav-item">
           <a class="menu-item" routerLink="login">Login</a>
