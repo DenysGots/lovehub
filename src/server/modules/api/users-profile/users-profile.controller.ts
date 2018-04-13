@@ -65,6 +65,7 @@ export class UsersProfileController {
       console.log(`server controller: findByPreference(${queries.preference})`);
       return await this.usersProfileService.findByPreference(queries.preference, queries.limit);
     }
+    return await this.usersProfileService.findByAll();
   }
 
   // @HttpCode(200)
