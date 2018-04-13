@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { MatchingService } from '../../services/matching.service';
-import { User } from '../../models/user';
-import { Observable } from 'rxjs/Observable';
-import { UsersProfileService } from '../../services/users-profile.service';
+import {Component, OnInit} from '@angular/core';
+import {MatchingService} from '../../services/matching.service';
+import {Observable} from 'rxjs/Observable';
+import {UsersProfileService} from '../../services/users-profile.service';
 
-import { PhotosService } from '../../services/photos.service';
-import { Photo } from '../../models/photo';
+import {PhotosService} from '../../services/photos.service';
+import {Photo} from '../../models/photo';
+import {UserProfileDto} from '../../../../server/modules/api/users-profile/dto/user-profile.dto';
 
 
 interface RadioParams {
@@ -26,10 +26,10 @@ export class UserMatchComponent implements OnInit {
     {label: 'For  Friend', value: 'FRIENDS'},
     {label: 'For  Party', value: 'PARTY'}
   ];
-  users$: any[];
+  // users$: any[];
   avatar: any;
   photos: Photo[] = [ {userId: 0, _id: '', base64: '', avatar: false, name: ''} ];
-  // users$: Observable<User[]>;
+  users$: Observable<UserProfileDto[]>;
 
   constructor(private matchingService: MatchingService,
               private usersProfileService: UsersProfileService,
@@ -55,10 +55,7 @@ export class UserMatchComponent implements OnInit {
   findAll() {
     // this.users$ = this.matchingService.searchUsers(value);
     console.log('test');
-    this.matchingService.findAll().subscribe(users => {
-      this.users$ = users;
-      console.log(users);
-    });
+    this.users$ = this.matchingService.findAll();
   }
   getPhoto(userId) {
     this.photoService.getAvatar(userId).subscribe(avatar => {
