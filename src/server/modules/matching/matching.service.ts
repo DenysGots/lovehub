@@ -1,162 +1,84 @@
 /**
  * Created by Crofty on 2/19/18.
  */
-import { Component } from '@nestjs/common';
-import { UsersProfileService } from '../api/users-profile/users-profile.service';
+import {Component, Inject} from '@nestjs/common';
+import {UserProfileDto} from '../api/users-profile/dto/user-profile.dto';
+import {Matching} from './matching.interface';
+import {Model} from 'mongoose';
+import {UsersProfileService} from '../api/users-profile/users-profile.service';
+
 @Component()
 export class MatchingServiceComponent {
-  constructor(private profileService: UsersProfileService) {}
-  matchUsers(preference: string) {
-    return this.profileService.findByPreference(preference, 50);
+  constructor(private profileService: UsersProfileService,
+              @Inject('MatchingModelToken') private readonly match: Model<Matching>) {
   }
-  const router = new express.Router()
 
-  router.get('/mine', authCheck, (req, res) => {
-  const user = req.user
-
-  Match.find({
-               $or: [{ 'user1.user': user._id }, { 'user2.user': user._id }],
-               $and: [{ 'user1.active': true }, { 'user2.active': true }]
-             })
-.sort('-timestamp')
-.populate('user1.user')
-.populate('user2.user')
-.then(matches => {
-  res.json(matches)
-})
-.catch(err => {
-  return res.json({ success: false, message: err.message })
-})
-})
-
-router.post('/unlike/:id', authCheck, (req, res) => {
-  const user = req.user
-  const id = req.params.id
-
-  // Find a potential match
-  Match.findOne({
-    $or: [
-      { $and: [{ 'user1.user': user._id }, { 'user2.user': id }] },
-      { $and: [{ 'user2.user': user._id }, { 'user1.user': id }] }
-    ]
-  })
-    .populate('user1.user')
-    .populate('user2.user')
-    .then(match => {
-      if (!match) {
-        // No such match - Error
-        return res.json({ success: false, message: 'You cannot unlike this user!' })
-      }
-
-      // Match exists - Set active to true or if already true return error message
-      if (match.user1.email === user.email) {
-        if (!match.user1.active) {
-          return res.json({
-            success: false,
-            message: 'You haven\'t liked this user!'
-          })
-        } else {
-          match.user1.active = false
-          match.save()
-          return res.json({
-            success: true,
-            message: 'Your unnlike was successful!'
-          })
-        }
-      } else {
-        if (!match.user2.active) {
-          return res.json({
-            success: false,
-            message: 'You haven\'t liked this user!'
-          })
-        } else {
-          match.user2.active = false
-          match.save()
-          return res.json({
-            success: true,
-            message: 'Your unlike was successful!'
-          })
-        }
-      }
+  async matchUsers(id: number, preference: string): Promise<any> {
+    const user = await this.profileService.findByUserId(id);
+    this.match.find({
+      $or: [{'user1.user': user.userId}, {'user2.user': user.userId}],
+      $and: [{'user1.active': true}, {'user2.active': true}]
     })
-    .catch(err => {
-      return res.json({ success: false, message: err.message })
+      .sort('-timestamp')
+      .populate('user1.user')
+      .populate('user2.user')
+      .then(matches => {
+        return matches;
+      })
+      .catch(err => {
+        return {success: false, message: err.message};
+      });
+    //return this.profileService.findByPreference(preference, 50);
+  }
+
+  async unlikeUsers(user: UserProfileDto, id: any): Promise<any> {
+    // Find a potential match
+    this.match.findOne({
+      $or: [
+        {$and: [{'user1.user': user.userId}, {'user2.user': id}]},
+        {$and: [{'user2.user': user.userId}, {'user1.user': id}]}
+      ]
     })
-})
-
-router.post('/like/:id', authCheck, (req, res) => {
-  const user = req.user
-  const id = req.params.id
-
-  // Find a potential match
-  Match.findOne({
-    $or: [
-      { $and: [{ 'user1.user': user._id }, { 'user2.user': id }] },
-      { $and: [{ 'user2.user': user._id }, { 'user1.user': id }] }
-    ]
-  })
-    .populate('user1.user')
-    .populate('user2.user')
-    .then(match => {
-      if (!match) {
-        // No such match - Create new Match
-        return Match.create({
-          user1: {
-            user: user._id,
-            active: true
-          },
-          user2: {
-            user: id
-          }
-        })
-          .then(match => {
-            return res.json({
-              success: true,
-              message: 'Your like was successful!'
-            })
-          })
-          .catch(err => {
-            return res.json({ success: false, message: err.message })
-          })
-      }
-
-      // Match exists - Set active to true or if already true return error message
-      if (match.user1.email === user.email) {
-        if (match.user1.active) {
-          return res.json({
-            success: false,
-            message: 'You have already liked this user.'
-          })
-        } else {
-          match.user1.active = true
-          match.save()
-          return res.json({
-            success: true,
-            message: 'Your like was successful!'
-          })
+      .populate('user1.user')
+      .populate('user2.user')
+      .then(match => {
+        if (!match) {
+          // No such match - Error
+          return {success: false, message: 'You cannot unlike this user!'};
         }
-      } else {
-        if (match.user2.active) {
-          return res.json({
-            success: false,
-            message: 'You have already liked this user.'
+      })
+      .catch(err => {
+        return {success: false, message: err.message};
+      });
+  }
+
+  async likeUsers(user: UserProfileDto, id: any): Promise<any> {
+    // Find a potential match
+    this.match.findOne({
+      $or: [
+        {$and: [{'user1.user': user.userId}, {'user2.user': id}]},
+        {$and: [{'user2.user': user.userId}, {'user1.user': id}]}
+      ]
+    })
+      .populate('user1.user')
+      .populate('user2.user')
+      .then(match => {
+        if (!match) {
+          // No such match - Create new Match
+          return match.create({
+            user1: {
+              user: user.userId,
+              active: true
+            },
+            user2: {
+              user: id
+            }
           })
-        } else {
-          match.user2.active = true
-          match.save()
-          return res.json({
-            success: true,
-            message: 'Your like was successful!'
-          })
+            .catch(err => {
+              return {success: false, message: err.message};
+            });
         }
-      }
-    })
-    .catch(err => {
-      return res.json({ success: false, message: err.message })
-    })
-})
-
-module.exports = router
-
+      });
+  }
 }
 

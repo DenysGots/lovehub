@@ -139,12 +139,12 @@ import { ModalForbiddenService } from './services/modal-forbidden.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'YOUR_KEY'
+    }),
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
-    }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCdhaZA2fOUM-rLoI95dNDssEdiaGiLDtM'
     }),
     ChartsModule,
   ],

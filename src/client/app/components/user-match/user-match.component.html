@@ -14,7 +14,7 @@
       <div class="Profile__container">
         <div class="profile" style="width:400px" *ngFor="let user of users$">
           <img class="profile-img-top"
-               src={{user.age}}
+               [src]="photos[0].base64"
                alt="profile image" style="width:100%">
           <div class="profile-body">
             <h4 class="profile-title">{{user.firstName}}</h4>
@@ -26,7 +26,9 @@
     </div>
     <div class="col-sm-7">
       <div class="Map__container">
-        <div id="map"></div>
+        <!--<agm-map [latitude]="lat" [longtitute]="lng">-->
+          <!--<agm-marker [latitude]="lat" [longtitute]="lng"></agm-marker>-->
+        <!--</agm-map>-->
       </div>
     </div>
   </div>

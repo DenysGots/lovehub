@@ -68,6 +68,13 @@ export class UsersProfileService {
         catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})` ))
       );
   }
+  findAll(): Observable <FilteredUsersProfile | {}> {
+    return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}`)
+      .pipe(
+        tap(_ => console.log(`found users-profile`)),
+        catchError(this.handleError<FilteredUsersProfile>(`repository users-profile` ))
+      );
+  }
 
   findByAge(age, offset, limit): Observable<FilteredUsersProfile | {}> {
     if (!parseInt(age.trim(), 10)) {

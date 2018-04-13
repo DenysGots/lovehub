@@ -3,8 +3,8 @@ import { UserProfileSchema } from './user-profile.schema';
 
 export const UserProfileProvider = [
   {
-    provide: 'UserProfileModelToken',
-    useFactory: (connection: Connection) => connection.model('UserProfile', UserProfileSchema),
+    provide: 'UsersProfileModelToken',
+    useFactory: (connection: Connection) => connection.model('UserProfile', UserProfileSchema, 'User'),
     inject: ['MongodbConnectionToken'],
   },
 ];

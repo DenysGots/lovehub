@@ -4,11 +4,13 @@ import { UsersProfileController } from './users-profile.controller';
 import { usersProfileProviders } from './users-profile.providers';
 import { UsersProfileService } from './users-profile.service';
 import { UsersModule } from '../users/users.module';
+import {UserProfileProvider} from "./user-profile.provider";
+import {MongodbModule} from "../mongodb/mongodb.module";
 
 @Module({
-  imports: [DatabaseModule, UsersModule],
+  imports: [DatabaseModule, UsersModule, MongodbModule],
   controllers: [UsersProfileController],
-  components: [UsersProfileService, ...usersProfileProviders],
+  components: [UsersProfileService, ...usersProfileProviders, ...UserProfileProvider],
   exports: [UsersProfileService]
 })
 export class UsersProfileModule {}

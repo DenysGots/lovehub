@@ -4,7 +4,7 @@ import { UsersService } from '../../services/users.service';
 import { UsersProfileService } from '../../services/users-profile.service';
 
 import { UserProfile } from '../../models/user-profile';
-import { User}  from '../../models/user';
+import { User }  from '../../models/user';
 
 import 'rxjs/add/operator/switchMap';
 

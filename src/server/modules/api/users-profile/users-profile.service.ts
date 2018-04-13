@@ -95,6 +95,17 @@ export class UsersProfileService {
     }
   }
 
+  async findByAll(): Promise<FilteredUsersProfile> {
+    console.log(`server service: findByAll()`);
+    try {
+      return await this.userProfileRepository
+        .findAndCountAll<UserProfile>();
+    } catch (error) {
+      console.error(`Arise an exception in the findByAll() method UserProfile Service`);
+      throw error;
+    }
+  }
+
   async findByAge(age: number, offset: number, limit: number): Promise<FilteredUsersProfile> {
     console.log(`server service: findByAge(${age})`);
     try {
