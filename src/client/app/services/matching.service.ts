@@ -7,9 +7,15 @@ import {catchError, tap} from 'rxjs/operators';
 import {User} from '../models/user';
 
 import {HttpClient} from '@angular/common/http';
-import {UserProfileDto} from '../../../server/modules/api/users-profile/dto/user-profile.dto';
-import {FilteredUsersProfile, UsersProfileService} from './users-profile.service';
+import {UsersProfileService} from './users-profile.service';
 import {AuthService} from './auth.service';
+import {UserProfile} from '../models/user-profile';
+import {PhotosService} from './photos.service';
+
+export interface UsersAvatar {
+  userProfile: UserProfile;
+  avatar: string;
+}
 
 @Injectable()
 export class MatchingService {
@@ -18,7 +24,8 @@ export class MatchingService {
 
   constructor(private http: HttpClient,
               private usersProfileService: UsersProfileService,
-              private auth: AuthService) {}
+              private auth: AuthService,
+              private photoService: PhotosService) {}
     searchUsers(term: string): Observable<User[]> {
       if (!term.trim()) {
       return of([]);
@@ -30,8 +37,17 @@ export class MatchingService {
       );
   }
 
-    findAll(): Observable<UserProfileDto[]> {
-      return this.usersProfileService.findAll().map(fup => fup.rows);
+    findAll(): Observable<UsersAvatar[]> {
+    const someArray: UsersAvatar[] = [];
+          return this.usersProfileService.findAll()
+        .flatMap(fup => Observable.from(fup.rows))
+        .mergeMap(userProfile => this.photoService.getAvatar(userProfile.userId),
+          (user, photo) => {
+            return {userProfile: user as UserProfile, avatar: photo.base64};
+          }).reduce<UsersAvatar>((acc, value, index) => {
+            someArray.push(value);
+            return someArray;
+        }, []);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
