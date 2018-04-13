@@ -68,7 +68,7 @@ export class UsersProfileService {
         catchError(this.handleError<FilteredUsersProfile>(`repository users-profile: findByName(${name})` ))
       );
   }
-  findAll(): Observable <FilteredUsersProfile | {}> {
+  findAll(): Observable <FilteredUsersProfile> {
     return this.http.get<FilteredUsersProfile>(`${this.usersProfileUrl}`)
       .pipe(
         tap(_ => console.log(`found users-profile`)),
