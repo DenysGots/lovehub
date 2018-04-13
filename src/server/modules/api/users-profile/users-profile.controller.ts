@@ -67,6 +67,12 @@ export class UsersProfileController {
     }
   }
 
+  // @HttpCode(200)
+  // @Get(':id')
+  // async findShortInfo(@Param() params): Promise<UserProfile> {
+  //   return await this.usersProfileService.findShortInfo(params.id);
+  // }
+
   @HttpCode(204)
   @Delete(':id')
   async removeById(@Param() params): Promise<{statusCode: number}> {
@@ -84,19 +90,25 @@ export class UsersProfileController {
   }
 
   @HttpCode(200)
+  @Get('/likes')
+  async findLikes(@Param() params): Promise<Likes[]> {
+    return await this.usersProfileService.findLikes();
+  }
+
+  @HttpCode(200)
   @Get(':userId/likes/who')
-  async findWhoLikesUser(@Param() params): Promise<Likes[]> {
+  async findWhoLikesUser(@Param() params): Promise<number[]> {
     return await this.usersProfileService.findWhoLikesUser(params.userId);
   }
 
   @HttpCode(200)
   @Get(':userId/likes/what')
-  async findWhatLikeUser(@Param() params): Promise<Likes[]> {
+  async findWhatLikeUser(@Param() params): Promise<number[]> {
     return await this.usersProfileService.findWhatLikeUser(params.userId);
   }
 
   @HttpCode(204)
-  @Delete(':userId/likes')
+  @Delete(':userId/likes/:userIdUrl')
   async dislike(@Param() params): Promise<{ statusCode: number }> {
     const affected = await this.usersProfileService.deleteLike(params.userId, params.userIdUrl);
     return { statusCode: affected };

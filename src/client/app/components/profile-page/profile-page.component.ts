@@ -16,9 +16,10 @@ export class ProfilePageComponent implements OnInit {
 
   userId: number;
   userIdUrl: number;
-  like: Like;
+  like: Like = { whoLike: 0, whatLike: 0};
   condition: Observable<boolean>;
-  likeMode = true;
+  likeMode: boolean = true;
+  likes: Like[];
 
   constructor(private route: ActivatedRoute,
               private likesService: LikesService) { }
@@ -47,4 +48,8 @@ export class ProfilePageComponent implements OnInit {
     this.likeMode = true;
   }
 
+  getLikes() {
+    this.likesService.getLikes().subscribe(likes =>
+    this.likes = likes);
+  }
 }
