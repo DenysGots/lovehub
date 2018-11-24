@@ -16,6 +16,7 @@ export class DialogComponent implements OnInit {
   text: String = '';
   windowWidth: number = window.innerWidth;
   messages: Array<any> = null;
+  selectedMessage = null;
 
   @Input() chat: Chat;
 
@@ -27,7 +28,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
     this.chatService.messagesUpdate.subscribe(data => this.messages = data);
-    this.userId = this.authService.getLoggedInUserCredential().userId;
+    this.userId = this.authService.getLoggedInUser().userId;
 
     this.scrollToBottom();
   }
@@ -41,24 +42,24 @@ export class DialogComponent implements OnInit {
       this.windowWidth = window.innerWidth;
   }
 
-  goBack(){
+  goBack() {
     this.chatService.closeMessages();
   }
 
-  ngAfterViewChecked() {        
-    this.scrollToBottom();        
-  } 
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
 
   scrollToBottom(): void {
     try {
         this.scrollChat.nativeElement.scrollTop = this.scrollChat.nativeElement.scrollHeight;
-    } catch(err) { }                 
+    } catch (err) { }
   }
 
-  sendMes(mes){
+  sendMes(mes) {
     const text = this.text.trim();
 
-    if(!!text.length){
+    if (!!text.length) {
       const newMessage = {
         userId: this.userId,
         text
@@ -71,20 +72,38 @@ export class DialogComponent implements OnInit {
 
   setClasses(mes) {
     const ownMessage = mes.userId === this.userId;
-    
+
     return {
       'align-items-end': ownMessage,
       'align-items-start': !ownMessage
-    }
+    };
   }
 
-  setMesClasses(mes){
+  setMesClasses(mes) {
     const ownMessage = mes.userId === this.userId;
-    
+
     return {
       'right': mes.userId === this.userId,
       'left': mes.userId !== this.userId,
       'unread': ownMessage && !mes.read
-    }
+    };
   }
+  onSelect(msg): void {
+    if (msg.userId !== this.userId) {
+      return;
+    }
+
+    if (this.selectedMessage === msg) {
+      this.selectedMessage = null;
+      return;
+    }
+
+    this.selectedMessage = msg;
+    console.log(this.selectedMessage === msg);
+  }
+
+  unSelect() {
+    this.selectedMessage = null;
+  }
+
 }

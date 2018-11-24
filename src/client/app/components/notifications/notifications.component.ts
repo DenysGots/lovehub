@@ -43,6 +43,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
       if (data) {
         this.currentUser = jwt_decode(localStorage.getItem('jwt_token'));
         this.notificationsService.sendOnlineUser(this.currentUser);
+      } else {
+        this.notificationsService.disconnectUser();
       }
     });
   }

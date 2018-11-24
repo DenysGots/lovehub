@@ -1,6 +1,8 @@
 import { Component, Inject } from '@nestjs/common';
 import { UserProfile } from './user-profile.entity';
+import { Likes } from './likes.entity';
 import { UserProfileDto } from './dto/user-profile.dto';
+import { LikeDto } from './dto/like.dto';
 import { PREFERENCE } from './preference';
 import { ORIENTATION } from './orientation';
 import {where} from 'sequelize';
@@ -16,6 +18,7 @@ export interface FilteredUsersProfile {
 export class UsersProfileService {
 
   constructor(@Inject('UsersProfileRepository') private readonly userProfileRepository: typeof UserProfile,
+              @Inject('LikesRepository') private readonly likesRepository: typeof Likes,
               @Inject('UsersProfileModelToken') private readonly userProfileModel: Model<UserProfileInterface>) {}
 
   async create(userProfileDto: UserProfileDto): Promise<UserProfile> {
@@ -50,10 +53,9 @@ export class UsersProfileService {
     }
   }
 
-  async findAll(): Promise<FilteredUsersProfile> {
+  async findAll(): Promise<UserProfile[]> {
     try {
-      return await this.userProfileRepository
-        .findAndCountAll<UserProfile>();
+      return await this.userProfileRepository.findAll<UserProfile>();
     } catch (error) {
       console.error(`Arise an exception in the findAll() method UserProfile Service`);
       throw error;
@@ -71,7 +73,7 @@ export class UsersProfileService {
     }
   }
 
-  async findShortInfo(id: number): Promise<any>{
+  async findShortInfo(id: number): Promise<any> {
     try {
       return await this.userProfileRepository
       .findOne<UserProfile>({
@@ -154,6 +156,58 @@ export class UsersProfileService {
     try {
       return await this.userProfileRepository
         .destroy({where: { id }});
+    } catch (error) {
+      throw error;
+    }
+  }
+
+
+  // operations with likes
+
+  async createLike(likeDto: LikeDto): Promise<Likes> {
+    const like = new Likes();
+    like.whatLike = likeDto.whatLike;
+    like.whoLike = likeDto.whoLike;
+    return await like.save();
+  }
+
+  async findLikes(): Promise<Likes[]> {
+    try {
+      return await this.likesRepository
+        .findAll<Likes>();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findWhoLikesUser(userId: number): Promise<number[]> {
+    try {
+      const b = await this.likesRepository
+        .findAll<Likes>({where: { whatLike: userId }, attributes: ['whoLike']});
+      const who = b.map(({whoLike}) => whoLike);
+      console.log('who:', who);
+      return who;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findWhatLikeUser(userId: number): Promise<number[]> {
+    try {
+      const a = await this.likesRepository
+        .findAll<Likes>({where: { whoLike: userId }, attributes: ['whatLike']});
+      const what = a.map(({whatLike}) => whatLike);
+      console.log('what:', what);
+      return what;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteLike(userId: number, userIdUrl: number): Promise<number> {
+    try {
+      return await this.likesRepository
+        .destroy({where: { whoLike: userId, whatLike: userIdUrl }});
     } catch (error) {
       throw error;
     }

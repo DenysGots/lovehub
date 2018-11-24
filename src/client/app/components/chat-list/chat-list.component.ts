@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
-
 import Chat from '../../models/chat';
 
 import { ChatService } from '../../services/chat.service';
@@ -24,7 +23,7 @@ export class ChatListComponent implements OnInit {
       this.activeChat = chat.chatId;
     });
 
-    this.userId = this.authService.getLoggedInUserCredential().userId;
+    this.userId = this.authService.getLoggedInUser().userId;
   }
 
   checkChat() {
@@ -43,7 +42,7 @@ export class ChatListComponent implements OnInit {
     return {
       'unread': unread,
       'active': activeChat
-    }
+    };
   }
 
   setLastMessStatus(){

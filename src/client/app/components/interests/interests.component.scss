@@ -49,7 +49,7 @@ $color_10: #ef233c;
 
 $color_11: #ccc9c9;
 
-$color_12: #f1f1f1;
+$color_12: rgba(233, 236, 239, 0.9);
 
 $color_13: #555b6e;
 
@@ -67,12 +67,16 @@ $box-shadow_5: 0 0 10px $color_13;
 
 $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 
+$box-shadow_7: 0px 3px 5px rgba(0, 0, 0, 0.3);
+
 .main {
   background-color: $color_12;
   border: 1px solid transparent;
+  border-radius: 6px;
+  box-shadow: $box-shadow_7;
   margin: 20px 0;
   position: relative;
-  width: 100%;
+  width: 105%;
 }
 
 @media screen and (max-width: 640px) {
@@ -259,12 +263,12 @@ $box-shadow_6: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 }
 
 .interest-list {
-  @include apply-flex(space-between, center, center);
+  @include apply-flex(flex-start, center, center);
   @include forbidTextSelection;
 }
 
 .interest {
-  @include apply-flex(center, center, center);
+  @include apply-flex(flex-start, center, center);
   background-color: $color_3;
   border-radius: 2px;
   margin: 5px;

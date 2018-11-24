@@ -4,7 +4,7 @@
   (click)="checkChat()"
 >
   <div class="avatar-container d-inline-flex mr-3">
-    <a class="avatar-container" routerLink="../profile">
+    <a class="avatar-container" [routerLink]="!!chat.user ? ['/profile', chat.user.userId]: ''">
         <img
         [src]="!!chat.user.avatar ? chat.user.avatar.base64: 'https://d30y9cdsu7xlg0.cloudfront.net/png/404950-200.png'"
         [alt]="chat.user.firstName"

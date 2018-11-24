@@ -1,3 +1,5 @@
+@import '../../../../assets/scss/colors.scss';
+
 .logo-img {
     width: 40px;
     height: 40px;
@@ -17,8 +19,8 @@
 
 .menu-item {
     display: inline-flex;
-    padding: 10px;
     color: white;
+    padding: 10px;
     &:hover {
       cursor: pointer;
     }
@@ -40,4 +42,8 @@
       background-color: #a52a2a;
       color: #fff;
     }
+}
+
+.navbar-dark {
+    background-color: #555b6e;
 }

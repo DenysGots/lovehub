@@ -7,11 +7,12 @@ import { Rating } from '../users-profile/rating.entity';
 import { Location } from '../users-profile/location.entity';
 import { UserProfileInterest } from '../users-profile/user-profile-interest.entity';
 import { Interest } from '../users-profile/interest.entity';
+import { Likes } from '../users-profile/likes.entity';
 import { ChatList } from '../chat-list/chat-list.entity';
 
 import { config } from '../../../config/config';
 
-const { host, port, db: database, user:username, pass: password } = config.postgres;
+const { host, port, db: database, user: username, pass: password } = config.postgres;
 
 export const databaseProviders = [
   {
@@ -35,6 +36,7 @@ export const databaseProviders = [
         User,
         UserProfile,
         Rating,
+        Likes,
         Location,
         Interest,
         UserProfileInterest,

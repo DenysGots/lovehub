@@ -1,4 +1,5 @@
-import { Model } from 'mongoose';
+import * as mongoose from 'mongoose';
+import {Model, Types} from 'mongoose';
 import { Component, Inject } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Chat } from './interfaces/chat.interface';
@@ -18,10 +19,10 @@ export class ChatMessagesService {
     return await this.chatModel
       .findOneAndUpdate(
         { chatId },
-        {$push: {"messages": createMessageDto}},
+        {$push: {'messages': createMessageDto}},
         {
-          "fields": { "messages": { $slice: -1 } },
-          "new": true 
+          'fields': { 'messages': { $slice: -1 } },
+          'new': true
         }
       )
       .then(chat => ({
@@ -29,19 +30,27 @@ export class ChatMessagesService {
         message: chat.messages[0]
       }));
   }
+  async deleteMessageById(chatId: number, messageId: string): Promise<any> {
+    const msgId = mongoose.Types.ObjectId(messageId);
+    return await this.chatModel.update({chatId}, {$pull: {messages: {_id: msgId}}});
+  }
 
+  async editMessageText(chatId: number, messageId: number, text: string): Promise<any> {
+    const msgId = mongoose.Types.ObjectId(messageId);
+    return await this.chatModel.updateOne({chatId, 'messages._id': msgId}, {$set: {'messages.$.text': text}});
+  }
   async findByChat(id: number): Promise<any> {
     return await this.chatModel.findOne({ chatId: id }).select('messages -_id');
   }
-  
+
   async setRead(chatId, userId){
     const res = await this.chatModel.update({
       chatId,
-      "messages": {$elemMatch: { "userId": userId, "read": false } }
-    },{
-        $set: { "messages.$[].read" : true}
+      'messages': {$elemMatch: { 'userId': userId, 'read': false } }
+    }, {
+        $set: { 'messages.$[].read' : true}
     },
-    {multi:true});
+    {multi: true});
   }
 
   async getLastMessage(chatId: number): Promise<any> {

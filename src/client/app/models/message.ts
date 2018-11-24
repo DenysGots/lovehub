@@ -10,4 +10,3 @@ export default class Message {
       this.read = read;
     }
 }
-  

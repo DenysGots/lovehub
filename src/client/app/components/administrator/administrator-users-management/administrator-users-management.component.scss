@@ -73,6 +73,7 @@ $box-shadow_1: 0px 0px 0px 4px rgba(230, 230, 230, 1.0);
 .main-section-content {
   background-color: $color_15;
   position: absolute;
+  width: 100%;
 }
 
 @media screen and (max-width: 640px) {

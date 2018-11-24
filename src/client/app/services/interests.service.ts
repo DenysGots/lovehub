@@ -9,8 +9,10 @@ interface Results {
 
 @Injectable()
 export class InterestsService {
-  private serverURL = 'http://localhost:5400';  // TODO: change on server's url change
+  private serverURL = 'http://localhost:5400';
   private socket = io(`${this.serverURL}/interests`);
+  private isConnected: any;
+  private interval: any;
 
   public currentUserId;
   public results = {} as Results;
@@ -50,6 +52,18 @@ export class InterestsService {
         this.results.hints = data;
 
         observer.next(this.results);
+      });
+
+      this.socket.on('disconnect', () => {
+        this.isConnected = false;
+        this.interval = window.setInterval(() => {
+          if (this.isConnected) {
+            clearInterval(this.interval);
+            this.interval = null;
+            return;
+          }
+          this.socket.connect()
+        }, 5000);
       });
 
       return () => {

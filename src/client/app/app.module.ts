@@ -60,6 +60,9 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { LeftPartComponent } from './components/profile-page/left-part/left-part.component';
 import { RightPartComponent } from './components/profile-page/right-part/right-part.component';
 
+import { LikesComponent } from './components/likes/likes.component';
+import { LikesService } from './services/likes.service';
+
 import { AdministratorFooterComponent } from './components/administrator/administrator-footer/administrator-footer.component';
 import { AdministratorHeaderComponent } from './components/administrator/administrator-header/administrator-header.component';
 import { AdministratorNavbarComponent } from './components/administrator/administrator-navbar/administrator-navbar.component';
@@ -85,7 +88,8 @@ import { InlineEditComponent } from './components/user-profile-settings/inline-e
 import { CustomRenderService } from './services/custom-render.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
 import { ModalForbiddenService } from './services/modal-forbidden.service';
-import {NguiMapModule} from "@ngui/map";
+import { MessageEditorComponent } from './message-editor/message-editor.component';
+import { ModalAuthService } from './services/modal-auth.service';
 
 
 @NgModule({
@@ -128,7 +132,9 @@ import {NguiMapModule} from "@ngui/map";
     RightPartComponent,
     PhotoSliderComponent,
     NotificationsComponent,
+    LikesComponent,
     InterestsComponent,
+    MessageEditorComponent,
     NotificationComponent,
     UserProfileSettingsComponent,
     InlineEditComponent
@@ -148,6 +154,7 @@ import {NguiMapModule} from "@ngui/map";
     ChartsModule,
   ],
   providers: [
+    LikesService,
     PhotosService,
     NavigationService,
     HomeService,
@@ -172,7 +179,8 @@ import {NguiMapModule} from "@ngui/map";
     NotificationsService,
     InterestsService,
     NotificationService,
-    ModalForbiddenService
+    ModalForbiddenService,
+    ModalAuthService,
   ],
   bootstrap: [AppComponent]
 })

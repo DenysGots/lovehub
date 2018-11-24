@@ -1,12 +1,15 @@
-<div class="container main" [ngStyle]="{'height.px': height}"> 
+<div class="container main" [ngStyle]="{'height.px': height}">
   <div class="row chat-container">
-    <div 
+    <div
       *ngIf="(windowWidth < 576) ? !showDialogs : true"
       class="col-md-4 col-sm-5 col-xs-12 chat-list scrollbar">
       <chat-list
         *ngFor="let chat of chats"
         [chat]="chat"
       ></chat-list>
+      <div *ngIf="!chats.length" class="no-chat-container">
+          <span class="no-chat">No chats</span>
+      </div>
     </div>
     <div
       *ngIf="(windowWidth < 576) ? showDialogs : true"

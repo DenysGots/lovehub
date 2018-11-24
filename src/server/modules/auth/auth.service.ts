@@ -8,6 +8,8 @@ import { UsersService } from '../api/users/users.service';
 import { UserProfile } from '../api/users-profile/user-profile.entity';
 import { MessageCodeError } from '../common/error/MessageCodeError';
 
+const crypto = require('crypto');
+
 @Component()
 export class AuthService implements IAuthService {
   options: IJwtOptions = {
@@ -20,7 +22,7 @@ export class AuthService implements IAuthService {
     const user = await User.findOne({
       where: {
         email: credentials.email,
-        password: credentials.password
+        password: crypto.createHmac('sha256', credentials.password).digest('hex')
       },
       include: [{
         model: UserProfile,

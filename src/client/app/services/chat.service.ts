@@ -35,15 +35,33 @@ export class ChatService {
       updateChat.lastMessage = data.message;
     });
 
+    wsService.connect('deletedMessageIdFromServer').subscribe(msgId => {
+      this.messages = this.messages.filter( message => message['_id'] !== msgId);
+      this.messagesUpdate.next(this.messages);
+    });
+
+    wsService.connect('modifiedMessage').subscribe(data => {
+      this.messages = this.messages.map((message, index, array) => {
+        if (message['_id'] === data.msgId) {
+          message['text'] = data.text;
+          return message;
+        }
+
+        return message;
+      });
+      this.messagesUpdate.next(this.messages);
+    });
+
     this.currentChatChange.subscribe((chat: Chat) => {
         this.currentChat = chat;
 
-        if(!!this.currentChat.lastMessage){
+        if (!!this.currentChat.lastMessage
+          && this.currentChat.lastMessage.userId !== this.userId){
           this.currentChat.lastMessage.read = true;
         }
     });
 
-    this.userId = this.authService.getLoggedInUserCredential().userId;
+    this.userId = this.authService.getLoggedInUser().userId;
 
     this.notifService.getNotifications().subscribe((notification: any) => {
       const { chatId, message } = notification.message;
@@ -54,17 +72,17 @@ export class ChatService {
     });
 
     this.notifService.setRead().subscribe((chatId: Number) => {
-      if(!!this.messages){
+      if (!!this.messages) {
         this.messages
         .filter(mes => mes.read === false)
         .map(mes => mes.read = true);
       }
 
       const updateChat = this.chats.find(chat => chat.chatId === chatId);
-        if(!!updateChat.lastMessage && updateChat.lastMessage.userId === this.userId){
-          updateChat.lastMessage.read = true;
-          this.userlistUpdate.next(this.chats);
-        }
+      if (!!updateChat.lastMessage && updateChat.lastMessage.userId === this.userId){
+        updateChat.lastMessage.read = true;
+        this.userlistUpdate.next(this.chats);
+      }
     });
 
     this.http.get<Chat[]>(`api/chats/${this.userId}`).subscribe((data) => {
@@ -73,8 +91,8 @@ export class ChatService {
     });
   }
 
-  sendMessage(message){
-    if(this.currentChat) {
+  sendMessage(message) {
+    if (this.currentChat) {
       this.wsService.send('send', {chat: this.currentChat, message});
     }
   }
@@ -89,11 +107,20 @@ export class ChatService {
 
     this.http.get<Array<Message>>(`api/messages/${chat.chatId}`).subscribe((data) => {
       this.messages = data;
+      console.log('data update', data);
       this.messagesUpdate.next(this.messages);
     });
   }
 
-  closeMessages(){
+  deleteMessage(msgId: string) {
+    this.wsService.send('deleteMessage', {chat: this.currentChat, msgId});
+  }
+
+  editMessage(msgId: number, text: string) {
+    this.wsService.send('editMessage', {chat: this.currentChat, msgId, text});
+  }
+
+  closeMessages() {
     this.showDialogsUpdate.next(false);
     this.wsService.send('leaveRoom', {chatId: this.currentChat.chatId});
 

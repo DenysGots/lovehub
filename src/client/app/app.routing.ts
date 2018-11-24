@@ -16,6 +16,7 @@ import { AdministratorSearchComponent } from './components/administrator/adminis
 import { AdministratorSendEmailComponent } from './components/administrator/administrator-send-email/administrator-send-email.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AuthProfileGuardService } from './services/auth-profile-guard.service';
+import { LikesComponent } from './components/likes/likes.component';
 
 export const routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -23,8 +24,9 @@ export const routes = [
   { path: 'search', component: UserSearchComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'register', component: RegistrationComponent},
-  { path: 'register-full', component: RegistrationFullComponent},
+  { path: 'likes', component: LikesComponent},
+  { path: 'register', component: RegistrationComponent },
+  { path: 'register-full', component: RegistrationFullComponent },
   { path: 'photo', component: PhotosComponent},
   { path: 'profile/:id', canActivate: [AuthProfileGuardService], component: ProfilePageComponent},
   { path: 'admin', canActivate: [ AuthGuard ],
@@ -38,5 +40,5 @@ export const routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'forgot', component:  RecoverPasswordComponent},
   { path: 'forgot/:token', component: ResetPasswordComponent},
-  { path: 'user-match', component: UserMatchComponent, canActivate: [ AuthGuard ] },
+  { path: 'user-match', component: UserMatchComponent },
 ];

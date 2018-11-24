@@ -29,10 +29,8 @@ export class AuthGuard implements CanActivate {
       let { userId } = this.authService.getLoggedInUser(),
         userRole;
       return this.usersProfileService.findByUserId(userId)
-        .map(userProfile => {
-          userRole = (<UserProfile>userProfile).role;
-          return this.usersService.verifyUserRole(userId, userRole);
-        })
+        .map(userProfile => (<UserProfile>userProfile).role)
+        .switchMap(userRole => this.usersService.verifyUserRole(userId, userRole))
         .switchMap(isAuth => {
           if (isAuth) {
             return Observable.of(true);
