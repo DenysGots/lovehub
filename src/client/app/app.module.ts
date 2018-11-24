@@ -146,9 +146,7 @@ import { ModalAuthService } from './services/modal-auth.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_KEY'
-    }),
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyAiekoph6xCh46f7RbPRoUNV3gtXWkPcUk'}),
     RouterModule.forRoot(routes, {
       useHash: false,
       preloadingStrategy: PreloadAllModules,
